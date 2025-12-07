@@ -1,6 +1,7 @@
 import { MapPin, Globe, ShoppingCart, ArrowRight, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { AnimatedSection, StaggerContainer, StaggerItem, ScaleOnHover } from "@/components/ui/animated-section";
 
 const services = [
   {
@@ -48,7 +49,7 @@ export function Services() {
       
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <AnimatedSection className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
             <span className="text-sm font-medium text-primary">
               EvolveSEO + AI Services
@@ -61,63 +62,66 @@ export function Services() {
             Visibility, ranking, and real results with AI. Discover how we can
             transform your online presence.
           </p>
-        </div>
+        </AnimatedSection>
 
         {/* Services Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-8" staggerDelay={0.15}>
           {services.map((service, index) => (
-            <Card
-              key={index}
-              variant={service.popular ? "glow" : "glass"}
-              className="relative group hover:-translate-y-2 transition-all duration-300"
-            >
-              {service.popular && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-primary rounded-full text-primary-foreground text-xs font-semibold">
-                  Most Popular
-                </div>
-              )}
-              
-              <CardHeader className="pb-4">
-                <div className="w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <service.icon className="w-8 h-8 text-primary" />
-                </div>
-                <CardTitle className="text-xl">{service.title}</CardTitle>
-                <CardDescription className="text-base">
-                  {service.description}
-                </CardDescription>
-              </CardHeader>
-              
-              <CardContent className="space-y-4">
-                <ul className="space-y-3">
-                  {service.features.map((feature, featureIndex) => (
-                    <li
-                      key={featureIndex}
-                      className="flex items-start gap-3 text-sm text-muted-foreground"
-                    >
-                      <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-                
-                <Button
-                  variant={service.popular ? "hero" : "outline"}
-                  className="w-full mt-4 group/btn"
+            <StaggerItem key={index}>
+              <ScaleOnHover scale={1.02}>
+                <Card
+                  variant={service.popular ? "glow" : "glass"}
+                  className="relative group h-full"
                 >
-                  Learn More
-                  <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
-                </Button>
-              </CardContent>
-            </Card>
+                  {service.popular && (
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-primary rounded-full text-primary-foreground text-xs font-semibold">
+                      Most Popular
+                    </div>
+                  )}
+                  
+                  <CardHeader className="pb-4">
+                    <div className="w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                      <service.icon className="w-8 h-8 text-primary" />
+                    </div>
+                    <CardTitle className="text-xl">{service.title}</CardTitle>
+                    <CardDescription className="text-base">
+                      {service.description}
+                    </CardDescription>
+                  </CardHeader>
+                  
+                  <CardContent className="space-y-4">
+                    <ul className="space-y-3">
+                      {service.features.map((feature, featureIndex) => (
+                        <li
+                          key={featureIndex}
+                          className="flex items-start gap-3 text-sm text-muted-foreground"
+                        >
+                          <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                    
+                    <Button
+                      variant={service.popular ? "hero" : "outline"}
+                      className="w-full mt-4 group/btn"
+                    >
+                      Learn More
+                      <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
+                    </Button>
+                  </CardContent>
+                </Card>
+              </ScaleOnHover>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
 
         {/* CTA */}
-        <div className="text-center mt-12">
+        <AnimatedSection delay={0.4} className="text-center mt-12">
           <Button variant="hero" size="xl">
             Request Free Consultation
           </Button>
-        </div>
+        </AnimatedSection>
       </div>
     </section>
   );

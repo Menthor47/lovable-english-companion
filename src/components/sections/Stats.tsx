@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
+import { AnimatedSection } from "@/components/ui/animated-section";
 import seoDashboard from "@/assets/seo-dashboard.jpg";
 
 const stats = [
@@ -10,8 +12,12 @@ const stats = [
 
 function AnimatedNumber({ value, suffix }: { value: number; suffix: string }) {
   const [displayValue, setDisplayValue] = useState(0);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   useEffect(() => {
+    if (!isInView) return;
+
     const duration = 2000;
     const steps = 60;
     const increment = value / steps;
@@ -28,7 +34,7 @@ function AnimatedNumber({ value, suffix }: { value: number; suffix: string }) {
     }, duration / steps);
 
     return () => clearInterval(timer);
-  }, [value]);
+  }, [value, isInView]);
 
   const formatNumber = (num: number) => {
     if (num >= 1000000) return (num / 1000000).toFixed(1) + "M";
@@ -37,7 +43,7 @@ function AnimatedNumber({ value, suffix }: { value: number; suffix: string }) {
   };
 
   return (
-    <span>
+    <span ref={ref}>
       {formatNumber(displayValue)}
       {suffix}
     </span>
@@ -52,7 +58,7 @@ export function Stats() {
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Stats Grid */}
-          <div className="order-2 lg:order-1">
+          <AnimatedSection direction="left" className="order-2 lg:order-1">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
               <span className="text-sm font-medium text-primary uppercase tracking-wider">
                 Proven Results
@@ -71,34 +77,51 @@ export function Stats() {
 
             <div className="grid grid-cols-2 gap-6">
               {stats.map((stat, index) => (
-                <div
+                <motion.div
                   key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  whileHover={{ scale: 1.05 }}
                   className="p-6 rounded-2xl bg-card/60 backdrop-blur-sm border border-border hover:border-primary/50 transition-all"
                 >
                   <div className="text-3xl md:text-4xl font-bold text-primary font-heading mb-2">
                     <AnimatedNumber value={stat.value} suffix={stat.suffix} />
                   </div>
                   <p className="text-sm text-muted-foreground">{stat.label}</p>
-                </div>
+                </motion.div>
               ))}
             </div>
-          </div>
+          </AnimatedSection>
 
           {/* Image */}
-          <div className="order-1 lg:order-2 relative">
-            <div className="relative rounded-2xl overflow-hidden border border-primary/20">
+          <AnimatedSection direction="right" className="order-1 lg:order-2 relative">
+            <motion.div 
+              className="relative rounded-2xl overflow-hidden border border-primary/20"
+              whileHover={{ scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            >
               <img
                 src={seoDashboard}
                 alt="SEO Analytics Dashboard showing performance metrics"
                 className="w-full h-auto object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
-            </div>
+            </motion.div>
             
             {/* Decorative elements */}
-            <div className="absolute -top-4 -right-4 w-24 h-24 bg-primary/20 rounded-full blur-2xl" />
-            <div className="absolute -bottom-4 -left-4 w-20 h-20 bg-primary/30 rounded-full blur-xl" />
-          </div>
+            <motion.div 
+              className="absolute -top-4 -right-4 w-24 h-24 bg-primary/20 rounded-full blur-2xl"
+              animate={{ scale: [1, 1.3, 1] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            />
+            <motion.div 
+              className="absolute -bottom-4 -left-4 w-20 h-20 bg-primary/30 rounded-full blur-xl"
+              animate={{ scale: [1.3, 1, 1.3] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+            />
+          </AnimatedSection>
         </div>
       </div>
     </section>

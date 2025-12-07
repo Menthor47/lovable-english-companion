@@ -1,4 +1,6 @@
+import { motion } from "framer-motion";
 import { CheckCircle2, Users } from "lucide-react";
+import { AnimatedSection } from "@/components/ui/animated-section";
 import aiRobot from "@/assets/ai-robot.png";
 
 const advantages = [
@@ -16,7 +18,7 @@ export function AIAdvantage() {
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Content */}
-          <div className="space-y-8">
+          <AnimatedSection direction="left" className="space-y-8">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
               <span className="text-sm font-medium text-primary">
                 Why Choose Us?
@@ -37,15 +39,19 @@ export function AIAdvantage() {
             
             <ul className="space-y-4">
               {advantages.map((advantage, index) => (
-                <li
+                <motion.li
                   key={index}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: 0.1 * index }}
                   className="flex items-center gap-3 text-foreground"
                 >
                   <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
                     <CheckCircle2 className="w-4 h-4 text-primary" />
                   </div>
                   {advantage}
-                </li>
+                </motion.li>
               ))}
             </ul>
             
@@ -62,11 +68,15 @@ export function AIAdvantage() {
                 </p>
               </div>
             </div>
-          </div>
+          </AnimatedSection>
 
           {/* Image */}
-          <div className="relative">
-            <div className="relative rounded-2xl overflow-hidden">
+          <AnimatedSection direction="right" className="relative">
+            <motion.div 
+              className="relative rounded-2xl overflow-hidden"
+              whileHover={{ scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            >
               <img
                 src={aiRobot}
                 alt="AI Robot analyzing SEO dashboard"
@@ -74,12 +84,20 @@ export function AIAdvantage() {
               />
               {/* Glow effect */}
               <div className="absolute inset-0 bg-gradient-to-t from-background/50 via-transparent to-transparent" />
-            </div>
+            </motion.div>
             
             {/* Floating accent */}
-            <div className="absolute -top-6 -right-6 w-32 h-32 bg-primary/20 rounded-full blur-3xl" />
-            <div className="absolute -bottom-6 -left-6 w-24 h-24 bg-primary/30 rounded-full blur-2xl" />
-          </div>
+            <motion.div 
+              className="absolute -top-6 -right-6 w-32 h-32 bg-primary/20 rounded-full blur-3xl"
+              animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.3, 0.2] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+            />
+            <motion.div 
+              className="absolute -bottom-6 -left-6 w-24 h-24 bg-primary/30 rounded-full blur-2xl"
+              animate={{ scale: [1.2, 1, 1.2], opacity: [0.3, 0.2, 0.3] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            />
+          </AnimatedSection>
         </div>
       </div>
     </section>

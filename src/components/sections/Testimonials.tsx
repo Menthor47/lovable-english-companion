@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { AnimatedSection } from "@/components/ui/animated-section";
 
 const testimonials = [
   {
@@ -35,15 +37,33 @@ const testimonials = [
 
 export function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(0);
 
   const nextTestimonial = () => {
+    setDirection(1);
     setCurrentIndex((prev) => (prev + 1) % testimonials.length);
   };
 
   const prevTestimonial = () => {
+    setDirection(-1);
     setCurrentIndex(
       (prev) => (prev - 1 + testimonials.length) % testimonials.length
     );
+  };
+
+  const slideVariants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? 300 : -300,
+      opacity: 0,
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+    },
+    exit: (direction: number) => ({
+      x: direction < 0 ? 300 : -300,
+      opacity: 0,
+    }),
   };
 
   return (
@@ -52,7 +72,7 @@ export function Testimonials() {
       
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <AnimatedSection className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
             <span className="text-sm font-medium text-primary uppercase tracking-wider">
               Client Testimonials
@@ -64,34 +84,52 @@ export function Testimonials() {
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Discover what our clients say about our AI-powered SEO methodology
           </p>
-        </div>
+        </AnimatedSection>
 
         {/* Testimonial Carousel */}
         <div className="max-w-4xl mx-auto">
           <div className="relative">
             {/* Quote Icon */}
-            <div className="absolute -top-4 -left-4 w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center">
+            <motion.div 
+              className="absolute -top-4 -left-4 w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center z-20"
+              initial={{ scale: 0, rotate: -180 }}
+              whileInView={{ scale: 1, rotate: 0 }}
+              viewport={{ once: true }}
+              transition={{ type: "spring", stiffness: 200, damping: 15 }}
+            >
               <Quote className="w-8 h-8 text-primary" />
-            </div>
+            </motion.div>
 
             {/* Testimonial Card */}
-            <div className="bg-card/60 backdrop-blur-sm border border-border rounded-2xl p-8 md:p-12 ml-6">
-              <div className="mb-8">
-                <h3 className="font-heading text-xl font-semibold text-foreground">
-                  {testimonials[currentIndex].company}
-                </h3>
-                <p className="text-sm text-primary">
-                  {testimonials[currentIndex].role}
-                </p>
-              </div>
+            <div className="bg-card/60 backdrop-blur-sm border border-border rounded-2xl p-8 md:p-12 ml-6 overflow-hidden relative min-h-[300px]">
+              <AnimatePresence mode="wait" custom={direction}>
+                <motion.div
+                  key={currentIndex}
+                  custom={direction}
+                  variants={slideVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{ duration: 0.4, ease: "easeInOut" }}
+                >
+                  <div className="mb-8">
+                    <h3 className="font-heading text-xl font-semibold text-foreground">
+                      {testimonials[currentIndex].company}
+                    </h3>
+                    <p className="text-sm text-primary">
+                      {testimonials[currentIndex].role}
+                    </p>
+                  </div>
 
-              <blockquote className="text-lg md:text-xl text-muted-foreground italic leading-relaxed mb-8">
-                "{testimonials[currentIndex].quote}"
-              </blockquote>
+                  <blockquote className="text-lg md:text-xl text-muted-foreground italic leading-relaxed mb-8">
+                    "{testimonials[currentIndex].quote}"
+                  </blockquote>
 
-              <p className="text-sm text-muted-foreground">
-                {testimonials[currentIndex].date}
-              </p>
+                  <p className="text-sm text-muted-foreground">
+                    {testimonials[currentIndex].date}
+                  </p>
+                </motion.div>
+              </AnimatePresence>
             </div>
           </div>
 
@@ -109,14 +147,19 @@ export function Testimonials() {
             {/* Dots */}
             <div className="flex gap-2">
               {testimonials.map((_, index) => (
-                <button
+                <motion.button
                   key={index}
-                  onClick={() => setCurrentIndex(index)}
-                  className={`w-2 h-2 rounded-full transition-all ${
+                  onClick={() => {
+                    setDirection(index > currentIndex ? 1 : -1);
+                    setCurrentIndex(index);
+                  }}
+                  className={`h-2 rounded-full transition-all ${
                     index === currentIndex
-                      ? "w-8 bg-primary"
+                      ? "bg-primary"
                       : "bg-muted hover:bg-muted-foreground/50"
                   }`}
+                  animate={{ width: index === currentIndex ? 32 : 8 }}
+                  transition={{ duration: 0.3 }}
                 />
               ))}
             </div>

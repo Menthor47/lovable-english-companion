@@ -1,5 +1,7 @@
-import { ArrowRight, Sparkles, Zap, TrendingUp, CheckCircle2 } from "lucide-react";
+import { motion } from "framer-motion";
+import { ArrowRight, Sparkles, Zap, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { AnimatedSection, StaggerContainer, StaggerItem } from "@/components/ui/animated-section";
 import heroImage from "@/assets/hero-ai-seo.jpg";
 
 const stats = [
@@ -22,32 +24,61 @@ export function Hero() {
     >
       {/* Background Effects */}
       <div className="absolute inset-0 circuit-pattern opacity-30" />
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-primary/5 rounded-full blur-3xl" />
+      <motion.div 
+        className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl"
+        animate={{ 
+          scale: [1, 1.2, 1],
+          opacity: [0.1, 0.15, 0.1]
+        }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div 
+        className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-primary/5 rounded-full blur-3xl"
+        animate={{ 
+          scale: [1.2, 1, 1.2],
+          opacity: [0.05, 0.1, 0.05]
+        }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+      />
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Left Content */}
           <div className="space-y-8">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 animate-fade-in">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20"
+            >
               <Sparkles className="w-4 h-4 text-primary" />
               <span className="text-sm font-medium text-primary">
                 Powered by Advanced AI
               </span>
               <Sparkles className="w-4 h-4 text-primary" />
-            </div>
+            </motion.div>
 
             {/* Headline */}
-            <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold leading-tight animate-slide-in-up">
+            <motion.h1 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
+            >
               <span className="gradient-text">AI-Powered SEO Agency:</span>{" "}
               <span className="text-foreground">
                 The Future of Web Ranking
               </span>
-            </h1>
+            </motion.h1>
 
             {/* Description */}
-            <p className="text-lg md:text-xl text-muted-foreground max-w-xl animate-slide-in-up" style={{ animationDelay: "100ms" }}>
+            <motion.p 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-lg md:text-xl text-muted-foreground max-w-xl"
+            >
               We combine the precision of{" "}
               <span className="text-primary font-medium">
                 Artificial Intelligence
@@ -55,10 +86,15 @@ export function Hero() {
               with cutting-edge{" "}
               <span className="text-primary font-medium">SEO strategies</span>{" "}
               to multiply your visibility and conversions online.
-            </p>
+            </motion.p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-wrap gap-4 animate-slide-in-up" style={{ animationDelay: "200ms" }}>
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="flex flex-wrap gap-4"
+            >
               <Button variant="hero" size="xl" className="group">
                 <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
                 Get SEO Strategy
@@ -67,26 +103,39 @@ export function Hero() {
                 <Sparkles className="w-5 h-5" />
                 View Services
               </Button>
-            </div>
+            </motion.div>
 
             {/* Feature Pills */}
-            <div className="flex flex-wrap gap-4 animate-slide-in-up" style={{ animationDelay: "300ms" }}>
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="flex flex-wrap gap-4"
+            >
               {features.map((feature, index) => (
-                <div
+                <motion.div
                   key={index}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.4, delay: 0.5 + index * 0.1 }}
                   className="flex items-center gap-2 px-4 py-2 rounded-lg bg-secondary/50 border border-border"
                 >
                   <feature.icon className="w-4 h-4 text-primary" />
                   <span className="text-sm font-medium text-foreground">
                     {feature.label}
                   </span>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
 
           {/* Right Content - Hero Image with Stats */}
-          <div className="relative animate-slide-in-right" style={{ animationDelay: "400ms" }}>
+          <motion.div 
+            initial={{ opacity: 0, x: 60 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="relative"
+          >
             {/* Main Image Container */}
             <div className="relative rounded-2xl overflow-hidden border border-primary/20 shadow-2xl shadow-primary/10">
               <img
@@ -101,8 +150,11 @@ export function Hero() {
               <div className="absolute bottom-0 left-0 right-0 p-6">
                 <div className="grid grid-cols-3 gap-4">
                   {stats.map((stat, index) => (
-                    <div
+                    <motion.div
                       key={index}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
                       className="text-center p-3 rounded-lg bg-background/60 backdrop-blur-sm border border-primary/20"
                     >
                       <div className="text-2xl md:text-3xl font-bold text-primary font-heading">
@@ -111,16 +163,24 @@ export function Hero() {
                       <div className="text-xs text-muted-foreground">
                         {stat.label}
                       </div>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               </div>
             </div>
 
             {/* Floating Elements */}
-            <div className="absolute -top-4 -right-4 w-20 h-20 bg-primary/20 rounded-2xl blur-2xl float" />
-            <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-primary/30 rounded-full blur-xl float" style={{ animationDelay: "1s" }} />
-          </div>
+            <motion.div 
+              className="absolute -top-4 -right-4 w-20 h-20 bg-primary/20 rounded-2xl blur-2xl"
+              animate={{ y: [0, -20, 0] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            />
+            <motion.div 
+              className="absolute -bottom-4 -left-4 w-16 h-16 bg-primary/30 rounded-full blur-xl"
+              animate={{ y: [0, 15, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+            />
+          </motion.div>
         </div>
       </div>
     </section>
