@@ -1,0 +1,39 @@
+{
+    "nav": {
+        "features": "Funcționalități",
+        "testimonials": "Testimoniale",
+        "faq": "Întrebări Frecvente"
+    },
+    "hero": {
+        "title": "Domină Clasamentele de Căutare cu SEO Bazat pe AI",
+        "subtitle": "Transformă-ți prezența digitală cu agenți AI autonomi care analizează, optimizează și clasează conținutul tău 24/7.",
+        "cta": {
+            "primary": "Audit Gratuit",
+            "secondary": "Vezi Demo"
+        },
+        "badge": "Nou: Agent AI v2.0 Lansat"
+    },
+    "contact": {
+        "title": "Contactează-ne",
+        "subtitle": "Gata să îți transformi strategia SEO? Trimite-ne un mesaj.",
+        "form": {
+            "name": "Nume",
+            "email": "Email",
+            "message": "Mesaj",
+            "submit": "Trimite Mesaj",
+            "sending": "Se trimite...",
+            "success": "Mesaj trimis cu succes!",
+            "error": "Nu s-a putut trimite mesajul. Te rugăm să încerci din nou."
+        }
+    },
+    "footer": {
+        "company": "Companie",
+        "resources": "Resurse",
+        "legal": "Legal",
+        "privacy": "Politica de Confidențialitate",
+        "terms": "Termeni și Condiții",
+        "cookies": "Politica de Cookie-uri",
+        "rights": "Toate drepturile rezervate.",
+        "description": "Agenție SEO bazată pe AI care transformă modul în care afacerile se clasează online."
+    }
+}

@@ -1,8 +1,10 @@
+import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles, Zap, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AnimatedSection, StaggerContainer, StaggerItem } from "@/components/ui/animated-section";
 import heroImage from "@/assets/hero-ai-seo.jpg";
+import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 
 const stats = [
   { value: "300%", label: "Traffic Increase" },
@@ -17,6 +19,8 @@ const features = [
 ];
 
 export function Hero() {
+  const { t } = useTranslation();
+  const prefersReducedMotion = usePrefersReducedMotion();
   return (
     <section
       id="home"
@@ -24,17 +28,17 @@ export function Hero() {
     >
       {/* Background Effects */}
       <div className="absolute inset-0 circuit-pattern opacity-30" />
-      <motion.div 
+      <motion.div
         className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl"
-        animate={{ 
+        animate={prefersReducedMotion ? {} : {
           scale: [1, 1.2, 1],
           opacity: [0.1, 0.15, 0.1]
         }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
       />
-      <motion.div 
+      <motion.div
         className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-primary/5 rounded-full blur-3xl"
-        animate={{ 
+        animate={prefersReducedMotion ? {} : {
           scale: [1.2, 1, 1.2],
           opacity: [0.05, 0.1, 0.05]
         }}
@@ -46,7 +50,7 @@ export function Hero() {
           {/* Left Content */}
           <div className="space-y-8">
             {/* Badge */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -54,42 +58,33 @@ export function Hero() {
             >
               <Sparkles className="w-4 h-4 text-primary" />
               <span className="text-sm font-medium text-primary">
-                Powered by Advanced AI
+                {t("hero.badge")}
               </span>
               <Sparkles className="w-4 h-4 text-primary" />
             </motion.div>
 
             {/* Headline */}
-            <motion.h1 
+            <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
               className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
             >
-              <span className="gradient-text">AI-Powered SEO Agency:</span>{" "}
-              <span className="text-foreground">
-                The Future of Web Ranking
-              </span>
+              <span className="gradient-text">{t("hero.title")}</span>
             </motion.h1>
 
             {/* Description */}
-            <motion.p 
+            <motion.p
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-lg md:text-xl text-muted-foreground max-w-xl"
             >
-              We combine the precision of{" "}
-              <span className="text-primary font-medium">
-                Artificial Intelligence
-              </span>{" "}
-              with cutting-edge{" "}
-              <span className="text-primary font-medium">SEO strategies</span>{" "}
-              to multiply your visibility and conversions online.
+              {t("hero.subtitle")}
             </motion.p>
 
             {/* CTA Buttons */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
@@ -97,16 +92,16 @@ export function Hero() {
             >
               <Button variant="hero" size="xl" className="group">
                 <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-                Get SEO Strategy
+                {t("hero.cta.primary")}
               </Button>
               <Button variant="hero-outline" size="xl">
                 <Sparkles className="w-5 h-5" />
-                View Services
+                {t("hero.cta.secondary")}
               </Button>
             </motion.div>
 
             {/* Feature Pills */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
@@ -130,7 +125,7 @@ export function Hero() {
           </div>
 
           {/* Right Content - Hero Image with Stats */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: 60 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
@@ -140,8 +135,12 @@ export function Hero() {
             <div className="relative rounded-2xl overflow-hidden border border-primary/20 shadow-2xl shadow-primary/10">
               <img
                 src={heroImage}
-                alt="AI-Powered SEO Technology Dashboard"
+                alt="AI-Powered SEO Technology Dashboard showing analytics, keyword rankings, and traffic metrics"
                 className="w-full h-auto object-cover"
+                loading="eager"
+                decoding="async"
+                width={1200}
+                height={675}
               />
               {/* Gradient Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
@@ -170,12 +169,12 @@ export function Hero() {
             </div>
 
             {/* Floating Elements */}
-            <motion.div 
+            <motion.div
               className="absolute -top-4 -right-4 w-20 h-20 bg-primary/20 rounded-2xl blur-2xl"
               animate={{ y: [0, -20, 0] }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
             />
-            <motion.div 
+            <motion.div
               className="absolute -bottom-4 -left-4 w-16 h-16 bg-primary/30 rounded-full blur-xl"
               animate={{ y: [0, 15, 0] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}

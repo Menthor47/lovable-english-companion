@@ -1,0 +1,39 @@
+{
+    "nav": {
+        "features": "Features",
+        "testimonials": "Testimonials",
+        "faq": "FAQ"
+    },
+    "hero": {
+        "title": "Dominate Search Rankings with AI-Powered SEO",
+        "subtitle": "Transform your digital presence with autonomous AI agents that analyze, optimize, and rank your content 24/7.",
+        "cta": {
+            "primary": "Start Free Audit",
+            "secondary": "Watch Demo"
+        },
+        "badge": "New: AI Agent v2.0 Released"
+    },
+    "contact": {
+        "title": "Get in Touch",
+        "subtitle": "Ready to transform your SEO strategy? Send us a message.",
+        "form": {
+            "name": "Name",
+            "email": "Email",
+            "message": "Message",
+            "submit": "Send Message",
+            "sending": "Sending...",
+            "success": "Message sent successfully!",
+            "error": "Failed to send message. Please try again."
+        }
+    },
+    "footer": {
+        "company": "Company",
+        "resources": "Resources",
+        "legal": "Legal",
+        "privacy": "Privacy Policy",
+        "terms": "Terms of Service",
+        "cookies": "Cookie Policy",
+        "rights": "All rights reserved.",
+        "description": "AI-powered SEO agency transforming how businesses rank online."
+    }
+}

@@ -1,29 +1,31 @@
+import { useTranslation } from "react-i18next";
 import { Sparkles, Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
 
-const footerLinks = {
-  services: [
-    { label: "Local SEO", href: "#services" },
-    { label: "Web SEO", href: "#services" },
-    { label: "E-commerce SEO", href: "#services" },
-    { label: "Link Building", href: "#services" },
-    { label: "SEM Advertising", href: "#services" },
-  ],
-  company: [
-    { label: "About Us", href: "#" },
-    { label: "Our Process", href: "#process" },
-    { label: "Testimonials", href: "#testimonials" },
-    { label: "Blog", href: "#" },
-    { label: "Careers", href: "#" },
-  ],
-  resources: [
-    { label: "SEO Tools", href: "#" },
-    { label: "Free Audit", href: "#contact" },
-    { label: "Case Studies", href: "#" },
-    { label: "API Docs", href: "#" },
-  ],
-};
-
 export function Footer() {
+  const { t } = useTranslation();
+
+  const footerLinks = {
+    services: [
+      { label: "Local SEO", href: "#services" },
+      { label: "Web SEO", href: "#services" },
+      { label: "E-commerce SEO", href: "#services" },
+      { label: "Link Building", href: "#services" },
+      { label: "SEM Advertising", href: "#services" },
+    ],
+    company: [
+      { label: "About Us", href: "#" },
+      { label: "Process", href: "#process" },
+      { label: "Testimonials", href: "#testimonials" },
+      { label: "Blog", href: "#" },
+      { label: "Careers", href: "#" },
+    ],
+    resources: [
+      { label: "SEO Tools", href: "#" },
+      { label: "Free Audit", href: "#contact" },
+      { label: "Case Studies", href: "#" },
+      { label: "API Docs", href: "#" },
+    ],
+  };
   return (
     <footer className="bg-card border-t border-border">
       <div className="container mx-auto px-4 py-16">
@@ -39,9 +41,7 @@ export function Footer() {
               </span>
             </a>
             <p className="text-sm text-muted-foreground mb-6">
-              AI-powered SEO agency transforming how businesses rank online.
-              Combining cutting-edge artificial intelligence with proven SEO
-              strategies.
+              {t("footer.description")}
             </p>
             <div className="space-y-2">
               <a
@@ -68,7 +68,7 @@ export function Footer() {
           {/* Services */}
           <div>
             <h4 className="font-heading font-semibold text-foreground mb-4">
-              Services
+              {t("nav.features")}
             </h4>
             <ul className="space-y-2">
               {footerLinks.services.map((link) => (
@@ -87,7 +87,7 @@ export function Footer() {
           {/* Company */}
           <div>
             <h4 className="font-heading font-semibold text-foreground mb-4">
-              Company
+              {t("footer.company")}
             </h4>
             <ul className="space-y-2">
               {footerLinks.company.map((link) => (
@@ -106,7 +106,7 @@ export function Footer() {
           {/* Resources */}
           <div>
             <h4 className="font-heading font-semibold text-foreground mb-4">
-              Resources
+              {t("footer.resources")}
             </h4>
             <ul className="space-y-2">
               {footerLinks.resources.map((link) => (
@@ -131,22 +131,22 @@ export function Footer() {
           </p>
           <div className="flex items-center gap-6">
             <a
-              href="#"
+              href="/privacy"
               className="text-sm text-muted-foreground hover:text-primary transition-colors"
             >
-              Privacy Policy
+              {t("footer.privacy")}
             </a>
             <a
-              href="#"
+              href="/terms"
               className="text-sm text-muted-foreground hover:text-primary transition-colors"
             >
-              Terms of Service
+              {t("footer.terms")}
             </a>
             <a
-              href="#"
+              href="/cookies"
               className="text-sm text-muted-foreground hover:text-primary transition-colors"
             >
-              Cookie Policy
+              {t("footer.cookies")}
             </a>
           </div>
         </div>

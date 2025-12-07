@@ -1,24 +1,29 @@
 import { motion } from "framer-motion";
+import { config } from "@/lib/config";
 import { MessageCircle, Clock, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AnimatedSection, StaggerContainer, StaggerItem } from "@/components/ui/animated-section";
+import { useContactForm } from "@/hooks/useContactForm";
+import { FormFeedback } from "@/components/ui/form-feedback";
+import { useTranslation } from "react-i18next";
 
 export function Contact() {
+  const { t } = useTranslation();
+  const { register, handleSubmit, errors, isSubmitting, onSubmit, success, error } = useContactForm();
+
   return (
     <section id="contact" className="py-24 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-t from-primary/5 via-background to-background" />
-      
+
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto">
           {/* Header */}
           <AnimatedSection className="text-center mb-12">
             <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
-              Ready to Boost Your{" "}
-              <span className="gradient-text">Digital Presence?</span>
+              {t("contact.title")}
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Contact us today for a free consultation and discover how we can
-              help you achieve your goals.
+              {t("contact.subtitle")}
             </p>
           </AnimatedSection>
 
@@ -26,7 +31,7 @@ export function Contact() {
           <StaggerContainer className="grid md:grid-cols-2 gap-6" staggerDelay={0.15}>
             {/* WhatsApp Card */}
             <StaggerItem>
-              <motion.div 
+              <motion.div
                 className="p-8 rounded-2xl bg-card/60 backdrop-blur-sm border border-border hover:border-green-500/50 transition-all group h-full"
                 whileHover={{ y: -5 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
@@ -34,17 +39,15 @@ export function Contact() {
                 <div className="w-16 h-16 rounded-2xl bg-green-500/20 border border-green-500/30 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                   <MessageCircle className="w-8 h-8 text-green-500" />
                 </div>
-                
+
                 <h3 className="font-heading text-2xl font-semibold mb-4 text-foreground">
                   Let's Talk on WhatsApp!
                 </h3>
-                
+
                 <p className="text-muted-foreground mb-6">
-                  Get immediate answers to all your questions. Our team is
-                  available to help you with your SEO and digital marketing
-                  project.
+                  Get immediate answers to all your questions.
                 </p>
-                
+
                 <Button
                   variant="hero"
                   size="lg"
@@ -52,7 +55,7 @@ export function Contact() {
                   asChild
                 >
                   <a
-                    href="https://wa.me/1234567890?text=Hello%2C%20I'm%20interested%20in%20learning%20more%20about%20your%20SEO%20and%20digital%20marketing%20services"
+                    href={`https://wa.me/${config.whatsapp.number}?text=${encodeURIComponent(config.whatsapp.message)}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -60,7 +63,7 @@ export function Contact() {
                     Contact via WhatsApp
                   </a>
                 </Button>
-                
+
                 <div className="flex items-center gap-2 mt-4 text-sm text-muted-foreground">
                   <Clock className="w-4 h-4" />
                   <span>Business hours: Mon-Fri 9:00 AM - 6:00 PM</span>
@@ -70,7 +73,7 @@ export function Contact() {
 
             {/* Email/Form Card */}
             <StaggerItem>
-              <motion.div 
+              <motion.div
                 className="p-8 rounded-2xl bg-card/60 backdrop-blur-sm border border-border hover:border-primary/50 transition-all group h-full"
                 whileHover={{ y: -5 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
@@ -78,32 +81,56 @@ export function Contact() {
                 <div className="w-16 h-16 rounded-2xl bg-primary/20 border border-primary/30 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                   <Send className="w-8 h-8 text-primary" />
                 </div>
-                
+
                 <h3 className="font-heading text-2xl font-semibold mb-4 text-foreground">
                   Request a Free Audit
                 </h3>
-                
+
                 <p className="text-muted-foreground mb-6">
-                  Our AI will analyze your website and provide actionable
-                  insights to improve your search rankings. No commitment
-                  required.
+                  Our AI will analyze your website and provide actionable insights.
                 </p>
-                
-                <form className="space-y-4">
-                  <input
-                    type="email"
-                    placeholder="Enter your email"
-                    className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/50 text-foreground placeholder:text-muted-foreground transition-all"
-                  />
-                  <input
-                    type="url"
-                    placeholder="Your website URL"
-                    className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/50 text-foreground placeholder:text-muted-foreground transition-all"
-                  />
-                  <Button variant="hero" size="lg" className="w-full">
+
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">{t("contact.form.email")}</label>
+                    <input
+                      type="email"
+                      placeholder="john@company.com"
+                      className={`w-full px-4 py-3 rounded-lg bg-background border ${errors.email ? "border-destructive focus:border-destructive" : "border-border focus:border-primary/50"} focus:outline-none focus:ring-1 focus:ring-primary/50 text-foreground placeholder:text-muted-foreground transition-all`}
+                      {...register("email")}
+                      disabled={isSubmitting}
+                    />
+                    {errors.email && (
+                      <p className="text-xs text-destructive ml-1">{errors.email.message}</p>
+                    )}
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Website URL</label>
+                    <input
+                      type="url"
+                      placeholder="https://example.com"
+                      className={`w-full px-4 py-3 rounded-lg bg-background border ${errors.website ? "border-destructive focus:border-destructive" : "border-border focus:border-primary/50"} focus:outline-none focus:ring-1 focus:ring-primary/50 text-foreground placeholder:text-muted-foreground transition-all`}
+                      {...register("website")}
+                      disabled={isSubmitting}
+                    />
+                    {errors.website && (
+                      <p className="text-xs text-destructive ml-1">{errors.website.message}</p>
+                    )}
+                  </div>
+
+                  <Button
+                    variant="hero"
+                    size="lg"
+                    className="w-full"
+                    type="submit"
+                    disabled={isSubmitting}
+                  >
                     <Send className="w-5 h-5" />
-                    Get Free Audit
+                    {isSubmitting ? t("contact.form.sending") : t("contact.form.submit")}
                   </Button>
+
+                  <FormFeedback isLoading={false} error={error} success={success} />
                 </form>
               </motion.div>
             </StaggerItem>
