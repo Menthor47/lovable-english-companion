@@ -1,0 +1,87 @@
+import { CheckCircle2, Users } from "lucide-react";
+import aiRobot from "@/assets/ai-robot.png";
+
+const advantages = [
+  "Analyze data in real-time",
+  "Optimize content intelligently",
+  "Improve user experience",
+  "Increase organic traffic without manual effort",
+];
+
+export function AIAdvantage() {
+  return (
+    <section className="py-24 relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-r from-secondary/30 via-transparent to-secondary/30" />
+      
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Content */}
+          <div className="space-y-8">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
+              <span className="text-sm font-medium text-primary">
+                Why Choose Us?
+              </span>
+            </div>
+            
+            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold">
+              Automated & Effective SEO with{" "}
+              <span className="gradient-text">Artificial Intelligence</span>
+            </h2>
+            
+            <p className="text-lg text-muted-foreground">
+              Artificial Intelligence has completely transformed web ranking.
+              Today, SEO isn't just about keywords: it's about deep data
+              analysis, content personalization, and decisions based on real
+              user behavior.
+            </p>
+            
+            <ul className="space-y-4">
+              {advantages.map((advantage, index) => (
+                <li
+                  key={index}
+                  className="flex items-center gap-3 text-foreground"
+                >
+                  <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
+                    <CheckCircle2 className="w-4 h-4 text-primary" />
+                  </div>
+                  {advantage}
+                </li>
+              ))}
+            </ul>
+            
+            <div className="flex items-center gap-3 pt-4">
+              <div className="w-12 h-12 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center">
+                <Users className="w-6 h-6 text-primary" />
+              </div>
+              <div>
+                <p className="font-semibold text-foreground">
+                  More than 150 satisfied clients
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  Trust our AI-powered solutions
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Image */}
+          <div className="relative">
+            <div className="relative rounded-2xl overflow-hidden">
+              <img
+                src={aiRobot}
+                alt="AI Robot analyzing SEO dashboard"
+                className="w-full h-auto object-cover rounded-2xl"
+              />
+              {/* Glow effect */}
+              <div className="absolute inset-0 bg-gradient-to-t from-background/50 via-transparent to-transparent" />
+            </div>
+            
+            {/* Floating accent */}
+            <div className="absolute -top-6 -right-6 w-32 h-32 bg-primary/20 rounded-full blur-3xl" />
+            <div className="absolute -bottom-6 -left-6 w-24 h-24 bg-primary/30 rounded-full blur-2xl" />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
