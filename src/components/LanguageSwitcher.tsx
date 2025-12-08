@@ -13,7 +13,7 @@ export const LanguageSwitcher = () => {
     const { i18n } = useTranslation();
 
     const languages = [
-        { code: "en", label: "English", flag: "🇺🇸" },
+        { code: "en", label: "EN", flag: "🇬🇧" },
         { code: "ro", label: "Română", flag: "🇷🇴" },
     ];
 
@@ -22,8 +22,9 @@ export const LanguageSwitcher = () => {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="w-14 px-2 gap-2">
+                <Button variant="ghost" size="sm" className="w-auto px-2 gap-2">
                     <span className="text-lg leading-none">{currentLanguage.flag}</span>
+                    <span className="font-medium">{currentLanguage.label}</span>
                     <span className="sr-only">Toggle language</span>
                 </Button>
             </DropdownMenuTrigger>

@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { cn } from "@/lib/utils";
 import { Link, useLocation } from "react-router-dom";
-import { ModeToggle } from "@/components/mode-toggle";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -169,7 +168,6 @@ export function Header() {
           {/* CTA Buttons */}
           <div className="hidden lg:flex items-center gap-4">
             <LanguageSwitcher />
-            <ModeToggle />
             <Button variant="hero" size="sm" asChild>
               <Link to="/#contact" onClick={() => handleNavClick("/#contact")}>
                 {t("hero.cta.primary")}
@@ -179,7 +177,6 @@ export function Header() {
 
           {/* Mobile Menu Button */}
           <div className="lg:hidden flex items-center gap-2">
-            <ModeToggle />
             <button
               className="lg:hidden p-2 text-foreground"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}

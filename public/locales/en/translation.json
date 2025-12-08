@@ -80,6 +80,26 @@
                 "Unlinked Mentions"
             ]
         },
+        "campaigns": {
+            "title": "Campaign Management",
+            "description": "End-to-end management of your digital campaigns for maximum impact and ROI.",
+            "features": [
+                "Budget Optimization",
+                "Creative Direction",
+                "A/B Testing",
+                "Conversion Tracking"
+            ]
+        },
+        "consulting": {
+            "title": "Strategic Consulting",
+            "description": "Expert guidance, audits, and custom strategies to accelerate your digital growth.",
+            "features": [
+                "Growth Roadmaps",
+                "Tech Stack Audits",
+                "Competitor Analysis",
+                "Market Penetration"
+            ]
+        },
         "analytics": {
             "title": "Analytics & Intelligence",
             "description": "Deep dive into your data with GA4, GSC, GBP, and custom reporting dashboards.",

@@ -6,75 +6,16 @@
 
 @layer base {
   :root {
-    /* Light Mode (Inverted Cyber Intelligence) */
-    --background: hsl(210, 40%, 98%);
-    --foreground: hsl(262, 52%, 20%);
-
-    --card: hsl(0, 0%, 100%);
-    --card-foreground: hsl(262, 52%, 20%);
-
-    --popover: hsl(0, 0%, 100%);
-    --popover-foreground: hsl(262, 52%, 20%);
-
-    /* Bright Cyan Primary (Text friendly) */
-    --primary: hsl(195, 100%, 35%);
-    --primary-foreground: hsl(210, 40%, 98%);
-
-    /* Secondary */
-    --secondary: hsl(210, 20%, 90%);
-    --secondary-foreground: hsl(262, 52%, 20%);
-
-    --muted: hsl(210, 20%, 90%);
-    --muted-foreground: hsl(215, 20%, 45%);
-
-    /* Electric Blue Accent */
-    --accent: hsl(195, 100%, 45%);
-    --accent-foreground: hsl(210, 40%, 98%);
-
-    /* Red for destructive */
-    --destructive: hsl(352, 81%, 51%);
-    --destructive-foreground: hsl(210, 40%, 98%);
-
-    --border: hsl(214, 32%, 91%);
-    --input: hsl(214, 32%, 91%);
-    --ring: hsl(195, 100%, 35%);
-
-    --radius: 0.75rem;
-
-    /* Custom colors - Light Mode */
-    --glow-primary: hsl(195, 100%, 40%);
-    --glow-secondary: hsl(262, 52%, 60%);
-    --surface-glass: hsl(210, 40%, 98%);
-    --gradient-start: hsl(210, 40%, 98%);
-    --gradient-end: hsl(195, 20%, 95%);
-
-    /* Additional palette colors */
-    --color-teal: hsl(184, 95%, 40%);
-    --color-orange: hsl(35, 100%, 50%);
-    --color-green: hsl(110, 100%, 35%);
-    --color-red: hsl(352, 81%, 51%);
-    --color-light-blue: hsl(195, 100%, 45%);
-
-    --sidebar-background: hsl(0, 0%, 100%);
-    --sidebar-foreground: hsl(262, 52%, 20%);
-    --sidebar-primary: hsl(195, 100%, 35%);
-    --sidebar-primary-foreground: hsl(0, 0%, 100%);
-    --sidebar-accent: hsl(210, 20%, 90%);
-    --sidebar-accent-foreground: hsl(262, 52%, 20%);
-    --sidebar-border: hsl(220, 13%, 91%);
-    --sidebar-ring: hsl(195, 100%, 35%);
-  }
-
-  .dark {
-    /* Cyber Intelligence Theme (Option 1) - Dark Mode Default */
-    --background: hsl(0, 24%, 24%);
-    --foreground: hsl(210, 40%, 98%);
+    /* Cyber Intelligence Theme (Permanent Dark Mode) */
+    --background: hsl(309, 16%, 15%);
+    --foreground: hsl(212, 22%, 66%);
 
     --card: hsl(227, 45%, 18%);
     --card-foreground: hsl(210, 40%, 98%);
 
     --popover: hsl(262, 52%, 22%);
     --popover-foreground: hsl(210, 40%, 98%);
+
 
     /* Bright Cyan Primary */
     --primary: hsl(184, 95%, 60%);
@@ -99,7 +40,9 @@
     --input: hsl(262, 30%, 30%);
     --ring: hsl(184, 95%, 60%);
 
-    /* Custom colors - Dark Mode */
+    --radius: 0.75rem;
+
+    /* Custom colors - Dark Mode Default */
     --glow-primary: hsl(184, 95%, 60%);
     --glow-secondary: hsl(195, 100%, 50%);
     --surface-glass: hsl(262, 52%, 25%);

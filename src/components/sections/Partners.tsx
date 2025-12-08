@@ -10,22 +10,22 @@ const partners = [
 export function Partners() {
   return (
     <section className="py-16 relative overflow-hidden border-y border-border/30">
-      <div className="absolute inset-0 bg-secondary/20" />
-      
+      <div className="absolute inset-0 bg-[rgb(203,234,248)]" />
+
       <div className="container mx-auto px-4 relative z-10">
-        <p className="text-center text-sm font-medium text-muted-foreground uppercase tracking-widest mb-8">
+        <p className="text-center text-sm font-medium text-slate-800 uppercase tracking-widest mb-8">
           Certified Technology Partners
         </p>
-        
+
         {/* Scrolling logos */}
         <div className="relative overflow-hidden">
           <div className="flex gap-16 animate-marquee">
             {[...partners, ...partners].map((partner, index) => (
               <div
                 key={index}
-                className="flex-shrink-0 h-12 w-32 flex items-center justify-center opacity-50 hover:opacity-100 transition-opacity grayscale hover:grayscale-0"
+                className="flex-shrink-0 h-12 w-32 flex items-center justify-center opacity-70 hover:opacity-100 transition-opacity grayscale hover:grayscale-0"
               >
-                <div className="text-muted-foreground font-heading font-semibold text-lg">
+                <div className="text-slate-800 font-heading font-semibold text-lg">
                   {partner.name}
                 </div>
               </div>

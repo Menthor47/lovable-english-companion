@@ -1,12 +1,12 @@
-import { MapPin, Globe, ShoppingCart, ArrowRight, CheckCircle2, Bot, Sparkles, Search, Megaphone, FileText, Link as LinkIcon, BarChart3 } from "lucide-react";
+import { MapPin, Globe, ShoppingCart, ArrowRight, CheckCircle2, Bot, Sparkles, Search, Megaphone, FileText, Link as LinkIcon, BarChart3, Target, Lightbulb } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { GlassCard } from "@/components/ui/glass-card";
 import { MagneticButton } from "@/components/ui/magnetic-button";
 import { AnimatedSection, StaggerContainer, StaggerItem } from "@/components/ui/animated-section";
 
-const serviceIcons = [Bot, Sparkles, Search, Megaphone, FileText, LinkIcon, BarChart3];
-const serviceKeys = ["aeo", "geo", "seo", "ads", "content", "links", "analytics"] as const;
+const serviceIcons = [Bot, Sparkles, Search, Megaphone, FileText, LinkIcon, Target, Lightbulb, BarChart3];
+const serviceKeys = ["aeo", "geo", "seo", "ads", "content", "links", "campaigns", "consulting", "analytics"] as const;
 
 export function Services() {
   const { t } = useTranslation();
@@ -81,13 +81,13 @@ export function Services() {
 
                   <MagneticButton className="w-full" strength={50}>
                     <Button
-                      variant={service.popular ? "hero" : "outline"}
-                      className="w-full group/btn"
+                      variant={service.popular ? "hero" : "default"}
+                      className={`w-full group/btn ${!service.popular && "bg-primary/80 hover:bg-primary"}`}
                       asChild
                     >
-                      <a href="#contact">
+                      <a href="#contact" className="text-slate-950 font-bold">
                         {t("services.learnMore")}
-                        <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1 ml-2" />
+                        <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1 ml-2 text-slate-950" />
                       </a>
                     </Button>
                   </MagneticButton>
