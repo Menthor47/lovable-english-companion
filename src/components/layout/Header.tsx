@@ -80,7 +80,7 @@ export function Header() {
               <NavigationMenuList>
                 {/* Solutions */}
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className="bg-transparent">Solutions</NavigationMenuTrigger>
+                  <NavigationMenuTrigger className="bg-transparent hover:text-primary data-[state=open]:text-primary transition-colors">Solutions</NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
                       <li className="row-span-3">
@@ -118,7 +118,7 @@ export function Header() {
 
                 {/* Products */}
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className="bg-transparent">Products</NavigationMenuTrigger>
+                  <NavigationMenuTrigger className="bg-transparent hover:text-primary data-[state=open]:text-primary transition-colors">Products</NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <ul className="grid w-[400px] gap-3 p-4 md:grid-cols-2">
                       <ListItem href="/tools" title="Tools Hub">
@@ -139,7 +139,7 @@ export function Header() {
 
                 {/* Resources */}
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className="bg-transparent">Resources</NavigationMenuTrigger>
+                  <NavigationMenuTrigger className="bg-transparent hover:text-primary data-[state=open]:text-primary transition-colors">Resources</NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <ul className="grid w-[400px] gap-3 p-4 md:grid-cols-1">
                       <ListItem href="/case-studies" title="Case Studies">
@@ -151,6 +151,9 @@ export function Header() {
                       <ListItem href="/resources/glossary" title="SEO Glossary">
                         Master the terminology of modern search.
                       </ListItem>
+                      <ListItem href="/blog" title="Blog">
+                        Latest insights and industry updates.
+                      </ListItem>
                     </ul>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
@@ -158,8 +161,17 @@ export function Header() {
                 {/* Pricing (Direct Link) */}
                 <NavigationMenuItem>
                   <Link to="/pricing">
-                    <NavigationMenuLink className={navigationMenuTriggerStyle() + " bg-transparent"}>
+                    <NavigationMenuLink className={navigationMenuTriggerStyle() + " bg-transparent hover:text-primary hover:bg-primary/10 transition-colors"}>
                       Pricing
+                    </NavigationMenuLink>
+                  </Link>
+                </NavigationMenuItem>
+
+                {/* Contact (Direct Link) */}
+                <NavigationMenuItem>
+                  <Link to="/contact">
+                    <NavigationMenuLink className={navigationMenuTriggerStyle() + " bg-transparent hover:text-primary hover:bg-primary/10 transition-colors"}>
+                      Contact
                     </NavigationMenuLink>
                   </Link>
                 </NavigationMenuItem>
@@ -205,8 +217,10 @@ export function Header() {
                 <Link to="/case-studies" className="pl-4 text-sm text-muted-foreground">Case Studies</Link>
                 <Link to="/compare" className="pl-4 text-sm text-muted-foreground">Comparisons</Link>
                 <Link to="/resources/glossary" className="pl-4 text-sm text-muted-foreground">Glossary</Link>
+                <Link to="/blog" className="pl-4 text-sm text-muted-foreground">Blog</Link>
 
                 <Link to="/pricing" className="font-semibold text-foreground px-2 mt-2 hover:text-primary transition-colors">Pricing</Link>
+                <Link to="/contact" className="font-semibold text-foreground px-2 mt-2 hover:text-primary transition-colors">Contact</Link>
 
                 <div className="flex flex-col gap-2 pt-4 border-t border-border mt-2">
                   <div className="flex justify-center py-2">
@@ -234,7 +248,7 @@ const ListItem = ({ className, title, children, href, ...props }: any) => {
         <Link
           to={href}
           className={cn(
-            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-primary/10 hover:text-primary focus:bg-primary/10 focus:text-primary",
             className
           )}
           {...props}

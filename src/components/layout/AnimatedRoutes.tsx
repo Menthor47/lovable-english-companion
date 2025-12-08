@@ -19,6 +19,9 @@ import { useScrollToAnchor } from "@/hooks/useScrollToAnchor";
 
 import CompareHub from "@/pages/CompareHub";
 import CompareDetail from "@/pages/CompareDetail";
+import Blog from "@/pages/Blog";
+import BlogPost from "@/pages/BlogPost";
+import Contact from "@/pages/Contact";
 
 export function AnimatedRoutes() {
     const location = useLocation();
@@ -43,6 +46,9 @@ export function AnimatedRoutes() {
                 <Route path="/compare/:slug" element={<CompareDetail />} />
                 <Route path="/geo-optimization" element={<GEO />} />
                 <Route path="/cookies" element={<CookiePolicy />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/:slug" element={<BlogPost />} />
+                <Route path="/contact" element={<Contact />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
             </Routes>

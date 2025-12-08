@@ -7,8 +7,8 @@
 @layer base {
   :root {
     /* Cyber Intelligence Theme (Permanent Dark Mode) */
-    --background: hsl(309, 16%, 15%);
-    --foreground: hsl(212, 22%, 66%);
+    --background: hsl(184, 83%, 16%);
+    --foreground: hsl(245, 22%, 66%);
 
     --card: hsl(227, 45%, 18%);
     --card-foreground: hsl(210, 40%, 98%);

@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Search, CheckCircle, Loader2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
+import { api } from "@/lib/api";
 
 export default function Audit() {
     const [step, setStep] = useState<"form" | "scanning" | "results">("form");
@@ -25,12 +26,24 @@ export default function Audit() {
 
     const [currentSimulationStep, setCurrentSimulationStep] = useState(0);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!formData.url || !formData.email) {
             toast({
                 title: "Missing Information",
                 description: "Please enter both a website URL and your email address.",
+                variant: "destructive",
+            });
+            return;
+        }
+
+        try {
+            await api.contact.submit({ email: formData.email, website: formData.url });
+        } catch (error) {
+            console.error("Audit submission failed:", error);
+            toast({
+                title: "Error",
+                description: "Could not start the audit. Please try again.",
                 variant: "destructive",
             });
             return;
