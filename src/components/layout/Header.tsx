@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { cn } from "@/lib/utils";
 import { Link, useLocation } from "react-router-dom";
+import { ModeToggle } from "@/components/mode-toggle";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -168,6 +169,7 @@ export function Header() {
           {/* CTA Buttons */}
           <div className="hidden lg:flex items-center gap-4">
             <LanguageSwitcher />
+            <ModeToggle />
             <Button variant="hero" size="sm" asChild>
               <Link to="/#contact" onClick={() => handleNavClick("/#contact")}>
                 {t("hero.cta.primary")}
@@ -176,48 +178,50 @@ export function Header() {
           </div>
 
           {/* Mobile Menu Button */}
-          <button
-            className="lg:hidden p-2 text-foreground"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
-        </div>
-
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="lg:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur-xl border-b border-border/50 py-6 overflow-y-auto max-h-[80vh]">
-            <nav className="flex flex-col gap-4 px-4">
-              <div className="font-semibold text-primary px-2">Solutions</div>
-              <Link to="/#services" className="pl-4 text-sm text-muted-foreground" onClick={() => handleNavClick("/#services")}>Services</Link>
-              <Link to="/industries/saas" className="pl-4 text-sm text-muted-foreground">Industries</Link>
-
-              <div className="font-semibold text-primary px-2 mt-2">Products</div>
-              <Link to="/tools" className="pl-4 text-sm text-muted-foreground">Free Tools</Link>
-              <Link to="/tools/audit" className="pl-4 text-sm text-muted-foreground">AI Audit</Link>
-              <Link to="/tools/roi-calculator" className="pl-4 text-sm text-muted-foreground">ROI Calculator</Link>
-
-              <div className="font-semibold text-primary px-2 mt-2">Resources</div>
-              <Link to="/case-studies" className="pl-4 text-sm text-muted-foreground">Case Studies</Link>
-              <Link to="/compare" className="pl-4 text-sm text-muted-foreground">Comparisons</Link>
-              <Link to="/resources/glossary" className="pl-4 text-sm text-muted-foreground">Glossary</Link>
-
-              <Link to="/pricing" className="font-semibold text-foreground px-2 mt-2 hover:text-primary transition-colors">Pricing</Link>
-
-              <div className="flex flex-col gap-2 pt-4 border-t border-border mt-2">
-                <div className="flex justify-center py-2">
-                  <LanguageSwitcher />
-                </div>
-                <Button variant="hero" size="lg" className="w-full" asChild>
-                  <Link to="/#contact" onClick={() => handleNavClick("/#contact")}>
-                    {t("hero.cta.primary")}
-                  </Link>
-                </Button>
-              </div>
-            </nav>
+          <div className="lg:hidden flex items-center gap-2">
+            <ModeToggle />
+            <button
+              className="lg:hidden p-2 text-foreground"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
           </div>
-        )}
-      </div>
+
+          {/* Mobile Menu */}
+          {isMobileMenuOpen && (
+            <div className="lg:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur-xl border-b border-border/50 py-6 overflow-y-auto max-h-[80vh]">
+              <nav className="flex flex-col gap-4 px-4">
+                <div className="font-semibold text-primary px-2">Solutions</div>
+                <Link to="/#services" className="pl-4 text-sm text-muted-foreground" onClick={() => handleNavClick("/#services")}>Services</Link>
+                <Link to="/industries/saas" className="pl-4 text-sm text-muted-foreground">Industries</Link>
+
+                <div className="font-semibold text-primary px-2 mt-2">Products</div>
+                <Link to="/tools" className="pl-4 text-sm text-muted-foreground">Free Tools</Link>
+                <Link to="/tools/audit" className="pl-4 text-sm text-muted-foreground">AI Audit</Link>
+                <Link to="/tools/roi-calculator" className="pl-4 text-sm text-muted-foreground">ROI Calculator</Link>
+
+                <div className="font-semibold text-primary px-2 mt-2">Resources</div>
+                <Link to="/case-studies" className="pl-4 text-sm text-muted-foreground">Case Studies</Link>
+                <Link to="/compare" className="pl-4 text-sm text-muted-foreground">Comparisons</Link>
+                <Link to="/resources/glossary" className="pl-4 text-sm text-muted-foreground">Glossary</Link>
+
+                <Link to="/pricing" className="font-semibold text-foreground px-2 mt-2 hover:text-primary transition-colors">Pricing</Link>
+
+                <div className="flex flex-col gap-2 pt-4 border-t border-border mt-2">
+                  <div className="flex justify-center py-2">
+                    <LanguageSwitcher />
+                  </div>
+                  <Button variant="hero" size="lg" className="w-full" asChild>
+                    <Link to="/#contact" onClick={() => handleNavClick("/#contact")}>
+                      {t("hero.cta.primary")}
+                    </Link>
+                  </Button>
+                </div>
+              </nav>
+            </div>
+          )}
+        </div>
     </header>
   );
 }
