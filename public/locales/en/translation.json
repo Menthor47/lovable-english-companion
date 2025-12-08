@@ -1,29 +1,263 @@
 {
     "nav": {
-        "features": "Features",
+        "services": "Services",
         "testimonials": "Testimonials",
         "faq": "FAQ"
     },
     "hero": {
-        "title": "Dominate Search Rankings with AI-Powered SEO",
-        "subtitle": "Transform your digital presence with autonomous AI agents that analyze, optimize, and rank your content 24/7.",
+        "title": "Dominate Search & AI Answers",
+        "subtitle": "AG SEO = AEO + GEO + SEO. The complete formula for modern search dominance. We help you rank on Google, ChatGPT, Gemini, and Claude.",
         "cta": {
             "primary": "Start Free Audit",
-            "secondary": "Watch Demo"
+            "secondary": "View Services"
         },
-        "badge": "New: AI Agent v2.0 Released"
+        "badge": "AI-Powered SEO Solutions"
+    },
+    "services": {
+        "title": "AGSEO Services",
+        "subtitle": "Visibility, ranking, and real results with AI. Discover how we can transform your online presence.",
+        "badge": "AGSEO Services",
+        "cta": "Request Free Consultation",
+        "learnMore": "Learn More",
+        "popular": "Most Popular",
+        "aeo": {
+            "title": "Answer Engine Optimization (AEO)",
+            "description": "Optimize for direct answers on AI platforms like ChatGPT, Perplexity, and voice search.",
+            "features": [
+                "Zero-Click Optimization",
+                "Voice Search Strategy",
+                "Featured Snippet Targeting",
+                "LLM Brand Citations"
+            ]
+        },
+        "geo": {
+            "title": "Generative Engine Optimization (GEO)",
+            "description": "Future-proof your content for generative search experiences (SGE) and AI-driven results.",
+            "features": [
+                "SGE Readiness Audit",
+                "AI-Friendly Structured Data",
+                "Entity-Based Content",
+                "Semantic Authority Building"
+            ]
+        },
+        "seo": {
+            "title": "Advanced Technical SEO",
+            "description": "Holistic search engine optimization including Local, Ecommerce, and Enterprise solutions.",
+            "features": [
+                "Technical Health Audits",
+                "Core Web Vitals",
+                "Local Map Pack Ranking",
+                "Ecommerce Architecture"
+            ]
+        },
+        "ads": {
+            "title": "Multi-Channel Paid Media",
+            "description": "High-ROAS campaigns across Google, Meta, TikTok, LinkedIn, and Physical channels for local business.",
+            "features": [
+                "Cross-Platform Strategy",
+                "ROAS Maximization",
+                "Creative Testing AI",
+                "Local Store Visits"
+            ]
+        },
+        "content": {
+            "title": "AI-Driven Content Engine",
+            "description": "Scale high-quality, authoritative content production that ranks and converts.",
+            "features": [
+                "Topic Cluster Strategy",
+                "Automated Brief Generation",
+                "Human-Edited AI Writing",
+                "E-E-A-T Optimization"
+            ]
+        },
+        "links": {
+            "title": "Authority & Link Building",
+            "description": "Secure high-quality backlinks from relevant, authoritative domains to boost credibility.",
+            "features": [
+                "Digital PR Campaigns",
+                "Niche Edits & Guest Posts",
+                "Broken Link Building",
+                "Unlinked Mentions"
+            ]
+        },
+        "analytics": {
+            "title": "Analytics & Intelligence",
+            "description": "Deep dive into your data with GA4, GSC, GBP, and custom reporting dashboards.",
+            "features": [
+                "GA4 Configuration",
+                "GSC Error Resolution",
+                "Google Business Profile",
+                "Looker Studio Reports"
+            ]
+        }
+    },
+    "whyChooseUs": {
+        "title": "Why Choose EvolveSEO?",
+        "subtitle": "Experience the power of AI-driven SEO strategies that deliver measurable results.",
+        "reasons": {
+            "exclusive": {
+                "title": "Exclusive Territories",
+                "description": "We guarantee your direct competitors won't be able to hire our services in your area."
+            },
+            "aiFirst": {
+                "title": "AI-First Approach",
+                "description": "First agency combining traditional SEO with advanced AI for superior results."
+            },
+            "proven": {
+                "title": "Proven Results",
+                "description": "Measurable improvements from month one with transparent reporting."
+            },
+            "sustainable": {
+                "title": "Sustainable Advantage",
+                "description": "Long-term competitive edge through cutting-edge technology and strategy."
+            }
+        }
+    },
+    "process": {
+        "title": "Our Working Process",
+        "subtitle": "A systematic approach to take your SEO strategy to the next level",
+        "badge": "Our Methodology",
+        "steps": {
+            "diagnosis": {
+                "title": "Intelligent Diagnosis",
+                "description": "We thoroughly analyze your current situation, competition, and opportunities using AI algorithms to establish a precise baseline."
+            },
+            "strategy": {
+                "title": "Custom Strategy",
+                "description": "We design a tailor-made SEO strategy based on collected data, aligned with your business goals and optimized by AI."
+            },
+            "execution": {
+                "title": "Optimization & Execution",
+                "description": "We implement technical, content, and authority improvements needed to boost your organic ranking."
+            },
+            "tracking": {
+                "title": "Tracking & Evolution",
+                "description": "We constantly monitor results, adjusting strategy in real-time to maximize SEO performance."
+            }
+        }
+    },
+    "stats": {
+        "title": "Data That Proves Our Effectiveness",
+        "subtitle": "Our data-driven, AI-powered approach allows us to achieve superior, measurable results. The metrics speak for themselves:",
+        "badge": "Proven Results",
+        "keywords": "Keywords Analyzed with AI",
+        "visibility": "Clients with Improved Visibility",
+        "products": "Products Optimized with SEO",
+        "satisfaction": "Client Satisfaction"
+    },
+    "testimonials": {
+        "title": "Results That Speak for Themselves",
+        "subtitle": "Discover what our clients say about our AI-powered SEO methodology",
+        "items": {
+            "t1": {
+                "company": "Bot Trade Pro",
+                "role": "Technology Company",
+                "quote": "Thanks to EvolveSEO, we have dramatically improved our online visibility. Their AI-based approach has allowed us to surpass competitors who have been in the market for years.",
+                "date": "March 2023"
+            },
+            "t2": {
+                "company": "Joel Garcia",
+                "role": "Digital Entrepreneur",
+                "quote": "I struggled with my website ranking for years until I found EvolveSEO. Their methodology combined with AI is simply revolutionary. In less than 3 months, my organic visits increased by 215%.",
+                "date": "January 2023"
+            },
+            "t3": {
+                "company": "Hugo Diaz",
+                "role": "Marketing Manager",
+                "quote": "What I value most about EvolveSEO is their approach based on real data and their ability to adapt strategies. The AI they use allows them to optimize resources and maximize results.",
+                "date": "February 2023"
+            },
+            "t4": {
+                "company": "Sergio Roldan",
+                "role": "E-commerce Manager",
+                "quote": "My online store has experienced exponential growth since working with EvolveSEO. The combination of traditional SEO with AI-powered analysis has been a game changer for our business.",
+                "date": "April 2023"
+            }
+        }
+    },
+    "faq": {
+        "title": "Frequently Asked Questions",
+        "subtitle": "Everything you need to know about our AI-powered SEO services",
+        "items": {
+            "q1": {
+                "question": "How does AI improve SEO results?",
+                "answer": "Our AI analyzes millions of data points including search patterns, competitor strategies, and user behavior to make data-driven decisions. It identifies opportunities faster than traditional methods, optimizes content in real-time, and predicts algorithm changes before they impact your rankings."
+            },
+            "q2": {
+                "question": "What makes your exclusive territory model unique?",
+                "answer": "We guarantee that your direct competitors in your geographic area cannot hire our services. This means you get an unfair advantage - we work exclusively for you in your market, ensuring all our AI insights and strategies benefit only your business."
+            },
+            "q3": {
+                "question": "How quickly can I expect to see results?",
+                "answer": "Most clients see initial improvements within the first 30 days, with significant ranking improvements typically occurring between 60-90 days. Our AI continuously optimizes your strategy, so results compound over time."
+            },
+            "q4": {
+                "question": "Do you work with businesses of all sizes?",
+                "answer": "Yes! Our AI-powered approach is scalable for businesses of all sizes - from local startups to enterprise-level corporations. We customize our strategies based on your specific goals, budget, and market."
+            },
+            "q5": {
+                "question": "What's included in the free SEO audit?",
+                "answer": "Our free audit includes a comprehensive analysis of your website's technical SEO health, content optimization opportunities, backlink profile, competitor analysis, and keyword ranking potential."
+            },
+            "q6": {
+                "question": "How do you measure and report on progress?",
+                "answer": "We provide detailed monthly reports covering keyword rankings, organic traffic growth, conversion rates, and ROI. Our AI dashboard gives you real-time visibility into your SEO performance."
+            },
+            "q7": {
+                "question": "What industries do you specialize in?",
+                "answer": "While our AI adapts to any industry, we have particular expertise in e-commerce, SaaS, professional services, healthcare, real estate, and local businesses."
+            },
+            "q8": {
+                "question": "Can you help with international SEO?",
+                "answer": "Absolutely! Our AI supports multi-language and multi-region SEO strategies. We can optimize your content for different markets, handle hreflang implementation, and develop location-specific keyword strategies."
+            }
+        }
+    },
+    "blog": {
+        "title": "Insights & Resources",
+        "subtitle": "Stay updated with the latest trends in AI-powered SEO, digital marketing strategies, and industry insights.",
+        "badge": "Latest from the Blog",
+        "readMore": "Read More",
+        "viewAll": "View All Articles",
+        "posts": {
+            "ai": {
+                "title": "Leverage AI: Key to Business Success Today",
+                "excerpt": "Discover how to implement artificial intelligence in your business to improve efficiency, personalize customer experience, and boost growth."
+            },
+            "react": {
+                "title": "React Website SEO: Keys to Effective Optimization",
+                "excerpt": "Discover best practices and techniques to optimize SEO in your React applications. Complete guide on rendering, content, and ranking strategies."
+            },
+            "smart": {
+                "title": "Smart SEO: How AI Accelerates Your Google Ranking",
+                "excerpt": "Discover how artificial intelligence is revolutionizing SEO and accelerating web ranking. Learn advanced strategies to use AI in your digital marketing."
+            },
+            "ecommerce": {
+                "title": "Perfect Product Pages: The SEO Secret of Successful E-commerce",
+                "excerpt": "Discover how to optimize your e-commerce product pages to improve SEO and increase conversions. Complete guide with examples and success stories."
+            }
+        }
     },
     "contact": {
         "title": "Get in Touch",
         "subtitle": "Ready to transform your SEO strategy? Send us a message.",
+        "whatsapp": {
+            "title": "Let's Talk on WhatsApp!",
+            "description": "Get immediate answers to all your questions.",
+            "button": "Contact via WhatsApp",
+            "hours": "Business hours: Mon-Fri 9:00 AM - 6:00 PM"
+        },
         "form": {
+            "title": "Request a Free Audit",
+            "description": "Our AI will analyze your website and provide actionable insights.",
             "name": "Name",
             "email": "Email",
+            "website": "Website URL",
             "message": "Message",
-            "submit": "Send Message",
+            "submit": "Get Free Audit",
             "sending": "Sending...",
-            "success": "Message sent successfully!",
-            "error": "Failed to send message. Please try again."
+            "success": "Request received! We'll be in touch soon.",
+            "error": "Failed to send. Please try again."
         }
     },
     "footer": {
@@ -35,5 +269,15 @@
         "cookies": "Cookie Policy",
         "rights": "All rights reserved.",
         "description": "AI-powered SEO agency transforming how businesses rank online."
+    },
+    "cookieConsent": {
+        "title": "Cookie Settings",
+        "description": "We use cookies to enhance your browsing experience and analyze site traffic.",
+        "necessary": "Necessary",
+        "analytics": "Analytics",
+        "marketing": "Marketing",
+        "acceptAll": "Accept All",
+        "rejectAll": "Reject All",
+        "savePreferences": "Save Preferences"
     }
 }

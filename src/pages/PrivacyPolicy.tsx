@@ -5,15 +5,15 @@ import { config } from "@/lib/config";
 
 export default function PrivacyPolicy() {
     const email = config.contact.email;
-    const website = "https://evolveseo.com";
+    const website = "https://agseo.pro";
     const city = "San Francisco";
     const country = "USA";
 
     return (
         <div className="min-h-screen flex flex-col bg-background">
             <Helmet>
-                <title>Privacy Policy | EvolveSEO</title>
-                <meta name="description" content="Privacy policy for EvolveSEO. Learn how we collect, use, and protect your personal data." />
+                <title>Privacy Policy | AGSEO</title>
+                <meta name="description" content="Privacy policy for AGSEO. Learn how we collect, use, and protect your personal data." />
             </Helmet>
 
             <Header />
@@ -32,7 +32,7 @@ export default function PrivacyPolicy() {
                             <div>
                                 <h2 className="text-2xl font-bold mb-4 text-foreground">1. Data Controller</h2>
                                 <p className="text-muted-foreground">
-                                    EvolveSEO, located in {city}, {country}, is the data controller responsible for your personal data collected through this website ({website}).
+                                    AGSEO, located in {city}, {country}, is the data controller responsible for your personal data collected through this website ({website}).
                                 </p>
                                 <p className="text-muted-foreground mt-2">
                                     For any privacy-related inquiries, contact us at: <a href={`mailto:${email}`}>{email}</a>

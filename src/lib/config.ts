@@ -32,13 +32,16 @@ export const config = {
         message: "Hello, I'm interested in your SEO services",
     },
     contact: {
-        email: import.meta.env.VITE_CONTACT_EMAIL || "hello@evolveseo.com",
+        email: import.meta.env.VITE_CONTACT_EMAIL || "hello@agseo.pro",
     },
     social: {
-        twitter: import.meta.env.VITE_TWITTER_URL || "https://twitter.com/evolveseo",
-        linkedin: import.meta.env.VITE_LINKEDIN_URL || "https://linkedin.com/company/evolveseo",
+        twitter: import.meta.env.VITE_TWITTER_URL || "https://twitter.com/agseo",
+        linkedin: import.meta.env.VITE_LINKEDIN_URL || "https://linkedin.com/company/agseo",
     },
     analytics: {
         gaMeasurementId: import.meta.env.VITE_GA_MEASUREMENT_ID,
+    },
+    sentry: {
+        dsn: import.meta.env.VITE_SENTRY_DSN,
     },
 } as const;

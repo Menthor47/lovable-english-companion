@@ -5,15 +5,15 @@ import { config } from "@/lib/config";
 
 export default function TermsOfService() {
     const email = config.contact.email;
-    const website = "https://evolveseo.com";
+    const website = "https://agseo.pro";
     const city = "San Francisco";
     const country = "USA";
 
     return (
         <div className="min-h-screen flex flex-col bg-background">
             <Helmet>
-                <title>Terms of Service | EvolveSEO</title>
-                <meta name="description" content="Terms of Service for EvolveSEO. Read our terms and conditions for using our digital marketing and SEO services." />
+                <title>Terms of Service | AGSEO</title>
+                <meta name="description" content="Terms of Service for AGSEO. Read our terms and conditions for using our digital marketing and SEO services." />
             </Helmet>
 
             <Header />
@@ -30,7 +30,7 @@ export default function TermsOfService() {
                             <div>
                                 <h2 className="text-2xl font-bold mb-4 text-foreground">1. Introduction</h2>
                                 <p className="text-muted-foreground">
-                                    These Terms of Service ("Terms") govern your use of the website {website} and the SEO and digital marketing services provided by EvolveSEO, located in {city}, {country} ("we", "us", "our").
+                                    These Terms of Service ("Terms") govern your use of the website {website} and the SEO and digital marketing services provided by AGSEO, located in {city}, {country} ("we", "us", "our").
                                 </p>
                                 <p className="text-muted-foreground mt-4">
                                     By using our website, requesting an audit, or engaging our services, you agree to be bound by these Terms.
@@ -62,7 +62,7 @@ export default function TermsOfService() {
                             <div>
                                 <h2 className="text-2xl font-bold mb-4 text-foreground">4. Intellectual Property</h2>
                                 <p className="text-muted-foreground">
-                                    All content, tools, and methodologies on this website are the property of EvolveSEO. Reports and deliverables created specifically for you under a service agreement become your property upon full payment.
+                                    All content, tools, and methodologies on this website are the property of AGSEO. Reports and deliverables created specifically for you under a service agreement become your property upon full payment.
                                 </p>
                             </div>
 

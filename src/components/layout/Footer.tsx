@@ -1,29 +1,25 @@
 import { useTranslation } from "react-i18next";
 import { Sparkles, Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export function Footer() {
   const { t } = useTranslation();
 
   const footerLinks = {
     services: [
-      { label: "Local SEO", href: "#services" },
-      { label: "Web SEO", href: "#services" },
-      { label: "E-commerce SEO", href: "#services" },
-      { label: "Link Building", href: "#services" },
-      { label: "SEM Advertising", href: "#services" },
+      { label: "Local SEO", href: "/#services" },
+      { label: "Web SEO", href: "/#services" },
+      { label: "E-commerce SEO", href: "/#services" },
     ],
     company: [
-      { label: "About Us", href: "#" },
-      { label: "Process", href: "#process" },
-      { label: "Testimonials", href: "#testimonials" },
-      { label: "Blog", href: "#" },
-      { label: "Careers", href: "#" },
+      { label: "About Us", href: "/#home" },
+      { label: "Process", href: "/#process" },
+      { label: "Testimonials", href: "/#testimonials" },
+      { label: "FAQ", href: "/#faq" },
     ],
     resources: [
-      { label: "SEO Tools", href: "#" },
-      { label: "Free Audit", href: "#contact" },
-      { label: "Case Studies", href: "#" },
-      { label: "API Docs", href: "#" },
+      { label: "Free Audit", href: "/#contact" },
+      { label: "Contact Us", href: "/#contact" },
     ],
   };
   return (
@@ -37,7 +33,7 @@ export function Footer() {
                 <Sparkles className="w-5 h-5 text-primary" />
               </div>
               <span className="font-heading font-bold text-xl text-foreground">
-                Evolve<span className="text-primary">SEO</span>
+                AG<span className="text-primary">SEO</span>
               </span>
             </a>
             <p className="text-sm text-muted-foreground mb-6">
@@ -45,11 +41,11 @@ export function Footer() {
             </p>
             <div className="space-y-2">
               <a
-                href="mailto:hello@evolveseo.com"
+                href="mailto:hello@agseo.pro"
                 className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
               >
                 <Mail className="w-4 h-4" />
-                hello@evolveseo.com
+                hello@agseo.pro
               </a>
               <a
                 href="tel:+1234567890"
@@ -68,7 +64,7 @@ export function Footer() {
           {/* Services */}
           <div>
             <h4 className="font-heading font-semibold text-foreground mb-4">
-              {t("nav.features")}
+              {t("nav.services")}
             </h4>
             <ul className="space-y-2">
               {footerLinks.services.map((link) => (
@@ -130,27 +126,27 @@ export function Footer() {
             © {new Date().getFullYear()} EvolveSEO. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <a
-              href="/privacy"
+            <Link
+              to="/privacy"
               className="text-sm text-muted-foreground hover:text-primary transition-colors"
             >
               {t("footer.privacy")}
-            </a>
-            <a
-              href="/terms"
+            </Link>
+            <Link
+              to="/terms"
               className="text-sm text-muted-foreground hover:text-primary transition-colors"
             >
               {t("footer.terms")}
-            </a>
-            <a
-              href="/cookies"
+            </Link>
+            <Link
+              to="/cookies"
               className="text-sm text-muted-foreground hover:text-primary transition-colors"
             >
               {t("footer.cookies")}
-            </a>
+            </Link>
           </div>
         </div>
       </div>
-    </footer>
+    </footer >
   );
 }

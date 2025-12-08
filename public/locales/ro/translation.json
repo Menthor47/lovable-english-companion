@@ -1,29 +1,223 @@
 {
     "nav": {
-        "features": "Funcționalități",
+        "services": "Servicii",
         "testimonials": "Testimoniale",
         "faq": "Întrebări Frecvente"
     },
     "hero": {
-        "title": "Domină Clasamentele de Căutare cu SEO Bazat pe AI",
-        "subtitle": "Transformă-ți prezența digitală cu agenți AI autonomi care analizează, optimizează și clasează conținutul tău 24/7.",
+        "title": "Domină Căutările & Răspunsurile AI",
+        "subtitle": "Viitorul SEO este Generative Engine Optimization (GEO). Te ajutăm să fii vizibil nu doar pe Google, ci și pe ChatGPT, Gemini și Claude.",
         "cta": {
             "primary": "Audit Gratuit",
-            "secondary": "Vezi Demo"
+            "secondary": "Vezi Serviciile"
         },
-        "badge": "Nou: Agent AI v2.0 Lansat"
+        "badge": "Soluții SEO Bazate pe AI"
+    },
+    "services": {
+        "title": "Servicii SEO Bazate pe AI",
+        "subtitle": "Vizibilitate, clasament și rezultate reale cu AI. Descoperă cum îți putem transforma prezența online.",
+        "badge": "EvolveSEO + Servicii AI",
+        "cta": "Solicită Consultație Gratuită",
+        "learnMore": "Află Mai Multe",
+        "popular": "Cel Mai Popular",
+        "local": {
+            "title": "SEO Local cu AI",
+            "description": "Fă-ți afacerea să iasă în evidență în căutările locale cu strategii bazate pe AI.",
+            "features": [
+                "Optimizare Profil Google Business",
+                "Analiză Competiție Locală",
+                "Strategie Cuvinte Cheie Geolocalizate",
+                "Citări și Directoare Locale"
+            ]
+        },
+        "web": {
+            "title": "SEO Web cu AI",
+            "description": "Îmbunătățește clasamentul organic al site-ului tău cu strategii SEO avansate și inteligente.",
+            "features": [
+                "Audit Tehnic Complet",
+                "Optimizare On-Page și Off-Page",
+                "Strategie Conținut SEO",
+                "Îmbunătățire Core Web Vitals"
+            ]
+        },
+        "ecommerce": {
+            "title": "SEO E-commerce cu AI",
+            "description": "Crește vânzările magazinului tău online cu strategii SEO specifice pentru e-commerce.",
+            "features": [
+                "Optimizare Pagini de Produs",
+                "Structură Categorii SEO-Friendly",
+                "UX Focusat pe Conversie",
+                "Cuvinte Cheie cu Intenție de Cumpărare"
+            ]
+        }
+    },
+    "whyChooseUs": {
+        "title": "De Ce Să Alegi EvolveSEO?",
+        "subtitle": "Experimentează puterea strategiilor SEO bazate pe AI care livrează rezultate măsurabile.",
+        "reasons": {
+            "exclusive": {
+                "title": "Teritorii Exclusive",
+                "description": "Garantăm că competitorii tăi direcți nu vor putea angaja serviciile noastre în zona ta."
+            },
+            "aiFirst": {
+                "title": "Abordare AI-First",
+                "description": "Prima agenție care combină SEO tradițional cu AI avansat pentru rezultate superioare."
+            },
+            "proven": {
+                "title": "Rezultate Dovedite",
+                "description": "Îmbunătățiri măsurabile din prima lună cu raportare transparentă."
+            },
+            "sustainable": {
+                "title": "Avantaj Sustenabil",
+                "description": "Avantaj competitiv pe termen lung prin tehnologie și strategie de ultimă generație."
+            }
+        }
+    },
+    "process": {
+        "title": "Procesul Nostru de Lucru",
+        "subtitle": "O abordare sistematică pentru a duce strategia ta SEO la nivelul următor",
+        "badge": "Metodologia Noastră",
+        "steps": {
+            "diagnosis": {
+                "title": "Diagnosticare Inteligentă",
+                "description": "Analizăm temeinic situația ta actuală, competiția și oportunitățile folosind algoritmi AI pentru a stabili o bază precisă."
+            },
+            "strategy": {
+                "title": "Strategie Personalizată",
+                "description": "Proiectăm o strategie SEO personalizată bazată pe datele colectate, aliniată cu obiectivele tale de afaceri și optimizată de AI."
+            },
+            "execution": {
+                "title": "Optimizare și Execuție",
+                "description": "Implementăm îmbunătățirile tehnice, de conținut și autoritate necesare pentru a stimula clasamentul tău organic."
+            },
+            "tracking": {
+                "title": "Urmărire și Evoluție",
+                "description": "Monitorizăm constant rezultatele, ajustând strategia în timp real pentru a maximiza performanța SEO."
+            }
+        }
+    },
+    "stats": {
+        "title": "Date Care Dovedesc Eficacitatea Noastră",
+        "subtitle": "Abordarea noastră bazată pe date și AI ne permite să obținem rezultate superioare, măsurabile. Metricile vorbesc de la sine:",
+        "badge": "Rezultate Dovedite",
+        "keywords": "Cuvinte Cheie Analizate cu AI",
+        "visibility": "Clienți cu Vizibilitate Îmbunătățită",
+        "products": "Produse Optimizate cu SEO",
+        "satisfaction": "Satisfacție Clienți"
+    },
+    "testimonials": {
+        "title": "Rezultate Care Vorbesc Singure",
+        "subtitle": "Descoperă ce spun clienții noștri despre metodologia noastră SEO bazată pe AI",
+        "items": {
+            "t1": {
+                "company": "Bot Trade Pro",
+                "role": "Companie Tehnologică",
+                "quote": "Mulțumită EvolveSEO, ne-am îmbunătățit dramatic vizibilitatea online. Abordarea lor bazată pe AI ne-a permis să depășim competitori prezenți pe piață de ani de zile.",
+                "date": "Martie 2023"
+            },
+            "t2": {
+                "company": "Joel Garcia",
+                "role": "Antreprenor Digital",
+                "quote": "M-am luptat cu clasamentul site-ului meu ani de zile până am găsit EvolveSEO. Metodologia lor combinată cu AI este pur și simplu revoluționară. În mai puțin de 3 luni, vizitele organice au crescut cu 215%.",
+                "date": "Ianuarie 2023"
+            },
+            "t3": {
+                "company": "Hugo Diaz",
+                "role": "Manager Marketing",
+                "quote": "Ce apreciez cel mai mult la EvolveSEO este abordarea lor bazată pe date reale și capacitatea de a adapta strategiile. AI-ul pe care îl folosesc le permite să optimizeze resursele și să maximizeze rezultatele.",
+                "date": "Februarie 2023"
+            },
+            "t4": {
+                "company": "Sergio Roldan",
+                "role": "Manager E-commerce",
+                "quote": "Magazinul meu online a experimentat o creștere exponențială de când lucrez cu EvolveSEO. Combinația de SEO tradițional cu analiza bazată pe AI a schimbat complet jocul pentru noi.",
+                "date": "Aprilie 2023"
+            }
+        }
+    },
+    "faq": {
+        "title": "Întrebări Frecvente",
+        "subtitle": "Tot ce trebuie să știi despre serviciile noastre SEO bazate pe AI",
+        "items": {
+            "q1": {
+                "question": "Cum îmbunătățește AI-ul rezultatele SEO?",
+                "answer": "AI-ul nostru analizează milioane de puncte de date, inclusiv tipare de căutare, strategii ale competitorilor și comportamentul utilizatorilor pentru a lua decizii bazate pe date. Identifică oportunități mai rapid decât metodele tradiționale, optimizează conținutul în timp real și prevede schimbările algoritmilor înainte să îți afecteze clasamentele."
+            },
+            "q2": {
+                "question": "Ce face modelul de teritoriu exclusiv unic?",
+                "answer": "Garantăm că competitorii tăi direcți din zona ta geografică nu pot angaja serviciile noastre. Asta înseamnă că ai un avantaj nedrept - lucrăm exclusiv pentru tine pe piața ta, asigurându-ne că toate perspectivele și strategiile noastre AI beneficiază doar afacerea ta."
+            },
+            "q3": {
+                "question": "Cât de repede pot să văd rezultate?",
+                "answer": "Majoritatea clienților văd îmbunătățiri inițiale în primele 30 de zile, cu îmbunătățiri semnificative de clasament de obicei între 60-90 de zile. AI-ul nostru optimizează continuu strategia, astfel încât rezultatele se acumulează în timp."
+            },
+            "q4": {
+                "question": "Lucrați cu afaceri de toate dimensiunile?",
+                "answer": "Da! Abordarea noastră bazată pe AI este scalabilă pentru afaceri de toate dimensiunile - de la startup-uri locale la corporații la nivel enterprise. Personalizăm strategiile pe baza obiectivelor, bugetului și pieței tale specifice."
+            },
+            "q5": {
+                "question": "Ce include auditul SEO gratuit?",
+                "answer": "Auditul nostru gratuit include o analiză cuprinzătoare a sănătății SEO tehnice a site-ului tău, oportunități de optimizare a conținutului, profilul de backlink-uri, analiza competitorilor și potențialul de clasare al cuvintelor cheie."
+            },
+            "q6": {
+                "question": "Cum măsurați și raportați progresul?",
+                "answer": "Oferim rapoarte lunare detaliate care acoperă clasamentele cuvintelor cheie, creșterea traficului organic, ratele de conversie și ROI. Dashboard-ul nostru AI îți oferă vizibilitate în timp real asupra performanței SEO."
+            },
+            "q7": {
+                "question": "În ce industrii vă specializați?",
+                "answer": "Deși AI-ul nostru se adaptează la orice industrie, avem expertiză particulară în e-commerce, SaaS, servicii profesionale, sănătate, imobiliare și afaceri locale."
+            },
+            "q8": {
+                "question": "Puteți ajuta cu SEO internațional?",
+                "answer": "Absolut! AI-ul nostru suportă strategii SEO multi-limbaj și multi-regiune. Putem optimiza conținutul tău pentru piețe diferite, gestiona implementarea hreflang și dezvolta strategii de cuvinte cheie specifice locației."
+            }
+        }
+    },
+    "blog": {
+        "title": "Informații și Resurse",
+        "subtitle": "Rămâi la curent cu cele mai recente tendințe în SEO bazat pe AI, strategii de marketing digital și informații din industrie.",
+        "badge": "Ultimele Articole",
+        "readMore": "Citește Mai Mult",
+        "viewAll": "Vezi Toate Articolele",
+        "posts": {
+            "ai": {
+                "title": "Folosește AI: Cheia Succesului în Afaceri Astăzi",
+                "excerpt": "Descoperă cum să implementezi inteligența artificială în afacerea ta pentru a îmbunătăți eficiența, personaliza experiența clienților și stimula creșterea."
+            },
+            "react": {
+                "title": "SEO pentru Site-uri React: Chei pentru Optimizare Eficientă",
+                "excerpt": "Descoperă cele mai bune practici și tehnici pentru a optimiza SEO în aplicațiile tale React. Ghid complet despre randare, conținut și strategii de clasament."
+            },
+            "smart": {
+                "title": "SEO Inteligent: Cum AI Accelerează Clasamentul pe Google",
+                "excerpt": "Descoperă cum inteligența artificială revoluționează SEO și accelerează clasamentul web. Învață strategii avansate pentru a folosi AI în marketingul tău digital."
+            },
+            "ecommerce": {
+                "title": "Pagini de Produs Perfecte: Secretul SEO al E-commerce-ului de Succes",
+                "excerpt": "Descoperă cum să optimizezi paginile de produs din e-commerce pentru a îmbunătăți SEO și crește conversiile. Ghid complet cu exemple și povești de succes."
+            }
+        }
     },
     "contact": {
         "title": "Contactează-ne",
         "subtitle": "Gata să îți transformi strategia SEO? Trimite-ne un mesaj.",
+        "whatsapp": {
+            "title": "Hai să Vorbim pe WhatsApp!",
+            "description": "Primește răspunsuri imediate la toate întrebările tale.",
+            "button": "Contactează pe WhatsApp",
+            "hours": "Program: Luni-Vineri 9:00 - 18:00"
+        },
         "form": {
+            "title": "Solicită un Audit Gratuit",
+            "description": "AI-ul nostru va analiza site-ul tău și va oferi informații acționabile.",
             "name": "Nume",
             "email": "Email",
+            "website": "URL Site Web",
             "message": "Mesaj",
-            "submit": "Trimite Mesaj",
+            "submit": "Obține Audit Gratuit",
             "sending": "Se trimite...",
-            "success": "Mesaj trimis cu succes!",
-            "error": "Nu s-a putut trimite mesajul. Te rugăm să încerci din nou."
+            "success": "Cerere primită! Te vom contacta în curând.",
+            "error": "Trimitere eșuată. Te rugăm să încerci din nou."
         }
     },
     "footer": {
@@ -35,5 +229,15 @@
         "cookies": "Politica de Cookie-uri",
         "rights": "Toate drepturile rezervate.",
         "description": "Agenție SEO bazată pe AI care transformă modul în care afacerile se clasează online."
+    },
+    "cookieConsent": {
+        "title": "Setări Cookie-uri",
+        "description": "Folosim cookie-uri pentru a îmbunătăți experiența de navigare și a analiza traficul site-ului.",
+        "necessary": "Necesare",
+        "analytics": "Analiză",
+        "marketing": "Marketing",
+        "acceptAll": "Acceptă Toate",
+        "rejectAll": "Respinge Toate",
+        "savePreferences": "Salvează Preferințele"
     }
 }

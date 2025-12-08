@@ -46,8 +46,8 @@ export default function CookiePolicy() {
     return (
         <div className="min-h-screen flex flex-col bg-background">
             <Helmet>
-                <title>Cookie Policy | EvolveSEO</title>
-                <meta name="description" content="Cookie Policy for EvolveSEO. Understand how we use cookies to improve your experience." />
+                <title>Cookie Policy | AGSEO</title>
+                <meta name="description" content="Cookie Policy for AGSEO. Understand how we use cookies to improve your experience." />
             </Helmet>
 
             <Header />

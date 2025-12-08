@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://evolveseo.com/sitemap.xml
+Sitemap: https://agseo.pro/sitemap.xml

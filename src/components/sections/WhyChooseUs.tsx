@@ -1,56 +1,31 @@
-import { Shield, Target, Award, Zap } from "lucide-react";
+import { Shield, Target, Award, Zap, CheckCircle } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { AnimatedSection, StaggerContainer, StaggerItem, ScaleOnHover } from "@/components/ui/animated-section";
+import { motion } from "framer-motion";
 
-const reasons = [
-  {
-    icon: Shield,
-    title: "Exclusive Territories",
-    description: "We guarantee your direct competitors won't be able to hire our services in your area.",
-  },
-  {
-    icon: Target,
-    title: "AI-First Approach",
-    description: "First agency combining traditional SEO with advanced AI for superior results.",
-  },
-  {
-    icon: Award,
-    title: "Proven Results",
-    description: "Measurable improvements from month one with transparent reporting.",
-  },
-  {
-    icon: Zap,
-    title: "Sustainable Advantage",
-    description: "Long-term competitive edge through cutting-edge technology and strategy.",
-  },
-];
+const reasonIcons = [Shield, Target, Award, Zap];
+const reasonKeys = ["exclusive", "aiFirst", "proven", "sustainable"] as const;
 
 export function WhyChooseUs() {
+  const { t } = useTranslation();
+
+  const reasons = reasonKeys.map((key, index) => ({
+    icon: reasonIcons[index],
+    title: t(`whyChooseUs.reasons.${key}.title`),
+    description: t(`whyChooseUs.reasons.${key}.description`),
+  }));
+
   return (
     <section className="py-24 relative">
       <div className="absolute inset-0 circuit-pattern opacity-20" />
-      
+
       <div className="container mx-auto px-4 relative z-10">
         <AnimatedSection className="max-w-3xl mx-auto text-center mb-16">
           <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
-            💡 Why Choose{" "}
-            <span className="gradient-text">EvolveSEO</span>{" "}
-            for Your Web Ranking?
+            {t("whyChooseUs.title")}
           </h2>
           <p className="text-lg text-muted-foreground">
-            We are the{" "}
-            <span className="text-primary font-medium">
-              first agency
-            </span>{" "}
-            that combines traditional SEO with advanced AI and{" "}
-            <span className="text-primary font-medium">
-              exclusive territorial zones
-            </span>
-            . This means your direct competition won't be able to hire our
-            services in your area, guaranteeing you a{" "}
-            <span className="text-primary font-medium">
-              sustainable competitive advantage
-            </span>{" "}
-            and measurable results from month one.
+            {t("whyChooseUs.subtitle")}
           </p>
         </AnimatedSection>
 
@@ -73,6 +48,34 @@ export function WhyChooseUs() {
             </StaggerItem>
           ))}
         </StaggerContainer>
+
+        {/* Technology Partners Trust Stack */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="mt-20 pt-10 border-t border-border/50 text-center"
+        >
+          <p className="text-sm text-muted-foreground uppercase tracking-wider mb-6">
+            Powered by Next-Gen AI Infrastructure
+          </p>
+          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
+            {/* Text-based logos for simplicity & performance */}
+            <div className="text-xl font-bold font-heading flex items-center gap-2">
+              <div className="w-6 h-6 bg-foreground rounded-full"></div> OpenAI
+            </div>
+            <div className="text-xl font-bold font-heading flex items-center gap-2">
+              <div className="w-6 h-6 border-2 border-foreground rounded-md"></div> Anthropic
+            </div>
+            <div className="text-xl font-bold font-heading flex items-center gap-2">
+              <div className="w-6 h-0 border-t-8 border-l-4 border-r-4 border-transparent border-t-foreground rotate-180"></div> Vercel
+            </div>
+            <div className="text-xl font-bold font-heading flex items-center gap-2">
+              <span className="text-2xl font-bold">G</span> Google Cloud
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

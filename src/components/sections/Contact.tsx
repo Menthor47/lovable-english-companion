@@ -6,10 +6,19 @@ import { AnimatedSection, StaggerContainer, StaggerItem } from "@/components/ui/
 import { useContactForm } from "@/hooks/useContactForm";
 import { FormFeedback } from "@/components/ui/form-feedback";
 import { useTranslation } from "react-i18next";
+import { useAnalytics } from "@/hooks/useAnalytics";
 
 export function Contact() {
   const { t } = useTranslation();
+  const { trackFormSubmit } = useAnalytics();
   const { register, handleSubmit, errors, isSubmitting, onSubmit, success, error } = useContactForm();
+
+  const onFormSubmit = async (data: any) => {
+    const result = await onSubmit(data);
+    if (result?.success) {
+      trackFormSubmit("contact_form");
+    }
+  };
 
   return (
     <section id="contact" className="py-24 relative overflow-hidden">
@@ -41,11 +50,11 @@ export function Contact() {
                 </div>
 
                 <h3 className="font-heading text-2xl font-semibold mb-4 text-foreground">
-                  Let's Talk on WhatsApp!
+                  {t("contact.whatsapp.title")}
                 </h3>
 
                 <p className="text-muted-foreground mb-6">
-                  Get immediate answers to all your questions.
+                  {t("contact.whatsapp.description")}
                 </p>
 
                 <Button
@@ -60,13 +69,13 @@ export function Contact() {
                     rel="noopener noreferrer"
                   >
                     <MessageCircle className="w-5 h-5" />
-                    Contact via WhatsApp
+                    {t("contact.whatsapp.button")}
                   </a>
                 </Button>
 
                 <div className="flex items-center gap-2 mt-4 text-sm text-muted-foreground">
                   <Clock className="w-4 h-4" />
-                  <span>Business hours: Mon-Fri 9:00 AM - 6:00 PM</span>
+                  <span>{t("contact.whatsapp.hours")}</span>
                 </div>
               </motion.div>
             </StaggerItem>
@@ -83,17 +92,18 @@ export function Contact() {
                 </div>
 
                 <h3 className="font-heading text-2xl font-semibold mb-4 text-foreground">
-                  Request a Free Audit
+                  {t("contact.form.title")}
                 </h3>
 
                 <p className="text-muted-foreground mb-6">
-                  Our AI will analyze your website and provide actionable insights.
+                  {t("contact.form.description")}
                 </p>
 
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                <form onSubmit={handleSubmit(onFormSubmit)} className="space-y-4">
                   <div className="space-y-2">
-                    <label className="text-sm font-medium">{t("contact.form.email")}</label>
+                    <label htmlFor="email" className="text-sm font-medium">{t("contact.form.email")}</label>
                     <input
+                      id="email"
                       type="email"
                       placeholder="john@company.com"
                       className={`w-full px-4 py-3 rounded-lg bg-background border ${errors.email ? "border-destructive focus:border-destructive" : "border-border focus:border-primary/50"} focus:outline-none focus:ring-1 focus:ring-primary/50 text-foreground placeholder:text-muted-foreground transition-all`}
@@ -106,8 +116,9 @@ export function Contact() {
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-sm font-medium">Website URL</label>
+                    <label htmlFor="website" className="text-sm font-medium">{t("contact.form.website")}</label>
                     <input
+                      id="website"
                       type="url"
                       placeholder="https://example.com"
                       className={`w-full px-4 py-3 rounded-lg bg-background border ${errors.website ? "border-destructive focus:border-destructive" : "border-border focus:border-primary/50"} focus:outline-none focus:ring-1 focus:ring-primary/50 text-foreground placeholder:text-muted-foreground transition-all`}

@@ -5,10 +5,10 @@ export function StructuredData() {
     const schema = {
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
-        name: "EvolveSEO",
+        name: "AGSEO",
         description: "AI-Powered SEO Agency specializing in local and e-commerce SEO",
-        url: "https://evolveseo.com",
-        image: "https://lovable.dev/opengraph-image-p98pqg.png",
+        url: "https://agseo.pro",
+        image: "/og-image.png",
         telephone: "+1-555-123-4567",
         address: {
             "@type": "PostalAddress",
@@ -24,8 +24,8 @@ export function StructuredData() {
             ratingCount: "150",
         },
         sameAs: [
-            "https://twitter.com/evolveseo",
-            "https://linkedin.com/company/evolveseo",
+            "https://twitter.com/agseo",
+            "https://linkedin.com/company/agseo",
         ],
     };
 

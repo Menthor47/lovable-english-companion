@@ -1,43 +1,23 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { AnimatedSection } from "@/components/ui/animated-section";
 
-const testimonials = [
-  {
-    company: "Bot Trade Pro",
-    role: "Technology Company",
-    quote:
-      "Thanks to EvolveSEO, we have dramatically improved our online visibility. Their AI-based approach has allowed us to surpass competitors who have been in the market for years. The increase in qualified traffic has been spectacular.",
-    date: "March 2023",
-  },
-  {
-    company: "Joel Garcia",
-    role: "Digital Entrepreneur",
-    quote:
-      "I struggled with my website ranking for years until I found EvolveSEO. Their methodology combined with AI is simply revolutionary. In less than 3 months, my organic visits increased by 215%.",
-    date: "January 2023",
-  },
-  {
-    company: "Hugo Diaz",
-    role: "Marketing Manager",
-    quote:
-      "What I value most about EvolveSEO is their approach based on real data and their ability to adapt strategies. The AI they use allows them to optimize resources and maximize results. Totally recommended.",
-    date: "February 2023",
-  },
-  {
-    company: "Sergio Roldan",
-    role: "E-commerce Manager",
-    quote:
-      "My online store has experienced exponential growth since working with EvolveSEO. The combination of traditional SEO with AI-powered analysis has been a game changer for our business.",
-    date: "April 2023",
-  },
-];
+const testimonialKeys = ["t1", "t2", "t3", "t4"] as const;
 
 export function Testimonials() {
+  const { t } = useTranslation();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
+
+  const testimonials = testimonialKeys.map((key) => ({
+    company: t(`testimonials.items.${key}.company`),
+    role: t(`testimonials.items.${key}.role`),
+    quote: t(`testimonials.items.${key}.quote`),
+    date: t(`testimonials.items.${key}.date`),
+  }));
 
   const nextTestimonial = () => {
     setDirection(1);
@@ -69,28 +49,26 @@ export function Testimonials() {
   return (
     <section id="testimonials" className="py-24 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/10 to-background" />
-      
+
       <div className="container mx-auto px-4 relative z-10">
-        {/* Section Header */}
         <AnimatedSection className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
             <span className="text-sm font-medium text-primary uppercase tracking-wider">
-              Client Testimonials
+              {t("nav.testimonials")}
             </span>
           </div>
           <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
-            Results That <span className="gradient-text">Speak for Themselves</span>
+            {t("testimonials.title")}
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Discover what our clients say about our AI-powered SEO methodology
+            {t("testimonials.subtitle")}
           </p>
         </AnimatedSection>
 
-        {/* Testimonial Carousel */}
         <div className="max-w-4xl mx-auto">
           <div className="relative">
             {/* Quote Icon */}
-            <motion.div 
+            <motion.div
               className="absolute -top-4 -left-4 w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center z-20"
               initial={{ scale: 0, rotate: -180 }}
               whileInView={{ scale: 1, rotate: 0 }}
@@ -144,7 +122,6 @@ export function Testimonials() {
               <ChevronLeft className="w-5 h-5" />
             </Button>
 
-            {/* Dots */}
             <div className="flex gap-2">
               {testimonials.map((_, index) => (
                 <motion.button
@@ -153,11 +130,10 @@ export function Testimonials() {
                     setDirection(index > currentIndex ? 1 : -1);
                     setCurrentIndex(index);
                   }}
-                  className={`h-2 rounded-full transition-all ${
-                    index === currentIndex
-                      ? "bg-primary"
-                      : "bg-muted hover:bg-muted-foreground/50"
-                  }`}
+                  className={`h-2 rounded-full transition-all ${index === currentIndex
+                    ? "bg-primary"
+                    : "bg-muted hover:bg-muted-foreground/50"
+                    }`}
                   animate={{ width: index === currentIndex ? 32 : 8 }}
                   transition={{ duration: 0.3 }}
                 />
