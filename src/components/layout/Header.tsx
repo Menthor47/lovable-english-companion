@@ -14,7 +14,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/logo.webp";
 
 export function Header() {
   const { t } = useTranslation();
@@ -67,6 +67,8 @@ export function Header() {
             <img
               src={logo}
               alt="AGSEO Logo"
+              width="40"
+              height="40"
               className="w-10 h-10 rounded-lg object-contain"
             />
             <span className="font-heading font-bold text-xl text-foreground">

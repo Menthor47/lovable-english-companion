@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
   <meta name="theme-color" content="#0ea5e9" />
+  <link rel="preload" as="image" href="/src/assets/hero-ai-seo.webp" fetchpriority="high" />
 
   <!-- Google Consent Mode v2 -->
   <script>
@@ -25,16 +26,22 @@
     });
   </script>
 
-  <!-- Google Tag Manager -->
-  <script>(function (w, d, s, l, i) {
-      w[l] = w[l] || []; w[l].push({
-        'gtm.start':
-          new Date().getTime(), event: 'gtm.js'
-      }); var f = d.getElementsByTagName(s)[0],
-        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-    })(window, document, 'script', 'dataLayer', 'GTM-KDH93VS4');</script>
-  <!-- End Google Tag Manager -->
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MB50YLY7YQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-MB50YLY7YQ');
+  </script>
+  <script>
+    var ahrefs_analytics_script = document.createElement('script');
+    ahrefs_analytics_script.async = true;
+    ahrefs_analytics_script.src = 'https://analytics.ahrefs.com/analytics.js';
+    ahrefs_analytics_script.setAttribute('data-key', '8mOzJDPvgbtcWVax7ARuRw');
+    document.getElementsByTagName('head')[0].appendChild(ahrefs_analytics_script);
+  </script>
 
   <!-- Performance Optimization -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -76,16 +83,11 @@
   <!-- Favicons -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-  <!-- Verification -->
-  <meta name="google-site-verification" content="YOUR_GOOGLE_VERIFICATION_CODE" />
 
 </head>
 
 <body class="dark">
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KDH93VS4" height="0" width="0"
-      style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
+
   <div id="root"></div>
   <script type="module" src="/src/main.tsx"></script>
 </body>

@@ -7,8 +7,8 @@
 @layer base {
   :root {
     /* Cyber Intelligence Theme (Permanent Dark Mode) */
-    --background: hsl(184, 83%, 16%);
-    --foreground: hsl(245, 22%, 66%);
+    --background: hsl(203, 90%, 4%);
+    --foreground: hsl(270, 3%, 87%);
 
     --card: hsl(227, 45%, 18%);
     --card-foreground: hsl(210, 40%, 98%);
@@ -43,8 +43,8 @@
     --radius: 0.75rem;
 
     /* Custom colors - Dark Mode Default */
-    --glow-primary: hsl(184, 95%, 60%);
-    --glow-secondary: hsl(195, 100%, 50%);
+    --glow-primary: hsl(41, 95%, 60%);
+    --glow-secondary: hsl(221, 100%, 50%);
     --surface-glass: hsl(262, 52%, 25%);
     --gradient-start: hsl(262, 52%, 20%);
     --gradient-end: hsl(184, 95%, 60%);

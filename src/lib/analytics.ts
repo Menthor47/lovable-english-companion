@@ -27,7 +27,7 @@ export const initAnalytics = () => {
 
     // Get Measurement ID from config (or use placeholder if not set)
     // In a real app, this would come from env vars in config.ts
-    const GA_MEASUREMENT_ID = "G-PLACEHOLDER";
+    const GA_MEASUREMENT_ID = "G-MB50YLY7YQ";
 
     // Basic configuration
     window.gtag("js", new Date());
