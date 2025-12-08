@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
-import { Sparkles, Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
+import { Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import logo from "@/assets/logo.png";
 
 export function Footer() {
   const { t } = useTranslation();
@@ -29,9 +30,11 @@ export function Footer() {
           {/* Brand Column */}
           <div className="col-span-2 md:col-span-4 lg:col-span-1">
             <a href="#home" className="flex items-center gap-2 mb-6">
-              <div className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center border border-primary/30">
-                <Sparkles className="w-5 h-5 text-primary" />
-              </div>
+              <img
+                src={logo}
+                alt="AGSEO Logo"
+                className="w-10 h-10 rounded-lg object-contain"
+              />
               <span className="font-heading font-bold text-xl text-foreground">
                 AG<span className="text-primary">SEO</span>
               </span>
@@ -48,15 +51,15 @@ export function Footer() {
                 hello@agseo.pro
               </a>
               <a
-                href="tel:+15551234567"
+                href="tel:+447455401962"
                 className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
               >
                 <Phone className="w-4 h-4" />
-                +1 (555) 123-4567
+                +44 7455 401962
               </a>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <MapPin className="w-4 h-4" />
-                123 Market St, San Francisco, CA
+                Amzei Square, Bucharest
               </div>
             </div>
           </div>

@@ -28,7 +28,7 @@ export const config = {
         baseUrl: import.meta.env.VITE_API_URL || "http://localhost:3000/api",
     },
     whatsapp: {
-        number: import.meta.env.VITE_WHATSAPP_NUMBER || "1234567890", // Default to placeholder if missing
+        number: import.meta.env.VITE_WHATSAPP_NUMBER || "447455401962",
         message: "Hello, I'm interested in your SEO services",
     },
     contact: {

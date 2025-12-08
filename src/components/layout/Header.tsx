@@ -14,6 +14,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import logo from "@/assets/logo.png";
 
 export function Header() {
   const { t } = useTranslation();
@@ -63,9 +64,11 @@ export function Header() {
             className="flex items-center gap-2 group"
             onClick={() => handleNavClick("/#home")}
           >
-            <div className="relative w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center border border-primary/30 group-hover:border-primary/50 transition-colors">
-              <Sparkles className="w-5 h-5 text-primary" />
-            </div>
+            <img
+              src={logo}
+              alt="AGSEO Logo"
+              className="w-10 h-10 rounded-lg object-contain"
+            />
             <span className="font-heading font-bold text-xl text-foreground">
               AG<span className="text-primary">SEO</span>
             </span>

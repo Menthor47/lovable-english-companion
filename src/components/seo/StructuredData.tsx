@@ -9,13 +9,12 @@ export function StructuredData() {
         description: "AI-Powered SEO Agency specializing in local and e-commerce SEO",
         url: "https://agseo.pro",
         image: "/og-image.png",
-        telephone: "+1-555-123-4567",
+        telephone: "+44-7455-401962",
         address: {
             "@type": "PostalAddress",
-            addressCountry: "US",
-            addressRegion: "CA",
-            postalCode: "94105",
-            streetAddress: "123 Market St",
+            addressCountry: "RO",
+            addressLocality: "Bucharest",
+            streetAddress: "Amzei Square",
         },
         priceRange: "$$$",
         aggregateRating: {
