@@ -48,15 +48,15 @@ export function Footer() {
                 hello@agseo.pro
               </a>
               <a
-                href="tel:+1234567890"
+                href="tel:+15551234567"
                 className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
               >
                 <Phone className="w-4 h-4" />
-                +1 (234) 567-890
+                +1 (555) 123-4567
               </a>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <MapPin className="w-4 h-4" />
-                San Francisco, CA
+                123 Market St, San Francisco, CA
               </div>
             </div>
           </div>

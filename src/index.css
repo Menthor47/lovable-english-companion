@@ -67,10 +67,10 @@
 
   .dark {
     /* Cyber Intelligence Theme (Option 1) - Dark Mode Default */
-    --background: hsl(262, 52%, 20%);
+    --background: hsl(0, 24%, 24%);
     --foreground: hsl(210, 40%, 98%);
 
-    --card: hsl(262, 52%, 22%);
+    --card: hsl(227, 45%, 18%);
     --card-foreground: hsl(210, 40%, 98%);
 
     --popover: hsl(262, 52%, 22%);
@@ -78,7 +78,7 @@
 
     /* Bright Cyan Primary */
     --primary: hsl(184, 95%, 60%);
-    --primary-foreground: hsl(262, 52%, 20%);
+    --primary-foreground: hsl(241, 58%, 36%);
 
     /* Secondary */
     --secondary: hsl(262, 40%, 28%);
