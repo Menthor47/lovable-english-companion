@@ -60,9 +60,9 @@ export function Header() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link
-            to="/#home"
+            to="/"
             className="flex items-center gap-2 group"
-            onClick={() => handleNavClick("/#home")}
+            onClick={() => handleNavClick("/")}
           >
             <img
               src={logo}
@@ -82,7 +82,7 @@ export function Header() {
               <NavigationMenuList>
                 {/* Solutions */}
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className="bg-transparent hover:text-primary data-[state=open]:text-primary transition-colors">Solutions</NavigationMenuTrigger>
+                  <NavigationMenuTrigger className="bg-transparent hover:text-primary data-[state=open]:text-primary transition-colors">{t("nav.solutions")}</NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
                       <li className="row-span-3">
@@ -94,25 +94,25 @@ export function Header() {
                           >
                             <Sparkles className="h-6 w-6 text-primary mb-2" />
                             <div className="mb-2 mt-4 text-lg font-medium text-white">
-                              AG SEO
+                              {t("nav.solutionsMenu.badge")}
                             </div>
                             <p className="text-sm leading-tight text-white/90">
-                              AEO + GEO + SEO. The complete formula for modern search dominance.
+                              {t("nav.solutionsMenu.description")}
                             </p>
                           </Link>
                         </NavigationMenuLink>
                       </li>
-                      <ListItem href="/#services" title="AEO & GEO">
-                        Optimize for AI answers and generative engines.
+                      <ListItem href="/#services" title={t("nav.solutionsMenu.aeoGeo")}>
+                        {t("services.geo.description")}
                       </ListItem>
-                      <ListItem href="/#services" title="Technical SEO">
-                        Enterprise-grade ranking infrastructure.
+                      <ListItem href="/#services" title={t("nav.solutionsMenu.technical")}>
+                        {t("services.seo.description")}
                       </ListItem>
-                      <ListItem href="/#services" title="Paid Media (Ads)">
-                        High-ROAS campaigns on Google, Meta, & TikTok.
+                      <ListItem href="/#services" title={t("nav.solutionsMenu.paid")}>
+                        {t("services.ads.description")}
                       </ListItem>
-                      <ListItem href="/#services" title="Content & Links">
-                        Authority building and scalable content engines.
+                      <ListItem href="/#services" title={t("nav.solutionsMenu.content")}>
+                        {t("services.content.description")}
                       </ListItem>
                     </ul>
                   </NavigationMenuContent>
@@ -120,19 +120,19 @@ export function Header() {
 
                 {/* Products */}
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className="bg-transparent hover:text-primary data-[state=open]:text-primary transition-colors">Products</NavigationMenuTrigger>
+                  <NavigationMenuTrigger className="bg-transparent hover:text-primary data-[state=open]:text-primary transition-colors">{t("nav.products")}</NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <ul className="grid w-[400px] gap-3 p-4 md:grid-cols-2">
-                      <ListItem href="/tools" title="Tools Hub">
+                      <ListItem href="/tools" title={t("nav.productsMenu.toolsHub")}>
                         Free AI utilities to boost your workflow.
                       </ListItem>
-                      <ListItem href="/tools/audit" title="Instant AI Audit">
+                      <ListItem href="/tools/audit" title={t("nav.productsMenu.aiAudit")}>
                         Get a comprehensive site analysis in seconds.
                       </ListItem>
-                      <ListItem href="/tools/roi-calculator" title="ROI Calculator">
+                      <ListItem href="/tools/roi-calculator" title={t("nav.productsMenu.roi")}>
                         Project your potential revenue growth.
                       </ListItem>
-                      <ListItem href="/dashboard" title="Client Portal">
+                      <ListItem href="/dashboard" title={t("nav.productsMenu.portal")}>
                         Live analytics and project tracking demo.
                       </ListItem>
                     </ul>
@@ -141,19 +141,19 @@ export function Header() {
 
                 {/* Resources */}
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className="bg-transparent hover:text-primary data-[state=open]:text-primary transition-colors">Resources</NavigationMenuTrigger>
+                  <NavigationMenuTrigger className="bg-transparent hover:text-primary data-[state=open]:text-primary transition-colors">{t("nav.resources")}</NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <ul className="grid w-[400px] gap-3 p-4 md:grid-cols-1">
-                      <ListItem href="/case-studies" title="Case Studies">
+                      <ListItem href="/case-studies" title={t("nav.resourcesMenu.caseStudies")}>
                         See how we drove 300% growth for clients.
                       </ListItem>
-                      <ListItem href="/compare" title="Tool Comparisons">
+                      <ListItem href="/compare" title={t("nav.resourcesMenu.comparisons")}>
                         Unbiased battles between top AI tools.
                       </ListItem>
-                      <ListItem href="/resources/glossary" title="SEO Glossary">
+                      <ListItem href="/resources/glossary" title={t("nav.resourcesMenu.glossary")}>
                         Master the terminology of modern search.
                       </ListItem>
-                      <ListItem href="/blog" title="Blog">
+                      <ListItem href="/blog" title={t("nav.resourcesMenu.blog")}>
                         Latest insights and industry updates.
                       </ListItem>
                     </ul>
@@ -164,7 +164,7 @@ export function Header() {
                 <NavigationMenuItem>
                   <Link to="/pricing">
                     <NavigationMenuLink className={navigationMenuTriggerStyle() + " bg-transparent hover:text-primary hover:bg-primary/10 transition-colors"}>
-                      Pricing
+                      {t("nav.pricing")}
                     </NavigationMenuLink>
                   </Link>
                 </NavigationMenuItem>
@@ -173,7 +173,7 @@ export function Header() {
                 <NavigationMenuItem>
                   <Link to="/contact">
                     <NavigationMenuLink className={navigationMenuTriggerStyle() + " bg-transparent hover:text-primary hover:bg-primary/10 transition-colors"}>
-                      Contact
+                      {t("nav.contact")}
                     </NavigationMenuLink>
                   </Link>
                 </NavigationMenuItem>
@@ -206,23 +206,23 @@ export function Header() {
           {isMobileMenuOpen && (
             <div className="lg:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur-xl border-b border-border/50 py-6 overflow-y-auto max-h-[80vh]">
               <nav className="flex flex-col gap-4 px-4">
-                <div className="font-semibold text-primary px-2">Solutions</div>
-                <Link to="/#services" className="pl-4 text-sm text-muted-foreground" onClick={() => handleNavClick("/#services")}>Services</Link>
-                <Link to="/industries/saas" className="pl-4 text-sm text-muted-foreground">Industries</Link>
+                <div className="font-semibold text-primary px-2">{t("nav.solutions")}</div>
+                <Link to="/#services" className="pl-4 text-sm text-muted-foreground" onClick={() => handleNavClick("/#services")}>{t("nav.services")}</Link>
+                <Link to="/industries/saas" className="pl-4 text-sm text-muted-foreground">{t("nav.mobile.industries")}</Link>
 
-                <div className="font-semibold text-primary px-2 mt-2">Products</div>
-                <Link to="/tools" className="pl-4 text-sm text-muted-foreground">Free Tools</Link>
-                <Link to="/tools/audit" className="pl-4 text-sm text-muted-foreground">AI Audit</Link>
-                <Link to="/tools/roi-calculator" className="pl-4 text-sm text-muted-foreground">ROI Calculator</Link>
+                <div className="font-semibold text-primary px-2 mt-2">{t("nav.products")}</div>
+                <Link to="/tools" className="pl-4 text-sm text-muted-foreground">{t("nav.mobile.freeTools")}</Link>
+                <Link to="/tools/audit" className="pl-4 text-sm text-muted-foreground">{t("nav.mobile.aiAudit")}</Link>
+                <Link to="/tools/roi-calculator" className="pl-4 text-sm text-muted-foreground">{t("nav.mobile.roi")}</Link>
 
-                <div className="font-semibold text-primary px-2 mt-2">Resources</div>
-                <Link to="/case-studies" className="pl-4 text-sm text-muted-foreground">Case Studies</Link>
-                <Link to="/compare" className="pl-4 text-sm text-muted-foreground">Comparisons</Link>
-                <Link to="/resources/glossary" className="pl-4 text-sm text-muted-foreground">Glossary</Link>
-                <Link to="/blog" className="pl-4 text-sm text-muted-foreground">Blog</Link>
+                <div className="font-semibold text-primary px-2 mt-2">{t("nav.resources")}</div>
+                <Link to="/case-studies" className="pl-4 text-sm text-muted-foreground">{t("nav.mobile.caseStudies")}</Link>
+                <Link to="/compare" className="pl-4 text-sm text-muted-foreground">{t("nav.mobile.comparisons")}</Link>
+                <Link to="/resources/glossary" className="pl-4 text-sm text-muted-foreground">{t("nav.mobile.glossary")}</Link>
+                <Link to="/blog" className="pl-4 text-sm text-muted-foreground">{t("nav.mobile.blog")}</Link>
 
-                <Link to="/pricing" className="font-semibold text-foreground px-2 mt-2 hover:text-primary transition-colors">Pricing</Link>
-                <Link to="/contact" className="font-semibold text-foreground px-2 mt-2 hover:text-primary transition-colors">Contact</Link>
+                <Link to="/pricing" className="font-semibold text-foreground px-2 mt-2 hover:text-primary transition-colors">{t("nav.pricing")}</Link>
+                <Link to="/contact" className="font-semibold text-foreground px-2 mt-2 hover:text-primary transition-colors">{t("nav.contact")}</Link>
 
                 <div className="flex flex-col gap-2 pt-4 border-t border-border mt-2">
                   <div className="flex justify-center py-2">

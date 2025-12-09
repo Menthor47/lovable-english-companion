@@ -58,7 +58,7 @@ export function WhyChooseUs() {
           className="mt-20 pt-10 border-t border-border/50 text-center"
         >
           <p className="text-sm text-muted-foreground uppercase tracking-wider mb-6">
-            Powered by Next-Gen AI Infrastructure
+            {t("whyChooseUs.partnerStackTitle")}
           </p>
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
             {/* Text-based logos for simplicity & performance */}

@@ -1,8 +1,44 @@
 {
     "nav": {
+        "solutions": "Soluții",
+        "products": "Produse",
+        "resources": "Resurse",
+        "pricing": "Prețuri",
+        "contact": "Contact",
         "services": "Servicii",
         "testimonials": "Testimoniale",
-        "faq": "Întrebări Frecvente"
+        "faq": "Întrebări Frecvente",
+        "solutionsMenu": {
+            "badge": "AG SEO",
+            "description": "AEO + GEO + SEO. Formula completă pentru dominarea căutărilor moderne.",
+            "aeoGeo": "AEO & GEO",
+            "technical": "SEO Tehnic",
+            "paid": "Publicitate Plătită (Ads)",
+            "content": "Conținut & Linkuri"
+        },
+        "productsMenu": {
+            "toolsHub": "Hub de Tool-uri",
+            "aiAudit": "Audit AI Instant",
+            "roi": "Calculator ROI",
+            "portal": "Portal Clienți"
+        },
+        "resourcesMenu": {
+            "caseStudies": "Studii de Caz",
+            "comparisons": "Comparative Tool-uri",
+            "glossary": "Glosar SEO",
+            "blog": "Blog"
+        },
+        "mobile": {
+            "solutions": "Soluții",
+            "industries": "Industrii",
+            "freeTools": "Tool-uri Gratuite",
+            "aiAudit": "Audit AI",
+            "roi": "Calculator ROI",
+            "caseStudies": "Studii de Caz",
+            "comparisons": "Comparative",
+            "glossary": "Glosar",
+            "blog": "Blog"
+        }
     },
     "hero": {
         "title": "Domină Căutările & Răspunsurile AI",
@@ -49,6 +85,96 @@
                 "UX Focusat pe Conversie",
                 "Cuvinte Cheie cu Intenție de Cumpărare"
             ]
+        },
+        "aeo": {
+            "title": "Answer Engine Optimization (AEO)",
+            "description": "Optimizează-te pentru răspunsuri directe în platforme AI precum ChatGPT, Perplexity și căutări vocale.",
+            "features": [
+                "Optimizare pentru rezultate fără clic (zero-click)",
+                "Strategie pentru căutări vocale",
+                "Țintirea featured snippets",
+                "Mențiuni de brand în LLM-uri"
+            ]
+        },
+        "geo": {
+            "title": "Generative Engine Optimization (GEO)",
+            "description": "Pregătește-ți conținutul pentru experiențe de căutare generativă (SGE) și rezultate conduse de AI.",
+            "features": [
+                "Audit de pregătire pentru SGE",
+                "Date structurate prietenoase cu AI",
+                "Conținut bazat pe entități",
+                "Construirea autorității semantice"
+            ]
+        },
+        "seo": {
+            "title": "SEO Tehnic Avansat",
+            "description": "Optimizare holistică pentru motoarele de căutare, inclusiv soluții Locale, pentru e-commerce și Enterprise.",
+            "features": [
+                "Audituri de sănătate tehnică",
+                "Core Web Vitals",
+                "Clasare în Local Map Pack",
+                "Arhitectură pentru e-commerce"
+            ]
+        },
+        "ads": {
+            "title": "Media Plătită Multi-Canal",
+            "description": "Campanii cu ROAS ridicat pe Google, Meta, TikTok, LinkedIn și canale fizice pentru afaceri locale.",
+            "features": [
+                "Strategie cross-platformă",
+                "Maximizarea ROAS",
+                "Testare creativă cu AI",
+                "Vizite în magazinul fizic"
+            ]
+        },
+        "content": {
+            "title": "Motor de Conținut Bazat pe AI",
+            "description": "Scalează producția de conținut de calitate, autoritar, care se clasează bine și convertește.",
+            "features": [
+                "Strategie de topic clusters",
+                "Generare automată de briefuri",
+                "Scriere asistată de AI, editată de oameni",
+                "Optimizare E-E-A-T"
+            ]
+        },
+        "links": {
+            "title": "Autoritate & Link Building",
+            "description": "Obține backlink-uri de înaltă calitate de la domenii relevante și autoritare pentru a crește credibilitatea.",
+            "features": [
+                "Campanii de PR digital",
+                "Niche edits & guest posts",
+                "Link building prin linkuri rupte",
+                "Mențiuni nelegate (unlinked mentions)"
+            ]
+        },
+        "campaigns": {
+            "title": "Management de Campanii",
+            "description": "Management end-to-end al campaniilor tale digitale pentru impact și ROI maxime.",
+            "features": [
+                "Optimizarea bugetului",
+                "Direcție creativă",
+                "A/B testing",
+                "Tracking al conversiilor"
+            ]
+        },
+        "consulting": {
+            "title": "Consultanță Strategică",
+            "description": "Ghidaj de la experți, audituri și strategii personalizate pentru a accelera creșterea digitală.",
+            "features": [
+                "Roadmap-uri de creștere",
+                "Audituri ale stack-ului tehnic",
+                "Analiza competitorilor",
+                "Penetrare de piață"
+            ]
+        },
+        "analytics": {
+            "title": "Analytics & Intelligence",
+            "description": "Analiză aprofundată a datelor cu GA4, GSC, GBP și dashboard-uri de raportare personalizate.",
+            "features": [
+                "Configurare GA4",
+                "Rezolvarea erorilor din GSC",
+                "Google Business Profile",
+                "Rapoarte Looker Studio"
+            ]
         }
     },
     "whyChooseUs": {
@@ -71,7 +197,95 @@
                 "title": "Avantaj Sustenabil",
                 "description": "Avantaj competitiv pe termen lung prin tehnologie și strategie de ultimă generație."
             }
+        },
+        "partnerStackTitle": "Alimentat de infrastructură AI de generație nouă"
+    },
+    "advancedServices": {
+        "badge": "Servicii Avansate",
+        "title": "Link Building & SEM cu AI",
+        "subtitle": "Completează-ți strategia SEO cu servicii avansate care îți maximizează prezența online",
+        "linkBuilding": {
+            "title": "Link Building Inteligent",
+            "description": "Construim linkuri de calitate care cresc autoritatea site-ului tău folosind algoritmi AI pentru a identifica cele mai bune oportunități.",
+            "features": [
+                "Analiză a profilului de linkuri al competitorilor",
+                "Strategii specifice pe industrie",
+                "Linkuri contextuale de înaltă calitate",
+                "Monitorizare și măsurare a rezultatelor"
+            ],
+            "cta": "Solicită Link Building"
+        },
+        "sem": {
+            "title": "Publicitate SEM cu AI",
+            "description": "Maximizează-ți ROI-ul în publicitate cu campanii SEM administrate de AI, optimizate în timp real pentru rezultate maxime.",
+            "features": [
+                "Cercetare avansată de cuvinte cheie",
+                "Creare de anunțuri optimizate cu AI",
+                "Ajustare automată a bid-urilor",
+                "Rapoarte detaliate de performanță"
+            ],
+            "cta": "Solicită SEM cu AI"
         }
+    },
+    "pricing": {
+        "badge": "Prețuri simple și transparente",
+        "title": "Investește în creștere, nu în presupuneri",
+        "subtitle": "Alege pachetul bazat pe AI care se potrivește nivelului tău. Fără costuri ascunse, doar rezultate.",
+        "viewDemoCta": "Vezi demo-ul Client Portal",
+        "plans": {
+            "starter": {
+                "name": "Starter",
+                "description": "Perfect pentru afaceri locale și startup-uri pregătite să crească.",
+                "price": "$1,500",
+                "period": "/lună",
+                "features": [
+                    "Optimizare SEO Local",
+                    "5 pagini principale de servicii",
+                    "Administrare Google Business Profile",
+                    "Dashboard de analytics de bază",
+                    "Raport de performanță lunar",
+                    "Generare de conținut cu AI (4 articole/lună)"
+                ],
+                "cta": "Începe creșterea",
+                "popularLabel": "CEL MAI POPULAR"
+            },
+            "growth": {
+                "name": "Growth",
+                "description": "Pentru branduri consolidate care se extind la nivel național sau internațional.",
+                "price": "$3,500",
+                "period": "/lună",
+                "features": [
+                    "Strategie SEO națională",
+                    "Audituri tehnice SEO (săptămânal)",
+                    "Conținut programatic (20 pagini/lună)",
+                    "Link building cu autoritate ridicată",
+                    "Recomandări de CRO",
+                    "Ședințe de strategie bilunare",
+                    "Suport prioritar"
+                ],
+                "cta": "Scalează acum",
+                "popularLabel": "CEL MAI POPULAR"
+            },
+            "dominance": {
+                "name": "Dominance",
+                "description": "SEO cu AI la nivel enterprise pentru cotă maximă de piață.",
+                "price": "Custom",
+                "period": "",
+                "features": [
+                    "Strategie GEO globală (ChatGPT/Gemini)",
+                    "Evaluare programatică nelimitată",
+                    "Dezvoltare de agenți AI custom",
+                    "Analiză a grafurilor de entități ale competitorilor",
+                    "Account manager dedicat",
+                    "Acces Slack 24/7",
+                    "Raportare white-label (pentru agenții)"
+                ],
+                "cta": "Contactează departamentul de vânzări",
+                "popularLabel": "CEL MAI POPULAR"
+            }
+        },
+        "faqTeaser": "Ai nevoie de o soluție enterprise personalizată?",
+        "faqCta": "Programează o consultație cu echipa noastră de vânzări"
     },
     "process": {
         "title": "Procesul Nostru de Lucru",

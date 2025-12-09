@@ -1,39 +1,30 @@
 import { Link2, Target, BarChart3, ArrowRight, CheckCircle2, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AnimatedSection, StaggerContainer, StaggerItem } from "@/components/ui/animated-section";
-
-const advancedServices = [
-  {
-    icon: Link2,
-    title: "Intelligent Link Building",
-    description:
-      "We build quality links that boost your website's authority using AI algorithms to identify the best opportunities.",
-    features: [
-      "Competitor link profile analysis",
-      "Sector-specific strategies",
-      "High-quality contextual links",
-      "Result monitoring & measurement",
-    ],
-    cta: "Request Link Building",
-    gradient: "from-blue-500 to-cyan-500",
-  },
-  {
-    icon: Target,
-    title: "AI-Powered SEM Advertising",
-    description:
-      "Maximize your advertising ROI with AI-managed SEM campaigns that optimize in real-time for best results.",
-    features: [
-      "Advanced keyword research",
-      "AI-optimized ad creation",
-      "Automatic bid adjustment",
-      "Detailed performance reports",
-    ],
-    cta: "Request SEM with AI",
-    gradient: "from-primary to-blue-600",
-  },
-];
+import { useTranslation } from "react-i18next";
 
 export function AdvancedServices() {
+  const { t } = useTranslation();
+
+  const advancedServices = [
+    {
+      icon: Link2,
+      title: t("advancedServices.linkBuilding.title"),
+      description: t("advancedServices.linkBuilding.description"),
+      features: t("advancedServices.linkBuilding.features", { returnObjects: true }) as string[],
+      cta: t("advancedServices.linkBuilding.cta"),
+      gradient: "from-blue-500 to-cyan-500",
+    },
+    {
+      icon: Target,
+      title: t("advancedServices.sem.title"),
+      description: t("advancedServices.sem.description"),
+      features: t("advancedServices.sem.features", { returnObjects: true }) as string[],
+      cta: t("advancedServices.sem.cta"),
+      gradient: "from-primary to-blue-600",
+    },
+  ];
+
   return (
     <section className="py-24 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-secondary/20 via-background to-background" />
@@ -44,16 +35,14 @@ export function AdvancedServices() {
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
             <Sparkles className="w-4 h-4 text-primary" />
             <span className="text-sm font-medium text-primary uppercase tracking-wider">
-              Advanced Services
+              {t("advancedServices.badge")}
             </span>
           </div>
           <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
-            Link Building & SEM with{" "}
-            <span className="gradient-text">AI</span>
+            {t("advancedServices.title")} <span className="gradient-text">AI</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Complement your SEO strategy with advanced services that maximize
-            your online presence
+            {t("advancedServices.subtitle")}
           </p>
         </AnimatedSection>
 

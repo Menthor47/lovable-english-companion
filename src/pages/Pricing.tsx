@@ -5,70 +5,44 @@ import { Button } from "@/components/ui/button";
 import { Check, Sparkles, Zap, Globe, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-
-const plans = [
-    {
-        name: "Starter",
-        description: "Perfect for local businesses and startups ready to grow.",
-        price: "$1,500",
-        period: "/month",
-        icon: Shield,
-        features: [
-            "Local SEO Optimization",
-            "5 Core Service Pages",
-            "Google Business Profile Management",
-            "Basic Analytics Dashboard",
-            "Monthly Performance Report",
-            "AI Content Generation (4 articles/mo)",
-        ],
-        cta: "Start Growing",
-        popular: false,
-        gradient: "from-blue-500/20 to-cyan-500/20",
-        border: "border-blue-500/20",
-    },
-    {
-        name: "Growth",
-        description: "For established brands scaling nationally or internationally.",
-        price: "$3,500",
-        period: "/month",
-        icon: Zap,
-        features: [
-            "National SEO Strategy",
-            "Technical SEO Audits (Weekly)",
-            "Programmatic Content (20 pages/mo)",
-            "High-Authority Link Building",
-            "CRO Recommendations",
-            "Bi-Weekly Strategy Calls",
-            "Priority Support",
-        ],
-        cta: "Scale Now",
-        popular: true,
-        gradient: "from-primary/20 to-accent/20",
-        border: "border-primary/50",
-    },
-    {
-        name: "Dominance",
-        description: "Enterprise-grade AI SEO for maximum market share.",
-        price: "Custom",
-        period: "",
-        icon: Globe,
-        features: [
-            "Global GEO Strategy (ChatGPT/Gemini)",
-            "Unlimited Programmatic Assessment",
-            "Custom AI Agent Development",
-            "Competitor Entity Graph Analysis",
-            "Dedicated Account Manager",
-            "24/7 Slack Access",
-            "White-label Reporting (Agencies)",
-        ],
-        cta: "Contact Sales",
-        popular: false,
-        gradient: "from-purple-500/20 to-pink-500/20",
-        border: "border-purple-500/20",
-    },
-];
+import { useTranslation } from "react-i18next";
 
 export default function Pricing() {
+    const { t } = useTranslation();
+
+    const plans = [
+        {
+            key: "starter",
+            icon: Shield,
+            popular: false,
+            gradient: "from-blue-500/20 to-cyan-500/20",
+            border: "border-blue-500/20",
+        },
+        {
+            key: "growth",
+            icon: Zap,
+            popular: true,
+            gradient: "from-primary/20 to-accent/20",
+            border: "border-primary/50",
+        },
+        {
+            key: "dominance",
+            icon: Globe,
+            popular: false,
+            gradient: "from-purple-500/20 to-pink-500/20",
+            border: "border-purple-500/20",
+        },
+    ].map((plan) => ({
+        ...plan,
+        name: t(`pricing.plans.${plan.key}.name`),
+        description: t(`pricing.plans.${plan.key}.description`),
+        price: t(`pricing.plans.${plan.key}.price`),
+        period: t(`pricing.plans.${plan.key}.period`),
+        features: t(`pricing.plans.${plan.key}.features`, { returnObjects: true }) as string[],
+        cta: t(`pricing.plans.${plan.key}.cta`),
+        popularLabel: t(`pricing.plans.${plan.key}.popularLabel`),
+    }));
+
     return (
         <div className="min-h-screen bg-background">
             <Helmet>
@@ -83,19 +57,19 @@ export default function Pricing() {
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-md mb-6">
                             <Sparkles className="w-4 h-4 text-primary" />
                             <span className="text-sm font-medium text-primary tracking-wide">
-                                Simple, Transparent Pricing
+                                {t("pricing.badge")}
                             </span>
                         </div>
                         <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-                            Invest in <span className="text-primary">Growth</span>, Not Guesswork
+                            {t("pricing.title")}
                         </h1>
                         <p className="text-xl text-muted-foreground mb-8">
-                            Choose the AI-powered plan that fits your scale. No hidden fees, just results.
+                            {t("pricing.subtitle")}
                         </p>
                         <Button variant="outline" size="sm" asChild>
                             <Link to="/dashboard">
                                 <Sparkles className="w-4 h-4 mr-2" />
-                                View Client Portal Demo
+                                {t("pricing.viewDemoCta")}
                             </Link>
                         </Button>
                     </AnimatedSection>
@@ -111,7 +85,7 @@ export default function Pricing() {
                                     {plan.popular && (
                                         <div className="absolute top-0 right-0">
                                             <div className="bg-primary text-primary-foreground text-xs font-bold px-3 py-1 rounded-bl-xl">
-                                                MOST POPULAR
+                                                {plan.popularLabel}
                                             </div>
                                         </div>
                                     )}
@@ -164,9 +138,9 @@ export default function Pricing() {
 
                     {/* FAQ Teaser */}
                     <AnimatedSection className="mt-24 text-center">
-                        <p className="text-muted-foreground mb-4">Need a custom enterprise solution?</p>
+                        <p className="text-muted-foreground mb-4">{t("pricing.faqTeaser")}</p>
                         <Link to="/#contact" className="text-primary hover:underline font-medium">
-                            Book a consultation with our sales team
+                            {t("pricing.faqCta")}
                         </Link>
                     </AnimatedSection>
                 </div>

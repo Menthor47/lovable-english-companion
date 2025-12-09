@@ -1,8 +1,44 @@
 {
     "nav": {
+        "solutions": "Solutions",
+        "products": "Products",
+        "resources": "Resources",
+        "pricing": "Pricing",
+        "contact": "Contact",
         "services": "Services",
         "testimonials": "Testimonials",
-        "faq": "FAQ"
+        "faq": "FAQ",
+        "solutionsMenu": {
+            "badge": "AG SEO",
+            "description": "AEO + GEO + SEO. The complete formula for modern search dominance.",
+            "aeoGeo": "AEO & GEO",
+            "technical": "Technical SEO",
+            "paid": "Paid Media (Ads)",
+            "content": "Content & Links"
+        },
+        "productsMenu": {
+            "toolsHub": "Tools Hub",
+            "aiAudit": "Instant AI Audit",
+            "roi": "ROI Calculator",
+            "portal": "Client Portal"
+        },
+        "resourcesMenu": {
+            "caseStudies": "Case Studies",
+            "comparisons": "Tool Comparisons",
+            "glossary": "SEO Glossary",
+            "blog": "Blog"
+        },
+        "mobile": {
+            "solutions": "Solutions",
+            "industries": "Industries",
+            "freeTools": "Free Tools",
+            "aiAudit": "AI Audit",
+            "roi": "ROI Calculator",
+            "caseStudies": "Case Studies",
+            "comparisons": "Comparisons",
+            "glossary": "Glossary",
+            "blog": "Blog"
+        }
     },
     "hero": {
         "title": "Dominate Search & AI Answers",
@@ -131,7 +167,95 @@
                 "title": "Sustainable Advantage",
                 "description": "Long-term competitive edge through cutting-edge technology and strategy."
             }
+        },
+        "partnerStackTitle": "Powered by Next-Gen AI Infrastructure"
+    },
+    "advancedServices": {
+        "badge": "Advanced Services",
+        "title": "Link Building & SEM with AI",
+        "subtitle": "Complement your SEO strategy with advanced services that maximize your online presence",
+        "linkBuilding": {
+            "title": "Intelligent Link Building",
+            "description": "We build quality links that boost your website's authority using AI algorithms to identify the best opportunities.",
+            "features": [
+                "Competitor link profile analysis",
+                "Sector-specific strategies",
+                "High-quality contextual links",
+                "Result monitoring & measurement"
+            ],
+            "cta": "Request Link Building"
+        },
+        "sem": {
+            "title": "AI-Powered SEM Advertising",
+            "description": "Maximize your advertising ROI with AI-managed SEM campaigns that optimize in real-time for best results.",
+            "features": [
+                "Advanced keyword research",
+                "AI-optimized ad creation",
+                "Automatic bid adjustment",
+                "Detailed performance reports"
+            ],
+            "cta": "Request SEM with AI"
         }
+    },
+    "pricing": {
+        "badge": "Simple, Transparent Pricing",
+        "title": "Invest in Growth, Not Guesswork",
+        "subtitle": "Choose the AI-powered plan that fits your scale. No hidden fees, just results.",
+        "viewDemoCta": "View Client Portal Demo",
+        "plans": {
+            "starter": {
+                "name": "Starter",
+                "description": "Perfect for local businesses and startups ready to grow.",
+                "price": "$1,500",
+                "period": "/month",
+                "features": [
+                    "Local SEO Optimization",
+                    "5 Core Service Pages",
+                    "Google Business Profile Management",
+                    "Basic Analytics Dashboard",
+                    "Monthly Performance Report",
+                    "AI Content Generation (4 articles/mo)"
+                ],
+                "cta": "Start Growing",
+                "popularLabel": "MOST POPULAR"
+            },
+            "growth": {
+                "name": "Growth",
+                "description": "For established brands scaling nationally or internationally.",
+                "price": "$3,500",
+                "period": "/month",
+                "features": [
+                    "National SEO Strategy",
+                    "Technical SEO Audits (Weekly)",
+                    "Programmatic Content (20 pages/mo)",
+                    "High-Authority Link Building",
+                    "CRO Recommendations",
+                    "Bi-Weekly Strategy Calls",
+                    "Priority Support"
+                ],
+                "cta": "Scale Now",
+                "popularLabel": "MOST POPULAR"
+            },
+            "dominance": {
+                "name": "Dominance",
+                "description": "Enterprise-grade AI SEO for maximum market share.",
+                "price": "Custom",
+                "period": "",
+                "features": [
+                    "Global GEO Strategy (ChatGPT/Gemini)",
+                    "Unlimited Programmatic Assessment",
+                    "Custom AI Agent Development",
+                    "Competitor Entity Graph Analysis",
+                    "Dedicated Account Manager",
+                    "24/7 Slack Access",
+                    "White-label Reporting (Agencies)"
+                ],
+                "cta": "Contact Sales",
+                "popularLabel": "MOST POPULAR"
+            }
+        },
+        "faqTeaser": "Need a custom enterprise solution?",
+        "faqCta": "Book a consultation with our sales team"
     },
     "process": {
         "title": "Our Working Process",

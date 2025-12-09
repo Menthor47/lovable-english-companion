@@ -29,7 +29,7 @@ export function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
           {/* Brand Column */}
           <div className="col-span-2 md:col-span-4 lg:col-span-1">
-            <a href="#home" className="flex items-center gap-2 mb-6">
+            <Link to="/" className="flex items-center gap-2 mb-6">
               <img
                 src={logo}
                 alt="AGSEO Logo"
@@ -40,7 +40,7 @@ export function Footer() {
               <span className="font-heading font-bold text-xl text-foreground">
                 AG<span className="text-primary">SEO</span>
               </span>
-            </a>
+            </Link>
             <p className="text-sm text-muted-foreground mb-6">
               {t("footer.description")}
             </p>
