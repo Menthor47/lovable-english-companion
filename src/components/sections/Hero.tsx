@@ -85,10 +85,10 @@ export function Hero() {
                 </Link>
               </Button>
               <Button variant="hero-outline" size="xl" className="backdrop-blur-sm hover:bg-white/5" asChild>
-                <Link to="/geo-optimization">
+                <a href="#services">
                   <Sparkles className="w-5 h-5 mr-2" />
                   {t("hero.cta.secondary")}
-                </Link>
+                </a>
               </Button>
             </motion.div>
 
