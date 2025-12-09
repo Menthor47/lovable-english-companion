@@ -1,10 +1,16 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { AnimatedSection } from "@/components/ui/animated-section";
+import { Helmet } from "react-helmet-async";
 
 export default function Terms() {
     return (
         <div className="min-h-screen bg-background">
+            <Helmet>
+                <title>Terms of Service | AGSEO</title>
+                <meta name="description" content="AGSEO Terms of Service. Read our terms and conditions for using our AI SEO services." />
+                <link rel="canonical" href="https://agseo.pro/terms" />
+            </Helmet>
             <Header />
             <main className="pt-24 pb-16">
                 <div className="container mx-auto px-4">

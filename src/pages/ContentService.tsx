@@ -4,10 +4,16 @@ import { AnimatedSection } from "@/components/ui/animated-section";
 import { Button } from "@/components/ui/button";
 import { CheckCircle2, Zap, BarChart, Database, FileText, Bot } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 export default function ContentService() {
     return (
         <div className="min-h-screen bg-background">
+            <Helmet>
+                <title>AI Content & Programmatic SEO | AGSEO</title>
+                <meta name="description" content="Scale your content 10x faster with AI-powered programmatic SEO. Automated gap analysis, topic clustering, and human-verified content at scale." />
+                <link rel="canonical" href="https://agseo.pro/services/content" />
+            </Helmet>
             <Header />
             <main className="pt-24 pb-16">
                 <div className="container mx-auto px-4">

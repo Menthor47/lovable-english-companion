@@ -1,10 +1,16 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { AnimatedSection } from "@/components/ui/animated-section";
+import { Helmet } from "react-helmet-async";
 
 export default function Privacy() {
     return (
         <div className="min-h-screen bg-background">
+            <Helmet>
+                <title>Privacy Policy | AGSEO</title>
+                <meta name="description" content="AGSEO Privacy Policy. Learn how we collect, use, and protect your personal information." />
+                <link rel="canonical" href="https://agseo.pro/privacy" />
+            </Helmet>
             <Header />
             <main className="pt-24 pb-16">
                 <div className="container mx-auto px-4">

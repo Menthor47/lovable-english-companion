@@ -4,10 +4,16 @@ import { AnimatedSection } from "@/components/ui/animated-section";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Brain, Network, MessageSquareText, Search, Zap } from "lucide-react";
+import { Helmet } from "react-helmet-async";
 
 export default function GEO() {
     return (
         <div className="min-h-screen bg-background">
+            <Helmet>
+                <title>Generative Engine Optimization (GEO) | AGSEO</title>
+                <meta name="description" content="Future-proof your rankings with Generative Engine Optimization. Optimize for AI answers from ChatGPT, Gemini, and Claude." />
+                <link rel="canonical" href="https://agseo.pro/geo-optimization" />
+            </Helmet>
             <Header />
             <main className="pt-24 pb-16">
                 <div className="container mx-auto px-4">

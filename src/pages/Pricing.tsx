@@ -48,6 +48,7 @@ export default function Pricing() {
             <Helmet>
                 <title>Pricing Plans - AGSEO | AI-Driven SEO Packages</title>
                 <meta name="description" content="Transparent pricing for AI SEO services. From local growth to enterprise dominance, find the perfect plan for your business scale." />
+                <link rel="canonical" href="https://agseo.pro/pricing" />
             </Helmet>
             <Header />
             <main className="pt-32 pb-24">

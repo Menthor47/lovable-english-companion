@@ -19,6 +19,7 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Helmet>
         <html lang="en" />
+        <link rel="canonical" href="https://agseo.pro/" />
         <link rel="alternate" href="https://agseo.pro/" hrefLang="x-default" />
         <link rel="alternate" href="https://agseo.pro/" hrefLang="en" />
       </Helmet>
