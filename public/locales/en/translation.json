@@ -414,14 +414,43 @@
         "rights": "All rights reserved.",
         "description": "AI-powered SEO agency transforming how businesses rank online."
     },
-    "cookieConsent": {
-        "title": "Cookie Settings",
-        "description": "We use cookies to enhance your browsing experience and analyze site traffic.",
-        "necessary": "Necessary",
-        "analytics": "Analytics",
-        "marketing": "Marketing",
-        "acceptAll": "Accept All",
-        "rejectAll": "Reject All",
-        "savePreferences": "Save Preferences"
+    "cookies": {
+        "title": "Cookie & Privacy Notice",
+        "description": "We use first-party and third-party cookies to analyze our services and show you advertising related to your preferences based on a profile compiled from your browsing habits.",
+        "buttons": {
+            "necessary": "Necessary Only",
+            "customize": "Customize",
+            "accept": "Accept All",
+            "save": "Save Preferences"
+        },
+        "settings": {
+            "title": "Privacy Preferences",
+            "necessary": {
+                "title": "Necessary",
+                "badge": "Required",
+                "description": "Essential for security and basic site functionality. Cannot be disabled."
+            },
+            "analytics": {
+                "title": "Analytics",
+                "description": "Help us understand how you use the site to improve experience."
+            },
+            "marketing": {
+                "title": "Marketing",
+                "description": "Allow showing relevant ads and measuring campaign effectiveness."
+            },
+            "preferences": {
+                "title": "Preferences",
+                "description": "Remember your settings (language, region) for future visits."
+            }
+        }
+    },
+    "common": {
+        "back": "Back"
+    },
+    "footer": {
+        "links": {
+            "privacy": "Privacy Policy",
+            "cookies": "Cookie Policy"
+        }
     }
 }
