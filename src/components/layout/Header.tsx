@@ -102,7 +102,7 @@ export function Header() {
                           </Link>
                         </NavigationMenuLink>
                       </li>
-                      <ListItem href="/#services" title={t("nav.solutionsMenu.aeoGeo")}>
+                      <ListItem href="/geo-optimization" title={t("nav.solutionsMenu.aeoGeo")}>
                         {t("services.geo.description")}
                       </ListItem>
                       <ListItem href="/#services" title={t("nav.solutionsMenu.technical")}>
@@ -111,7 +111,7 @@ export function Header() {
                       <ListItem href="/#services" title={t("nav.solutionsMenu.paid")}>
                         {t("services.ads.description")}
                       </ListItem>
-                      <ListItem href="/#services" title={t("nav.solutionsMenu.content")}>
+                      <ListItem href="/services/content" title={t("nav.solutionsMenu.content")}>
                         {t("services.content.description")}
                       </ListItem>
                     </ul>

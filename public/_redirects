@@ -1,0 +1,6 @@
+# Redirect non-www to www (or vice versa - pick one)
+# Option A: Redirect www to non-www (current setup)
+https://www.agseo.pro/* https://agseo.pro/:splat 301!
+
+# SPA fallback - let React Router handle all routes
+/*    /index.html   200

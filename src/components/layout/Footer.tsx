@@ -8,19 +8,21 @@ export function Footer() {
 
   const footerLinks = {
     services: [
+      { label: "Content & Programmatic SEO", href: "/services/content" },
+      { label: "GEO Optimization", href: "/geo-optimization" },
       { label: "Local SEO", href: "/#services" },
-      { label: "Web SEO", href: "/#services" },
       { label: "E-commerce SEO", href: "/#services" },
     ],
     company: [
       { label: "About Us", href: "/#home" },
-      { label: "Process", href: "/#process" },
-      { label: "Testimonials", href: "/#testimonials" },
-      { label: "FAQ", href: "/#faq" },
+      { label: "Pricing", href: "/pricing" },
+      { label: "Case Studies", href: "/case-studies" },
+      { label: "Blog", href: "/blog" },
     ],
     resources: [
-      { label: "Free Audit", href: "/#contact" },
-      { label: "Contact Us", href: "/#contact" },
+      { label: "Free Audit", href: "/tools/audit" },
+      { label: "ROI Calculator", href: "/tools/roi-calculator" },
+      { label: "Contact Us", href: "/contact" },
     ],
   };
   return (
@@ -74,12 +76,12 @@ export function Footer() {
             <ul className="space-y-2">
               {footerLinks.services.map((link) => (
                 <li key={link.label}>
-                  <a
-                    href={link.href}
+                  <Link
+                    to={link.href}
                     className="text-sm text-muted-foreground hover:text-primary transition-colors"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -93,12 +95,12 @@ export function Footer() {
             <ul className="space-y-2">
               {footerLinks.company.map((link) => (
                 <li key={link.label}>
-                  <a
-                    href={link.href}
+                  <Link
+                    to={link.href}
                     className="text-sm text-muted-foreground hover:text-primary transition-colors"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -112,13 +114,13 @@ export function Footer() {
             <ul className="space-y-2">
               {footerLinks.resources.map((link) => (
                 <li key={link.label}>
-                  <a
-                    href={link.href}
+                  <Link
+                    to={link.href}
                     className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-1"
                   >
                     {link.label}
                     <ArrowUpRight className="w-3 h-3" />
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

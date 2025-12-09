@@ -19,9 +19,9 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Helmet>
         <html lang="en" />
+        <title>AGSEO - AI-Powered SEO Agency | Future of Web Ranking</title>
+        <meta name="description" content="AGSEO combines AI with SEO strategies to multiply your visibility and conversions. Get 300% traffic increase with our proven methodology." />
         <link rel="canonical" href="https://agseo.pro/" />
-        <link rel="alternate" href="https://agseo.pro/" hrefLang="x-default" />
-        <link rel="alternate" href="https://agseo.pro/" hrefLang="en" />
       </Helmet>
       <a
         href="#main"
