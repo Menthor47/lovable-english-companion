@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { AnimatedSection } from "@/components/ui/animated-section";
@@ -20,6 +21,14 @@ export default function CaseStudies() {
 
     return (
         <div className="min-h-screen bg-background">
+            <Helmet>
+                <title>Case Studies | AGSEO - AI SEO Success Stories</title>
+                <meta name="description" content="See how AGSEO has transformed businesses across industries with our AI-powered SEO methodologies. Real results, measurable growth." />
+                <link rel="canonical" href="https://agseo.pro/case-studies" />
+                <meta property="og:url" content="https://agseo.pro/case-studies" />
+                <meta property="og:title" content="Case Studies | AGSEO - AI SEO Success Stories" />
+                <meta property="og:description" content="See how AGSEO has transformed businesses across industries with our AI-powered SEO methodologies. Real results, measurable growth." />
+            </Helmet>
             <Header />
             <main className="pt-24 pb-16">
                 <div className="container mx-auto px-4">

@@ -10,6 +10,9 @@ export default function Terms() {
                 <title>Terms of Service | AGSEO</title>
                 <meta name="description" content="AGSEO Terms of Service. Read our terms and conditions for using our AI SEO services." />
                 <link rel="canonical" href="https://agseo.pro/terms" />
+                <meta property="og:url" content="https://agseo.pro/terms" />
+                <meta property="og:title" content="Terms of Service | AGSEO" />
+                <meta property="og:description" content="AGSEO Terms of Service. Read our terms and conditions for using our AI SEO services." />
             </Helmet>
             <Header />
             <main className="pt-24 pb-16">

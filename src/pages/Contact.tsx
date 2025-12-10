@@ -10,6 +10,9 @@ const Contact = () => {
                 <title>Contact Us | AGSEO - AI SEO Agency</title>
                 <meta name="description" content="Get in touch with AGSEO for a free AI SEO audit. We are ready to help you dominate search rankings." />
                 <link rel="canonical" href="https://agseo.pro/contact" />
+                <meta property="og:url" content="https://agseo.pro/contact" />
+                <meta property="og:title" content="Contact Us | AGSEO - AI SEO Agency" />
+                <meta property="og:description" content="Get in touch with AGSEO for a free AI SEO audit. We are ready to help you dominate search rankings." />
             </Helmet>
 
             <Header />

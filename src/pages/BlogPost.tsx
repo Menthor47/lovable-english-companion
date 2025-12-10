@@ -75,6 +75,11 @@ const BlogPost = () => {
             <Helmet>
                 <title>{post.title} | AGSEO Blog</title>
                 <meta name="description" content={post.excerpt} />
+                <link rel="canonical" href={`https://agseo.pro/blog/${post.slug}`} />
+                <meta property="og:url" content={`https://agseo.pro/blog/${post.slug}`} />
+                <meta property="og:title" content={`${post.title} | AGSEO Blog`} />
+                <meta property="og:description" content={post.excerpt} />
+                <meta property="og:image" content={post.image} />
                 <script type="application/ld+json">
                     {JSON.stringify(articleSchema)}
                 </script>

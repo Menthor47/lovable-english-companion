@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+		<meta name="theme-color" content="#0ea5e9">
+		<!-- Google Consent Mode v2 -->
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			    function gtag() { dataLayer.push(arguments); }
+			
+			    // Default consent to 'denied'
+			    gtag('consent', 'default', {
+			      'ad_storage': 'denied',
+			      'ad_user_data': 'denied',
+			      'ad_personalization': 'denied',
+			      'analytics_storage': 'denied',
+			      'functionality_storage': 'denied',
+			      'personalization_storage': 'denied',
+			      'security_storage': 'granted', // Always granted for security
+			      'wait_for_update': 500 // Give the app time to load user preferences
+			    });
+		</script> <!-- Google Tag Manager -->
+		<script>
+			(function (w, d, s, l, i) {
+			      w[l] = w[l] || []; w[l].push({
+			        'gtm.start':
+			          new Date().getTime(), event: 'gtm.js'
+			      }); var f = d.getElementsByTagName(s)[0],
+			        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+			          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+			    })(window, document, 'script', 'dataLayer', 'GTM-P7QNM6J3');
+		</script> <!-- End Google Tag Manager -->
+		<!-- Google tag (gtag.js) -->
+		<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-MB50YLY7YQ"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			    function gtag() { dataLayer.push(arguments); }
+			    gtag('js', new Date());
+			
+			    gtag('config', 'G-MB50YLY7YQ');
+		</script>
+		<script>
+			var ahrefs_analytics_script = document.createElement('script');
+			    ahrefs_analytics_script.async = true;
+			    ahrefs_analytics_script.src = 'https://analytics.ahrefs.com/analytics.js';
+			    ahrefs_analytics_script.setAttribute('data-key', '8mOzJDPvgbtcWVax7ARuRw');
+			    document.getElementsByTagName('head')[0].appendChild(ahrefs_analytics_script);
+		</script> <!-- Performance Optimization -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+		<!-- Fallback Title & Description for non-JS crawlers. Overridden by React Helmet. -->
+		<title>AGSEO - AI-Powered SEO Agency | Future of Web Ranking</title>
+		<meta name="description" content="AGSEO combines AI with SEO strategies to multiply your visibility and conversions. Get 300% traffic increase with our proven methodology.">
+		<meta name="keywords" content="SEO agency, AI SEO, artificial intelligence, web ranking, local SEO, e-commerce SEO, digital marketing">
+		<meta name="author" content="AGSEO Inc.">
+		<meta name="language" content="English">
+		<!-- Canonical URL - managed per-page via React Helmet -->
+		<!-- OpenGraph Defaults (page-specific tags set via React Helmet) -->
+		<meta property="og:locale" content="en_US">
+		<meta property="og:type" content="website">
+		<meta property="og:site_name" content="AGSEO">
+		<meta property="og:image" content="https://agseo.pro/og-image.png">
+		<meta property="og:image:width" content="1200">
+		<meta property="og:image:height" content="630">
+		<!-- Twitter Card -->
+		<meta name="twitter:card" content="summary_large_image">
+		<meta name="twitter:site" content="@AGSEO">
+		<meta name="twitter:creator" content="@AGSEO">
+		<meta name="twitter:title" content="AGSEO - AI-Powered SEO Agency">
+		<meta name="twitter:description" content="300% traffic growth guaranteed. AI-powered SEO for local, e-commerce, and SaaS businesses.">
+		<meta name="twitter:image" content="/og-image.png">
+		<!-- Favicons -->
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+		<script type="module" crossorigin="" src="/assets/index-DErE0LC5.js.pagespeed.ce.Lds3friQ8f.js"></script>
+		<link rel="stylesheet" crossorigin="" href="/assets/A.index-BcEFL1KB.css.pagespeed.cf.O1iukcwK41.css">
+	</head>
+
+	<body class="dark">
+		<!-- Google Tag Manager (noscript) --><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P7QNM6J3" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> <!-- End Google Tag Manager (noscript) -->
+		<div id="root"></div>
+	</body>
+
+</html>

@@ -93,3 +93,45 @@ export const navigationConfig: NavItem[] = [
         href: "/contact"
     }
 ];
+
+export interface FooterLinkGroup {
+    titleKey: string;
+    links: { label: string; href: string }[];
+}
+
+export const footerLinks: Record<string, FooterLinkGroup> = {
+    services: {
+        titleKey: "nav.services",
+        links: [
+            { label: "Content & Programmatic SEO", href: "/services/content" },
+            { label: "GEO Optimization", href: "/geo-optimization" },
+            { label: "Local SEO", href: "/#services" },
+            { label: "E-commerce SEO", href: "/#services" },
+        ]
+    },
+    company: {
+        titleKey: "footer.company",
+        links: [
+            { label: "About Us", href: "/#home" },
+            { label: "Pricing", href: "/pricing" },
+            { label: "Case Studies", href: "/case-studies" },
+            { label: "Blog", href: "/blog" },
+        ]
+    },
+    resources: {
+        titleKey: "footer.resources",
+        links: [
+            { label: "Free Audit", href: "/tools/audit" },
+            { label: "ROI Calculator", href: "/tools/roi-calculator" },
+            { label: "Contact Us", href: "/contact" },
+        ]
+    },
+    legal: {
+        titleKey: "footer.legal",
+        links: [
+            { label: "Privacy Policy", href: "/privacy" },
+            { label: "Terms of Service", href: "/terms" },
+            { label: "Cookie Policy", href: "/cookies" },
+        ]
+    }
+};

@@ -13,6 +13,9 @@ export default function GEO() {
                 <title>Generative Engine Optimization (GEO) | AGSEO</title>
                 <meta name="description" content="Future-proof your rankings with Generative Engine Optimization. Optimize for AI answers from ChatGPT, Gemini, Claude and Perplexity." />
                 <link rel="canonical" href="https://agseo.pro/geo-optimization" />
+                <meta property="og:url" content="https://agseo.pro/geo-optimization" />
+                <meta property="og:title" content="Generative Engine Optimization (GEO) | AGSEO" />
+                <meta property="og:description" content="Future-proof your rankings with Generative Engine Optimization. Optimize for AI answers from ChatGPT, Gemini, Claude and Perplexity." />
             </Helmet>
             <Header />
             <main className="pt-24 pb-16">

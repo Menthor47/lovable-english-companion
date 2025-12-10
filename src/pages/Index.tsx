@@ -22,6 +22,9 @@ const Index = () => {
         <title>AGSEO - AI-Powered SEO Agency | Future of Web Ranking</title>
         <meta name="description" content="AGSEO combines AI with SEO strategies to multiply your visibility and conversions. Get 300% traffic increase with our proven methodology." />
         <link rel="canonical" href="https://agseo.pro/" />
+        <meta property="og:url" content="https://agseo.pro/" />
+        <meta property="og:title" content="AGSEO - AI-Powered SEO Agency | Future of Web Ranking" />
+        <meta property="og:description" content="AGSEO combines AI with SEO strategies to multiply your visibility and conversions. Get 300% traffic increase with our proven methodology." />
       </Helmet>
       <a
         href="#main"

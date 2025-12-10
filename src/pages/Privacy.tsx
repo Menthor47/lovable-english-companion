@@ -10,6 +10,9 @@ export default function Privacy() {
                 <title>Privacy Policy | AGSEO</title>
                 <meta name="description" content="AGSEO Privacy Policy. Learn how we collect, use, and protect your personal information." />
                 <link rel="canonical" href="https://agseo.pro/privacy" />
+                <meta property="og:url" content="https://agseo.pro/privacy" />
+                <meta property="og:title" content="Privacy Policy | AGSEO" />
+                <meta property="og:description" content="AGSEO Privacy Policy. Learn how we collect, use, and protect your personal information." />
             </Helmet>
             <Header />
             <main className="pt-24 pb-16">

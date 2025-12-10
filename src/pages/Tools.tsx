@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { AnimatedSection } from "@/components/ui/animated-section";
@@ -51,6 +52,14 @@ const tools = [
 export default function Tools() {
     return (
         <div className="min-h-screen bg-background">
+            <Helmet>
+                <title>Free AI SEO Tools | AGSEO</title>
+                <meta name="description" content="Powerful free SEO tools including AI Audit, ROI Calculator, and more. Supercharge your SEO with AI power." />
+                <link rel="canonical" href="https://agseo.pro/tools" />
+                <meta property="og:url" content="https://agseo.pro/tools" />
+                <meta property="og:title" content="Free AI SEO Tools | AGSEO" />
+                <meta property="og:description" content="Powerful free SEO tools including AI Audit, ROI Calculator, and more. Supercharge your SEO with AI power." />
+            </Helmet>
             <Header />
             <main className="pt-24 pb-16">
                 <div className="container mx-auto px-4">

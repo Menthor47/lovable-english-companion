@@ -2,29 +2,11 @@ import { useTranslation } from "react-i18next";
 import { Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import logo from "@/assets/logo.webp";
+import { footerLinks } from "@/config/navigation";
 
 export function Footer() {
   const { t } = useTranslation();
 
-  const footerLinks = {
-    services: [
-      { label: "Content & Programmatic SEO", href: "/services/content" },
-      { label: "GEO Optimization", href: "/geo-optimization" },
-      { label: "Local SEO", href: "/#services" },
-      { label: "E-commerce SEO", href: "/#services" },
-    ],
-    company: [
-      { label: "About Us", href: "/#home" },
-      { label: "Pricing", href: "/pricing" },
-      { label: "Case Studies", href: "/case-studies" },
-      { label: "Blog", href: "/blog" },
-    ],
-    resources: [
-      { label: "Free Audit", href: "/tools/audit" },
-      { label: "ROI Calculator", href: "/tools/roi-calculator" },
-      { label: "Contact Us", href: "/contact" },
-    ],
-  };
   return (
     <footer className="bg-card border-t border-border">
       <div className="container mx-auto px-4 py-16">
@@ -71,10 +53,10 @@ export function Footer() {
           {/* Services */}
           <div>
             <h4 className="font-heading font-semibold text-foreground mb-4">
-              {t("nav.services")}
+              {t(footerLinks.services.titleKey)}
             </h4>
             <ul className="space-y-2">
-              {footerLinks.services.map((link) => (
+              {footerLinks.services.links.map((link) => (
                 <li key={link.label}>
                   <Link
                     to={link.href}
@@ -90,10 +72,10 @@ export function Footer() {
           {/* Company */}
           <div>
             <h4 className="font-heading font-semibold text-foreground mb-4">
-              {t("footer.company")}
+              {t(footerLinks.company.titleKey)}
             </h4>
             <ul className="space-y-2">
-              {footerLinks.company.map((link) => (
+              {footerLinks.company.links.map((link) => (
                 <li key={link.label}>
                   <Link
                     to={link.href}
@@ -109,10 +91,10 @@ export function Footer() {
           {/* Resources */}
           <div>
             <h4 className="font-heading font-semibold text-foreground mb-4">
-              {t("footer.resources")}
+              {t(footerLinks.resources.titleKey)}
             </h4>
             <ul className="space-y-2">
-              {footerLinks.resources.map((link) => (
+              {footerLinks.resources.links.map((link) => (
                 <li key={link.label}>
                   <Link
                     to={link.href}
@@ -133,27 +115,18 @@ export function Footer() {
             © {new Date().getFullYear()} AGSEO. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <Link
-              to="/privacy"
-              className="text-sm text-muted-foreground hover:text-primary transition-colors"
-            >
-              {t("footer.privacy")}
-            </Link>
-            <Link
-              to="/terms"
-              className="text-sm text-muted-foreground hover:text-primary transition-colors"
-            >
-              {t("footer.terms")}
-            </Link>
-            <Link
-              to="/cookies"
-              className="text-sm text-muted-foreground hover:text-primary transition-colors"
-            >
-              {t("footer.cookies")}
-            </Link>
+            {footerLinks.legal.links.map((link) => (
+              <Link
+                key={link.label}
+                to={link.href}
+                className="text-sm text-muted-foreground hover:text-primary transition-colors"
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
         </div>
       </div>
-    </footer >
+    </footer>
   );
 }

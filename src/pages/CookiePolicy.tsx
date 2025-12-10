@@ -49,6 +49,9 @@ export default function CookiePolicy() {
                 <title>Cookie Policy | AGSEO</title>
                 <meta name="description" content="Cookie Policy for AGSEO. Understand how we use cookies to improve your experience." />
                 <link rel="canonical" href="https://agseo.pro/cookies" />
+                <meta property="og:url" content="https://agseo.pro/cookies" />
+                <meta property="og:title" content="Cookie Policy | AGSEO" />
+                <meta property="og:description" content="Cookie Policy for AGSEO. Understand how we use cookies to improve your experience." />
             </Helmet>
 
             <Header />

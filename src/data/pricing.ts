@@ -255,7 +255,6 @@ export const pricingData: Record<string, PricingTierData> = {
                 icon: Settings,
                 title: "Tools & Software Included",
                 items: [
-                    "Full reporting dashboard access",
                     "Google Search Console, GA4 integration",
                     "Rank tracking (40-60 keywords)",
                     "Competitor rank tracking (daily updates)",
@@ -266,7 +265,6 @@ export const pricingData: Record<string, PricingTierData> = {
             }
         ],
         notIncluded: [
-            "Paid advertising management (PPC, Facebook Ads)",
             "Video SEO services",
             "Full CRO/conversion optimization",
             "Dedicated full-time account manager",

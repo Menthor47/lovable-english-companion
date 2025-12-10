@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { AnimatedSection } from "@/components/ui/animated-section";
@@ -67,6 +68,14 @@ export default function Audit() {
 
     return (
         <div className="min-h-screen bg-background flex flex-col">
+            <Helmet>
+                <title>Free AI SEO Audit | AGSEO</title>
+                <meta name="description" content="Get a free instant AI-powered SEO audit for your website. Discover how visible your brand is on Google, ChatGPT, and Gemini." />
+                <link rel="canonical" href="https://agseo.pro/tools/audit" />
+                <meta property="og:url" content="https://agseo.pro/tools/audit" />
+                <meta property="og:title" content="Free AI SEO Audit | AGSEO" />
+                <meta property="og:description" content="Get a free instant AI-powered SEO audit for your website. Discover how visible your brand is on Google, ChatGPT, and Gemini." />
+            </Helmet>
             <Header />
             <main className="flex-grow pt-32 pb-16 flex items-center justify-center">
                 <div className="container mx-auto px-4">

@@ -29,7 +29,7 @@ export function AdvancedServices() {
     <section className="py-24 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-secondary/20 via-background to-background" />
       <div className="absolute top-1/3 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-      
+
       <div className="container mx-auto px-4 relative z-10">
         <AnimatedSection className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
@@ -52,13 +52,13 @@ export function AdvancedServices() {
               <div className="group relative h-full p-8 rounded-2xl bg-card/60 backdrop-blur-sm border border-border hover:border-primary/50 transition-all duration-500 overflow-hidden">
                 {/* Gradient background on hover */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
-                
+
                 <div className="relative z-10">
                   {/* Icon */}
                   <div className="w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-primary/20 transition-all duration-300">
                     <service.icon className="w-8 h-8 text-primary" />
                   </div>
-                  
+
                   {/* Content */}
                   <h3 className="font-heading text-2xl font-semibold mb-4 text-foreground">
                     {service.title}
@@ -66,10 +66,10 @@ export function AdvancedServices() {
                   <p className="text-muted-foreground mb-6 leading-relaxed">
                     {service.description}
                   </p>
-                  
+
                   {/* Features */}
                   <ul className="space-y-3 mb-8">
-                    {service.features.map((feature, featureIndex) => (
+                    {Array.isArray(service.features) && service.features.map((feature, featureIndex) => (
                       <li
                         key={featureIndex}
                         className="flex items-start gap-3 text-sm text-muted-foreground"
@@ -79,7 +79,7 @@ export function AdvancedServices() {
                       </li>
                     ))}
                   </ul>
-                  
+
                   {/* CTA */}
                   <Button variant="hero" className="group/btn">
                     {service.cta}

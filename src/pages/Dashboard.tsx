@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
@@ -44,6 +45,14 @@ export default function Dashboard() {
 
     return (
         <div className="min-h-screen bg-background">
+            <Helmet>
+                <title>Client Dashboard Demo | AGSEO</title>
+                <meta name="description" content="Preview the AGSEO client dashboard. See live SEO performance metrics, content planning, and reporting features." />
+                <link rel="canonical" href="https://agseo.pro/dashboard" />
+                <meta property="og:url" content="https://agseo.pro/dashboard" />
+                <meta property="og:title" content="Client Dashboard Demo | AGSEO" />
+                <meta property="og:description" content="Preview the AGSEO client dashboard. See live SEO performance metrics, content planning, and reporting features." />
+            </Helmet>
             <Header />
             <main className="pt-24 pb-16">
                 <div className="container mx-auto px-4 max-w-7xl">

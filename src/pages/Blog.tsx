@@ -15,6 +15,10 @@ const Blog = () => {
             <Helmet>
                 <title>Blog | AGSEO - AI SEO Agency</title>
                 <meta name="description" content="Latest insights and strategies on AI, SEO, and Digital Marketing to help your business grow." />
+                <link rel="canonical" href="https://agseo.pro/blog" />
+                <meta property="og:url" content="https://agseo.pro/blog" />
+                <meta property="og:title" content="Blog | AGSEO - AI SEO Agency" />
+                <meta property="og:description" content="Latest insights and strategies on AI, SEO, and Digital Marketing to help your business grow." />
             </Helmet>
 
             <Header />

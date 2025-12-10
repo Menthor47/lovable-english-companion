@@ -35,14 +35,15 @@ export default function Pricing() {
     });
 
 
-    console.log("Rendering plans:", plans);
-
     return (
         <div className="min-h-screen bg-background">
             <Helmet>
                 <title>Pricing Plans - AGSEO | AI-Driven SEO Packages</title>
                 <meta name="description" content="Transparent pricing for AI SEO services. From local growth to enterprise dominance, find the perfect plan for your business scale." />
                 <link rel="canonical" href="https://agseo.pro/pricing" />
+                <meta property="og:url" content="https://agseo.pro/pricing" />
+                <meta property="og:title" content="Pricing Plans - AGSEO | AI-Driven SEO Packages" />
+                <meta property="og:description" content="Transparent pricing for AI SEO services. From local growth to enterprise dominance, find the perfect plan for your business scale." />
             </Helmet>
             <Header />
             <main className="pt-32 pb-24">
