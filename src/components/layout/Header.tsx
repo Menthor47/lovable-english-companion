@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { Menu, X, Sparkles, ChevronDown } from "lucide-react";
+import { Menu, X, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { cn } from "@/lib/utils";
@@ -15,6 +15,7 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import logo from "@/assets/logo.webp";
+import { navigationConfig } from "@/config/navigation";
 
 export function Header() {
   const { t } = useTranslation();
@@ -80,104 +81,61 @@ export function Header() {
           <div className="hidden lg:flex">
             <NavigationMenu>
               <NavigationMenuList>
-                {/* Solutions */}
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger className="bg-transparent hover:text-primary data-[state=open]:text-primary transition-colors">{t("nav.solutions")}</NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-                      <li className="row-span-3">
-                        <NavigationMenuLink asChild>
-                          <Link
-                            className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-primary/50 to-primary/20 p-6 no-underline outline-none focus:shadow-md"
-                            to="/#services"
-                            onClick={() => handleNavClick("/#services")}
-                          >
-                            <Sparkles className="h-6 w-6 text-primary mb-2" />
-                            <div className="mb-2 mt-4 text-lg font-medium text-white">
-                              {t("nav.solutionsMenu.badge")}
-                            </div>
-                            <p className="text-sm leading-tight text-white/90">
-                              {t("nav.solutionsMenu.description")}
-                            </p>
-                          </Link>
+                {navigationConfig.map((item) => (
+                  <NavigationMenuItem key={item.title}>
+                    {item.items ? (
+                      <>
+                        <NavigationMenuTrigger className="bg-transparent hover:text-primary data-[state=open]:text-primary transition-colors">
+                          {t(`nav.${item.title}`)}
+                        </NavigationMenuTrigger>
+                        <NavigationMenuContent>
+                          <ul className={cn(
+                            "grid gap-3 p-4 md:w-[400px]",
+                            item.title === "solutions" ? "lg:w-[500px] lg:grid-cols-[.75fr_1fr]" : "md:grid-cols-2"
+                          )}>
+                            {item.title === "solutions" && (
+                              <li className="row-span-4">
+                                <NavigationMenuLink asChild>
+                                  <Link
+                                    className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-primary/50 to-primary/20 p-6 no-underline outline-none focus:shadow-md"
+                                    to="/#services"
+                                    onClick={() => handleNavClick("/#services")}
+                                  >
+                                    <Sparkles className="h-6 w-6 text-primary mb-2" />
+                                    <div className="mb-2 mt-4 text-lg font-medium text-white">
+                                      {t("nav.solutionsMenu.badge")}
+                                    </div>
+                                    <p className="text-sm leading-tight text-white/90">
+                                      {t("nav.solutionsMenu.description")}
+                                    </p>
+                                  </Link>
+                                </NavigationMenuLink>
+                              </li>
+                            )}
+                            {item.items.map((subItem) => (
+                              <ListItem
+                                key={subItem.title}
+                                href={subItem.href}
+                                title={t(`nav.${item.title}Menu.${subItem.title}`)}
+                              >
+                                {item.title === "solutions" // Solution descriptions use translation keys
+                                  ? t(`services.${subItem.description?.includes("Geo") ? "geo" : subItem.title === "technical" ? "seo" : subItem.title === "paid" ? "ads" : "content"}.description`)
+                                  : subItem.description // Others use direct strings from config (or should effectively be translated, but preserving current behavior for now)
+                                }
+                              </ListItem>
+                            ))}
+                          </ul>
+                        </NavigationMenuContent>
+                      </>
+                    ) : (
+                      <Link to={item.href}>
+                        <NavigationMenuLink className={navigationMenuTriggerStyle() + " bg-transparent hover:text-primary hover:bg-primary/10 transition-colors"}>
+                          {t(`nav.${item.title}`)}
                         </NavigationMenuLink>
-                      </li>
-                      <ListItem href="/geo-optimization" title={t("nav.solutionsMenu.aeoGeo")}>
-                        {t("services.geo.description")}
-                      </ListItem>
-                      <ListItem href="/#services" title={t("nav.solutionsMenu.technical")}>
-                        {t("services.seo.description")}
-                      </ListItem>
-                      <ListItem href="/#services" title={t("nav.solutionsMenu.paid")}>
-                        {t("services.ads.description")}
-                      </ListItem>
-                      <ListItem href="/services/content" title={t("nav.solutionsMenu.content")}>
-                        {t("services.content.description")}
-                      </ListItem>
-                    </ul>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-
-                {/* Products */}
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger className="bg-transparent hover:text-primary data-[state=open]:text-primary transition-colors">{t("nav.products")}</NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <ul className="grid w-[400px] gap-3 p-4 md:grid-cols-2">
-                      <ListItem href="/tools" title={t("nav.productsMenu.toolsHub")}>
-                        Free AI utilities to boost your workflow.
-                      </ListItem>
-                      <ListItem href="/tools/audit" title={t("nav.productsMenu.aiAudit")}>
-                        Get a comprehensive site analysis in seconds.
-                      </ListItem>
-                      <ListItem href="/tools/roi-calculator" title={t("nav.productsMenu.roi")}>
-                        Project your potential revenue growth.
-                      </ListItem>
-                      <ListItem href="/dashboard" title={t("nav.productsMenu.portal")}>
-                        Live analytics and project tracking demo.
-                      </ListItem>
-                    </ul>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-
-                {/* Resources */}
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger className="bg-transparent hover:text-primary data-[state=open]:text-primary transition-colors">{t("nav.resources")}</NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <ul className="grid w-[400px] gap-3 p-4 md:grid-cols-1">
-                      <ListItem href="/case-studies" title={t("nav.resourcesMenu.caseStudies")}>
-                        See how we drove 300% growth for clients.
-                      </ListItem>
-                      <ListItem href="/compare" title={t("nav.resourcesMenu.comparisons")}>
-                        Unbiased battles between top AI tools.
-                      </ListItem>
-                      <ListItem href="/resources/glossary" title={t("nav.resourcesMenu.glossary")}>
-                        Master the terminology of modern search.
-                      </ListItem>
-                      <ListItem href="/blog" title={t("nav.resourcesMenu.blog")}>
-                        Latest insights and industry updates.
-                      </ListItem>
-                    </ul>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-
-                {/* Pricing (Direct Link) */}
-                <NavigationMenuItem>
-                  <Link to="/pricing">
-                    <NavigationMenuLink className={navigationMenuTriggerStyle() + " bg-transparent hover:text-primary hover:bg-primary/10 transition-colors"}>
-                      {t("nav.pricing")}
-                    </NavigationMenuLink>
-                  </Link>
-                </NavigationMenuItem>
-
-                {/* Contact (Direct Link) */}
-                <NavigationMenuItem>
-                  <Link to="/contact">
-                    <NavigationMenuLink className={navigationMenuTriggerStyle() + " bg-transparent hover:text-primary hover:bg-primary/10 transition-colors"}>
-                      {t("nav.contact")}
-                    </NavigationMenuLink>
-                  </Link>
-                </NavigationMenuItem>
-
+                      </Link>
+                    )}
+                  </NavigationMenuItem>
+                ))}
               </NavigationMenuList>
             </NavigationMenu>
           </div>
@@ -197,8 +155,10 @@ export function Header() {
             <button
               className="lg:hidden p-2 text-foreground"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isMobileMenuOpen}
             >
-              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {isMobileMenuOpen ? <X className="w-6 h-6" aria-hidden="true" /> : <Menu className="w-6 h-6" aria-hidden="true" />}
             </button>
           </div>
 
@@ -206,23 +166,35 @@ export function Header() {
           {isMobileMenuOpen && (
             <div className="lg:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur-xl border-b border-border/50 py-6 overflow-y-auto max-h-[80vh]">
               <nav className="flex flex-col gap-4 px-4">
-                <div className="font-semibold text-primary px-2">{t("nav.solutions")}</div>
-                <Link to="/#services" className="pl-4 text-sm text-muted-foreground" onClick={() => handleNavClick("/#services")}>{t("nav.services")}</Link>
-                <Link to="/industries/saas" className="pl-4 text-sm text-muted-foreground">{t("nav.mobile.industries")}</Link>
-
-                <div className="font-semibold text-primary px-2 mt-2">{t("nav.products")}</div>
-                <Link to="/tools" className="pl-4 text-sm text-muted-foreground">{t("nav.mobile.freeTools")}</Link>
-                <Link to="/tools/audit" className="pl-4 text-sm text-muted-foreground">{t("nav.mobile.aiAudit")}</Link>
-                <Link to="/tools/roi-calculator" className="pl-4 text-sm text-muted-foreground">{t("nav.mobile.roi")}</Link>
-
-                <div className="font-semibold text-primary px-2 mt-2">{t("nav.resources")}</div>
-                <Link to="/case-studies" className="pl-4 text-sm text-muted-foreground">{t("nav.mobile.caseStudies")}</Link>
-                <Link to="/compare" className="pl-4 text-sm text-muted-foreground">{t("nav.mobile.comparisons")}</Link>
-                <Link to="/resources/glossary" className="pl-4 text-sm text-muted-foreground">{t("nav.mobile.glossary")}</Link>
-                <Link to="/blog" className="pl-4 text-sm text-muted-foreground">{t("nav.mobile.blog")}</Link>
-
-                <Link to="/pricing" className="font-semibold text-foreground px-2 mt-2 hover:text-primary transition-colors">{t("nav.pricing")}</Link>
-                <Link to="/contact" className="font-semibold text-foreground px-2 mt-2 hover:text-primary transition-colors">{t("nav.contact")}</Link>
+                {navigationConfig.map((item) => (
+                  <div key={item.title}>
+                    {item.items ? (
+                      <>
+                        <div className="font-semibold text-primary px-2">{t(`nav.${item.title}`)}</div>
+                        <div className="flex flex-col mt-1">
+                          {item.items.map((subItem) => (
+                            <Link
+                              key={subItem.title}
+                              to={subItem.href}
+                              className="pl-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                              onClick={() => handleNavClick(subItem.href)}
+                            >
+                              {t(`nav.${item.title}Menu.${subItem.title}`)}
+                            </Link>
+                          ))}
+                        </div>
+                      </>
+                    ) : (
+                      <Link
+                        to={item.href}
+                        className="font-semibold text-foreground px-2 mt-2 hover:text-primary transition-colors block"
+                        onClick={() => handleNavClick(item.href)}
+                      >
+                        {t(`nav.${item.title}`)}
+                      </Link>
+                    )}
+                  </div>
+                ))}
 
                 <div className="flex flex-col gap-2 pt-4 border-t border-border mt-2">
                   <div className="flex justify-center py-2">

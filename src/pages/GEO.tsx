@@ -11,7 +11,7 @@ export default function GEO() {
         <div className="min-h-screen bg-background">
             <Helmet>
                 <title>Generative Engine Optimization (GEO) | AGSEO</title>
-                <meta name="description" content="Future-proof your rankings with Generative Engine Optimization. Optimize for AI answers from ChatGPT, Gemini, and Claude." />
+                <meta name="description" content="Future-proof your rankings with Generative Engine Optimization. Optimize for AI answers from ChatGPT, Gemini, Claude and Perplexity." />
                 <link rel="canonical" href="https://agseo.pro/geo-optimization" />
             </Helmet>
             <Header />
@@ -32,7 +32,7 @@ export default function GEO() {
                         </h1>
                         <p className="text-xl text-muted-foreground mb-8 text-balance">
                             SEO is dead. Long live GEO. <br />
-                            We don't just optimizing for 10 blue links. We optimize for the single answer given by ChatGPT, Gemini, and Claude.
+                            We don't just optimizing for 10 blue links. We optimize for the single answer given by ChatGPT, Gemini, Claude and Perplexity.
                         </p>
                     </AnimatedSection>
 

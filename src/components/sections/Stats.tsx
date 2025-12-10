@@ -112,6 +112,7 @@ export function Stats() {
               <img
                 src={seoDashboard}
                 alt="SEO Analytics Dashboard showing performance metrics"
+                loading="lazy"
                 className="w-full h-auto object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />

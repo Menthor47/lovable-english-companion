@@ -2,50 +2,37 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import { Button } from "@/components/ui/button";
-import { Check, Sparkles, Zap, Globe, Shield } from "lucide-react";
+import { Check, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
+import { pricingData } from "@/data/pricing";
 
 export default function Pricing() {
     const { t } = useTranslation();
 
-    const plans = [
-        {
-            key: "starter",
-            icon: Shield,
-            popular: false,
-            gradient: "from-blue-500/20 to-cyan-500/20",
-            border: "border-blue-500/20",
-            detailLink: "/pricing/starter"
-        },
-        {
-            key: "business",
-            icon: Zap,
-            popular: true,
-            gradient: "from-primary/20 to-accent/20",
-            border: "border-primary/50",
-            detailLink: "/pricing/business"
-        },
-        {
-            key: "proBusiness",
-            icon: Globe,
-            popular: false,
-            gradient: "from-purple-500/20 to-pink-500/20",
-            border: "border-purple-500/20",
-            detailLink: "/pricing/pro-business",
-            isCustom: true
-        },
-    ].map((plan) => ({
-        ...plan,
-        name: t(`pricing.plans.${plan.key}.name`),
-        description: t(`pricing.plans.${plan.key}.description`),
-        price: t(`pricing.plans.${plan.key}.price`),
-        period: t(`pricing.plans.${plan.key}.period`),
-        features: t(`pricing.plans.${plan.key}.features`, { returnObjects: true }) as string[],
-        cta: t(`pricing.plans.${plan.key}.cta`),
-        popularLabel: t(`pricing.plans.${plan.key}.popularLabel`),
-    }));
+    const planKeys = ["starter", "business", "pro"] as const;
+
+    const plans = planKeys.map((key) => {
+        const data = pricingData[key];
+        const translationKey = key === "pro" ? "proBusiness" : key;
+        return {
+            id: data.id,
+            icon: data.icon,
+            popular: data.isPopular ?? false,
+            gradient: key === "starter" ? "from-blue-500/20 to-cyan-500/20" : key === "business" ? "from-primary/20 to-accent/20" : "from-purple-500/20 to-pink-500/20",
+            border: key === "starter" ? "border-blue-500/20" : key === "business" ? "border-primary/50" : "border-purple-500/20",
+            detailLink: key === "pro" ? "/pricing/pro-business" : `/pricing/${key}`,
+            isCustom: key === "pro",
+            name: t(`pricing.plans.${translationKey}.name`),
+            description: t(`pricing.plans.${translationKey}.description`),
+            price: data.price,
+            period: t(`pricing.plans.${translationKey}.period`),
+            features: t(`pricing.plans.${translationKey}.features`, { returnObjects: true }) as string[],
+            cta: t(`pricing.plans.${translationKey}.cta`),
+            popularLabel: t(`pricing.plans.${translationKey}.popularLabel`),
+        };
+    });
 
 
     console.log("Rendering plans:", plans);
