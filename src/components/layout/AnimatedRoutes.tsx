@@ -25,6 +25,9 @@ const CompareDetail = lazy(() => import("@/pages/CompareDetail"));
 const Blog = lazy(() => import("@/pages/Blog"));
 const BlogPost = lazy(() => import("@/pages/BlogPost"));
 const Contact = lazy(() => import("@/pages/Contact"));
+const PricingStarter = lazy(() => import("@/pages/PricingStarter"));
+const PricingBusiness = lazy(() => import("@/pages/PricingBusiness"));
+const PricingProBusiness = lazy(() => import("@/pages/PricingProBusiness"));
 
 const PageLoader = () => (
     <div className="min-h-screen flex items-center justify-center">
@@ -51,6 +54,9 @@ export function AnimatedRoutes() {
                     <Route path="/services/content" element={<ContentService />} />
                     <Route path="/tools/roi-calculator" element={<ROICalculator />} />
                     <Route path="/pricing" element={<Pricing />} />
+                    <Route path="/pricing/starter" element={<PricingStarter />} />
+                    <Route path="/pricing/business" element={<PricingBusiness />} />
+                    <Route path="/pricing/pro-business" element={<PricingProBusiness />} />
                     <Route path="/industries/:slug" element={<IndustryTemplate />} />
                     <Route path="/compare" element={<CompareHub />} />
                     <Route path="/compare/:slug" element={<CompareDetail />} />

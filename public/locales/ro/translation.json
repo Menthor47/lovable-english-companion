@@ -235,53 +235,57 @@
         "plans": {
             "starter": {
                 "name": "Starter",
-                "description": "Perfect pentru afaceri locale și startup-uri pregătite să crească.",
-                "price": "$1,500",
+                "description": "Fundație SEO pentru afaceri în creștere.",
+                "price": "$470 - $1,200",
                 "period": "/lună",
                 "features": [
-                    "Optimizare SEO Local",
-                    "5 pagini principale de servicii",
-                    "Administrare Google Business Profile",
-                    "Dashboard de analytics de bază",
-                    "Raport de performanță lunar",
-                    "Generare de conținut cu AI (4 articole/lună)"
+                    "15-20 Cuvinte Cheie",
+                    "2-3 Pagini Optimizate/lună",
+                    "1 Articol Blog/lună",
+                    "Optimizare Conținut",
+                    "Audit Tehnic De Bază",
+                    "2-3 Comunicate de Presă/lună",
+                    "Configurare SEO Local",
+                    "Raportare Lunară"
                 ],
-                "cta": "Începe creșterea",
-                "popularLabel": "CEL MAI POPULAR"
+                "cta": "Începe Acum",
+                "popularLabel": ""
             },
-            "growth": {
-                "name": "Growth",
-                "description": "Pentru branduri consolidate care se extind la nivel național sau internațional.",
-                "price": "$3,500",
+            "business": {
+                "name": "Business",
+                "description": "Creștere profesională pentru piețe competitive.",
+                "price": "$1,500 - $4,200",
                 "period": "/lună",
                 "features": [
-                    "Strategie SEO națională",
-                    "Audituri tehnice SEO (săptămânal)",
-                    "Conținut programatic (20 pagini/lună)",
-                    "Link building cu autoritate ridicată",
-                    "Recomandări de CRO",
-                    "Ședințe de strategie bilunare",
-                    "Suport prioritar"
+                    "40-60 Cuvinte Cheie",
+                    "4-6 Pagini Optimizate/lună",
+                    "3 Articole Blog/lună",
+                    "Audituri Trimestriale",
+                    "7-10 Comunicate de Presă",
+                    "Guest Posting (3-5/lună)",
+                    "Optimizare Core Web Vitals",
+                    "Ședințe Strategie Bilunare"
                 ],
-                "cta": "Scalează acum",
+                "cta": "Scalează Acum",
                 "popularLabel": "CEL MAI POPULAR"
             },
-            "dominance": {
-                "name": "Dominance",
-                "description": "SEO cu AI la nivel enterprise pentru cotă maximă de piață.",
-                "price": "Custom",
+            "proBusiness": {
+                "name": "Pro Business",
+                "description": "SEO Enterprise: Creștere focusată pe venituri.",
+                "price": "Discută cu Noi",
                 "period": "",
                 "features": [
-                    "Strategie GEO globală (ChatGPT/Gemini)",
-                    "Evaluare programatică nelimitată",
-                    "Dezvoltare de agenți AI custom",
-                    "Analiză a grafurilor de entități ale competitorilor",
-                    "Account manager dedicat",
-                    "Acces Slack 24/7",
-                    "Raportare white-label (pentru agenții)"
+                    "Ținte Cuvinte Cheie Custom",
+                    "8-12+ Pagini Optimizate/lună",
+                    "5-8 Articole Blog/lună",
+                    "Modul CRO Complet",
+                    "Audituri Tehnice Lunare",
+                    "Link Building Avansat",
+                    "Account Manager Dedicat",
+                    "Automatizări AI Custom"
                 ],
-                "cta": "Contactează departamentul de vânzări",
-                "popularLabel": "CEL MAI POPULAR"
+                "cta": "Contactează Vânzări",
+                "popularLabel": ""
             }
         },
         "faqTeaser": "Ai nevoie de o soluție enterprise personalizată?",

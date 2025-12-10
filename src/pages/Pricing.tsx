@@ -17,20 +17,24 @@ export default function Pricing() {
             popular: false,
             gradient: "from-blue-500/20 to-cyan-500/20",
             border: "border-blue-500/20",
+            detailLink: "/pricing/starter"
         },
         {
-            key: "growth",
+            key: "business",
             icon: Zap,
             popular: true,
             gradient: "from-primary/20 to-accent/20",
             border: "border-primary/50",
+            detailLink: "/pricing/business"
         },
         {
-            key: "dominance",
+            key: "proBusiness",
             icon: Globe,
             popular: false,
             gradient: "from-purple-500/20 to-pink-500/20",
             border: "border-purple-500/20",
+            detailLink: "/pricing/pro-business",
+            isCustom: true
         },
     ].map((plan) => ({
         ...plan,
@@ -42,6 +46,9 @@ export default function Pricing() {
         cta: t(`pricing.plans.${plan.key}.cta`),
         popularLabel: t(`pricing.plans.${plan.key}.popularLabel`),
     }));
+
+
+    console.log("Rendering plans:", plans);
 
     return (
         <div className="min-h-screen bg-background">
@@ -78,9 +85,9 @@ export default function Pricing() {
                     {/* Pricing Grid */}
                     <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
                         {plans.map((plan, index) => (
-                            <AnimatedSection key={index} delay={index * 100}>
+                            <div key={index} className="h-full">
                                 <div
-                                    className={`relative h-full p-8 rounded-3xl bg-card border ${plan.border} backdrop-blur-sm transition-all duration-300 hover:transform hover:-translate-y-2 group overflow-hidden`}
+                                    className={`relative h-full p-8 rounded-3xl bg-card border ${plan.border} backdrop-blur-sm transition-all duration-300 hover:transform hover:-translate-y-2 group overflow-hidden flex flex-col`}
                                 >
                                     {/* Popular Badge */}
                                     {plan.popular && (
@@ -106,41 +113,58 @@ export default function Pricing() {
 
                                         {/* Price */}
                                         <div className="mb-8">
-                                            <span className="text-4xl font-bold font-heading">{plan.price}</span>
-                                            <span className="text-muted-foreground">{plan.period}</span>
+                                            {plan.isCustom ? (
+                                                <span className="text-3xl font-bold font-heading">{plan.price}</span>
+                                            ) : (
+                                                <>
+                                                    <span className="text-3xl font-bold font-heading">{plan.price}</span>
+                                                    <span className="text-muted-foreground text-sm ml-1">{plan.period}</span>
+                                                </>
+                                            )}
                                         </div>
 
                                         {/* Features */}
                                         <div className="space-y-4 mb-8 flex-grow">
-                                            {plan.features.map((feature, i) => (
+                                            {plan.features.slice(0, 8).map((feature, i) => (
                                                 <div key={i} className="flex items-start gap-3">
                                                     <Check className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
                                                     <span className="text-sm text-foreground/80">{feature}</span>
                                                 </div>
                                             ))}
+                                            <div className="pt-2">
+                                                <span className="text-xs text-muted-foreground italic">...plus full service breakdown</span>
+                                            </div>
                                         </div>
 
                                         {/* CTA */}
-                                        <Button
-                                            variant={plan.popular ? "hero" : "outline"}
-                                            size="lg"
-                                            className="w-full"
-                                            asChild
-                                        >
-                                            <Link to="/#contact">
-                                                {plan.cta}
+                                        <div className="mt-auto space-y-4">
+                                            <Button
+                                                variant={plan.popular ? "hero" : "outline"}
+                                                size="lg"
+                                                className="w-full"
+                                                asChild
+                                            >
+                                                <Link to="/contact">
+                                                    {plan.cta}
+                                                </Link>
+                                            </Button>
+                                            <Link
+                                                to={plan.detailLink}
+                                                className="flex items-center justify-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors py-2"
+                                            >
+                                                View Full Details
                                             </Link>
-                                        </Button>
+                                        </div>
                                     </div>
                                 </div>
-                            </AnimatedSection>
+                            </div>
                         ))}
                     </div>
 
                     {/* FAQ Teaser */}
                     <AnimatedSection className="mt-24 text-center">
                         <p className="text-muted-foreground mb-4">{t("pricing.faqTeaser")}</p>
-                        <Link to="/#contact" className="text-primary hover:underline font-medium">
+                        <Link to="/contact" className="text-primary hover:underline font-medium">
                             {t("pricing.faqCta")}
                         </Link>
                     </AnimatedSection>
