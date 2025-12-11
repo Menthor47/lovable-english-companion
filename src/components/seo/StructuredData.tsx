@@ -1,13 +1,36 @@
 import { Helmet } from "react-helmet-async";
 
 export function StructuredData() {
+    // WebSite schema for sitelinks searchbox
+    const websiteSchema = {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://agseo.pro/#website",
+        url: "https://agseo.pro",
+        name: "AGSEO",
+        description: "AI-Powered SEO Agency - Dominate Search & AI Answers",
+        publisher: {
+            "@id": "https://agseo.pro/#organization"
+        },
+        potentialAction: {
+            "@type": "SearchAction",
+            target: {
+                "@type": "EntryPoint",
+                urlTemplate: "https://agseo.pro/resources/glossary?q={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+        }
+    };
+
     const organizationSchema = {
         "@context": "https://schema.org",
-        "@type": "LocalBusiness",
+        "@type": ["LocalBusiness", "ProfessionalService"],
         "@id": "https://agseo.pro/#organization",
         name: "AGSEO",
-        description: "AI-Powered SEO Agency specializing in local and e-commerce SEO",
+        alternateName: "AG SEO",
+        description: "AI-Powered SEO Agency specializing in Answer Engine Optimization (AEO), Generative Engine Optimization (GEO), and Traditional SEO for businesses worldwide.",
         url: "https://agseo.pro",
+        logo: "https://agseo.pro/logo.webp",
         image: "https://agseo.pro/og-image.png",
         telephone: "+44-7455-401962",
         email: "hello@agseo.pro",
@@ -21,12 +44,28 @@ export function StructuredData() {
         aggregateRating: {
             "@type": "AggregateRating",
             ratingValue: "4.9",
-            ratingCount: "150",
+            reviewCount: "47",
+            bestRating: "5",
+            worstRating: "1"
         },
         sameAs: [
-            "https://twitter.com/agseo",
+            "https://twitter.com/agseopro",
             "https://linkedin.com/company/agseo",
+            "https://www.facebook.com/agseopro"
         ],
+        knowsAbout: [
+            "Search Engine Optimization",
+            "Answer Engine Optimization",
+            "Generative Engine Optimization",
+            "AI-Powered SEO",
+            "Local SEO",
+            "E-commerce SEO",
+            "Technical SEO"
+        ],
+        areaServed: {
+            "@type": "Place",
+            name: "Worldwide"
+        }
     };
 
     const serviceSchema = {
@@ -229,6 +268,9 @@ export function StructuredData() {
 
     return (
         <Helmet>
+            <script type="application/ld+json">
+                {JSON.stringify(websiteSchema)}
+            </script>
             <script type="application/ld+json">
                 {JSON.stringify(organizationSchema)}
             </script>

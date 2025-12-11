@@ -20,11 +20,11 @@ const Index = () => {
       <Helmet>
         <html lang="en" />
         <title>AGSEO - AI-Powered SEO Agency | Future of Web Ranking</title>
-        <meta name="description" content="AGSEO combines AI with SEO strategies to multiply your visibility and conversions. Get 300% traffic increase with our proven methodology." />
+        <meta name="description" content="AGSEO combines AI with proven SEO strategies to multiply your visibility and conversions. Get measurable results with our data-driven methodology." />
         <link rel="canonical" href="https://agseo.pro/" />
         <meta property="og:url" content="https://agseo.pro/" />
         <meta property="og:title" content="AGSEO - AI-Powered SEO Agency | Future of Web Ranking" />
-        <meta property="og:description" content="AGSEO combines AI with SEO strategies to multiply your visibility and conversions. Get 300% traffic increase with our proven methodology." />
+        <meta property="og:description" content="AGSEO combines AI with proven SEO strategies to multiply your visibility and conversions. Get measurable results with our data-driven methodology." />
       </Helmet>
       <a
         href="#main"

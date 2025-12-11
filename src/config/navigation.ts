@@ -65,7 +65,7 @@ export const navigationConfig: NavItem[] = [
             {
                 title: "caseStudies",
                 href: "/case-studies",
-                description: "See how we drove 300% growth for clients."
+                description: "See how we drive measurable growth for clients."
             },
             {
                 title: "comparisons",
@@ -112,7 +112,7 @@ export const footerLinks: Record<string, FooterLinkGroup> = {
     company: {
         titleKey: "footer.company",
         links: [
-            { label: "About Us", href: "/#home" },
+            { label: "About Us", href: "/about" },
             { label: "Pricing", href: "/pricing" },
             { label: "Case Studies", href: "/case-studies" },
             { label: "Blog", href: "/blog" },

@@ -6,10 +6,10 @@ import seoDashboard from "@/assets/seo-dashboard.jpg";
 
 const statKeys = ["keywords", "visibility", "products", "satisfaction"] as const;
 const statValues = [
-  { value: 500000, suffix: "+" },
+  { value: 100000, suffix: "+" },
+  { value: 95, suffix: "%" },
+  { value: 10000, suffix: "+" },
   { value: 98, suffix: "%" },
-  { value: 25000, suffix: "+" },
-  { value: 99, suffix: "%" },
 ];
 
 function AnimatedNumber({ value, suffix }: { value: number; suffix: string }) {

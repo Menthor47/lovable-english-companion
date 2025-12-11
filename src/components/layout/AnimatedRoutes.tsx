@@ -26,6 +26,8 @@ import Contact from "@/pages/Contact";
 import PricingStarter from "@/pages/PricingStarter";
 import PricingBusiness from "@/pages/PricingBusiness";
 import PricingProBusiness from "@/pages/PricingProBusiness";
+import About from "@/pages/About";
+import Services from "@/pages/Services";
 
 export function AnimatedRoutes() {
     const location = useLocation();
@@ -42,6 +44,7 @@ export function AnimatedRoutes() {
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/case-studies" element={<CaseStudies />} />
                 <Route path="/resources/glossary" element={<Glossary />} />
+                <Route path="/services" element={<Services />} />
                 <Route path="/services/content" element={<ContentService />} />
                 <Route path="/tools/roi-calculator" element={<ROICalculator />} />
                 <Route path="/pricing" element={<Pricing />} />
@@ -56,6 +59,7 @@ export function AnimatedRoutes() {
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/blog/:slug" element={<BlogPost />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/about" element={<About />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
             </Routes>

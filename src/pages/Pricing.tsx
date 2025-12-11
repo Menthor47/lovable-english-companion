@@ -28,7 +28,10 @@ export default function Pricing() {
             description: t(`pricing.plans.${translationKey}.description`),
             price: data.price,
             period: t(`pricing.plans.${translationKey}.period`),
-            features: t(`pricing.plans.${translationKey}.features`, { returnObjects: true }) as string[],
+            features: (() => {
+                const translated = t(`pricing.plans.${translationKey}.features`, { returnObjects: true });
+                return Array.isArray(translated) ? translated : [];
+            })(),
             cta: t(`pricing.plans.${translationKey}.cta`),
             popularLabel: t(`pricing.plans.${translationKey}.popularLabel`),
         };
