@@ -6,10 +6,10 @@ import seoDashboard from "@/assets/seo-dashboard.jpg";
 
 const statKeys = ["keywords", "visibility", "products", "satisfaction"] as const;
 const statValues = [
-  { value: 100000, suffix: "+" },
-  { value: 95, suffix: "%" },
-  { value: 10000, suffix: "+" },
-  { value: 98, suffix: "%" },
+  { value: 2500, suffix: "+" },
+  { value: 30, suffix: "+" },
+  { value: 120, suffix: "+" },
+  { value: 12, suffix: "/yr" },
 ];
 
 function AnimatedNumber({ value, suffix }: { value: number; suffix: string }) {
@@ -40,7 +40,12 @@ function AnimatedNumber({ value, suffix }: { value: number; suffix: string }) {
 
   const formatNumber = (num: number) => {
     if (num >= 1000000) return (num / 1000000).toFixed(1) + "M";
-    if (num >= 1000) return (num / 1000).toFixed(0) + "K";
+    if (num >= 10000) return (num / 1000).toFixed(0) + "K";
+    if (num >= 1000) {
+      const asK = (num / 1000).toFixed(1);
+      const trimmed = asK.endsWith(".0") ? asK.slice(0, -2) : asK;
+      return trimmed + "K";
+    }
     return num.toString();
   };
 

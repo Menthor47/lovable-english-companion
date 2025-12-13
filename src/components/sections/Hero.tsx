@@ -8,15 +8,15 @@ import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { Link } from "react-router-dom";
 
 const stats = [
-  { value: "300%", label: "Traffic Increase" },
-  { value: "150+", label: "Active Clients" },
-  { value: "99%", label: "Satisfaction" },
+  { value: "AI", label: "Strategy" },
+  { value: "GEO", label: "LLM Visibility" },
+  { value: "SEO", label: "Technical + Content" },
 ];
 
 const features = [
   { icon: Sparkles, label: "Advanced AI" },
-  { icon: Zap, label: "Fast Results" },
-  { icon: TrendingUp, label: "Guaranteed ROI" },
+  { icon: Zap, label: "Clear Roadmap" },
+  { icon: TrendingUp, label: "Measurable Reporting" },
 ];
 
 export function Hero() {

@@ -39,6 +39,11 @@ function getRoutesFromSitemap() {
 
 const routesToPrerender = getRoutesFromSitemap();
 
+// Ensure we have a stable not-found page for internal redirects and static hosts
+if (!routesToPrerender.includes('/404')) {
+    routesToPrerender.push('/404');
+}
+
 console.log(`Prerendering ${routesToPrerender.length} routes...`);
 
 (async () => {
@@ -76,5 +81,10 @@ console.log(`Prerendering ${routesToPrerender.length} routes...`);
 
         fs.writeFileSync(toAbsolute(filePath), html);
         console.log('pre-rendered:', filePath);
+
+        if (url === '/404') {
+            fs.writeFileSync(toAbsolute('dist/static/404.html'), html);
+            console.log('pre-rendered: dist/static/404.html');
+        }
     }
 })();

@@ -3,4 +3,3 @@
 https://www.agseo.pro/* https://agseo.pro/:splat 301!
 
 # SPA fallback - let React Router handle all routes
-/*    /index.html   200

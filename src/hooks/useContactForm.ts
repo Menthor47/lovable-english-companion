@@ -1,4 +1,3 @@
-
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -32,7 +31,10 @@ export function useContactForm() {
         setSuccess(false);
 
         try {
-            await api.contact.submit(data as any); // Temporary fix to bypass weird type inference issue
+            await api.contact.submit({
+                email: data.email,
+                website: data.website || undefined,
+            });
             setSuccess(true);
             toast({
                 title: "Audit Request Sent!",

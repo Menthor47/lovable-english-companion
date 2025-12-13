@@ -7,11 +7,13 @@ import { Link } from "react-router-dom";
 
 declare global {
     interface Window {
-        gtag: (...args: any[]) => void;
+        dataLayer?: unknown[];
+        gtag?: (...args: unknown[]) => void;
     }
 }
 
 const COOKIE_CONSENT_KEY = "agseo_cookie_consent";
+const CONSENT_EVENT_NAME = "agseo:cookie-consent";
 
 interface CookieConsentState {
     necessary: boolean;
@@ -49,7 +51,7 @@ export const CookieConsent = () => {
                     marketing: parsedConsent.marketing,
                     preferences: parsedConsent.preferences,
                 });
-            } catch (error) {
+            } catch (error: unknown) {
                 console.error("Error parsing cookie consent:", error);
                 setShowBanner(true);
             }
@@ -81,6 +83,8 @@ export const CookieConsent = () => {
 
         localStorage.setItem(COOKIE_CONSENT_KEY, JSON.stringify(finalConsent));
         applyConsent(finalConsent);
+
+        window.dispatchEvent(new CustomEvent<CookieConsentState>(CONSENT_EVENT_NAME, { detail: finalConsent }));
         setShowBanner(false);
         setShowSettings(false);
     };

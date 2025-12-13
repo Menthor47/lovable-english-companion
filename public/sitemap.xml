@@ -3,7 +3,6 @@
   <!-- Homepage -->
   <url>
     <loc>https://agseo.pro/</loc>
-    <lastmod>2025-12-10</lastmod>
     <priority>1.0</priority>
     <changefreq>weekly</changefreq>
   </url>
@@ -103,25 +102,21 @@
   </url>
   <url>
     <loc>https://agseo.pro/blog/ai-business-success</loc>
-    <lastmod>2025-05-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://agseo.pro/blog/react-seo-optimization</loc>
-    <lastmod>2025-05-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://agseo.pro/blog/smart-seo-ai</loc>
-    <lastmod>2025-04-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://agseo.pro/blog/ecommerce-product-pages</loc>
-    <lastmod>2025-04-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

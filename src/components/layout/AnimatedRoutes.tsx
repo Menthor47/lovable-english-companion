@@ -37,6 +37,7 @@ export function AnimatedRoutes() {
         <AnimatePresence mode="wait">
             <Routes location={location} key={location.pathname}>
                 <Route path="/" element={<Index />} />
+                <Route path="/404" element={<NotFound />} />
                 <Route path="/privacy" element={<Privacy />} />
                 <Route path="/terms" element={<Terms />} />
                 <Route path="/tools" element={<Tools />} />
