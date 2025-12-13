@@ -6,6 +6,7 @@ import { AnimatedBackground } from "@/components/ui/animated-background";
 import heroImage from "@/assets/hero-ai-seo.webp";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const stats = [
   { value: "AI", label: "Strategy" },
@@ -21,10 +22,13 @@ const features = [
 
 export function Hero() {
   const { t } = useTranslation();
-  const prefersReducedMotion = usePrefersReducedMotion();
+  usePrefersReducedMotion();
 
   return (
     <section id="home" className="relative min-h-screen flex items-center pt-20 overflow-hidden">
+      <Helmet>
+        <link rel="preload" as="image" href={heroImage} />
+      </Helmet>
       <AnimatedBackground />
 
       <div className="container mx-auto px-4 relative z-10">
@@ -131,7 +135,6 @@ export function Hero() {
                   alt="AI-Powered SEO Dashboard"
                   className="w-full h-auto object-cover opacity-90 transition-transform duration-700 hover:scale-105"
                   loading="eager"
-                  fetchPriority="high"
                   width={1200}
                   height={675}
                 />

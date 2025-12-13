@@ -14,6 +14,13 @@ import {
     CheckCircle2
 } from "lucide-react";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
+import { authors } from "@/data/authors";
+import {
+    ORGANIZATION_ID,
+    SITE_OG_IMAGE_URL,
+    WEBSITE_ID,
+    getAbsoluteUrl
+} from "@/lib/siteMetadata";
 
 const values = [
     {
@@ -48,6 +55,22 @@ const expertise = [
 ];
 
 export default function About() {
+    const pageUrl = getAbsoluteUrl("/about");
+
+    const aboutPageSchema = {
+        "@context": "https://schema.org",
+        "@type": "AboutPage",
+        "@id": `${pageUrl}#aboutpage`,
+        url: pageUrl,
+        name: "About AGSEO",
+        isPartOf: {
+            "@id": WEBSITE_ID
+        },
+        about: {
+            "@id": ORGANIZATION_ID
+        }
+    };
+
     return (
         <div className="min-h-screen bg-background">
             <Helmet>
@@ -56,11 +79,13 @@ export default function About() {
                     name="description"
                     content="Learn about AGSEO, the AI-powered SEO agency helping businesses dominate search engines and AI platforms. Meet our team and discover our mission."
                 />
-                <link rel="canonical" href="https://agseo.pro/about" />
-                <meta property="og:url" content="https://agseo.pro/about" />
+                <link rel="canonical" href={pageUrl} />
+                <meta property="og:url" content={pageUrl} />
                 <meta property="og:title" content="About Us | AGSEO - AI-Powered SEO Agency" />
                 <meta property="og:description" content="Learn about AGSEO, the AI-powered SEO agency helping businesses dominate search engines and AI platforms." />
+                <meta property="og:image" content={SITE_OG_IMAGE_URL} />
                 <meta property="og:type" content="website" />
+                <script type="application/ld+json">{JSON.stringify(aboutPageSchema)}</script>
             </Helmet>
 
             <Header />
@@ -180,6 +205,98 @@ export default function About() {
                                         </p>
                                     </motion.div>
                                 </AnimatedSection>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+
+                <section className="py-20 bg-card/30">
+                    <div className="container mx-auto px-4">
+                        <AnimatedSection direction="up" className="text-center mb-12">
+                            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
+                                Our Team
+                            </h2>
+                            <p className="text-muted-foreground max-w-2xl mx-auto">
+                                The people behind the research, strategy, and execution.
+                            </p>
+                        </AnimatedSection>
+
+                        <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+                            {authors.map((author) => (
+                                <motion.div
+                                    key={author.id}
+                                    whileHover={{ scale: 1.01 }}
+                                    className="p-8 rounded-2xl bg-card/60 backdrop-blur-sm border border-border hover:border-primary/50 transition-all"
+                                >
+                                    <div className="flex flex-col sm:flex-row gap-6">
+                                        <Link to={`/authors/${author.id}`} className="inline-flex">
+                                            <img
+                                                src={author.image}
+                                                alt={author.name}
+                                                loading="lazy"
+                                                className="w-24 h-24 rounded-2xl object-cover border border-border"
+                                            />
+                                        </Link>
+                                        <div className="flex-1">
+                                            <h3 className="font-heading text-xl font-semibold text-foreground mb-1">
+                                                <Link
+                                                    to={`/authors/${author.id}`}
+                                                    className="hover:text-primary transition-colors"
+                                                >
+                                                    {author.name}
+                                                </Link>
+                                            </h3>
+                                            <p className="text-sm text-primary font-medium mb-4">
+                                                {author.role}
+                                            </p>
+                                            <p className="text-muted-foreground mb-4">
+                                                {author.bio}
+                                            </p>
+
+                                            <ul className="space-y-1 text-sm text-muted-foreground">
+                                                {author.credentials.map((credential) => (
+                                                    <li key={credential} className="flex items-start gap-2">
+                                                        <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
+                                                        <span>{credential}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+
+                                            <div className="mt-5 flex flex-wrap gap-4">
+                                                {author.socialLinks.linkedin ? (
+                                                    <a
+                                                        href={author.socialLinks.linkedin}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                                                    >
+                                                        LinkedIn
+                                                    </a>
+                                                ) : null}
+                                                {author.socialLinks.twitter ? (
+                                                    <a
+                                                        href={author.socialLinks.twitter}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                                                    >
+                                                        X (Twitter)
+                                                    </a>
+                                                ) : null}
+                                                {author.socialLinks.website ? (
+                                                    <a
+                                                        href={author.socialLinks.website}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                                                    >
+                                                        Website
+                                                    </a>
+                                                ) : null}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </motion.div>
                             ))}
                         </div>
                     </div>

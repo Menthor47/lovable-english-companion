@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link, useLocation } from "react-router-dom";
 import { ChevronRight, Home } from "lucide-react";
+import { getAbsoluteUrl } from "@/lib/siteMetadata";
 
 interface BreadcrumbItem {
     label: string;
@@ -68,7 +69,7 @@ export function Breadcrumbs({ items, className = "" }: BreadcrumbsProps) {
             "@type": "ListItem",
             position: index + 1,
             name: item.label,
-            item: `https://agseo.pro${item.href}`
+            item: getAbsoluteUrl(item.href)
         }))
     };
 

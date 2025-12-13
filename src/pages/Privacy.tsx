@@ -3,9 +3,12 @@ import { Footer } from "@/components/layout/Footer";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
+import { SITE_OG_IMAGE_URL, getAbsoluteUrl } from "@/lib/siteMetadata";
 
 export default function Privacy() {
     const { t } = useTranslation();
+
+    const pageUrl = getAbsoluteUrl("/privacy");
 
     const sectionKeys = [
         "introduction",
@@ -24,10 +27,11 @@ export default function Privacy() {
             <Helmet>
                 <title>{t("privacyPolicy.title")} | AGSEO</title>
                 <meta name="description" content={t("privacyPolicy.description")} />
-                <link rel="canonical" href="https://agseo.pro/privacy" />
-                <meta property="og:url" content="https://agseo.pro/privacy" />
+                <link rel="canonical" href={pageUrl} />
+                <meta property="og:url" content={pageUrl} />
                 <meta property="og:title" content={`${t("privacyPolicy.title")} | AGSEO`} />
                 <meta property="og:description" content={t("privacyPolicy.description")} />
+                <meta property="og:image" content={SITE_OG_IMAGE_URL} />
             </Helmet>
             <Header />
             <main className="pt-24 pb-16">

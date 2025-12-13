@@ -2,7 +2,17 @@ import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { FileText, MoreHorizontal } from "lucide-react";
 
-const tasks = [
+type TaskStatus = "Drafting" | "Review" | "Published";
+
+interface Task {
+    id: number;
+    title: string;
+    status: TaskStatus;
+    assignee: string;
+    date: string;
+}
+
+const tasks: Task[] = [
     { id: 1, title: "SaaS SEO Guide", status: "Drafting", assignee: "AI Agent", date: "Due Today" },
     { id: 2, title: "Best AI Tools Comparison", status: "Review", assignee: "Editor", date: "Due Tomorrow" },
     { id: 3, title: "Enterprise Link Building", status: "Published", assignee: "System", date: "Oct 24" },
@@ -61,7 +71,7 @@ export function ContentKanban() {
     );
 }
 
-function TaskCard({ task }: { task: any }) {
+function TaskCard({ task }: { task: Task }) {
     return (
         <Card className="p-3 bg-card border-border shadow-sm hover:shadow-md transition-shadow cursor-pointer group">
             <div className="flex justify-between items-start mb-2">

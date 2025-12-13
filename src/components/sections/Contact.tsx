@@ -3,7 +3,7 @@ import { config } from "@/lib/config";
 import { MessageCircle, Clock, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AnimatedSection, StaggerContainer, StaggerItem } from "@/components/ui/animated-section";
-import { useContactForm } from "@/hooks/useContactForm";
+import { useContactForm, type ContactFormData } from "@/hooks/useContactForm";
 import { FormFeedback } from "@/components/ui/form-feedback";
 import { useTranslation } from "react-i18next";
 import { useAnalytics } from "@/hooks/useAnalytics";
@@ -13,7 +13,7 @@ export function Contact() {
   const { trackFormSubmit } = useAnalytics();
   const { register, handleSubmit, errors, isSubmitting, onSubmit, success, error } = useContactForm();
 
-  const onFormSubmit = async (data: any) => {
+  const onFormSubmit = async (data: ContactFormData) => {
     const result = await onSubmit(data);
     if (result?.success) {
       trackFormSubmit("contact_form");

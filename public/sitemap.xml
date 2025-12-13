@@ -3,8 +3,8 @@
   <!-- Homepage -->
   <url>
     <loc>https://agseo.pro/</loc>
-    <priority>1.0</priority>
     <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
   </url>
   
   <!-- Services Hub -->
@@ -25,12 +25,43 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+
+  <url>
+    <loc>https://agseo.pro/industries/saas</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://agseo.pro/industries/ecommerce</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://agseo.pro/industries/local</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://agseo.pro/industries/healthcare</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://agseo.pro/industries/professional-services</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
   
   <!-- About -->
   <url>
     <loc>https://agseo.pro/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://agseo.pro/authors/agseo-team</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   
   <!-- Pricing -->
@@ -84,6 +115,26 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://agseo.pro/case-studies/fashion-brand-seo</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://agseo.pro/case-studies/saas-growth</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://agseo.pro/case-studies/legal-firm-local</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://agseo.pro/case-studies/fintech-ai</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://agseo.pro/resources/glossary</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -92,6 +143,21 @@
     <loc>https://agseo.pro/compare</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://agseo.pro/compare/jasper-vs-copyai</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://agseo.pro/compare/surfer-vs-frase</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://agseo.pro/compare/semrush-vs-ahrefs</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   
   <!-- Blog -->

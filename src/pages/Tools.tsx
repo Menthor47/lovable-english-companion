@@ -5,6 +5,7 @@ import { AnimatedSection } from "@/components/ui/animated-section";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Search, Sparkles, MessageSquare, Zap, DollarSign } from "lucide-react";
+import { SITE_OG_IMAGE_URL, getAbsoluteUrl } from "@/lib/siteMetadata";
 
 const tools = [
     {
@@ -50,15 +51,18 @@ const tools = [
 ];
 
 export default function Tools() {
+    const pageUrl = getAbsoluteUrl("/tools");
+
     return (
         <div className="min-h-screen bg-background">
             <Helmet>
                 <title>Free AI SEO Tools | AGSEO</title>
                 <meta name="description" content="Powerful free SEO tools including AI Audit, ROI Calculator, and more. Supercharge your SEO with AI power." />
-                <link rel="canonical" href="https://agseo.pro/tools" />
-                <meta property="og:url" content="https://agseo.pro/tools" />
+                <link rel="canonical" href={pageUrl} />
+                <meta property="og:url" content={pageUrl} />
                 <meta property="og:title" content="Free AI SEO Tools | AGSEO" />
                 <meta property="og:description" content="Powerful free SEO tools including AI Audit, ROI Calculator, and more. Supercharge your SEO with AI power." />
+                <meta property="og:image" content={SITE_OG_IMAGE_URL} />
             </Helmet>
             <Header />
             <main className="pt-24 pb-16">

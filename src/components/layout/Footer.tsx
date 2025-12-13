@@ -1,11 +1,13 @@
 import { useTranslation } from "react-i18next";
-import { Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
+import { Mail, ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import logo from "@/assets/logo.webp";
 import { footerLinks } from "@/config/navigation";
+import { config } from "@/lib/config";
 
 export function Footer() {
   const { t } = useTranslation();
+  const email = config.contact.email;
 
   return (
     <footer className="bg-card border-t border-border">
@@ -30,23 +32,12 @@ export function Footer() {
             </p>
             <div className="space-y-2">
               <a
-                href="mailto:hello@agseo.pro"
+                href={`mailto:${email}`}
                 className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
               >
                 <Mail className="w-4 h-4" />
-                hello@agseo.pro
+                {email}
               </a>
-              <a
-                href="tel:+447455401962"
-                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
-              >
-                <Phone className="w-4 h-4" />
-                +44 7455 401962
-              </a>
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <MapPin className="w-4 h-4" />
-                Amzei Square, Bucharest
-              </div>
             </div>
           </div>
 

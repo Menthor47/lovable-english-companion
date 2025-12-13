@@ -4,8 +4,18 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import { Button } from "@/components/ui/button";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { ArrowLeft, Check, X, Trophy } from "lucide-react";
 import { Helmet } from "react-helmet-async";
+import {
+    ORGANIZATION_ID,
+    SITE_LOGO_URL,
+    SITE_NAME,
+    SITE_OG_IMAGE_URL,
+    TEAM_ID,
+    WEBSITE_ID,
+    getAbsoluteUrl
+} from "@/lib/siteMetadata";
 
 export default function CompareDetail() {
     const { slug } = useParams();
@@ -15,15 +25,61 @@ export default function CompareDetail() {
         return <Navigate to="/404" replace />;
     }
 
+    const pageUrl = getAbsoluteUrl(`/compare/${comp.slug}`);
+
+    const breadcrumbItems = [
+        { label: "Home", href: "/" },
+        { label: "Comparisons", href: "/compare" },
+        { label: `${comp.toolA.name} vs ${comp.toolB.name}`, href: `/compare/${comp.slug}` }
+    ];
+
+    const articleSchema = {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        headline: `${comp.toolA.name} vs ${comp.toolB.name} (2025 Review)`,
+        description: `Head-to-head comparison: ${comp.toolA.name} vs ${comp.toolB.name}. See features, pricing, and our expert verdict on which AI tool wins.`,
+        url: pageUrl,
+        mainEntityOfPage: {
+            "@type": "WebPage",
+            "@id": pageUrl
+        },
+        image: SITE_OG_IMAGE_URL,
+        author: {
+            "@type": "Organization",
+            "@id": TEAM_ID,
+            name: "AGSEO Team"
+        },
+        publisher: {
+            "@type": "Organization",
+            "@id": ORGANIZATION_ID,
+            name: SITE_NAME,
+            logo: {
+                "@type": "ImageObject",
+                url: SITE_LOGO_URL
+            }
+        },
+        isPartOf: {
+            "@id": WEBSITE_ID
+        }
+    };
+
     return (
         <div className="min-h-screen bg-background">
             <Helmet>
                 <title>{comp.toolA.name} vs {comp.toolB.name} (2025 Review) - AGSEO</title>
                 <meta name="description" content={`Head-to-head comparison: ${comp.toolA.name} vs ${comp.toolB.name}. See features, pricing, and our expert verdict on which AI tool wins.`} />
+                <link rel="canonical" href={pageUrl} />
+                <meta property="og:url" content={pageUrl} />
+                <meta property="og:title" content={`${comp.toolA.name} vs ${comp.toolB.name} (2025 Review) - AGSEO`} />
+                <meta property="og:description" content={`Head-to-head comparison: ${comp.toolA.name} vs ${comp.toolB.name}. See features, pricing, and our expert verdict on which AI tool wins.`} />
+                <meta property="og:image" content={SITE_OG_IMAGE_URL} />
+                <meta property="og:type" content="article" />
+                <script type="application/ld+json">{JSON.stringify(articleSchema)}</script>
             </Helmet>
             <Header />
             <main className="pt-24 pb-16">
                 <div className="container mx-auto px-4 max-w-5xl">
+                    <Breadcrumbs items={breadcrumbItems} className="mb-6" />
                     <Link to="/compare" className="inline-flex items-center text-muted-foreground hover:text-primary mb-8 transition-colors">
                         <ArrowLeft className="w-4 h-4 mr-2" /> Back to Comparisons
                     </Link>

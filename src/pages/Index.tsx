@@ -13,18 +13,22 @@ import { FAQ } from "@/components/sections/FAQ";
 import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/layout/Footer";
 import { Helmet } from "react-helmet-async";
+import { SITE_OG_IMAGE_URL, getAbsoluteUrl } from "@/lib/siteMetadata";
 
 const Index = () => {
+  const pageUrl = getAbsoluteUrl("/");
+
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
         <html lang="en" />
         <title>AGSEO - AI-Powered SEO Agency | Future of Web Ranking</title>
         <meta name="description" content="AGSEO combines AI with proven SEO strategies to multiply your visibility and conversions. Get measurable results with our data-driven methodology." />
-        <link rel="canonical" href="https://agseo.pro/" />
-        <meta property="og:url" content="https://agseo.pro/" />
+        <link rel="canonical" href={pageUrl} />
+        <meta property="og:url" content={pageUrl} />
         <meta property="og:title" content="AGSEO - AI-Powered SEO Agency | Future of Web Ranking" />
         <meta property="og:description" content="AGSEO combines AI with proven SEO strategies to multiply your visibility and conversions. Get measurable results with our data-driven methodology." />
+        <meta property="og:image" content={SITE_OG_IMAGE_URL} />
       </Helmet>
       <a
         href="#main"

@@ -4,14 +4,17 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, X } from "lucide-react";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
+import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import { caseStudies, CaseStudy } from "@/data/caseStudies";
+import { caseStudies } from "@/data/caseStudies";
 import { motion, AnimatePresence } from "framer-motion";
+import { SITE_OG_IMAGE_URL, getAbsoluteUrl } from "@/lib/siteMetadata";
 
 export default function CaseStudies() {
     const [filter, setFilter] = useState("All");
-    const [selectedStudy, setSelectedStudy] = useState<CaseStudy | null>(null);
+
+    const pageUrl = getAbsoluteUrl("/case-studies");
 
     const filteredStudies = filter === "All"
         ? caseStudies
@@ -24,20 +27,25 @@ export default function CaseStudies() {
             <Helmet>
                 <title>Case Studies | AGSEO - AI SEO Success Stories</title>
                 <meta name="description" content="See how AGSEO has transformed businesses across industries with our AI-powered SEO methodologies. Real results, measurable growth." />
-                <link rel="canonical" href="https://agseo.pro/case-studies" />
-                <meta property="og:url" content="https://agseo.pro/case-studies" />
+                <link rel="canonical" href={pageUrl} />
+                <meta property="og:url" content={pageUrl} />
                 <meta property="og:title" content="Case Studies | AGSEO - AI SEO Success Stories" />
                 <meta property="og:description" content="See how AGSEO has transformed businesses across industries with our AI-powered SEO methodologies. Real results, measurable growth." />
+                <meta property="og:image" content={SITE_OG_IMAGE_URL} />
             </Helmet>
             <Header />
             <main className="pt-24 pb-16">
                 <div className="container mx-auto px-4">
+                    <Breadcrumbs className="mb-8" />
                     <AnimatedSection className="text-center max-w-3xl mx-auto mb-16">
                         <h1 className="font-heading text-4xl md:text-5xl font-bold mb-6">
                             Real Results, <span className="text-primary">Powered by AI</span>
                         </h1>
                         <p className="text-xl text-muted-foreground mb-8">
                             See how AGSEO has transformed businesses across industries with our proprietary AI methodologies.
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                            Results are illustrative and may vary. Client details may be anonymized to protect privacy.
                         </p>
 
                         {/* Filters */}
@@ -82,9 +90,11 @@ export default function CaseStudies() {
                                                 <Button
                                                     variant="link"
                                                     className="p-0 text-primary h-auto text-lg group-hover:translate-x-2 transition-transform"
-                                                    onClick={() => setSelectedStudy(study)}
+                                                    asChild
                                                 >
-                                                    Read Full Story <ArrowRight className="ml-2 w-4 h-4" />
+                                                    <Link to={`/case-studies/${study.id}`}>
+                                                        Read Full Story <ArrowRight className="ml-2 w-4 h-4" />
+                                                    </Link>
                                                 </Button>
                                             </div>
 
@@ -119,84 +129,6 @@ export default function CaseStudies() {
                 </div>
             </main>
             <Footer />
-
-            {/* Modal */}
-            <AnimatePresence>
-                {selectedStudy && (
-                    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-                            onClick={() => setSelectedStudy(null)}
-                        />
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                            animate={{ opacity: 1, scale: 1, y: 0 }}
-                            exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                            className="relative bg-card border border-border w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl shadow-2xl p-8 md:p-10"
-                        >
-                            <button
-                                onClick={() => setSelectedStudy(null)}
-                                className="absolute top-4 right-4 p-2 rounded-full hover:bg-muted transition-colors"
-                            >
-                                <X className="w-6 h-6" />
-                            </button>
-
-                            <div className={`inline-flex px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide mb-6 ${selectedStudy.color} ${selectedStudy.bgColor}`}>
-                                {selectedStudy.category}
-                            </div>
-
-                            <h2 className="font-heading text-3xl font-bold mb-6">
-                                {selectedStudy.title}
-                            </h2>
-
-                            <div className="space-y-8">
-                                <div>
-                                    <h3 className="text-xl font-bold mb-3 text-primary">The Challenge</h3>
-                                    <p className="text-muted-foreground leading-relaxed">
-                                        {selectedStudy.content.challenge}
-                                    </p>
-                                </div>
-
-                                <div>
-                                    <h3 className="text-xl font-bold mb-3 text-primary"> The AI Strategy</h3>
-                                    <p className="text-muted-foreground leading-relaxed">
-                                        {selectedStudy.content.strategy}
-                                    </p>
-                                </div>
-
-                                <div>
-                                    <h3 className="text-xl font-bold mb-3 text-primary">The Results</h3>
-                                    <p className="text-muted-foreground leading-relaxed">
-                                        {selectedStudy.content.results}
-                                    </p>
-                                </div>
-
-                                <div className="grid grid-cols-3 gap-4 py-6 border-y border-border/50">
-                                    {selectedStudy.stats.map((stat, i) => (
-                                        <div key={i} className="text-center">
-                                            <div className="text-2xl font-bold font-heading text-foreground">
-                                                {stat.value}
-                                            </div>
-                                            <div className="text-[10px] sm:text-xs text-muted-foreground uppercase tracking-wider">
-                                                {stat.label}
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-
-                                <Button className="w-full" size="lg" asChild>
-                                    <Link to="/#contact" onClick={() => setSelectedStudy(null)}>
-                                        Get Similar Results
-                                    </Link>
-                                </Button>
-                            </div>
-                        </motion.div>
-                    </div>
-                )}
-            </AnimatePresence>
         </div>
     );
 }

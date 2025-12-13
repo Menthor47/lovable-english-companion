@@ -7,6 +7,7 @@ import { Slider } from "@/components/ui/slider";
 import { useState, useEffect } from "react";
 import { DollarSign, TrendingUp, Users, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { SITE_OG_IMAGE_URL, getAbsoluteUrl } from "@/lib/siteMetadata";
 
 export default function ROICalculator() {
     const [traffic, setTraffic] = useState([5000]);
@@ -37,15 +38,18 @@ export default function ROICalculator() {
         return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(val);
     };
 
+    const pageUrl = getAbsoluteUrl("/tools/roi-calculator");
+
     return (
         <div className="min-h-screen bg-background">
             <Helmet>
                 <title>SEO ROI Calculator | AGSEO</title>
                 <meta name="description" content="Calculate your potential SEO ROI. See how much revenue you could gain with AI-driven SEO strategy." />
-                <link rel="canonical" href="https://agseo.pro/tools/roi-calculator" />
-                <meta property="og:url" content="https://agseo.pro/tools/roi-calculator" />
+                <link rel="canonical" href={pageUrl} />
+                <meta property="og:url" content={pageUrl} />
                 <meta property="og:title" content="SEO ROI Calculator | AGSEO" />
                 <meta property="og:description" content="Calculate your potential SEO ROI. See how much revenue you could gain with AI-driven SEO strategy." />
+                <meta property="og:image" content={SITE_OG_IMAGE_URL} />
             </Helmet>
             <Header />
             <main className="pt-24 pb-16">

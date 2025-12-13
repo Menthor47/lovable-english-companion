@@ -5,14 +5,22 @@ import { Button } from "@/components/ui/button";
 import { CheckCircle2, Zap, BarChart, Database, FileText, Bot } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { SITE_OG_IMAGE_URL, getAbsoluteUrl } from "@/lib/siteMetadata";
 
 export default function ContentService() {
+    const pageUrl = getAbsoluteUrl("/services/content");
+
     return (
         <div className="min-h-screen bg-background">
             <Helmet>
                 <title>AI Content & Programmatic SEO | AGSEO</title>
                 <meta name="description" content="Scale your content 10x faster with AI-powered programmatic SEO. Automated gap analysis, topic clustering, and human-verified content at scale." />
-                <link rel="canonical" href="https://agseo.pro/services/content" />
+                <link rel="canonical" href={pageUrl} />
+                <meta property="og:url" content={pageUrl} />
+                <meta property="og:title" content="AI Content & Programmatic SEO | AGSEO" />
+                <meta property="og:description" content="Scale your content 10x faster with AI-powered programmatic SEO. Automated gap analysis, topic clustering, and human-verified content at scale." />
+                <meta property="og:image" content={SITE_OG_IMAGE_URL} />
+                <meta property="og:type" content="website" />
             </Helmet>
             <Header />
             <main className="pt-24 pb-16">

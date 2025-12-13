@@ -1,22 +1,45 @@
 import { Helmet } from "react-helmet-async";
+import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router-dom";
+
+import { config } from "@/lib/config";
+import {
+    ORGANIZATION_ID,
+    SITE_ALTERNATE_NAME,
+    SITE_BASE_URL,
+    SITE_LOGO_URL,
+    SITE_NAME,
+    SITE_OG_IMAGE_URL,
+    TEAM_ID,
+    WEBSITE_ID
+} from "@/lib/siteMetadata";
+
+const FAQ_KEYS = ["q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8"] as const;
 
 export function StructuredData() {
+    const { t } = useTranslation();
+    const location = useLocation();
+
+    const organizationSameAs = [config.social.twitter, config.social.linkedin].filter(
+        (url): url is string => Boolean(url)
+    );
+
     // WebSite schema for sitelinks searchbox
     const websiteSchema = {
         "@context": "https://schema.org",
         "@type": "WebSite",
-        "@id": "https://agseo.pro/#website",
-        url: "https://agseo.pro",
-        name: "AGSEO",
+        "@id": WEBSITE_ID,
+        url: SITE_BASE_URL,
+        name: SITE_NAME,
         description: "AI-Powered SEO Agency - Dominate Search & AI Answers",
         publisher: {
-            "@id": "https://agseo.pro/#organization"
+            "@id": ORGANIZATION_ID
         },
         potentialAction: {
             "@type": "SearchAction",
             target: {
                 "@type": "EntryPoint",
-                urlTemplate: "https://agseo.pro/resources/glossary?q={search_term_string}"
+                urlTemplate: `${SITE_BASE_URL}/resources/glossary?q={search_term_string}`
             },
             "query-input": "required name=search_term_string"
         }
@@ -24,247 +47,117 @@ export function StructuredData() {
 
     const organizationSchema = {
         "@context": "https://schema.org",
-        "@type": ["LocalBusiness", "ProfessionalService"],
-        "@id": "https://agseo.pro/#organization",
-        name: "AGSEO",
-        alternateName: "AG SEO",
-        description: "AI-Powered SEO Agency specializing in Answer Engine Optimization (AEO), Generative Engine Optimization (GEO), and Traditional SEO for businesses worldwide.",
-        url: "https://agseo.pro",
-        logo: "https://agseo.pro/logo.webp",
-        image: "https://agseo.pro/og-image.png",
-        telephone: "+44-7455-401962",
-        email: "hello@agseo.pro",
-        address: {
-            "@type": "PostalAddress",
-            addressCountry: "RO",
-            addressLocality: "Bucharest",
-            streetAddress: "Amzei Square",
-        },
-        priceRange: "$$$",
-        aggregateRating: {
-            "@type": "AggregateRating",
-            ratingValue: "4.9",
-            reviewCount: "47",
-            bestRating: "5",
-            worstRating: "1"
-        },
-        sameAs: [
-            "https://twitter.com/agseopro",
-            "https://linkedin.com/company/agseo",
-            "https://www.facebook.com/agseopro"
-        ],
-        knowsAbout: [
-            "Search Engine Optimization",
-            "Answer Engine Optimization",
-            "Generative Engine Optimization",
-            "AI-Powered SEO",
-            "Local SEO",
-            "E-commerce SEO",
-            "Technical SEO"
-        ],
-        areaServed: {
-            "@type": "Place",
-            name: "Worldwide"
-        }
-    };
-
-    const serviceSchema = {
-        "@context": "https://schema.org",
-        "@type": "Service",
-        serviceType: "SEO Services",
-        provider: {
-            "@type": "LocalBusiness",
-            name: "AGSEO",
-            url: "https://agseo.pro"
-        },
-        areaServed: {
-            "@type": "Place",
-            name: "Worldwide"
-        },
-        hasOfferCatalog: {
-            "@type": "OfferCatalog",
-            name: "SEO Services",
-            itemListElement: [
-                {
-                    "@type": "Offer",
-                    itemOffered: {
-                        "@type": "Service",
-                        name: "Answer Engine Optimization (AEO)",
-                        description: "Optimize for direct answers on AI platforms like ChatGPT, Perplexity, and voice search."
-                    }
-                },
-                {
-                    "@type": "Offer",
-                    itemOffered: {
-                        "@type": "Service",
-                        name: "Generative Engine Optimization (GEO)",
-                        description: "Future-proof your content for generative search experiences and AI-driven results."
-                    }
-                },
-                {
-                    "@type": "Offer",
-                    itemOffered: {
-                        "@type": "Service",
-                        name: "Advanced Technical SEO",
-                        description: "Holistic search engine optimization including Local, Ecommerce, and Enterprise solutions."
-                    }
-                },
-                {
-                    "@type": "Offer",
-                    itemOffered: {
-                        "@type": "Service",
-                        name: "AI-Driven Content Engine",
-                        description: "Scale high-quality, authoritative content production that ranks and converts."
-                    }
-                },
-                {
-                    "@type": "Offer",
-                    itemOffered: {
-                        "@type": "Service",
-                        name: "Authority & Link Building",
-                        description: "Secure high-quality backlinks from relevant, authoritative domains to boost credibility."
-                    }
-                }
-            ]
-        }
-    };
-
-    const faqSchema = {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        mainEntity: [
-            {
-                "@type": "Question",
-                name: "How does AI improve SEO results?",
-                acceptedAnswer: {
-                    "@type": "Answer",
-                    text: "Our AI analyzes millions of data points including search patterns, competitor strategies, and user behavior to make data-driven decisions. It identifies opportunities faster than traditional methods, optimizes content in real-time, and predicts algorithm changes before they impact your rankings."
-                }
-            },
-            {
-                "@type": "Question",
-                name: "What makes your exclusive territory model unique?",
-                acceptedAnswer: {
-                    "@type": "Answer",
-                    text: "We guarantee that your direct competitors in your geographic area cannot hire our services. This means you get an unfair advantage - we work exclusively for you in your market, ensuring all our AI insights and strategies benefit only your business."
-                }
-            },
-            {
-                "@type": "Question",
-                name: "How quickly can I expect to see results?",
-                acceptedAnswer: {
-                    "@type": "Answer",
-                    text: "Most clients see initial improvements within the first 30 days, with significant ranking improvements typically occurring between 60-90 days. Our AI continuously optimizes your strategy, so results compound over time."
-                }
-            },
-            {
-                "@type": "Question",
-                name: "Do you work with businesses of all sizes?",
-                acceptedAnswer: {
-                    "@type": "Answer",
-                    text: "Yes! Our AI-powered approach is scalable for businesses of all sizes - from local startups to enterprise-level corporations. We customize our strategies based on your specific goals, budget, and market."
-                }
-            },
-            {
-                "@type": "Question",
-                name: "What's included in the free SEO audit?",
-                acceptedAnswer: {
-                    "@type": "Answer",
-                    text: "Our free audit includes a comprehensive analysis of your website's technical SEO health, content optimization opportunities, backlink profile, competitor analysis, and keyword ranking potential."
-                }
-            },
-            {
-                "@type": "Question",
-                name: "How do you measure and report on progress?",
-                acceptedAnswer: {
-                    "@type": "Answer",
-                    text: "We provide detailed monthly reports covering keyword rankings, organic traffic growth, conversion rates, and ROI. Our AI dashboard gives you real-time visibility into your SEO performance."
-                }
-            },
-            {
-                "@type": "Question",
-                name: "What industries do you specialize in?",
-                acceptedAnswer: {
-                    "@type": "Answer",
-                    text: "While our AI adapts to any industry, we have particular expertise in e-commerce, SaaS, professional services, healthcare, real estate, and local businesses."
-                }
-            },
-            {
-                "@type": "Question",
-                name: "Can you help with international SEO?",
-                acceptedAnswer: {
-                    "@type": "Answer",
-                    text: "Absolutely! Our AI supports multi-language and multi-region SEO strategies. We can optimize your content for different markets, handle hreflang implementation, and develop location-specific keyword strategies."
-                }
-            }
-        ]
-    };
-
-    // Review schema for testimonials - helps with rich snippets
-    const reviewSchema = {
-        "@context": "https://schema.org",
         "@type": "Organization",
-        "@id": "https://agseo.pro/#reviews",
-        name: "AGSEO",
-        review: [
-            {
-                "@type": "Review",
-                author: {
-                    "@type": "Organization",
-                    name: "Bot Trade Pro"
-                },
-                reviewRating: {
-                    "@type": "Rating",
-                    ratingValue: "5",
-                    bestRating: "5"
-                },
-                reviewBody: "Thanks to AGSEO, we have dramatically improved our online visibility. Their AI-based approach has allowed us to surpass competitors who have been in the market for years.",
-                datePublished: "2023-03-15"
-            },
-            {
-                "@type": "Review",
-                author: {
-                    "@type": "Person",
-                    name: "Joel Garcia"
-                },
-                reviewRating: {
-                    "@type": "Rating",
-                    ratingValue: "5",
-                    bestRating: "5"
-                },
-                reviewBody: "I struggled with my website ranking for years until I found AGSEO. Their methodology combined with AI is simply revolutionary. In less than 3 months, my organic visits increased by 215%.",
-                datePublished: "2023-01-20"
-            },
-            {
-                "@type": "Review",
-                author: {
-                    "@type": "Person",
-                    name: "Hugo Diaz"
-                },
-                reviewRating: {
-                    "@type": "Rating",
-                    ratingValue: "5",
-                    bestRating: "5"
-                },
-                reviewBody: "What I value most about AGSEO is their approach based on real data and their ability to adapt strategies. The AI they use allows them to optimize resources and maximize results.",
-                datePublished: "2023-02-10"
-            },
-            {
-                "@type": "Review",
-                author: {
-                    "@type": "Person",
-                    name: "Sergio Roldan"
-                },
-                reviewRating: {
-                    "@type": "Rating",
-                    ratingValue: "5",
-                    bestRating: "5"
-                },
-                reviewBody: "My online store has experienced exponential growth since working with AGSEO. The combination of traditional SEO with AI-powered analysis has been a game changer for our business.",
-                datePublished: "2023-04-05"
-            }
-        ]
+        "@id": ORGANIZATION_ID,
+        name: SITE_NAME,
+        alternateName: SITE_ALTERNATE_NAME,
+        description: "AI-Powered SEO Agency specializing in Answer Engine Optimization (AEO), Generative Engine Optimization (GEO), and Traditional SEO for businesses worldwide.",
+        url: SITE_BASE_URL,
+        logo: SITE_LOGO_URL,
+        image: SITE_OG_IMAGE_URL,
+        email: config.contact.email,
+        sameAs: organizationSameAs,
+        contactPoint: {
+            "@type": "ContactPoint",
+            contactType: "customer support",
+            email: config.contact.email,
+            areaServed: "Worldwide"
+        }
     };
+
+     const teamSchema = {
+         "@context": "https://schema.org",
+         "@type": "Organization",
+         "@id": TEAM_ID,
+         name: "AGSEO Team",
+         url: SITE_BASE_URL,
+         parentOrganization: {
+             "@id": ORGANIZATION_ID
+         },
+         sameAs: organizationSameAs
+     };
+
+    const shouldIncludeServiceSchema =
+        location.pathname === "/services" ||
+        location.pathname.startsWith("/services/") ||
+        location.pathname === "/geo-optimization";
+
+    const serviceSchema = shouldIncludeServiceSchema
+        ? {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            serviceType: "SEO Services",
+            provider: {
+                "@id": ORGANIZATION_ID
+            },
+            areaServed: {
+                "@type": "Place",
+                name: "Worldwide"
+            },
+            hasOfferCatalog: {
+                "@type": "OfferCatalog",
+                name: "SEO Services",
+                itemListElement: [
+                    {
+                        "@type": "Offer",
+                        itemOffered: {
+                            "@type": "Service",
+                            name: "Answer Engine Optimization (AEO)",
+                            description: "Optimize for direct answers on AI platforms and voice search."
+                        }
+                    },
+                    {
+                        "@type": "Offer",
+                        itemOffered: {
+                            "@type": "Service",
+                            name: "Generative Engine Optimization (GEO)",
+                            description: "Optimize content for generative search experiences and AI-driven results."
+                        }
+                    },
+                    {
+                        "@type": "Offer",
+                        itemOffered: {
+                            "@type": "Service",
+                            name: "Technical SEO",
+                            description: "Technical audits, indexation, performance, and on-site quality improvements."
+                        }
+                    },
+                    {
+                        "@type": "Offer",
+                        itemOffered: {
+                            "@type": "Service",
+                            name: "Content Strategy",
+                            description: "Content planning and production support for search visibility."
+                        }
+                    }
+                ]
+            }
+        }
+        : null;
+
+    const faqItems = FAQ_KEYS.map((key) => {
+        const question = t(`faq.items.${key}.question`, { defaultValue: "" });
+        const answer = t(`faq.items.${key}.answer`, { defaultValue: "" });
+
+        return { question, answer };
+    }).filter((item) => item.question && item.answer);
+
+    const shouldIncludeFaqSchema = location.pathname === "/" && faqItems.length > 0;
+
+    const faqSchema = shouldIncludeFaqSchema
+        ? {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: faqItems.map((item) => ({
+                "@type": "Question",
+                name: item.question,
+                acceptedAnswer: {
+                    "@type": "Answer",
+                    text: item.answer
+                }
+            }))
+        }
+        : null;
 
     return (
         <Helmet>
@@ -274,15 +167,13 @@ export function StructuredData() {
             <script type="application/ld+json">
                 {JSON.stringify(organizationSchema)}
             </script>
-            <script type="application/ld+json">
-                {JSON.stringify(serviceSchema)}
-            </script>
-            <script type="application/ld+json">
-                {JSON.stringify(faqSchema)}
-            </script>
-            <script type="application/ld+json">
-                {JSON.stringify(reviewSchema)}
-            </script>
+            <script type="application/ld+json">{JSON.stringify(teamSchema)}</script>
+            {serviceSchema ? (
+                <script type="application/ld+json">{JSON.stringify(serviceSchema)}</script>
+            ) : null}
+            {faqSchema ? (
+                <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
+            ) : null}
         </Helmet>
     );
 }

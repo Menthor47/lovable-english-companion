@@ -15,6 +15,7 @@ import {
     ArrowRight,
     CheckCircle2
 } from "lucide-react";
+import { SITE_OG_IMAGE_URL, getAbsoluteUrl } from "@/lib/siteMetadata";
 
 interface ServiceCard {
     icon: React.ElementType;
@@ -103,6 +104,8 @@ const services: ServiceCard[] = [
 ];
 
 export default function Services() {
+    const pageUrl = getAbsoluteUrl("/services");
+
     return (
         <div className="min-h-screen bg-background">
             <Helmet>
@@ -111,10 +114,11 @@ export default function Services() {
                     name="description"
                     content="Explore AGSEO's full suite of AI-powered SEO services: GEO optimization, content strategy, technical SEO, local SEO, and e-commerce solutions."
                 />
-                <link rel="canonical" href="https://agseo.pro/services" />
-                <meta property="og:url" content="https://agseo.pro/services" />
+                <link rel="canonical" href={pageUrl} />
+                <meta property="og:url" content={pageUrl} />
                 <meta property="og:title" content="Our Services | AGSEO - AI-Powered SEO Solutions" />
                 <meta property="og:description" content="Explore AGSEO's full suite of AI-powered SEO services for modern search visibility." />
+                <meta property="og:image" content={SITE_OG_IMAGE_URL} />
                 <meta property="og:type" content="website" />
             </Helmet>
 

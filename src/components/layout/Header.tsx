@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, type ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { Menu, X, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { cn } from "@/lib/utils";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, type LinkProps } from "react-router-dom";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -215,7 +215,13 @@ export function Header() {
   );
 }
 
-const ListItem = ({ className, title, children, href, ...props }: any) => {
+type ListItemProps = Omit<LinkProps, "to"> & {
+  href: string;
+  title: string;
+  children: ReactNode;
+};
+
+const ListItem = ({ className, title, children, href, ...props }: ListItemProps) => {
   return (
     <li>
       <NavigationMenuLink asChild>

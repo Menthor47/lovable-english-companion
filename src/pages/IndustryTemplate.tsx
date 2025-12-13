@@ -6,6 +6,7 @@ import { AnimatedSection } from "@/components/ui/animated-section";
 import { Button } from "@/components/ui/button";
 import { Check, Zap } from "lucide-react";
 import { Helmet } from "react-helmet-async";
+import { SITE_OG_IMAGE_URL, getAbsoluteUrl } from "@/lib/siteMetadata";
 
 export default function IndustryTemplate() {
     const { slug } = useParams();
@@ -16,13 +17,21 @@ export default function IndustryTemplate() {
     }
 
     const HeroIcon = industry.icon;
+    const pageUrl = getAbsoluteUrl(`/industries/${industry.slug}`);
 
     return (
         <div className="min-h-screen bg-background">
             <Helmet>
                 <title>{industry.hero.title} - AGSEO</title>
                 <meta name="description" content={industry.hero.subtitle} />
+                <link rel="canonical" href={pageUrl} />
+                <meta property="og:url" content={pageUrl} />
+                <meta property="og:title" content={`${industry.hero.title} - AGSEO`} />
+                <meta property="og:description" content={industry.hero.subtitle} />
+                <meta property="og:image" content={SITE_OG_IMAGE_URL} />
+                <meta property="og:type" content="website" />
             </Helmet>
+
             <Header />
             <main className="pt-24 pb-16">
                 <div className="container mx-auto px-4">

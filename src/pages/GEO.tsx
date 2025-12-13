@@ -5,17 +5,21 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Brain, Network, MessageSquareText, Search, Zap } from "lucide-react";
 import { Helmet } from "react-helmet-async";
+import { SITE_OG_IMAGE_URL, getAbsoluteUrl } from "@/lib/siteMetadata";
 
 export default function GEO() {
+    const pageUrl = getAbsoluteUrl("/geo-optimization");
+
     return (
         <div className="min-h-screen bg-background">
             <Helmet>
                 <title>Generative Engine Optimization (GEO) | AGSEO</title>
                 <meta name="description" content="Future-proof your rankings with Generative Engine Optimization. Optimize for AI answers from ChatGPT, Gemini, Claude and Perplexity." />
-                <link rel="canonical" href="https://agseo.pro/geo-optimization" />
-                <meta property="og:url" content="https://agseo.pro/geo-optimization" />
+                <link rel="canonical" href={pageUrl} />
+                <meta property="og:url" content={pageUrl} />
                 <meta property="og:title" content="Generative Engine Optimization (GEO) | AGSEO" />
                 <meta property="og:description" content="Future-proof your rankings with Generative Engine Optimization. Optimize for AI answers from ChatGPT, Gemini, Claude and Perplexity." />
+                <meta property="og:image" content={SITE_OG_IMAGE_URL} />
             </Helmet>
             <Header />
             <main className="pt-24 pb-16">

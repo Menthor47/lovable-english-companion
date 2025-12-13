@@ -11,6 +11,7 @@ import Tools from "@/pages/Tools";
 import Audit from "@/pages/Audit";
 import Dashboard from "@/pages/Dashboard";
 import CaseStudies from "@/pages/CaseStudies";
+import CaseStudy from "@/pages/CaseStudy";
 import Glossary from "@/pages/Glossary";
 import ContentService from "@/pages/ContentService";
 import ROICalculator from "@/pages/ROICalculator";
@@ -28,6 +29,7 @@ import PricingBusiness from "@/pages/PricingBusiness";
 import PricingProBusiness from "@/pages/PricingProBusiness";
 import About from "@/pages/About";
 import Services from "@/pages/Services";
+import Author from "@/pages/Author";
 
 export function AnimatedRoutes() {
     const location = useLocation();
@@ -44,6 +46,7 @@ export function AnimatedRoutes() {
                 <Route path="/tools/audit" element={<Audit />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/case-studies" element={<CaseStudies />} />
+                <Route path="/case-studies/:id" element={<CaseStudy />} />
                 <Route path="/resources/glossary" element={<Glossary />} />
                 <Route path="/services" element={<Services />} />
                 <Route path="/services/content" element={<ContentService />} />
@@ -59,6 +62,7 @@ export function AnimatedRoutes() {
                 <Route path="/cookies" element={<CookiePolicy />} />
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/blog/:slug" element={<BlogPost />} />
+                <Route path="/authors/:id" element={<Author />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/about" element={<About />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

@@ -7,9 +7,11 @@ import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 import { pricingData } from "@/data/pricing";
+import { SITE_OG_IMAGE_URL, getAbsoluteUrl } from "@/lib/siteMetadata";
 
 export default function Pricing() {
     const { t } = useTranslation();
+    const pageUrl = getAbsoluteUrl("/pricing");
 
     const planKeys = ["starter", "business", "pro"] as const;
 
@@ -43,10 +45,11 @@ export default function Pricing() {
             <Helmet>
                 <title>Pricing Plans - AGSEO | AI-Driven SEO Packages</title>
                 <meta name="description" content="Transparent pricing for AI SEO services. From local growth to enterprise dominance, find the perfect plan for your business scale." />
-                <link rel="canonical" href="https://agseo.pro/pricing" />
-                <meta property="og:url" content="https://agseo.pro/pricing" />
+                <link rel="canonical" href={pageUrl} />
+                <meta property="og:url" content={pageUrl} />
                 <meta property="og:title" content="Pricing Plans - AGSEO | AI-Driven SEO Packages" />
                 <meta property="og:description" content="Transparent pricing for AI SEO services. From local growth to enterprise dominance, find the perfect plan for your business scale." />
+                <meta property="og:image" content={SITE_OG_IMAGE_URL} />
             </Helmet>
             <Header />
             <main className="pt-32 pb-24">

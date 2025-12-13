@@ -10,11 +10,14 @@ import { Search, CheckCircle, Loader2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
 import { api } from "@/lib/api";
+import { SITE_OG_IMAGE_URL, getAbsoluteUrl } from "@/lib/siteMetadata";
 
 export default function Audit() {
     const [step, setStep] = useState<"form" | "scanning" | "results">("form");
     const [formData, setFormData] = useState({ url: "", email: "" });
     const { toast } = useToast();
+
+    const pageUrl = getAbsoluteUrl("/tools/audit");
 
     // The simulation steps
     const simulationSteps = [
@@ -71,10 +74,11 @@ export default function Audit() {
             <Helmet>
                 <title>Free AI SEO Audit | AGSEO</title>
                 <meta name="description" content="Get a free instant AI-powered SEO audit for your website. Discover how visible your brand is on Google, ChatGPT, and Gemini." />
-                <link rel="canonical" href="https://agseo.pro/tools/audit" />
-                <meta property="og:url" content="https://agseo.pro/tools/audit" />
+                <link rel="canonical" href={pageUrl} />
+                <meta property="og:url" content={pageUrl} />
                 <meta property="og:title" content="Free AI SEO Audit | AGSEO" />
                 <meta property="og:description" content="Get a free instant AI-powered SEO audit for your website. Discover how visible your brand is on Google, ChatGPT, and Gemini." />
+                <meta property="og:image" content={SITE_OG_IMAGE_URL} />
             </Helmet>
             <Header />
             <main className="flex-grow pt-32 pb-16 flex items-center justify-center">

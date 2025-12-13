@@ -10,6 +10,7 @@ import { motion } from "framer-motion";
 import { ContentKanban } from "@/components/dashboard/ContentKanban";
 import { ProjectTimeline } from "@/components/dashboard/ProjectTimeline";
 import { DeliverableVault } from "@/components/dashboard/DeliverableVault";
+import { SITE_OG_IMAGE_URL, getAbsoluteUrl } from "@/lib/siteMetadata";
 
 const data = [
     { name: "Jan", traffic: 4000, keywords: 240 },
@@ -50,16 +51,18 @@ const StatCard = ({ title, value, change, icon: Icon, delay }: StatCardProps) =>
 
 export default function Dashboard() {
     const [timeRange, setTimeRange] = useState("6M");
+    const pageUrl = getAbsoluteUrl("/dashboard");
 
     return (
         <div className="min-h-screen bg-background">
             <Helmet>
                 <title>Client Dashboard Demo | AGSEO</title>
                 <meta name="description" content="Preview the AGSEO client dashboard demo. Data shown is illustrative sample data (not live client metrics)." />
-                <link rel="canonical" href="https://agseo.pro/dashboard" />
-                <meta property="og:url" content="https://agseo.pro/dashboard" />
+                <link rel="canonical" href={pageUrl} />
+                <meta property="og:url" content={pageUrl} />
                 <meta property="og:title" content="Client Dashboard Demo | AGSEO" />
                 <meta property="og:description" content="Preview the AGSEO client dashboard demo. Data shown is illustrative sample data (not live client metrics)." />
+                <meta property="og:image" content={SITE_OG_IMAGE_URL} />
             </Helmet>
             <Header />
             <main className="pt-24 pb-16">

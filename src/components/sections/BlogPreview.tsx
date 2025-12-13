@@ -4,51 +4,12 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { AnimatedSection, StaggerContainer, StaggerItem, ScaleOnHover } from "@/components/ui/animated-section";
 
-const blogPosts = [
-  {
-    titleKey: "blog.posts.ai.title",
-    excerptKey: "blog.posts.ai.excerpt",
-    category: "Artificial Intelligence",
-    date: "May 10, 2025",
-    author: "Alex Turner",
-    readTime: "8 min",
-    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop",
-    slug: "future-of-ai-seo"
-  },
-  {
-    titleKey: "blog.posts.react.title",
-    excerptKey: "blog.posts.react.excerpt",
-    category: "Technical SEO",
-    date: "May 3, 2025",
-    author: "Alex Turner",
-    readTime: "12 min",
-    image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=600&h=400&fit=crop",
-    slug: "react-seo-mastery"
-  },
-  {
-    titleKey: "blog.posts.smart.title",
-    excerptKey: "blog.posts.smart.excerpt",
-    category: "Smart SEO",
-    date: "April 26, 2025",
-    author: "Alex Turner",
-    readTime: "10 min",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop",
-    slug: "smart-keyword-research"
-  },
-  {
-    titleKey: "blog.posts.ecommerce.title",
-    excerptKey: "blog.posts.ecommerce.excerpt",
-    category: "E-commerce SEO",
-    date: "April 22, 2025",
-    author: "Alex Turner",
-    readTime: "15 min",
-    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop",
-    slug: "ecommerce-conversion-optimization"
-  },
-];
+import { blogPosts } from "@/data/blogPosts";
 
 export function BlogPreview() {
   const { t } = useTranslation();
+
+  const previewPosts = blogPosts.slice(0, 4);
 
   return (
     <section className="py-24 relative overflow-hidden">
@@ -70,7 +31,7 @@ export function BlogPreview() {
         </AnimatedSection>
 
         <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-4 gap-6" staggerDelay={0.1}>
-          {blogPosts.map((post, index) => (
+          {previewPosts.map((post, index) => (
             <StaggerItem key={index}>
               <ScaleOnHover scale={1.02}>
                 <Link to={`/blog/${post.slug}`} className="block h-full">
@@ -79,7 +40,7 @@ export function BlogPreview() {
                     <div className="relative h-48 overflow-hidden">
                       <img
                         src={post.image}
-                        alt={t(post.titleKey, post.titleKey)}
+                        alt={post.title}
                         loading="lazy"
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                       />
@@ -109,12 +70,12 @@ export function BlogPreview() {
 
                       {/* Title */}
                       <h3 className="font-heading font-semibold text-foreground mb-2 line-clamp-2 group-hover:text-primary transition-colors">
-                        {t(post.titleKey, post.titleKey)}
+                        {post.title}
                       </h3>
 
                       {/* Excerpt */}
                       <p className="text-sm text-muted-foreground line-clamp-3 mb-4 flex-1">
-                        {t(post.excerptKey, post.excerptKey)}
+                        {post.excerpt}
                       </p>
 
                       {/* Author & Read More */}

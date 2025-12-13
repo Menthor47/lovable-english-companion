@@ -5,6 +5,7 @@ import { Check, X, ArrowLeft, Plus } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { PricingTierData } from "@/data/pricing";
+import { SITE_OG_IMAGE_URL } from "@/lib/siteMetadata";
 
 interface PricingTierTemplateProps {
     data: PricingTierData;
@@ -19,6 +20,11 @@ export function PricingTierTemplate({ data }: PricingTierTemplateProps) {
                 <title>{data.metaTitle}</title>
                 <meta name="description" content={data.metaDescription} />
                 <link rel="canonical" href={data.canonicalUrl} />
+                <meta property="og:url" content={data.canonicalUrl} />
+                <meta property="og:title" content={data.metaTitle} />
+                <meta property="og:description" content={data.metaDescription} />
+                <meta property="og:image" content={SITE_OG_IMAGE_URL} />
+                <meta property="og:type" content="website" />
             </Helmet>
             <Header />
             <main className="pt-32 pb-24">

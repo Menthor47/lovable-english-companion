@@ -1,4 +1,6 @@
 // Author profiles for E-E-A-T signals
+import { config } from "@/lib/config";
+
 export interface Author {
     id: string;
     name: string;
@@ -15,23 +17,6 @@ export interface Author {
 
 export const authors: Author[] = [
     {
-        id: "alex-turner",
-        name: "Alex Turner",
-        role: "Head of Content & SEO",
-        bio: "Alex is a seasoned SEO strategist with over 10 years of experience in digital marketing. Specializing in AI-powered content optimization and technical SEO, Alex has helped numerous businesses achieve top rankings across search engines and AI platforms.",
-        image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face",
-        credentials: [
-            "Google Analytics Certified",
-            "Google Ads Certified",
-            "HubSpot Content Marketing Certified",
-            "10+ years in SEO & Content Strategy"
-        ],
-        socialLinks: {
-            linkedin: "https://linkedin.com/in/alexturner",
-            twitter: "https://twitter.com/alexturner"
-        }
-    },
-    {
         id: "agseo-team",
         name: "AGSEO Team",
         role: "Editorial Team",
@@ -43,8 +28,8 @@ export const authors: Author[] = [
             "Published in leading SEO publications"
         ],
         socialLinks: {
-            linkedin: "https://linkedin.com/company/agseo",
-            twitter: "https://twitter.com/agseopro"
+            linkedin: config.social.linkedin,
+            twitter: config.social.twitter
         }
     }
 ];

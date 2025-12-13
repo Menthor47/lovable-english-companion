@@ -2,11 +2,24 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Helmet } from "react-helmet-async";
 import { config } from "@/lib/config";
+import { SITE_OG_IMAGE_URL, getAbsoluteUrl } from "@/lib/siteMetadata";
+
+ interface CookiePolicySubsection {
+     heading: string;
+     text: string;
+ }
+
+ interface CookiePolicySection {
+     title: string;
+     content: string;
+     subsections?: CookiePolicySubsection[];
+ }
 
 export default function CookiePolicy() {
     const email = config.contact.email;
+    const pageUrl = getAbsoluteUrl("/cookies");
 
-    const sections = [
+    const sections: CookiePolicySection[] = [
         {
             title: "1. What Are Cookies?",
             content: "Cookies are small text files stored on your device (computer, mobile phone, or tablet) when you visit our website. They help us recognize you, remember your preferences, and understand how you use our site."
@@ -48,10 +61,11 @@ export default function CookiePolicy() {
             <Helmet>
                 <title>Cookie Policy | AGSEO</title>
                 <meta name="description" content="Cookie Policy for AGSEO. Understand how we use cookies to improve your experience." />
-                <link rel="canonical" href="https://agseo.pro/cookies" />
-                <meta property="og:url" content="https://agseo.pro/cookies" />
+                <link rel="canonical" href={pageUrl} />
+                <meta property="og:url" content={pageUrl} />
                 <meta property="og:title" content="Cookie Policy | AGSEO" />
                 <meta property="og:description" content="Cookie Policy for AGSEO. Understand how we use cookies to improve your experience." />
+                <meta property="og:image" content={SITE_OG_IMAGE_URL} />
             </Helmet>
 
             <Header />

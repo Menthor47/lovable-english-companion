@@ -1,4 +1,5 @@
 import { Target, FileText, Wrench, PenTool, Link2, MapPin, BarChart3, Settings, Zap, Globe, Briefcase, TrendingUp } from "lucide-react";
+import { getAbsoluteUrl } from "@/lib/siteMetadata";
 
 export interface ServiceCategory {
     icon: React.ElementType;
@@ -46,7 +47,7 @@ export const pricingData: Record<string, PricingTierData> = {
         ctaText: "Get Started with Starter Plan",
         metaTitle: "Starter SEO Package - AGSEO | €470-€1,200/month",
         metaDescription: "SEO Foundation for Growing Businesses. Perfect for local businesses, startups, and solopreneurs. 15-20 keywords, technical audit, content creation, and local SEO.",
-        canonicalUrl: "https://agseo.pro/pricing/starter",
+        canonicalUrl: getAbsoluteUrl("/pricing/starter"),
         summaryTitle: "Ready to Start Growing?",
         summaryText: "Get a free consultation to discuss how our Starter plan can help your business establish a strong SEO foundation.",
         serviceCategories: [
@@ -160,7 +161,7 @@ export const pricingData: Record<string, PricingTierData> = {
         includesText: "Includes everything from Starter tier",
         metaTitle: "Business SEO Package - AGSEO | €1,500-€4,200/month",
         metaDescription: "Professional SEO Growth for Competitive Markets. For growing SMEs, established e-commerce, and regional services. 40-60 keywords, quarterly audits, guest posting, and advanced link building.",
-        canonicalUrl: "https://agseo.pro/pricing/business",
+        canonicalUrl: getAbsoluteUrl("/pricing/business"),
         summaryTitle: "Ready to Scale Your Business?",
         summaryText: "Get a free consultation to discuss how our Business plan can accelerate your growth in competitive markets.",
         serviceCategories: [
@@ -289,7 +290,7 @@ export const pricingData: Record<string, PricingTierData> = {
         includesText: "Includes everything from Business tier",
         metaTitle: "Enterprise SEO Package - AGSEO | Custom Solutions",
         metaDescription: "Enterprise SEO: Revenue-Focused, Scalable Growth. For large enterprises and multi-location brands. Custom strategy, dedicated account manager, advanced technical SEO, and full CRO.",
-        canonicalUrl: "https://agseo.pro/pricing/pro-business",
+        canonicalUrl: getAbsoluteUrl("/pricing/pro-business"),
         summaryTitle: "Build Your Custom Solution",
         summaryText: "Contact our sales team to design an SEO strategy that aligns perfectly with your enterprise goals.",
         serviceCategories: [

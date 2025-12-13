@@ -1,11 +1,23 @@
 import { useRef, useEffect } from "react";
 import { useParams, Navigate, Link } from "react-router-dom";
 import { blogPosts } from "@/data/blogPosts";
+import { getAuthorByName } from "@/data/authors";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { ArrowLeft, Calendar, Clock, User, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Helmet } from "react-helmet-async";
+import {
+    ORGANIZATION_ID,
+    SITE_BASE_URL,
+    SITE_LOGO_URL,
+    SITE_NAME,
+    TEAM_ID,
+    WEBSITE_ID,
+    getAbsoluteUrl,
+    parseDateToIso
+} from "@/lib/siteMetadata";
 
 // Simple markdown renderer component since we don't have react-markdown installed
 // and we want to keep dependencies minimal as requested.
@@ -48,26 +60,66 @@ const BlogPost = () => {
         return <Navigate to="/blog" replace />;
     }
 
+    const author = getAuthorByName(post.author);
+
+    const authorPath = author ? `/authors/${author.id}` : undefined;
+    const authorUrl = authorPath ? getAbsoluteUrl(authorPath) : undefined;
+
+    const postPath = `/blog/${post.slug}`;
+    const postUrl = getAbsoluteUrl(postPath);
+    const breadcrumbItems = [
+        { label: "Home", href: "/" },
+        { label: "Blog", href: "/blog" },
+        { label: post.title, href: postPath }
+    ];
+    const datePublished = parseDateToIso(post.date);
+
+    const authorSchema =
+        author?.id === "agseo-team"
+            ? {
+                "@type": "Organization",
+                "@id": TEAM_ID,
+                name: author.name,
+                ...(authorUrl ? { url: authorUrl } : {})
+            }
+            : author
+                ? {
+                    "@type": "Person",
+                    "@id": `${SITE_BASE_URL}/#author-${author.id}`,
+                    name: author.name,
+                    ...(authorUrl ? { url: authorUrl } : {})
+                }
+                : {
+                    "@type": "Person",
+                    name: post.author
+                };
+
     // Schema.org structured data for Article
     const articleSchema = {
         "@context": "https://schema.org",
         "@type": "BlogPosting",
-        "headline": post.title,
-        "image": post.image,
-        "author": {
-            "@type": "Person",
-            "name": post.author
+        headline: post.title,
+        description: post.excerpt,
+        url: postUrl,
+        mainEntityOfPage: {
+            "@type": "WebPage",
+            "@id": postUrl
         },
-        "publisher": {
+        image: post.image,
+        author: authorSchema,
+        publisher: {
             "@type": "Organization",
-            "name": "AGSEO",
-            "logo": {
+            "@id": ORGANIZATION_ID,
+            name: SITE_NAME,
+            logo: {
                 "@type": "ImageObject",
-                "url": "https://agseo.pro/logo.png"
+                url: SITE_LOGO_URL
             }
         },
-        "datePublished": post.date, // Note: Should ideally be ISO format
-        "description": post.excerpt
+        isPartOf: {
+            "@id": WEBSITE_ID
+        },
+        ...(datePublished ? { datePublished } : {})
     };
 
     return (
@@ -75,11 +127,12 @@ const BlogPost = () => {
             <Helmet>
                 <title>{post.title} | AGSEO Blog</title>
                 <meta name="description" content={post.excerpt} />
-                <link rel="canonical" href={`https://agseo.pro/blog/${post.slug}`} />
-                <meta property="og:url" content={`https://agseo.pro/blog/${post.slug}`} />
+                <link rel="canonical" href={postUrl} />
+                <meta property="og:url" content={postUrl} />
                 <meta property="og:title" content={`${post.title} | AGSEO Blog`} />
                 <meta property="og:description" content={post.excerpt} />
                 <meta property="og:image" content={post.image} />
+                <meta property="og:type" content="article" />
                 <script type="application/ld+json">
                     {JSON.stringify(articleSchema)}
                 </script>
@@ -100,6 +153,7 @@ const BlogPost = () => {
 
                     <div className="absolute bottom-0 left-0 w-full p-8 md:p-12">
                         <div className="container mx-auto max-w-4xl">
+                            <Breadcrumbs items={breadcrumbItems} className="mb-4" />
                             <Link to="/blog" className="inline-flex items-center text-primary mb-6 hover:underline font-medium">
                                 <ArrowLeft className="mr-2 h-4 w-4" />
                                 Back to Blog
@@ -118,7 +172,16 @@ const BlogPost = () => {
                             <div className="flex flex-wrap items-center gap-6 text-muted-foreground">
                                 <div className="flex items-center gap-2">
                                     <User className="h-4 w-4" />
-                                    <span>{post.author}</span>
+                                    {authorPath ? (
+                                        <Link
+                                            to={authorPath}
+                                            className="hover:text-primary transition-colors"
+                                        >
+                                            {post.author}
+                                        </Link>
+                                    ) : (
+                                        <span>{post.author}</span>
+                                    )}
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <Calendar className="h-4 w-4" />

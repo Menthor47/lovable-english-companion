@@ -5,13 +5,37 @@ import { comparisons } from "@/data/comparisons";
 import { Link } from "react-router-dom";
 import { ArrowRight, Scale } from "lucide-react";
 import { Helmet } from "react-helmet-async";
+import { SITE_OG_IMAGE_URL, getAbsoluteUrl } from "@/lib/siteMetadata";
 
 export default function CompareHub() {
+    const pageUrl = getAbsoluteUrl("/compare");
+
+    const itemListSchema = {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "@id": `${pageUrl}#itemlist`,
+        url: pageUrl,
+        name: "AI SEO Tool Comparisons",
+        itemListElement: comparisons.map((comp, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            name: `${comp.toolA.name} vs ${comp.toolB.name}`,
+            url: getAbsoluteUrl(`/compare/${comp.slug}`)
+        }))
+    };
+
     return (
         <div className="min-h-screen bg-background">
             <Helmet>
                 <title>AI SEO Tool Comparisons - AGSEO</title>
                 <meta name="description" content="Use AGSEO's unbiased comparison battles to find the best AI tools (Jasper, Copy.ai, Surfer) for your stack." />
+                <link rel="canonical" href={pageUrl} />
+                <meta property="og:url" content={pageUrl} />
+                <meta property="og:title" content="AI SEO Tool Comparisons - AGSEO" />
+                <meta property="og:description" content="Use AGSEO's unbiased comparison battles to find the best AI tools (Jasper, Copy.ai, Surfer) for your stack." />
+                <meta property="og:image" content={SITE_OG_IMAGE_URL} />
+                <meta property="og:type" content="website" />
+                <script type="application/ld+json">{JSON.stringify(itemListSchema)}</script>
             </Helmet>
             <Header />
             <main className="pt-24 pb-16">

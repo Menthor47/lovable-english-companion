@@ -1,11 +1,11 @@
-import { ShoppingCart, Users, TrendingUp, Cpu, Globe, Activity } from "lucide-react";
+import { ShoppingCart, Users, TrendingUp, Globe, type LucideIcon } from "lucide-react";
 
 export interface CaseStudy {
     id: string;
     category: "E-commerce" | "SaaS" | "Local Service" | "Enterprise";
     title: string;
     description: string;
-    icon: any;
+    icon: LucideIcon;
     color: string;
     bgColor: string;
     stats: { label: string; value: string }[];

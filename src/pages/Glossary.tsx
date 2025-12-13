@@ -2,6 +2,8 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import { Search, Brain, Bot, Network, Sparkles } from "lucide-react";
+import { Helmet } from "react-helmet-async";
+import { SITE_OG_IMAGE_URL, getAbsoluteUrl } from "@/lib/siteMetadata";
 
 const terms = [
     {
@@ -37,8 +39,35 @@ const terms = [
 ];
 
 export default function Glossary() {
+    const pageUrl = getAbsoluteUrl("/resources/glossary");
+
+    const definedTermSetSchema = {
+        "@context": "https://schema.org",
+        "@type": "DefinedTermSet",
+        "@id": `${pageUrl}#definedtermset`,
+        url: pageUrl,
+        name: "AI SEO Dictionary",
+        description: "Definitions for GEO, RAG, agentic workflows, knowledge graphs, and other AI SEO terms.",
+        hasDefinedTerm: terms.map((item) => ({
+            "@type": "DefinedTerm",
+            name: item.term,
+            description: item.definition
+        }))
+    };
+
     return (
         <div className="min-h-screen bg-background">
+            <Helmet>
+                <title>AI SEO Glossary | AGSEO</title>
+                <meta name="description" content="Definitions for GEO, RAG, agentic workflows, knowledge graphs, and other AI SEO terms." />
+                <link rel="canonical" href={pageUrl} />
+                <meta property="og:url" content={pageUrl} />
+                <meta property="og:title" content="AI SEO Glossary | AGSEO" />
+                <meta property="og:description" content="Definitions for GEO, RAG, agentic workflows, knowledge graphs, and other AI SEO terms." />
+                <meta property="og:image" content={SITE_OG_IMAGE_URL} />
+                <meta property="og:type" content="website" />
+                <script type="application/ld+json">{JSON.stringify(definedTermSetSchema)}</script>
+            </Helmet>
             <Header />
             <main className="pt-24 pb-16">
                 <div className="container mx-auto px-4">
