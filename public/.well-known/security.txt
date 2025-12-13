@@ -1,0 +1,11 @@
+# AGSEO Security Policy
+# https://securitytxt.org/
+
+Contact: mailto:security@agseo.pro
+Expires: 2026-12-31T23:59:59.000Z
+Preferred-Languages: en, ro
+Canonical: https://agseo.pro/.well-known/security.txt
+Policy: https://agseo.pro/privacy
+
+# If you discover a security vulnerability, please report it to us.
+# We appreciate your efforts in keeping our users safe.

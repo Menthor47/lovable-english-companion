@@ -386,6 +386,76 @@
             }
         }
     },
+    "privacyPolicy": {
+        "title": "Privacy Policy",
+        "description": "AGSEO Privacy Policy. Learn how we collect, use, and protect your personal information.",
+        "lastUpdated": "Last updated: December 12, 2024",
+        "sections": {
+            "introduction": {
+                "title": "1. Introduction",
+                "content": "Welcome to AGSEO ('we,' 'our,' or 'us'). We are committed to protecting your personal information and your right to privacy. If you have any questions or concerns about this privacy notice or our practices with regard to your personal information, please contact us."
+            },
+            "collection": {
+                "title": "2. Information We Collect",
+                "content": "We collect personal information that you voluntarily provide to us when you register on the website, express an interest in obtaining information about us or our products and services, when you participate in activities on the website, or otherwise when you contact us.",
+                "items": [
+                    "Personal Data: Name, email address, phone number, and contact preferences.",
+                    "Business Data: Company name, website URL, industry, and competitor information.",
+                    "Technical Data: IP address, browser type, device information, operating system, and usage data."
+                ]
+            },
+            "use": {
+                "title": "3. How We Use Your Information",
+                "content": "We use personal information collected via our website for a variety of business purposes described below. We process your personal information for these purposes in reliance on our legitimate business interests, in order to enter into or perform a contract with you, with your consent, and/or for compliance with our legal obligations.",
+                "items": [
+                    "To provide and maintain our Service",
+                    "To notify you about changes to our Service",
+                    "To allow you to participate in interactive features of our Service",
+                    "To provide customer support",
+                    "To gather analysis or valuable information so that we can improve our Service",
+                    "To monitor the usage of our Service",
+                    "To detect, prevent and address technical issues"
+                ]
+            },
+            "ai": {
+                "title": "4. AI Subprocessors & Data Sharing",
+                "content": "We utilize third-party Artificial Intelligence (AI) providers to deliver our SEO analysis and content generation services. We have established Data Processing Agreements (DPAs) with these providers to ensure your data is protected.",
+                "items": [
+                    "OpenAI: We use OpenAI API for content analysis and generation. Data sent includes website content and SEO keywords.",
+                    "Anthropic: We use Anthropic's Claude API for advanced reasoning and strategy generation.",
+                    "Data Privacy: These providers are prohibited from training their models on your proprietary data submitted via our API."
+                ]
+            },
+            "retention": {
+                "title": "5. Data Retention",
+                "content": "We retain your personal information only for as long as is necessary for the purposes set out in this Privacy Policy. We will retain and use your information to the extent necessary to comply with our legal obligations (for example, if we are required to retain your data to comply with applicable laws), resolve disputes, and enforce our legal agreements and policies."
+            },
+            "international": {
+                "title": "6. International Data Transfers",
+                "content": "Your information, including Personal Data, may be transferred to — and maintained on — computers located outside of your state, province, country or other governmental jurisdiction where the data protection laws may differ than those from your jurisdiction. We take all steps reasonably necessary to ensure that your data is treated securely and in accordance with this Privacy Policy, utilizing Standard Contractual Clauses (SCCs) or Data Privacy Framework (DPF) participation where applicable."
+            },
+            "rights": {
+                "title": "7. Your Data Protection Rights",
+                "content": "Depending on your location (including the EEA, UK, and California), you may have the following rights:",
+                "items": [
+                    "The right to access, update or to delete the information we have on you.",
+                    "The right of rectification.",
+                    "The right to object.",
+                    "The right of restriction.",
+                    "The right to data portability.",
+                    "The right to withdraw consent."
+                ]
+            },
+            "cookies": {
+                "title": "8. Cookies and Tracking Technologies",
+                "content": "We collect certain information by automated means, such as cookies and web beacons, when a user visits our website. The information we collect in this manner includes IP address, browser characteristics, device characteristics, operating system, language preferences, referring URLs, information on actions taken on our site, and dates and times of website visits."
+            },
+            "contact": {
+                "title": "9. Contact Us",
+                "content": "If you have questions or comments about this policy, you may contact us via the contact form on our website or by email at legal@agseo.pro."
+            }
+        }
+    },
     "contact": {
         "title": "Get in Touch",
         "subtitle": "Ready to transform your SEO strategy? Send us a message.",
@@ -406,6 +476,49 @@
             "sending": "Sending...",
             "success": "Request received! We'll be in touch soon.",
             "error": "Failed to send. Please try again."
+        }
+    },
+    "termsOfService": {
+        "title": "Terms of Service",
+        "description": "AGSEO Terms of Service. Read our terms and conditions for using our AI SEO services.",
+        "lastUpdated": "Last updated: December 12, 2024",
+        "sections": {
+            "agreement": {
+                "title": "1. Agreement to Terms",
+                "content": "These Terms of Service constitute a legally binding agreement made between you, whether personally or on behalf of an entity ('you') and AGSEO ('we,' 'us' or 'our'), concerning your access to and use of the AGSEO website as well as any other media form, media channel, mobile website or mobile application related, linked, or otherwise connected thereto (collectively, the 'Site'). You agree that by accessing the Site, you have read, understood, and agree to be bound by all of these Terms of Service."
+            },
+            "ip": {
+                "title": "2. Intellectual Property Rights",
+                "content": "Unless otherwise indicated, the Site is our proprietary property and all source code, databases, functionality, software, website designs, audio, video, text, photographs, and graphics on the Site (collectively, the 'Content') and the trademarks, service marks, and logos contained therein (the 'Marks') are owned or controlled by us or licensed to us, and are protected by copyright and trademark laws."
+            },
+            "userRep": {
+                "title": "3. User Representations",
+                "content": "By using the Site, you represent and warrant that: (1) All registration information you submit will be true, accurate, current, and complete; (2) You will maintain the accuracy of such information; (3) You have the legal capacity and you agree to comply with these Terms of Service; (4) You are not a minor in the jurisdiction in which you reside.",
+                "items": [
+                    "All registration information you submit will be true, accurate, current, and complete.",
+                    "You will maintain the accuracy of such information and promptly update such registration information as necessary.",
+                    "You have the legal capacity and you agree to comply with these Terms of Service.",
+                    "You are not a minor in the jurisdiction in which you reside.",
+                    "You will not access the Site through automated or non-human means, whether through a bot, script or otherwise."
+                ]
+            },
+            "prohibited": {
+                "title": "4. Prohibited Activities",
+                "content": "You may not access or use the Site for any purpose other than that for which we make the Site available. The Site may not be used in connection with any commercial endeavors except those that are specifically endorsed or approved by us."
+            },
+            "disclaimer": {
+                "title": "5. Disclaimer",
+                "content": "The site is provided on an as-is and as-available basis. You agree that your use of the site and our services will be at your sole risk. To the fullest extent permitted by law, we disclaim all warranties, express or implied, in connection with the site and your use thereof."
+            },
+            "sla": {
+                "title": "6. Service Level Agreement (SLA)",
+                "content": "We are committed to providing reliable service to our customers. This SLA outlines our commitments regarding uptime and support.",
+                "items": [
+                    "Uptime Commitment: We target a 99.5% monthly uptime for our core services.",
+                    "Support Response: We endeavor to respond to all critical support tickets within 24 business hours.",
+                    "Maintenance: We will provide at least 48 hours notice for scheduled maintenance that may impact service availability."
+                ]
+            }
         }
     },
     "footer": {
