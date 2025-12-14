@@ -1,6 +1,10 @@
 RewriteEngine On
 RewriteBase /
 
+<IfModule pagespeed_module>
+  ModPagespeed off
+</IfModule>
+
 # Cache static assets aggressively
 <IfModule mod_expires.c>
   ExpiresActive On
@@ -17,9 +21,15 @@ RewriteBase /
   <FilesMatch "\.(css|js|png|jpe?g|webp|svg)$">
     Header set Cache-Control "public, max-age=2592000, immutable"
   </FilesMatch>
+  <FilesMatch "\.(html)$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+  </FilesMatch>
 </IfModule>
 
 # SPA fallback: serve index.html for any route that doesn't exist as a file or directory
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/assets/
 RewriteRule ^ index.html [L]

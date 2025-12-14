@@ -14,7 +14,7 @@ export function render(url: string) {
     const html = ReactDOMServer.renderToString(
         <React.StrictMode>
             <StaticRouter location={url}>
-                <App />
+                <App helmetContext={helmetContext} />
             </StaticRouter>
         </React.StrictMode>
     );

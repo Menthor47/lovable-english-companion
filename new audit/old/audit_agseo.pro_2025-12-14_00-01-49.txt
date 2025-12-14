@@ -1,0 +1,190 @@
+SE RankingWebsite Auditagseo.proHEALTH SCORE76OUT OF 100DECENTBETTER THAN 72% OF USERSISSUE DISTRIBUTION154NOTICES (2)WARNINGS (113)ERRORS (39)
+CORE WEB VITALSNO RESULTS FOUNDPAGES CRAWLED75080757575URLS FOUND1240160124124124TOP ISSUESRedirect chain37No inbound links1Robots.txt is not accessible13ХХ HTTP status code743XX redirects in XML sitemap37
+
+
+SE RankingDOMAIN METRICSDomain expirationN/ABacklinks0Referring domains0Domain Trust0Pages in Yahoo!
+Pages in Yahoo!
+Pages in GoogleNaNPages in BingNaNPAGE INDEXABILITYIndexableNot indexable1(1.3%)74(98.7%)
+050100Robots.txt0Meta tag0X-robots header0Non-canonical0Non-200 status co74 (100%)
+LINK ATTRIBUTESPAGESEXTERNAL DOFOLLOW15%
+INTERNAL DOFOLLOW1995%
+EXTERNAL NOFOLLOW00%
+INTERNAL NOFOLLOW00%
+ROBOTS META TAGSPAGESINDEX & FOLLOW11.3%
+NOINDEX & FOLLOW00%
+INDEX & NOFOLLOW00%
+NOINDEX & NOFOLLOW00%
+NO ROBOTS META TAG7498.7%
+
+
+SE Ranking
+Crawling & Indexing10
+
+Description
+Your website's pages must first be properly crawled and indexed to appear in search engine results. This section contains checks for mainfactors that can affect search engine crawlers' scanning and indexing of your site.
+
+ISSUESPAGESNEWFIXEDRobots.txt is not accessible100Issue description
+Our bot could not access the robots.txt file on your website. Weeither received an HTTP code that denied us access to the file, orthe server could not fulfill the request.
+
+How to fix
+Ensure you don't have a firewall or plugin blocking bots. If youdo, whitelist our Website Audit user-agent on that system. Wealso recommend adding our IPs to the server's whitelist.
+
+
+
+Redirects3774
+
+Description
+Misconfigured redirects can lead to incorrect locations. This can confuse users, ruin their experience, increase the number of HTTPrequests to your website, and result in a traffic drop and crawling budget decline. The checks in this section help you maintain control overyour redirects and pinpoint room for improvement related to them.
+
+ISSUESPAGESNEWFIXEDRedirect chain3700https://agseo.pro/pricinghttps://agseo.pro/contacthttps://agseo.pro/blog/react-seo-optimizationhttps://agseo.pro/blog/ai-business-successhttps://agseo.pro/blog/ecommerce-product-pageshttps://agseo.pro/blog/smart-seo-aihttps://agseo.pro/bloghttps://agseo.pro/services/contenthttps://agseo.pro/geo-optimizationhttps://agseo.pro/abouthttps://agseo.pro/case-studieshttps://agseo.pro/tools/audithttps://agseo.pro/tools/roi-calculatorhttps://agseo.pro/privacyhttps://agseo.pro/termshttps://agseo.pro/cookieshttps://agseo.pro/services
+
+
+
+
+SE Ranking
+ISSUESPAGESNEWFIXEDhttps://agseo.pro/industries/saashttps://agseo.pro/industries/ecommercehttps://agseo.pro/industries/localhttps://agseo.pro/industries/healthcarehttps://agseo.pro/industries/professional-serviceshttps://agseo.pro/authors/agseo-teamhttps://agseo.pro/pricing/starterhttps://agseo.pro/pricing/businesshttps://agseo.pro/pricing/pro-businesshttps://agseo.pro/toolshttps://agseo.pro/dashboardhttps://agseo.pro/case-studies/fashion-brand-seohttps://agseo.pro/case-studies/saas-growthhttps://agseo.pro/case-studies/legal-firm-localhttps://agseo.pro/case-studies/fintech-aihttps://agseo.pro/resources/glossaryhttps://agseo.pro/comparehttps://agseo.pro/compare/jasper-vs-copyaihttps://agseo.pro/compare/surfer-vs-frasehttps://agseo.pro/compare/semrush-vs-ahrefsIssue description
+Redirect chains occur when a redirect is set up from page 1 topage 2, and from page 2 to page 3. There may be more thanthree links in a chain, but the longer the path to the target pageis, the slower the page will load. Redirect chains negatively affectthe user experience, and also complicate the crawling processfor search engine robots.
+
+How to fix
+Remove unnecessary links from the chain by setting up aredirect from the first version of the page directly to the page'scurrent address.
+
+3ХХ HTTP status code7400https://agseo.pro/pricinghttps://agseo.pro/contacthttps://agseo.pro/blog/react-seo-optimizationhttps://agseo.pro/blog/ai-business-successhttps://agseo.pro/blog/ecommerce-product-pageshttps://agseo.pro/blog/smart-seo-aihttps://agseo.pro/bloghttps://agseo.pro/services/contenthttps://agseo.pro/geo-optimizationhttps://agseo.pro/abouthttps://agseo.pro/case-studies
+
+
+
+
+SE Ranking
+ISSUESPAGESNEWFIXEDhttps://agseo.pro/tools/audithttps://agseo.pro/tools/roi-calculatorhttps://agseo.pro/privacyhttps://agseo.pro/termshttps://agseo.pro/cookieshttp://agseo.pro/pricing/
+http://agseo.pro/contact/
+http://agseo.pro/blog/react-seo-optimization/
+http://agseo.pro/blog/ai-business-success/
+http://agseo.pro/blog/ecommerce-product-pages/
+http://agseo.pro/blog/smart-seo-ai/
+http://agseo.pro/blog/
+http://agseo.pro/services/content/
+http://agseo.pro/geo-optimization/
+http://agseo.pro/about/
+http://agseo.pro/case-studies/
+http://agseo.pro/tools/audit/
+http://agseo.pro/tools/roi-calculator/
+http://agseo.pro/privacy/
+http://agseo.pro/terms/
+http://agseo.pro/cookies/
+https://agseo.pro/serviceshttps://agseo.pro/industries/saashttps://agseo.pro/industries/ecommercehttps://agseo.pro/industries/localhttps://agseo.pro/industries/healthcarehttps://agseo.pro/industries/professional-serviceshttps://agseo.pro/authors/agseo-teamhttps://agseo.pro/pricing/starterhttps://agseo.pro/pricing/businesshttps://agseo.pro/pricing/pro-businesshttps://agseo.pro/toolshttps://agseo.pro/dashboardhttps://agseo.pro/case-studies/fashion-brand-seohttps://agseo.pro/case-studies/saas-growthhttps://agseo.pro/case-studies/legal-firm-localhttps://agseo.pro/case-studies/fintech-aihttps://agseo.pro/resources/glossaryhttps://agseo.pro/comparehttps://agseo.pro/compare/jasper-vs-copyai
+
+
+
+
+SE Ranking
+ISSUESPAGESNEWFIXEDhttps://agseo.pro/compare/surfer-vs-frasehttps://agseo.pro/compare/semrush-vs-ahrefshttp://agseo.pro/services/
+http://agseo.pro/industries/saas/
+http://agseo.pro/industries/ecommerce/
+http://agseo.pro/industries/local/
+http://agseo.pro/industries/healthcare/
+http://agseo.pro/industries/professional-services/
+http://agseo.pro/authors/agseo-team/
+http://agseo.pro/pricing/starter/
+http://agseo.pro/pricing/business/
+http://agseo.pro/pricing/pro-business/
+http://agseo.pro/tools/
+http://agseo.pro/dashboard/
+http://agseo.pro/case-studies/fashion-brand-seo/
+http://agseo.pro/case-studies/saas-growth/
+http://agseo.pro/case-studies/legal-firm-local/
+http://agseo.pro/case-studies/fintech-ai/
+http://agseo.pro/resources/glossary/
+http://agseo.pro/compare/
+http://agseo.pro/compare/jasper-vs-copyai/
+http://agseo.pro/compare/surfer-vs-frase/
+http://agseo.pro/compare/semrush-vs-ahrefs/
+Issue description
+The pages indicated in the report return a 3XX response code,
+meaning that a redirect is set up from such pages. The 3XXresponse code in itself is not a problem, but each redirect putsan additional load on the server, so it’s better to removeunnecessary internal redirects.
+
+How to fix
+Make sure that the number of 3XX pages on your website doesnot exceed 5% of the total number of pages. If their numberexceeds 10%, then you have a critical problem, and you shouldimmediately remove some of the redirects.
+
+
+
+Sitemap037
+
+Description
+A sitemap is a file that contains a list of all the URLs on a website that crawlers should be aware of. It must be free of irrelevant or invalidURLs to prevent it from hurting your crawl budget. The checks in this section help ensure your sitemap remains in place and error-free.
+
+ISSUESPAGESNEWFIXED3XX redirects in XML sitemap3700https://agseo.pro/pricing
+
+
+
+
+SE Ranking
+ISSUESPAGESNEWFIXEDhttps://agseo.pro/contacthttps://agseo.pro/blog/react-seo-optimizationhttps://agseo.pro/blog/ai-business-successhttps://agseo.pro/blog/ecommerce-product-pageshttps://agseo.pro/blog/smart-seo-aihttps://agseo.pro/bloghttps://agseo.pro/services/contenthttps://agseo.pro/geo-optimizationhttps://agseo.pro/abouthttps://agseo.pro/case-studieshttps://agseo.pro/tools/audithttps://agseo.pro/tools/roi-calculatorhttps://agseo.pro/privacyhttps://agseo.pro/termshttps://agseo.pro/cookieshttps://agseo.pro/serviceshttps://agseo.pro/industries/saashttps://agseo.pro/industries/ecommercehttps://agseo.pro/industries/localhttps://agseo.pro/industries/healthcarehttps://agseo.pro/industries/professional-serviceshttps://agseo.pro/authors/agseo-teamhttps://agseo.pro/pricing/starterhttps://agseo.pro/pricing/businesshttps://agseo.pro/pricing/pro-businesshttps://agseo.pro/toolshttps://agseo.pro/dashboardhttps://agseo.pro/case-studies/fashion-brand-seohttps://agseo.pro/case-studies/saas-growthhttps://agseo.pro/case-studies/legal-firm-localhttps://agseo.pro/case-studies/fintech-aihttps://agseo.pro/resources/glossaryhttps://agseo.pro/comparehttps://agseo.pro/compare/jasper-vs-copyaihttps://agseo.pro/compare/surfer-vs-frasehttps://agseo.pro/compare/semrush-vs-ahrefsIssue descriptionHow to fix
+
+
+
+
+SE Ranking
+ISSUESPAGESNEWFIXED
+The XML sitemap contains URLs that redirect visitors from onepage to another via 3XX redirects, which, in turn, can drain thecrawl budget and lead to website indexing issues.
+
+Replace redirecting URLs in the XML sitemap with destinationURLs. If a destination URL is already in the XML sitemap, youshould delete URLs with 3XX redirects from the XML sitemap.
+
+
+
+Content01
+
+Description
+Content is the core of your SEO efforts and results. This section contains the most popular checks related to the technical health of yourwebsite's content.
+
+ISSUESPAGESNEWFIXEDNo WWW redirect100Issue description
+This check analyzes to see if you have set up a www to non-wwwredirect and vice versa on your website. Having your websiteload with and without www can lead to duplicate content issues.
+
+How to fix
+If necessary, redirect all non-www URLs on your website to www.
+
+
+
+Links11
+
+Description
+Internal links help search engine crawlers discover new web pages and ensure link equity distribution across the website. External linkshelp support ideas and facts expressed in content with data from external sources. Both are indispensable components for a good userexperience. However, they can ruin it if they don't work properly. This section checks whether the links on your website work correctly. Italso suggests improvements if it discovers any issues.
+
+ISSUESPAGESNEWFIXEDNo inbound links100https://agseo.pro/
+Issue description
+Some pages of the website don't have any internal links pointingto them.
+Search engines can only find and index such pages if they areindicated in the XML sitemap or via external links.
+Your website visitors cannot access such pages from otherpages of the site.
+
+How to fix
+Check your website's internal linking and ensure that visitors andsearch robots can easily access every important page.
+
+Internal links to 3XX redirect pages100https://agseo.pro/
+
+
+
+
+SE Ranking
+ISSUESPAGESNEWFIXEDIssue description
+Some internal links on your website point to pages whose URLhas changed. Redirects allow both visitors and search engines toaccess the relevant page, but we still recommend you replacesuch links. In some cases, such links may cause the page towork incorrectly (for example, if the site was moved to HTTPSand internal links still use the HTTP protocol). Redirects alsoresult in the loss of a small fraction of the link juice.
+
+How to fix
+Replace all internal links indicated in the report with up-to-datepage URL addresses.
+
+Internal links missing anchor100https://agseo.pro/
+Issue description
+Some internal links on your website have an empty or nakedanchor (i.e., anchor that uses a raw URL), or the anchor text onlycontains symbols. When clicking on links without anchors, it maybe difficult for both website visitors and search engines tounderstand what to expect to see on the page that you link outto.
+
+How to fix
+Review the links indicated in the report and, if necessary, addanchor texts or descriptive in-copy text around the link. Aim touse concise phrasing in anchor texts.
+
+External links to 3XX100https://agseo.pro/
+Issue description
+Some pages that you link out to from your website redirectvisitors to a completely different page. Perhaps the redirect wasset up after you linked out to the website, and now the link canlead visitors to another page that does not contain theinformation they need.
+
+How to fix
+Manually look through every external 3XX link and make surethat redirected pages contain the necessary information. If thereinformation is there, replace the link with the new version of theURL. If the required information is not available, replace or deletethe link.
+
+
+
+
+
+

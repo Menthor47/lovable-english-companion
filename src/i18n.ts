@@ -28,7 +28,7 @@ i18n
             loadPath: '/locales/{{lng}}/translation.json',
         },
         react: {
-            useSuspense: false,
+            useSuspense: true,
         }
     });
 

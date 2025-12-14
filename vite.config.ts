@@ -3,7 +3,7 @@ import react from "@vitejs/plugin-react-swc";
 import fs from "node:fs";
 import path from "path";
 
- type SitemapChangeFrequency =
+type SitemapChangeFrequency =
   | "always"
   | "hourly"
   | "daily"
@@ -12,13 +12,13 @@ import path from "path";
   | "yearly"
   | "never";
 
- interface SitemapEntry {
+interface SitemapEntry {
   path: string;
   changefreq: SitemapChangeFrequency;
   priority: number;
- }
+}
 
- function uniqueStrings(values: string[]): string[] {
+function uniqueStrings(values: string[]): string[] {
   const seen = new Set<string>();
   const unique: string[] = [];
   for (const value of values) {
@@ -27,34 +27,34 @@ import path from "path";
     unique.push(value);
   }
   return unique;
- }
+}
 
- function getMatches(source: string, regex: RegExp): string[] {
+function getMatches(source: string, regex: RegExp): string[] {
   const values: string[] = [];
   let match: RegExpExecArray | null;
   while ((match = regex.exec(source)) !== null) {
     values.push(match[1]);
   }
   return values;
- }
+}
 
- function getSiteBaseUrl(projectRoot: string): string {
+function getSiteBaseUrl(projectRoot: string): string {
   const siteMetadataPath = path.resolve(projectRoot, "src", "lib", "siteMetadata.ts");
   const siteMetadataSource = fs.readFileSync(siteMetadataPath, "utf-8");
   const match = siteMetadataSource.match(
     /export const SITE_BASE_URL = ["']([^"']+)["']/
   );
   return match?.[1] ?? "https://agseo.pro";
- }
+}
 
- function getAbsoluteUrl(baseUrl: string, routePath: string): string {
+function getAbsoluteUrl(baseUrl: string, routePath: string): string {
   if (routePath.startsWith("http://") || routePath.startsWith("https://")) return routePath;
   if (routePath === "/") return `${baseUrl}/`;
   if (!routePath.startsWith("/")) return `${baseUrl}/${routePath}`;
   return `${baseUrl}${routePath}`;
- }
+}
 
- function renderUrlEntries(baseUrl: string, entries: SitemapEntry[]): string[] {
+function renderUrlEntries(baseUrl: string, entries: SitemapEntry[]): string[] {
   return entries.flatMap((entry) => {
     const url = getAbsoluteUrl(baseUrl, entry.path);
     const priority = entry.priority.toFixed(1);
@@ -67,9 +67,9 @@ import path from "path";
     ];
     return lines;
   });
- }
+}
 
- function generateSitemapXml(projectRoot: string): string {
+function generateSitemapXml(projectRoot: string): string {
   const baseUrl = getSiteBaseUrl(projectRoot);
 
   const dataDir = path.resolve(projectRoot, "src", "data");
@@ -193,9 +193,9 @@ import path from "path";
   ];
 
   return lines.join("\n");
- }
+}
 
- function generateSitemapPlugin(): Plugin {
+function generateSitemapPlugin(): Plugin {
   return {
     name: "generate-sitemap",
     apply: "build",
@@ -207,7 +207,7 @@ import path from "path";
       fs.writeFileSync(sitemapPath, sitemapXml);
     },
   };
- }
+}
 
 const MANUAL_CHUNK_RULES = [
   {
@@ -271,7 +271,7 @@ export default defineConfig(({ mode }) => ({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: (id) => getManualChunkName(id),
+        // manualChunks removed to fix vendor undefined 'forwardRef' error
       },
     },
   },
