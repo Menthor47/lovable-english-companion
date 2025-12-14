@@ -7,6 +7,7 @@ import heroImage from "@/assets/hero-ai-seo.webp";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { OptimizedImage } from "@/components/ui/optimized-image";
 
 const stats = [
   { value: "AI", label: "Strategy" },
@@ -130,11 +131,11 @@ export function Hero() {
             {/* Main Card */}
             <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl backdrop-blur-sm bg-gradient-to-br from-white/5 to-transparent p-1">
               <div className="relative rounded-xl overflow-hidden bg-background/50">
-                <img
+                <OptimizedImage
                   src={heroImage}
                   alt="AI-Powered SEO Dashboard"
                   className="w-full h-auto object-cover opacity-90 transition-transform duration-700 hover:scale-105"
-                  loading="eager"
+                  priority={true}
                   width={1200}
                   height={675}
                 />

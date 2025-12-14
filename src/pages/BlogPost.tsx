@@ -1,11 +1,14 @@
 import { useRef, useEffect } from "react";
 import { useParams, Navigate, Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { blogPosts } from "@/data/blogPosts";
 import { getAuthorByName } from "@/data/authors";
 import { Header } from "@/components/layout/Header";
+
+import { OptimizedImage } from "@/components/ui/optimized-image";
 import { Footer } from "@/components/layout/Footer";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
-import { ArrowLeft, Calendar, Clock, User, Share2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, Calendar, Clock, User, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Helmet } from "react-helmet-async";
 import {
@@ -18,6 +21,7 @@ import {
     getAbsoluteUrl,
     parseDateToIso
 } from "@/lib/siteMetadata";
+import { useToast } from "@/hooks/use-toast";
 
 // Simple markdown renderer component since we don't have react-markdown installed
 // and we want to keep dependencies minimal as requested.
@@ -48,6 +52,7 @@ const MarkdownRenderer = ({ content }: { content: string }) => {
 };
 
 const BlogPost = () => {
+    const { t } = useTranslation();
     const { slug } = useParams();
     const post = blogPosts.find((p) => p.slug === slug);
     const topRef = useRef<HTMLDivElement>(null);
@@ -120,6 +125,24 @@ const BlogPost = () => {
             "@id": WEBSITE_ID
         },
         ...(datePublished ? { datePublished } : {})
+    };
+
+    const { toast } = useToast();
+
+    const handleShare = async () => {
+        try {
+            await navigator.clipboard.writeText(window.location.href);
+            toast({
+                title: "Link copied",
+                description: "Article link copied to clipboard",
+            });
+        } catch (err) {
+            toast({
+                title: "Failed to copy",
+                description: "Could not copy link to clipboard",
+                variant: "destructive",
+            });
+        }
     };
 
     return (
@@ -209,11 +232,53 @@ const BlogPost = () => {
                                 </Button>
                             </Link>
 
-                            <Button variant="ghost" size="icon">
+                            <Button variant="ghost" size="icon" onClick={handleShare}>
                                 <Share2 className="h-4 w-4" />
                             </Button>
                         </div>
                     </div>
+
+                    {/* Related Articles */}
+                    {blogPosts.filter(p => p.slug !== post.slug).length > 0 && (
+                        <div className="mt-20 mb-12">
+                            <h2 className="text-3xl font-bold mb-8 text-center">{t("blog.relatedArticles") || "Related Articles"}</h2>
+                            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                                {blogPosts
+                                    .filter(p => p.slug !== post.slug)
+                                    .slice(0, 3)
+                                    .map((relatedPost) => (
+                                        <Link key={relatedPost.slug} to={`/blog/${relatedPost.slug}`} className="group">
+                                            <div className="bg-card rounded-xl overflow-hidden border border-border hover:border-primary/50 transition-all duration-300 h-full flex flex-col">
+                                                <div className="relative h-48 overflow-hidden">
+                                                    <OptimizedImage
+                                                        src={relatedPost.image}
+                                                        alt={relatedPost.title}
+                                                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                                    />
+                                                </div>
+                                                <div className="p-6 flex flex-col flex-grow">
+                                                    <div className="flex items-center gap-2 text-xs text-muted-foreground mb-3">
+                                                        <span className="px-2 py-1 rounded-full bg-primary/10 text-primary font-medium">
+                                                            {relatedPost.category}
+                                                        </span>
+                                                        <span>{relatedPost.readTime}</span>
+                                                    </div>
+                                                    <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors line-clamp-2">
+                                                        {relatedPost.title}
+                                                    </h3>
+                                                    <p className="text-muted-foreground text-sm line-clamp-2 mb-4 flex-grow">
+                                                        {relatedPost.excerpt}
+                                                    </p>
+                                                    <div className="flex items-center text-primary text-sm font-medium mt-auto">
+                                                        Read More <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </Link>
+                                    ))}
+                            </div>
+                        </div>
+                    )}
                 </article>
             </main>
 

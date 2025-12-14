@@ -271,7 +271,7 @@ export default defineConfig(({ mode }) => ({
   build: {
     rollupOptions: {
       output: {
-        // manualChunks removed to fix vendor undefined 'forwardRef' error
+        // manualChunks: (id) => getManualChunkName(id),
       },
     },
   },

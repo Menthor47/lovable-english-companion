@@ -1,4 +1,4 @@
-import { Target, FileText, Wrench, PenTool, Link2, MapPin, BarChart3, Settings, Zap, Globe, Briefcase, TrendingUp } from "lucide-react";
+import { Target, FileText, Wrench, PenTool, Link2, MapPin, BarChart3, Settings, Zap, Globe, Briefcase, TrendingUp, Shield } from "lucide-react";
 import { getAbsoluteUrl } from "@/lib/siteMetadata";
 
 export interface ServiceCategory {
@@ -37,7 +37,7 @@ export const pricingData: Record<string, PricingTierData> = {
         id: "starter",
         name: "Starter",
         subtitle: "SEO Foundation for Growing Businesses",
-        price: "€470 - €1,200",
+        price: "€450 - €1,150",
         contract: "3-6 months",
         targetClient: "Local businesses, startups, solopreneurs",
         icon: Shield,
@@ -45,7 +45,7 @@ export const pricingData: Record<string, PricingTierData> = {
         iconBgClass: "bg-blue-500/20",
         iconBorderClass: "border-blue-500/30",
         ctaText: "Get Started with Starter Plan",
-        metaTitle: "Starter SEO Package - AGSEO | €470-€1,200/month",
+        metaTitle: "Starter SEO Package - AGSEO | €450-€1,150/month",
         metaDescription: "SEO Foundation for Growing Businesses. Perfect for local businesses, startups, and solopreneurs. 15-20 keywords, technical audit, content creation, and local SEO.",
         canonicalUrl: getAbsoluteUrl("/pricing/starter"),
         summaryTitle: "Ready to Start Growing?",
@@ -149,7 +149,7 @@ export const pricingData: Record<string, PricingTierData> = {
         id: "business",
         name: "Business",
         subtitle: "Professional SEO Growth for Competitive Markets",
-        price: "$1,500 - $4,200",
+        price: "€1,450 - €3,800",
         contract: "6 months (12-month discount)",
         targetClient: "Growing SMEs, established e-commerce",
         icon: Zap,
@@ -159,7 +159,7 @@ export const pricingData: Record<string, PricingTierData> = {
         isPopular: true,
         ctaText: "Get Started with Business Plan",
         includesText: "Includes everything from Starter tier",
-        metaTitle: "Business SEO Package - AGSEO | €1,500-€4,200/month",
+        metaTitle: "Business SEO Package - AGSEO | €1,450-€3,800/month",
         metaDescription: "Professional SEO Growth for Competitive Markets. For growing SMEs, established e-commerce, and regional services. 40-60 keywords, quarterly audits, guest posting, and advanced link building.",
         canonicalUrl: getAbsoluteUrl("/pricing/business"),
         summaryTitle: "Ready to Scale Your Business?",
@@ -399,4 +399,4 @@ export const pricingData: Record<string, PricingTierData> = {
     }
 };
 
-import { Shield } from "lucide-react"; // Import Shield here as it was missed in top import
+

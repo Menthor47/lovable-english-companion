@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Link2, Target, BarChart3, ArrowRight, CheckCircle2, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AnimatedSection, StaggerContainer, StaggerItem } from "@/components/ui/animated-section";
@@ -81,10 +82,16 @@ export function AdvancedServices() {
                   </ul>
 
                   {/* CTA */}
-                  <Button variant="hero" className="group/btn">
-                    {service.cta}
-                    <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
-                  </Button>
+                  <Link to="/contact">
+                    <Button
+                      variant="hero"
+                      className="group/btn"
+                      aria-label={`Get started with ${service.title}`}
+                    >
+                      {service.cta}
+                      <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </StaggerItem>

@@ -33,6 +33,7 @@ export function Footer() {
             <div className="space-y-2">
               <a
                 href={`mailto:${email}`}
+                aria-label={`Email us at ${email}`}
                 className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
               >
                 <Mail className="w-4 h-4" />

@@ -1,29 +1,28 @@
-import { supabase } from "./supabase";
+import { config } from './config';
 
-export interface ContactData {
+interface ContactSubmission {
     email: string;
     website?: string;
+    message?: string;
 }
 
 export const api = {
     contact: {
-        submit: async (data: ContactData) => {
-            if (!supabase) throw new Error("Supabase is not configured. Please set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY.");
+        submit: async (data: ContactSubmission) => {
+            // Simulation of an API call
+            // In a real scenario:
+            // const response = await fetch(`${config.api.baseUrl}/contact`, {
+            //   method: 'POST',
+            //   headers: { 'Content-Type': 'application/json' },
+            //   body: JSON.stringify(data),
+            // });
+            // if (!response.ok) throw new Error('Submission failed');
+            // return response.json();
 
-            const { error } = await supabase
-                .from('contact_submissions')
-                .insert([
-                    {
-                        email: data.email,
-                        website: data.website || null,
-                    }
-                ]);
+            // Mock delay
+            await new Promise((resolve) => setTimeout(resolve, 1000));
 
-            if (error) {
-                console.error("Supabase error:", error);
-                throw new Error("Failed to submit form. Please try again later.");
-            }
-
+            // Simulate success
             return { success: true };
         },
     },

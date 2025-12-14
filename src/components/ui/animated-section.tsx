@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView, useAnimation, Variants } from "framer-motion";
+import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 
 interface AnimatedSectionProps {
   children: React.ReactNode;
@@ -36,6 +37,7 @@ export function AnimatedSection({
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const controls = useAnimation();
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
     if (isInView) {
@@ -43,12 +45,17 @@ export function AnimatedSection({
     }
   }, [isInView, controls]);
 
+  const activeVariants = prefersReducedMotion ? {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 }
+  } : variants[direction];
+
   return (
     <motion.div
       ref={ref}
       initial="hidden"
       animate={controls}
-      variants={variants[direction]}
+      variants={activeVariants}
       transition={{
         duration: 0.6,
         delay,

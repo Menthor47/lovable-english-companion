@@ -10,6 +10,7 @@ import { motion } from "framer-motion";
 import { ContentKanban } from "@/components/dashboard/ContentKanban";
 import { ProjectTimeline } from "@/components/dashboard/ProjectTimeline";
 import { DeliverableVault } from "@/components/dashboard/DeliverableVault";
+import { Link } from "react-router-dom";
 import { SITE_OG_IMAGE_URL, getAbsoluteUrl } from "@/lib/siteMetadata";
 
 const data = [
@@ -175,7 +176,9 @@ export default function Dashboard() {
                             <div className="rounded-xl bg-gradient-to-br from-primary/20 to-blue-600/20 border border-primary/20 p-6 text-center">
                                 <h4 className="font-bold mb-2">Ready for the real thing?</h4>
                                 <p className="text-sm text-muted-foreground mb-4">Get your own custom dashboard setup today.</p>
-                                <Button className="w-full">Start Onboarding</Button>
+                                <Link to="/contact">
+                                    <Button className="w-full">Start Onboarding</Button>
+                                </Link>
                             </div>
                         </div>
                     </div>

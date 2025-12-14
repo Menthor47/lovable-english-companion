@@ -11,7 +11,10 @@ initAnalytics();
 
 const container = document.getElementById("root")!;
 
-if (container.hasChildNodes()) {
+// Check if there is actual server-rendered HTML (Elements), not just comments
+const hasServerHTML = Array.from(container.childNodes).some(node => node.nodeType === 1);
+
+if (hasServerHTML) {
     const { hydrateRoot } = await import("react-dom/client");
     hydrateRoot(
         container,
@@ -19,6 +22,7 @@ if (container.hasChildNodes()) {
             <a
                 href="#main"
                 className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-md focus:shadow-lg transition-colors"
+                aria-label="Skip to main content"
             >
                 Skip to main content
             </a>
