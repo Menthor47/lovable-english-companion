@@ -99,7 +99,15 @@ export function Contact() {
                   {t("contact.form.description")}
                 </p>
 
-                <form onSubmit={handleSubmit(onFormSubmit)} className="space-y-4">
+                <form noValidate onSubmit={handleSubmit(onFormSubmit)} className="space-y-4">
+                  <input
+                    type="text"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                    className="absolute left-[-10000px] top-auto h-1 w-1 overflow-hidden"
+                    {...register("website2")}
+                  />
                   <div className="space-y-2">
                     <label htmlFor="email" className="text-sm font-medium">{t("contact.form.email")}</label>
                     <input
@@ -141,7 +149,7 @@ export function Contact() {
                     {isSubmitting ? t("contact.form.sending") : t("contact.form.submit")}
                   </Button>
 
-                  <FormFeedback isLoading={false} error={error} success={success} />
+                  <FormFeedback isLoading={isSubmitting} error={error} success={success} />
                 </form>
               </motion.div>
             </StaggerItem>

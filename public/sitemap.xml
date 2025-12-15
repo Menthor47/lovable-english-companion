@@ -103,6 +103,21 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://agseo.pro/tools/serp-simulator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://agseo.pro/tools/keyword-mixer</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://agseo.pro/tools/schema-generator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://agseo.pro/dashboard</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -156,6 +171,26 @@
   </url>
   <url>
     <loc>https://agseo.pro/compare/semrush-vs-ahrefs</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://agseo.pro/compare/chatgpt-vs-claude</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://agseo.pro/compare/seranking-vs-moz</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://agseo.pro/compare/surfer-vs-clearscope</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://agseo.pro/compare/semrush-vs-seranking</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

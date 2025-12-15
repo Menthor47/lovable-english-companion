@@ -1,0 +1,113 @@
+Mini Audit: Oferta & Planurile SEO (RO)
+
+VERDICT: Arată premium ca design, dar copy-ul și ancorele de preț transmit „multă muncă pe bani puțini”. Asta scade încrederea și atrage mai ales price-shoppers.
+
+Obiectiv: să faci oferta să pară (și să fie percepută) ca un sistem de creștere, nu ca o listă de task-uri.
+
+---
+
+## 1) Probleme critice (ce te trage în jos)
+
+### 1. Features > Outcomes
+În forma actuală, enumeri livrabile (ex: „15–20 cuvinte cheie”), dar cumpărătorul cumpără rezultate: trafic calificat, leaduri, predictibilitate și claritate.
+
+Regula simplă: fiecare bullet de livrabil trebuie să poată fi tradus într-un „de ce contează” (ex: „pagini optimizate” → „mai multe pagini care convertesc”).
+
+### 2. Starter pare supraîncărcat (raport perceput preț/livrabil)
+Un Starter care include content + PR + audit + local SEO + reporting, dar are un range foarte jos/lat, ridică două întrebări în mintea clientului:
+
+- livrați superficial?
+- sau sub-prețuiți (deci ceva nu e clar)?
+
+### 3. Range-uri prea late = fricțiune în decizie
+€450 → €1,150 e o diferență mare pentru aceeași „etichetă” de plan. Clientul amână decizia pentru că nu înțelege rapid unde se încadrează.
+
+Soluție: range-uri mai strânse + condiții clare pentru ce împinge prețul în sus (număr pagini/limbi/locații/industria).
+
+---
+
+## 2) Prețuri recomandate (curate, credibile)
+
+### Structură propusă
+
+Starter: **€590 – €890 / lună**
+Business: **€1,490 – €2,490 / lună**
+Pro Business: **de la €3,500 / lună**
+
+Notă: „de la” la Pro Business e psihologie bună pentru enterprise, dar trebuie ancorat printr-un minim clar (ex: 8–12 pagini/lună, audit lunar, link building avansat).
+
+---
+
+## 3) Copy „ready to paste” (RO)
+
+### STARTER
+
+Headline: **Pentru afaceri care vor trafic constant și o fundație SEO solidă**
+Subheadline: SEO esențial pentru vizibilitate, trafic și primele conversii.
+
+Puncte cheie:
+- 15–25 cuvinte cheie comerciale (focus pe intenție)
+- 2–3 pagini cheie optimizate/lună (pagini care vând)
+- 1 articol SEO/lună (trafic + autoritate)
+- audit tehnic inițial + listă de priorități
+- SEO local (Google Business Profile)
+- 2 comunicate PR/lună
+- raportare lunară + pași următori
+
+CTA recomandat: **Începe creșterea**
+
+### BUSINESS (Most Popular)
+
+Headline: **Pentru companii care vor leaduri, nu doar trafic**
+Subheadline: Creștere SEO predictibilă în piețe competitive.
+
+Puncte cheie:
+- 40–70 cuvinte cheie cu intenție de cumpărare
+- 4–6 pagini optimizate/lună
+- 3 articole SEO/lună (topic clusters)
+- audit trimestrial + roadmap
+- guest posting: 3–5 linkuri/lună
+- PR: 5–8 mențiuni/lună
+- Core Web Vitals (prioritare pentru conversii)
+- call bilunar strategie (SEO + Content)
+
+CTA recomandat: **Scalează acum**
+
+### PRO BUSINESS (Enterprise / Revenue SEO)
+
+Headline: **Pentru branduri care vor dominare și creștere pe venituri**
+Subheadline: SEO orientat pe conversii, autoritate și execuție la nivel enterprise.
+
+Puncte cheie:
+- strategie custom (100+ cuvinte cheie)
+- 8–12 pagini optimizate/lună
+- 5–8 articole premium/lună
+- audit tehnic lunar + prioritizare
+- digital PR + link building avansat
+- modul CRO (SEO → conversie)
+- account manager dedicat
+- tracking avansat + automatizări AI
+
+CTA recomandat: **Discută cu un consultant SEO**
+
+---
+
+## 4) Boostere de conversie (opționale, dar puternice)
+
+### 1) Risk reversal (fără promisiuni riscante)
+În loc de „continuăm gratis până apare”, folosește un risc reversibil și controlabil:
+
+- „Audit inițial + plan de acțiune în X zile”
+- „Raport de progres la 30 de zile + ajustare roadmap”
+
+### 2) „Nu este pentru…” (filtrează clienții slabi)
+- Nu este pentru rezultate peste noapte
+- Nu este pentru bugete foarte mici
+- Este pentru business-uri care vor creștere sustenabilă și pot executa recomandările
+
+### 3) Microcopy care reduce fricțiunea
+În loc de „View Full Details”, folosește: **„Vezi exact ce primești”**.
+
+---
+
+Următorul pas logic: aplică aceste ajustări direct în cardurile de preț (headline/beneficii/CTA) și aliniază range-urile în toate paginile (pricing + plan detail pages). E genul de fix care ridică percepția înainte să schimbi ceva în delivery.

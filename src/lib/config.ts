@@ -1,6 +1,6 @@
 export const config = {
     api: {
-        baseUrl: import.meta.env.Vite_API_URL || '/api',
+        baseUrl: import.meta.env.VITE_API_URL || "/api",
     },
     whatsapp: {
         number: import.meta.env.VITE_WHATSAPP_NUMBER || '1234567890',

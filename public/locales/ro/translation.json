@@ -230,66 +230,111 @@
     "pricing": {
         "badge": "Prețuri simple și transparente",
         "title": "Investește în creștere, nu în presupuneri",
-        "subtitle": "Alege pachetul bazat pe AI care se potrivește nivelului tău. Fără costuri ascunse, doar rezultate.",
+        "subtitle": "Alege planul bazat pe AI care se potrivește nivelului tău. Fără costuri ascunse — doar rezultate.",
         "viewDemoCta": "Vezi demo-ul Client Portal",
+        "viewDetailsCta": "Vezi exact ce primești",
+        "moreFeaturesHint": "...plus lista completă de livrabile",
         "plans": {
             "starter": {
                 "name": "Starter",
-                "description": "Fundație SEO pentru afaceri în creștere.",
-                "price": "$470 - $1,200",
+                "description": "Trafic constant + o fundație SEO solidă.",
+                "price": "€590 - €890",
                 "period": "/lună",
                 "features": [
-                    "15-20 Cuvinte Cheie",
-                    "2-3 Pagini Optimizate/lună",
-                    "1 Articol Blog/lună",
-                    "Optimizare Conținut",
-                    "Audit Tehnic De Bază",
-                    "2-3 Comunicate de Presă/lună",
-                    "Configurare SEO Local",
-                    "Raportare Lunară"
+                    "15-25 cuvinte cheie comerciale",
+                    "2-3 pagini cheie optimizate/lună",
+                    "1 articol SEO/lună",
+                    "Refresh conținut existent",
+                    "Audit tehnic inițial + priorități",
+                    "2 comunicate de presă/lună",
+                    "SEO local (Google Business Profile)",
+                    "Raportare lunară + pași următori"
                 ],
-                "cta": "Începe Acum",
+                "cta": "Începe creșterea",
                 "popularLabel": ""
             },
             "business": {
                 "name": "Business",
-                "description": "Creștere profesională pentru piețe competitive.",
-                "price": "$1,500 - $4,200",
+                "description": "Creștere SEO orientată pe lead-uri pentru piețe competitive.",
+                "price": "€1,490 - €2,490",
                 "period": "/lună",
                 "features": [
-                    "40-60 Cuvinte Cheie",
-                    "4-6 Pagini Optimizate/lună",
-                    "3 Articole Blog/lună",
-                    "Audituri Trimestriale",
-                    "7-10 Comunicate de Presă",
-                    "Guest Posting (3-5/lună)",
-                    "Optimizare Core Web Vitals",
-                    "Ședințe Strategie Bilunare"
+                    "40-70 cuvinte cheie cu intenție de cumpărare",
+                    "4-6 pagini optimizate/lună",
+                    "3 articole SEO/lună (topic clusters)",
+                    "Audit trimestrial + roadmap",
+                    "Guest posting (3-5 linkuri/lună)",
+                    "Mențiuni PR (5-8/lună)",
+                    "Îmbunătățiri Core Web Vitals",
+                    "Call de strategie la 2 săptămâni"
                 ],
-                "cta": "Scalează Acum",
+                "cta": "Scalează acum",
                 "popularLabel": "CEL MAI POPULAR"
             },
             "proBusiness": {
                 "name": "Pro Business",
-                "description": "SEO Enterprise: Creștere focusată pe venituri.",
-                "price": "Discută cu Noi",
+                "description": "SEO enterprise: execuție scalabilă, focus pe venituri.",
+                "price": "€3,500+",
                 "period": "",
                 "features": [
-                    "Ținte Cuvinte Cheie Custom",
-                    "8-12+ Pagini Optimizate/lună",
-                    "5-8 Articole Blog/lună",
-                    "Modul CRO Complet",
-                    "Audituri Tehnice Lunare",
-                    "Link Building Avansat",
-                    "Account Manager Dedicat",
-                    "Automatizări AI Custom"
+                    "Strategie custom (100+ cuvinte cheie)",
+                    "8-12+ pagini optimizate/lună",
+                    "5-8 articole premium/lună",
+                    "Audit tehnic lunar + priorități",
+                    "Digital PR avansat + link building",
+                    "Modul CRO (SEO → conversie)",
+                    "Account manager dedicat",
+                    "Tracking avansat + automatizări AI"
                 ],
-                "cta": "Contactează Vânzări",
+                "cta": "Vorbește cu un consultant SEO",
                 "popularLabel": ""
             }
         },
         "faqTeaser": "Ai nevoie de o soluție enterprise personalizată?",
-        "faqCta": "Programează o consultație cu echipa noastră de vânzări"
+        "faqCta": "Programează o consultație cu echipa noastră"
+    },
+    "auditTool": {
+        "metaTitle": "Audit SEO AI Gratuit | AGSEO",
+        "metaDescription": "Solicită un audit gratuit de vizibilitate SEO, asistat de AI, pentru site-ul tău. Vezi cum apare brandul tău pe Google și în răspunsurile AI (ChatGPT, Gemini). Primești un rezumat verificat de un om și pașii prioritizați.",
+        "title": "Audit SEO AI Gratuit",
+        "subtitle": "Vezi cât de vizibil e brandul tău pe Google, ChatGPT și Gemini — și primești pașii prioritizați.",
+        "form": {
+            "urlLabel": "URL site",
+            "urlPlaceholder": "https://example.com",
+            "emailLabel": "Adresă de email",
+            "emailPlaceholder": "you@company.com",
+            "submitCta": "Primește auditul gratuit",
+            "note": "Vei primi imediat un email de confirmare. Rezumatul auditului vine după revizuire."
+        },
+        "toast": {
+            "missingTitle": "Lipsesc informații",
+            "missingDescription": "Te rugăm să introduci atât URL-ul site-ului, cât și adresa de email.",
+            "errorTitle": "Eroare",
+            "errorDescription": "Nu am putut porni auditul. Te rugăm să încerci din nou."
+        },
+        "scanning": {
+            "title": "Analizăm {{url}}...",
+            "steps": [
+                "Verificăm fundația tehnică...",
+                "Analizăm date structurate & schema...",
+                "Evaluăm entități și acoperirea topicurilor...",
+                "Căutăm oportunități de citare în AI (AEO/GEO)...",
+                "Pregătim quick wins prioritizate..."
+            ]
+        },
+        "results": {
+            "title": "Cerere primită!",
+            "receivedPrefix": "Am primit cererea ta de audit pentru",
+            "confirmationPrefix": "Dacă nu vezi emailul de confirmare la",
+            "confirmationSuffix": "verifică spam sau scrie-ne pe WhatsApp.",
+            "nextTitle": "Ce urmează?",
+            "nextSteps": [
+                "Revizuim site-ul tău și vizibilitatea actuală.",
+                "Identificăm quick wins pentru SEO + GEO + AEO.",
+                "Îți trimitem pe email pașii următori și recomandările."
+            ],
+            "scanAnotherCta": "Scanează alt site"
+        }
     },
     "process": {
         "title": "Procesul Nostru de Lucru",

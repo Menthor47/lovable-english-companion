@@ -39,7 +39,7 @@ export default function GEO() {
                         </h1>
                         <p className="text-xl text-muted-foreground mb-8 text-balance">
                             SEO is dead. Long live GEO. <br />
-                            We don't just optimizing for 10 blue links. We optimize for the single answer given by ChatGPT, Gemini, Claude and Perplexity.
+                            We don't just optimize for 10 blue links. We optimize for the single answer given by ChatGPT, Gemini, Claude and Perplexity.
                         </p>
                     </AnimatedSection>
 

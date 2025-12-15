@@ -128,11 +128,15 @@ export function Header() {
                         </NavigationMenuContent>
                       </>
                     ) : (
-                      <Link to={item.href}>
-                        <NavigationMenuLink className={navigationMenuTriggerStyle() + " bg-transparent hover:text-primary hover:bg-primary/10 transition-colors"}>
-                          {t(`nav.${item.title}`)}
-                        </NavigationMenuLink>
-                      </Link>
+                      <NavigationMenuLink
+                        asChild
+                        className={
+                          navigationMenuTriggerStyle() +
+                          " bg-transparent hover:text-primary hover:bg-primary/10 transition-colors"
+                        }
+                      >
+                        <Link to={item.href}>{t(`nav.${item.title}`)}</Link>
+                      </NavigationMenuLink>
                     )}
                   </NavigationMenuItem>
                 ))}

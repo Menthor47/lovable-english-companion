@@ -60,7 +60,8 @@ export default function CompareDetail() {
         },
         isPartOf: {
             "@id": WEBSITE_ID
-        }
+        },
+        ...(comp.article ? { articleBody: comp.article } : {})
     };
 
     return (
@@ -171,6 +172,29 @@ export default function CompareDetail() {
                             <span className="font-bold text-lg">{comp.verdict.bestFor}</span>
                         </div>
                     </AnimatedSection>
+
+                    {comp.article ? (
+                        <AnimatedSection className="mt-20">
+                            <div className="bg-card border border-border/50 rounded-3xl p-8 md:p-12">
+                                <h2 className="font-heading text-2xl md:text-3xl font-bold mb-6">
+                                    Full comparison
+                                </h2>
+                                <div className="prose prose-lg dark:prose-invert max-w-none">
+                                    {comp.article
+                                        .split("\n\n")
+                                        .map((paragraph, index) => {
+                                            const trimmed = paragraph.trim();
+                                            if (!trimmed.length) return null;
+                                            return (
+                                                <p key={index} className="leading-relaxed text-muted-foreground">
+                                                    {trimmed}
+                                                </p>
+                                            );
+                                        })}
+                                </div>
+                            </div>
+                        </AnimatedSection>
+                    ) : null}
 
                     {/* CTA */}
                     <div className="mt-20 text-center">

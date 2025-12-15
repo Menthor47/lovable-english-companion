@@ -4,10 +4,19 @@ import { Footer } from "@/components/layout/Footer";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Search, Sparkles, MessageSquare, Zap, DollarSign } from "lucide-react";
+import { Search, Sparkles, MessageSquare, Zap, DollarSign, LayoutDashboard, type LucideIcon } from "lucide-react";
 import { SITE_OG_IMAGE_URL, getAbsoluteUrl } from "@/lib/siteMetadata";
 
-const tools = [
+type ToolCard = {
+    icon: LucideIcon;
+    title: string;
+    description: string;
+    link: string;
+    action: string;
+    isReady: boolean;
+};
+
+const tools: ToolCard[] = [
     {
         icon: Search,
         title: "Instant AI Audit",
@@ -25,33 +34,42 @@ const tools = [
         isReady: true,
     },
     {
+        icon: LayoutDashboard,
+        title: "Visibility Dashboard Demo",
+        description: "Preview a clean client dashboard view for rankings, traffic, and next steps — with illustrative sample data.",
+        link: "/dashboard",
+        action: "Open Dashboard",
+        isReady: true,
+    },
+    {
         icon: Sparkles,
         title: "Keyword Mixer",
         description: "Combine seed keywords to find long-tail opportunities that competitors miss.",
-        link: "#",
-        action: "Coming Soon",
-        isReady: false,
+        link: "/tools/keyword-mixer",
+        action: "Launch Tool",
+        isReady: true,
     },
     {
         icon: MessageSquare,
-        title: "Persona Generator",
-        description: "Generate detailed buyer personas based on your target audience using AI analysis.",
-        link: "#",
-        action: "Coming Soon",
-        isReady: false,
+        title: "Schema Generator",
+        description: "Generate JSON-LD markup for FAQs and Articles to win rich results.",
+        link: "/tools/schema-generator",
+        action: "Launch Tool",
+        isReady: true,
     },
     {
         icon: Zap,
         title: "SERP Simulator",
         description: "Preview how your pages will look in Google Search and AI Overview citations.",
-        link: "#",
-        action: "Coming Soon",
-        isReady: false,
+        link: "/tools/serp-simulator",
+        action: "Launch Tool",
+        isReady: true,
     },
 ];
 
 export default function Tools() {
     const pageUrl = getAbsoluteUrl("/tools");
+    const FeaturedIcon = tools[0].icon;
 
     return (
         <div className="min-h-screen bg-background">
@@ -84,8 +102,47 @@ export default function Tools() {
                         </p>
                     </AnimatedSection>
 
+                    {/* Featured Tool */}
+                    <AnimatedSection className="mb-16">
+                        <div className="max-w-4xl mx-auto">
+                            <div className="relative overflow-hidden p-8 md:p-12 rounded-3xl bg-gradient-to-br from-card to-background border border-primary/20 shadow-2xl hover:shadow-primary/10 transition-shadow duration-500 group">
+                                <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                                <div className="relative z-10 flex flex-col items-center text-center">
+                                    <div className="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center mb-8 text-primary group-hover:scale-110 transition-transform duration-500">
+                                        <FeaturedIcon className="w-10 h-10" />
+                                    </div>
+
+                                    <h2 className="text-3xl md:text-4xl font-bold font-heading mb-4">
+                                        {tools[0].title}
+                                    </h2>
+                                    <p className="text-xl text-muted-foreground mb-10 max-w-2xl">
+                                        {tools[0].description}
+                                    </p>
+
+                                    <Button variant="hero" size="lg" className="h-14 px-10 text-lg w-full sm:w-auto" asChild>
+                                        <Link to={tools[0].link}>
+                                            <Sparkles className="mr-2 w-5 h-5" />
+                                            {tools[0].action}
+                                        </Link>
+                                    </Button>
+
+                                    <div className="mt-6 flex items-center gap-2 text-sm text-muted-foreground">
+                                        <div className="flex -space-x-2">
+                                            {[1, 2, 3].map(i => (
+                                                <div key={i} className="w-6 h-6 rounded-full bg-border border-2 border-background" />
+                                            ))}
+                                        </div>
+                                        <span>Join 1,000+ marketers optimizing with AI</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </AnimatedSection>
+
+                    {/* Remaining Tools Grid */}
                     <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                        {tools.map((tool, index) => (
+                        {tools.slice(1).map((tool, index) => (
                             <AnimatedSection key={index} delay={index * 100} className="h-full">
                                 <div className="h-full p-8 rounded-2xl bg-card border border-border/50 hover:border-primary/50 transition-all duration-300 flex flex-col group">
                                     <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-6 text-primary group-hover:scale-110 transition-transform duration-300">

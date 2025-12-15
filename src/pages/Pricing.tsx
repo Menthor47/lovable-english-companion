@@ -126,7 +126,7 @@ export default function Pricing() {
                                                 </div>
                                             ))}
                                             <div className="pt-2">
-                                                <span className="text-xs text-muted-foreground italic">...plus full service breakdown</span>
+                                                <span className="text-xs text-muted-foreground italic">{t("pricing.moreFeaturesHint")}</span>
                                             </div>
                                         </div>
 
@@ -146,7 +146,7 @@ export default function Pricing() {
                                                 to={plan.detailLink}
                                                 className="flex items-center justify-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors py-2"
                                             >
-                                                View Full Details
+                                                {t("pricing.viewDetailsCta")}
                                             </Link>
                                         </div>
                                     </div>

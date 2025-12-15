@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
+import { useTranslation } from "react-i18next";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { AnimatedSection } from "@/components/ui/animated-section";
@@ -14,19 +15,29 @@ import { SITE_OG_IMAGE_URL, getAbsoluteUrl } from "@/lib/siteMetadata";
 
 export default function Audit() {
     const [step, setStep] = useState<"form" | "scanning" | "results">("form");
-    const [formData, setFormData] = useState({ url: "", email: "" });
+    const [formData, setFormData] = useState({ url: "", email: "", website2: "" });
     const { toast } = useToast();
+    const { t } = useTranslation();
 
     const pageUrl = getAbsoluteUrl("/tools/audit");
 
     // The simulation steps
-    const simulationSteps = [
-        "Analyzing Technical Architecture...",
-        "Scanning for Schema Markup...",
-        "Evaluating Entity Graph Connections...",
-        "Checking LLM Citation Sources...",
-        "Generating AI Readability Score...",
-    ];
+    const toStringArray = (value: unknown): string[] => {
+        if (!Array.isArray(value)) return [];
+
+        const array = value as unknown[];
+        if (!array.every((item) => typeof item === "string")) return [];
+
+        return array as string[];
+    };
+
+    const simulationSteps = toStringArray(
+        t("auditTool.scanning.steps", { returnObjects: true }) as unknown,
+    );
+
+    const nextSteps = toStringArray(
+        t("auditTool.results.nextSteps", { returnObjects: true }) as unknown,
+    );
 
     const [currentSimulationStep, setCurrentSimulationStep] = useState(0);
 
@@ -34,20 +45,25 @@ export default function Audit() {
         e.preventDefault();
         if (!formData.url || !formData.email) {
             toast({
-                title: "Missing Information",
-                description: "Please enter both a website URL and your email address.",
+                title: t("auditTool.toast.missingTitle"),
+                description: t("auditTool.toast.missingDescription"),
                 variant: "destructive",
             });
             return;
         }
 
         try {
-            await api.contact.submit({ email: formData.email, website: formData.url });
+            await api.contact.submit({
+                email: formData.email,
+                website: formData.url,
+                source: "audit",
+                website2: formData.website2 || undefined,
+            });
         } catch (error) {
             console.error("Audit submission failed:", error);
             toast({
-                title: "Error",
-                description: "Could not start the audit. Please try again.",
+                title: t("auditTool.toast.errorTitle"),
+                description: t("auditTool.toast.errorDescription"),
                 variant: "destructive",
             });
             return;
@@ -72,12 +88,12 @@ export default function Audit() {
     return (
         <div className="min-h-screen bg-background flex flex-col">
             <Helmet>
-                <title>Free AI SEO Audit | AGSEO</title>
-                <meta name="description" content="Get a free instant AI-powered SEO audit for your website. Discover how visible your brand is on Google, ChatGPT, and Gemini." />
+                <title>{t("auditTool.metaTitle")}</title>
+                <meta name="description" content={t("auditTool.metaDescription")} />
                 <link rel="canonical" href={pageUrl} />
                 <meta property="og:url" content={pageUrl} />
-                <meta property="og:title" content="Free AI SEO Audit | AGSEO" />
-                <meta property="og:description" content="Get a free instant AI-powered SEO audit for your website. Discover how visible your brand is on Google, ChatGPT, and Gemini." />
+                <meta property="og:title" content={t("auditTool.metaTitle")} />
+                <meta property="og:description" content={t("auditTool.metaDescription")} />
                 <meta property="og:image" content={SITE_OG_IMAGE_URL} />
             </Helmet>
             <Header />
@@ -88,10 +104,10 @@ export default function Audit() {
                             <AnimatedSection>
                                 <div className="text-center mb-10">
                                     <h1 className="font-heading text-4xl md:text-5xl font-bold mb-4">
-                                        Instant AI SEO Audit
+                                        {t("auditTool.title")}
                                     </h1>
                                     <p className="text-xl text-muted-foreground">
-                                        Discover how visible your brand is on Google, ChatGPT, and Gemini.
+                                        {t("auditTool.subtitle")}
                                     </p>
                                 </div>
 
@@ -99,11 +115,23 @@ export default function Audit() {
                                     <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-accent" />
 
                                     <form onSubmit={handleSubmit} className="space-y-6">
+                                        <input
+                                            name="website2"
+                                            type="text"
+                                            tabIndex={-1}
+                                            autoComplete="off"
+                                            aria-hidden="true"
+                                            className="absolute left-[-10000px] top-auto h-1 w-1 overflow-hidden"
+                                            value={formData.website2}
+                                            onChange={(e) =>
+                                                setFormData({ ...formData, website2: e.target.value })
+                                            }
+                                        />
                                         <div className="space-y-2">
-                                            <Label htmlFor="url">Website URL</Label>
+                                            <Label htmlFor="url">{t("auditTool.form.urlLabel")}</Label>
                                             <Input
                                                 id="url"
-                                                placeholder="https://example.com"
+                                                placeholder={t("auditTool.form.urlPlaceholder")}
                                                 value={formData.url}
                                                 onChange={(e) => setFormData({ ...formData, url: e.target.value })}
                                                 className="h-12 bg-background/50"
@@ -111,11 +139,11 @@ export default function Audit() {
                                         </div>
 
                                         <div className="space-y-2">
-                                            <Label htmlFor="email">Email Address</Label>
+                                            <Label htmlFor="email">{t("auditTool.form.emailLabel")}</Label>
                                             <Input
                                                 id="email"
                                                 type="email"
-                                                placeholder="you@company.com"
+                                                placeholder={t("auditTool.form.emailPlaceholder")}
                                                 value={formData.email}
                                                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                                                 className="h-12 bg-background/50"
@@ -124,11 +152,11 @@ export default function Audit() {
 
                                         <Button type="submit" variant="hero" size="xl" className="w-full text-lg">
                                             <Search className="w-5 h-5 mr-2" />
-                                            Scan My Website
+                                            {t("auditTool.form.submitCta")}
                                         </Button>
 
                                         <p className="text-xs text-center text-muted-foreground">
-                                            We'll email you a comprehensive report within 5 minutes.
+                                            {t("auditTool.form.note")}
                                         </p>
                                     </form>
                                 </div>
@@ -146,7 +174,7 @@ export default function Audit() {
                                     <div className="absolute inset-0 border-4 border-primary border-t-transparent rounded-full animate-spin" />
                                     <Search className="absolute inset-0 m-auto text-primary w-8 h-8 animate-pulse" />
                                 </div>
-                                <h2 className="text-2xl font-bold mb-2">Analyzing {formData.url}...</h2>
+                                <h2 className="text-2xl font-bold mb-2">{t("auditTool.scanning.title", { url: formData.url })}</h2>
                                 <p className="text-muted-foreground text-lg animate-pulse">
                                     {simulationSteps[currentSimulationStep]}
                                 </p>
@@ -163,31 +191,27 @@ export default function Audit() {
                                     <CheckCircle className="w-8 h-8 text-green-500" />
                                 </div>
 
-                                <h2 className="text-3xl font-bold mb-4 font-heading">Audit Queued!</h2>
+                                <h2 className="text-3xl font-bold mb-4 font-heading">{t("auditTool.results.title")}</h2>
                                 <p className="text-lg text-muted-foreground mb-8">
-                                    Your website <strong>{formData.url}</strong> is currently being analyzed by our AI agents. The full report will be sent to <strong>{formData.email}</strong> shortly.
+                                    {t("auditTool.results.receivedPrefix")} <strong>{formData.url}</strong>. {t("auditTool.results.confirmationPrefix")} <strong>{formData.email}</strong>. {t("auditTool.results.confirmationSuffix")}
                                 </p>
 
                                 <div className="bg-background/50 rounded-xl p-6 mb-8 text-left border border-border">
-                                    <h4 className="font-semibold mb-2">What happens next?</h4>
+                                    <h4 className="font-semibold mb-2">{t("auditTool.results.nextTitle")}</h4>
                                     <ul className="space-y-2 text-sm text-muted-foreground">
-                                        <li className="flex items-start gap-2">
-                                            <span className="text-primary">1.</span> We scan your top 100 pages.
-                                        </li>
-                                        <li className="flex items-start gap-2">
-                                            <span className="text-primary">2.</span> We evaluate Entity Graph connections.
-                                        </li>
-                                        <li className="flex items-start gap-2">
-                                            <span className="text-primary">3.</span> You get a PDF report with score & strategy.
-                                        </li>
+                                        {nextSteps.map((text, index) => (
+                                            <li key={index} className="flex items-start gap-2">
+                                                <span className="text-primary">{index + 1}.</span> {text}
+                                            </li>
+                                        ))}
                                     </ul>
                                 </div>
 
                                 <Button variant="outline" size="lg" onClick={() => {
                                     setStep("form");
-                                    setFormData({ url: "", email: "" });
+                                    setFormData({ url: "", email: "", website2: "" });
                                 }}>
-                                    Scan Another Website
+                                    {t("auditTool.results.scanAnotherCta")}
                                 </Button>
                             </motion.div>
                         )}

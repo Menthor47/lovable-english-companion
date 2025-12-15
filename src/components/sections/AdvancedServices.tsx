@@ -40,7 +40,7 @@ export function AdvancedServices() {
             </span>
           </div>
           <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
-            {t("advancedServices.title")} <span className="gradient-text">AI</span>
+            {t("advancedServices.title")}
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             {t("advancedServices.subtitle")}

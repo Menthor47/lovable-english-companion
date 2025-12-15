@@ -1,11 +1,40 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { AnimatedSection } from "@/components/ui/animated-section";
+import { Button } from "@/components/ui/button";
 import { comparisons } from "@/data/comparisons";
 import { Link } from "react-router-dom";
-import { ArrowRight, Scale } from "lucide-react";
+import { ArrowRight, CheckCircle2, Scale, ShieldCheck, Sparkles, type LucideIcon } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 import { SITE_OG_IMAGE_URL, getAbsoluteUrl } from "@/lib/siteMetadata";
+
+type ValueProp = {
+    title: string;
+    description: string;
+    bullets: string[];
+    icon: LucideIcon;
+};
+
+const valueProps: ValueProp[] = [
+    {
+        title: "Decision-ready verdicts",
+        description: "Clear winners, tradeoffs, and best-for recommendations so you can choose quickly.",
+        bullets: ["Pricing & limits", "Workflow fit", "Who it’s best for"],
+        icon: CheckCircle2,
+    },
+    {
+        title: "No pay-to-win rankings",
+        description: "We don’t sell winner placements. If a tool wins, it’s because it fits the use case.",
+        bullets: ["Pros/cons", "Contextual guidance", "Updated as tools change"],
+        icon: ShieldCheck,
+    },
+    {
+        title: "Built for modern search",
+        description: "We care about GEO/AEO workflows and ranking reality — not just feature checklists.",
+        bullets: ["AI output quality", "SEO integrations", "Team scalability"],
+        icon: Sparkles,
+    },
+];
 
 export default function CompareHub() {
     const pageUrl = getAbsoluteUrl("/compare");
@@ -55,6 +84,51 @@ export default function CompareHub() {
                         </p>
                     </AnimatedSection>
 
+                    <AnimatedSection className="max-w-5xl mx-auto mb-16">
+                        <div className="bg-card border border-border/50 rounded-3xl p-8 md:p-10">
+                            <h2 className="font-heading text-2xl md:text-3xl font-bold mb-4">
+                                What you’ll find here
+                            </h2>
+                            <p className="text-muted-foreground leading-relaxed mb-8">
+                                Use these comparisons to pick tools that actually match your workflow — whether you’re building an
+                                AI writing stack, optimizing content, or choosing an SEO suite. If you’re newer to the terminology,
+                                start with the <Link to="/resources/glossary" className="text-primary underline underline-offset-4">AI SEO Glossary</Link>.
+                            </p>
+
+                            <div className="grid md:grid-cols-3 gap-6">
+                                {valueProps.map((item) => {
+                                    const Icon = item.icon;
+                                    return (
+                                        <div key={item.title} className="rounded-2xl border border-border/50 bg-background/40 p-6">
+                                            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5 text-primary">
+                                                <Icon className="w-6 h-6" />
+                                            </div>
+                                            <h3 className="font-heading text-xl font-bold mb-3">{item.title}</h3>
+                                            <p className="text-sm text-muted-foreground mb-5 leading-relaxed">{item.description}</p>
+                                            <ul className="space-y-2 text-sm text-muted-foreground">
+                                                {item.bullets.map((bullet) => (
+                                                    <li key={bullet} className="flex items-center gap-2">
+                                                        <span className="h-1.5 w-1.5 rounded-full bg-primary/60" />
+                                                        <span>{bullet}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    </AnimatedSection>
+
+                    <AnimatedSection className="max-w-5xl mx-auto mb-8">
+                        <h2 className="font-heading text-2xl md:text-3xl font-bold">
+                            Latest comparisons
+                        </h2>
+                        <p className="text-muted-foreground mt-2">
+                            Open any matchup to see pricing, pros/cons, and our recommendation.
+                        </p>
+                    </AnimatedSection>
+
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {comparisons.map((comp, index) => (
                             <AnimatedSection key={index} delay={index * 100} className="group">
@@ -82,6 +156,26 @@ export default function CompareHub() {
                             </AnimatedSection>
                         ))}
                     </div>
+
+                    <AnimatedSection className="max-w-5xl mx-auto mt-16">
+                        <div className="rounded-3xl border border-primary/20 bg-gradient-to-br from-primary/10 via-background to-background p-8 md:p-12">
+                            <h2 className="font-heading text-2xl md:text-4xl font-bold mb-4">
+                                Want a stack that actually ranks?
+                            </h2>
+                            <p className="text-muted-foreground text-lg leading-relaxed mb-8 max-w-3xl">
+                                Tools are only half the battle. If you want to rank across Google and AI answers (ChatGPT, Gemini,
+                                Perplexity), run a quick audit or talk to us about a strategy.
+                            </p>
+                            <div className="flex flex-col sm:flex-row gap-3">
+                                <Button variant="hero" size="lg" asChild>
+                                    <Link to="/tools/audit">Run a Free AI Audit</Link>
+                                </Button>
+                                <Button variant="outline" size="lg" asChild>
+                                    <Link to="/#contact">Talk to AGSEO</Link>
+                                </Button>
+                            </div>
+                        </div>
+                    </AnimatedSection>
                 </div>
             </main>
             <Footer />

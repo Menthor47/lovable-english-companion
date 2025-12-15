@@ -13,7 +13,9 @@ import { CookieConsent } from "@/components/ui/cookie-consent";
 
 const queryClient = new QueryClient();
 
-const App = ({ helmetContext }: { helmetContext?: any }) => (
+type HelmetContext = Record<string, unknown>;
+
+const App = ({ helmetContext }: { helmetContext?: HelmetContext }) => (
   <HelmetProvider context={helmetContext}>
     <QueryClientProvider client={queryClient}>
       <ThemeProvider attribute="class" defaultTheme="dark" forcedTheme="dark" enableSystem={false}>

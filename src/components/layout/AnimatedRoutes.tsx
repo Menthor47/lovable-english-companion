@@ -30,6 +30,9 @@ import PricingProBusiness from "@/pages/PricingProBusiness";
 import About from "@/pages/About";
 import Services from "@/pages/Services";
 import Author from "@/pages/Author";
+import SerpSimulator from "@/pages/tools/SerpSimulator";
+import KeywordMixer from "@/pages/tools/KeywordMixer";
+import SchemaGenerator from "@/pages/tools/SchemaGenerator";
 
 export function AnimatedRoutes() {
     const location = useLocation();
@@ -51,6 +54,10 @@ export function AnimatedRoutes() {
                 <Route path="/services" element={<Services />} />
                 <Route path="/services/content" element={<ContentService />} />
                 <Route path="/tools/roi-calculator" element={<ROICalculator />} />
+                {/* New Functional Tools */}
+                <Route path="/tools/serp-simulator" element={<SerpSimulator />} />
+                <Route path="/tools/keyword-mixer" element={<KeywordMixer />} />
+                <Route path="/tools/schema-generator" element={<SchemaGenerator />} />
                 <Route path="/pricing" element={<Pricing />} />
                 <Route path="/pricing/starter" element={<PricingStarter />} />
                 <Route path="/pricing/business" element={<PricingBusiness />} />

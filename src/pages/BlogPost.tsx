@@ -52,6 +52,7 @@ const MarkdownRenderer = ({ content }: { content: string }) => {
 };
 
 const BlogPost = () => {
+    const { toast } = useToast();
     const { t } = useTranslation();
     const { slug } = useParams();
     const post = blogPosts.find((p) => p.slug === slug);
@@ -126,8 +127,6 @@ const BlogPost = () => {
         },
         ...(datePublished ? { datePublished } : {})
     };
-
-    const { toast } = useToast();
 
     const handleShare = async () => {
         try {

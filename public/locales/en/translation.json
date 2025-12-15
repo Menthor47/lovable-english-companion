@@ -1,7 +1,7 @@
 {
     "nav": {
         "solutions": "Solutions",
-        "products": "Products",
+        "products": "Tools Hub",
         "resources": "Resources",
         "pricing": "Pricing",
         "contact": "Contact",
@@ -17,7 +17,7 @@
             "content": "Content & Links"
         },
         "productsMenu": {
-            "toolsHub": "Tools Hub",
+            "toolsHub": "All Tools",
             "aiAudit": "Instant AI Audit",
             "roi": "ROI Calculator",
             "portal": "Client Portal"
@@ -202,64 +202,109 @@
         "title": "Invest in Growth, Not Guesswork",
         "subtitle": "Choose the AI-powered plan that fits your scale. No hidden fees, just results.",
         "viewDemoCta": "View Client Portal Demo",
+        "viewDetailsCta": "See exactly what you get",
+        "moreFeaturesHint": "...plus full deliverables breakdown",
         "plans": {
             "starter": {
                 "name": "Starter",
-                "description": "SEO Foundation for Growing Businesses.",
-                "price": "$470 - $1,200",
+                "description": "Consistent traffic + a strong SEO foundation.",
+                "price": "€590 - €890",
                 "period": "/month",
                 "features": [
-                    "15-20 Target Keywords",
-                    "2-3 Pages Optimized/mo",
-                    "1 Blog Article/mo",
-                    "Content Optimization",
-                    "Basic Technical Audit",
-                    "2-3 Press Releases/mo",
-                    "Local SEO Setup",
-                    "Monthly Reporting"
+                    "15-25 Commercial Keywords",
+                    "2-3 Key Pages Optimized/mo",
+                    "1 SEO Article/mo",
+                    "Existing Content Refresh",
+                    "Initial Technical Audit + Priorities",
+                    "2 Press Releases/mo",
+                    "Local SEO (Google Business Profile)",
+                    "Monthly Reporting + Next Steps"
                 ],
-                "cta": "Get Started",
+                "cta": "Start Growth",
                 "popularLabel": ""
             },
             "business": {
                 "name": "Business",
-                "description": "Professional Growth for Competitive Markets.",
-                "price": "$1,500 - $4,200",
+                "description": "Lead-focused SEO growth for competitive markets.",
+                "price": "€1,490 - €2,490",
                 "period": "/month",
                 "features": [
-                    "40-60 Target Keywords",
+                    "40-70 Buyer-Intent Keywords",
                     "4-6 Pages Optimized/mo",
-                    "3 Blog Articles/mo",
-                    "Quarterly Audits",
-                    "7-10 Press Releases",
-                    "Guest Posting (3-5/mo)",
-                    "Core Web Vitals Opt.",
-                    "Bi-Weekly Strategy Calls"
+                    "3 SEO Articles/mo (Topic Clusters)",
+                    "Quarterly Audit + Roadmap",
+                    "Guest Posting (3-5 links/mo)",
+                    "PR Mentions (5-8/mo)",
+                    "Core Web Vitals Improvements",
+                    "Strategy Call Every 2 Weeks"
                 ],
                 "cta": "Scale Now",
                 "popularLabel": "MOST POPULAR"
             },
             "proBusiness": {
                 "name": "Pro Business",
-                "description": "Enterprise SEO: Revenue-Focused Growth.",
-                "price": "Let's Talk",
+                "description": "Enterprise SEO: revenue-focused, scalable execution.",
+                "price": "€3,500+",
                 "period": "",
                 "features": [
-                    "Custom Keyword Targets",
+                    "Custom Strategy (100+ keywords)",
                     "8-12+ Pages Optimized/mo",
-                    "5-8 Blog Articles/mo",
-                    "Full CRO Module",
-                    "Monthly Tech Audits",
-                    "Advanced Link Building",
+                    "5-8 Premium Articles/mo",
+                    "Monthly Technical Audit + Priorities",
+                    "Advanced Digital PR + Link Building",
+                    "CRO Module (SEO → Conversion)",
                     "Dedicated Account Manager",
-                    "Custom AI Automations"
+                    "Advanced Tracking + AI Automations"
                 ],
-                "cta": "Contact Sales",
+                "cta": "Talk to an SEO Consultant",
                 "popularLabel": ""
             }
         },
         "faqTeaser": "Need a custom enterprise solution?",
         "faqCta": "Book a consultation with our sales team"
+    },
+    "auditTool": {
+        "metaTitle": "Free AI SEO Audit | AGSEO",
+        "metaDescription": "Request a free AI-powered SEO visibility audit for your website. See how your brand appears on Google and AI answers (ChatGPT, Gemini). Get a human-reviewed summary and prioritized next steps.",
+        "title": "Free AI SEO Audit",
+        "subtitle": "See how visible your brand is on Google, ChatGPT, and Gemini — and get prioritized next steps.",
+        "form": {
+            "urlLabel": "Website URL",
+            "urlPlaceholder": "https://example.com",
+            "emailLabel": "Email address",
+            "emailPlaceholder": "you@company.com",
+            "submitCta": "Get My Free Audit",
+            "note": "You’ll receive a confirmation email now. Your audit summary follows after review."
+        },
+        "toast": {
+            "missingTitle": "Missing Information",
+            "missingDescription": "Please enter both a website URL and your email address.",
+            "errorTitle": "Error",
+            "errorDescription": "Could not start the audit. Please try again."
+        },
+        "scanning": {
+            "title": "Analyzing {{url}}...",
+            "steps": [
+                "Reviewing technical foundation...",
+                "Checking structured data & schema...",
+                "Evaluating entity and topical coverage...",
+                "Looking for AI citation opportunities (AEO/GEO)...",
+                "Preparing prioritized quick wins..."
+            ]
+        },
+        "results": {
+            "title": "Request Received!",
+            "receivedPrefix": "We received your audit request for",
+            "confirmationPrefix": "If you don’t see a confirmation email at",
+            "confirmationSuffix": "check spam or reach out via WhatsApp.",
+            "nextTitle": "What happens next?",
+            "nextSteps": [
+                "We review your website and current visibility.",
+                "We identify quick wins for SEO + GEO + AEO.",
+                "We email you next steps and recommended actions."
+            ],
+            "scanAnotherCta": "Scan Another Website"
+        }
     },
     "process": {
         "title": "Our Working Process",
