@@ -1,17 +1,38 @@
-import { z } from "zod";
-import { createClient } from "@supabase/supabase-js";
-
-export const config = { runtime: "edge" };
+import "jsr:@supabase/functions-js/edge-runtime.d.ts";
+import { createClient } from "jsr:@supabase/supabase-js@2";
+import { z } from "npm:zod@3.25.76";
 
 type LeadSource = "contact" | "audit";
 
+const PHONE_ALLOWED_REGEX = /^[0-9+()\-.\s]+$/;
+
+function isValidPhone(value: string): boolean {
+    if (value.length < 7 || value.length > 50) return false;
+    if (!PHONE_ALLOWED_REGEX.test(value)) return false;
+    const digitCount = (value.match(/\d/g) ?? []).length;
+    return digitCount >= 7;
+}
+
 const leadSchema = z.object({
     email: z.preprocess(
-        (value) => (typeof value === "string" ? value.trim() : value),
+        (value: unknown) => (typeof value === "string" ? value.trim() : value),
         z.string().email(),
     ),
+    phone: z.preprocess(
+        (value: unknown) => {
+            if (typeof value !== "string") return value;
+            const trimmed = value.trim();
+            if (!trimmed.length) return undefined;
+            return trimmed;
+        },
+        z
+            .string()
+            .max(50)
+            .refine((value: string) => isValidPhone(value), "Invalid phone")
+            .optional(),
+    ),
     website: z.preprocess(
-        (value) => {
+        (value: unknown) => {
             if (typeof value !== "string") return value;
             const trimmed = value.trim();
             if (!trimmed.length) return undefined;
@@ -20,22 +41,18 @@ const leadSchema = z.object({
         },
         z.string().url().optional(),
     ),
-    message: z.string().max(5000).optional(),
+    message: z.preprocess(
+        (value: unknown) => (typeof value === "string" ? value.trim() : value),
+        z.string().max(5000).optional(),
+    ),
     source: z.union([z.literal("contact"), z.literal("audit")]).optional(),
     website2: z.string().max(200).optional(),
 });
 
 type LeadPayload = z.infer<typeof leadSchema>;
 
-type ResendResult =
-    | { ok: true }
-    | { ok: false; error: string };
-
 type RateLimitState = { count: number; resetAt: number };
 
-// NOTE: This in-memory store is local to the serverless function instance.
-// It provides "best-effort" rate limiting but is not a global distributed lock.
-// For stricter control, use Redis (e.g., Upstash) or database-backed limiting.
 const rateLimitStore: Map<string, RateLimitState> = new Map();
 
 const HTML_ESCAPE_MAP: Record<string, string> = {
@@ -53,7 +70,7 @@ function jsonResponse(body: Record<string, unknown>, init?: ResponseInit): Respo
 }
 
 function getStringEnv(name: string): string | null {
-    const value = process.env[name];
+    const value = Deno.env.get(name);
     if (typeof value !== "string") return null;
     const trimmed = value.trim();
     return trimmed.length ? trimmed : null;
@@ -119,6 +136,7 @@ function getCorsDecision(request: Request): {
     const allowedOrigins = parseCsv(allowedOriginsRaw);
     const allowedOrigin =
         requestOrigin && isOriginAllowed(requestOrigin, allowedOrigins) ? requestOrigin : null;
+
     return { requestOrigin, allowedOrigins, allowedOrigin };
 }
 
@@ -134,7 +152,7 @@ function buildPreflightHeaders(allowedOrigin: string): HeadersInit {
     return {
         "access-control-allow-origin": allowedOrigin,
         "access-control-allow-methods": "POST, OPTIONS",
-        "access-control-allow-headers": "content-type",
+        "access-control-allow-headers": "content-type, authorization, apikey",
         "access-control-max-age": "86400",
         vary: "origin",
     };
@@ -179,7 +197,7 @@ async function sendResendEmail(params: {
     subject: string;
     html: string;
     replyTo?: string;
-}): Promise<ResendResult> {
+}): Promise<{ ok: true } | { ok: false; error: string }> {
     let response: Response;
     try {
         response = await fetch("https://api.resend.com/emails", {
@@ -207,17 +225,76 @@ async function sendResendEmail(params: {
     return { ok: false, error: text || `Resend error: ${response.status}` };
 }
 
-export default async function handler(request: Request): Promise<Response> {
+function getSupabaseAdmin(): ReturnType<typeof createClient> | null {
+    const supabaseUrl = getStringEnv("SUPABASE_URL");
+    const serviceRoleKey = getStringEnv("SUPABASE_SERVICE_ROLE_KEY");
+    if (!supabaseUrl || !serviceRoleKey) return null;
+
+    return createClient(supabaseUrl, serviceRoleKey, {
+        auth: {
+            persistSession: false,
+            autoRefreshToken: false,
+            detectSessionInUrl: false,
+        },
+    });
+}
+
+async function storeSubmission(params: {
+    email: string;
+    website?: string;
+    phone?: string;
+}): Promise<{ ok: true } | { ok: false; error: string }> {
+    const supabaseAdmin = getSupabaseAdmin();
+    if (!supabaseAdmin) {
+        return { ok: false, error: "Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY" };
+    }
+
+    const baseRow: Record<string, unknown> = {
+        email: params.email,
+        website: params.website ?? null,
+    };
+
+    const tryWithPhone: Record<string, unknown> = {
+        ...baseRow,
+        phone: params.phone ?? null,
+    };
+
+    const { error: firstError } = await supabaseAdmin
+        .from("contact_submissions")
+        .insert([tryWithPhone]);
+
+    if (!firstError) return { ok: true };
+
+    const message = firstError.message ?? "Insert failed";
+    const phoneColumnMissing =
+        message.toLowerCase().includes("phone") &&
+        (message.toLowerCase().includes("schema cache") ||
+            message.toLowerCase().includes("column") ||
+            message.toLowerCase().includes("does not exist"));
+
+    if (!phoneColumnMissing) {
+        return { ok: false, error: message };
+    }
+
+    const { error: secondError } = await supabaseAdmin
+        .from("contact_submissions")
+        .insert([baseRow]);
+
+    if (secondError) {
+        return { ok: false, error: secondError.message ?? "Insert failed" };
+    }
+
+    return { ok: true };
+}
+
+Deno.serve(async (request: Request): Promise<Response> => {
     const { requestOrigin, allowedOrigins, allowedOrigin } = getCorsDecision(request);
     const corsHeaders = buildCorsHeaders(allowedOrigin);
 
     if (request.method === "OPTIONS") {
         if (!allowedOrigins) return new Response(null, { status: 204 });
         if (!allowedOrigin) return new Response(null, { status: 403 });
-        return new Response(null, {
-            status: 204,
-            headers: buildPreflightHeaders(allowedOrigin),
-        });
+        return new Response(null, { status: 204, headers: buildPreflightHeaders(allowedOrigin) });
     }
 
     if (request.method !== "POST") {
@@ -257,54 +334,33 @@ export default async function handler(request: Request): Promise<Response> {
         return jsonResponse({ success: true }, { headers: corsHeaders });
     }
 
-    const userAgent = request.headers.get("user-agent") ?? "";
-    const referer = request.headers.get("referer") ?? "";
+    const stored = await storeSubmission({
+        email: payload.email,
+        website: payload.website,
+        phone: payload.phone,
+    });
 
-    const supabaseUrl = getStringEnv("SUPABASE_URL");
-    const supabaseServiceRoleKey = getStringEnv("SUPABASE_SERVICE_ROLE_KEY");
+    if (!stored.ok) {
+        console.error("Supabase insert failed:", stored.error);
+        return jsonResponse(
+            { success: false, error: "Failed to store submission." },
+            { status: 502, headers: corsHeaders },
+        );
+    }
 
     const resendApiKey = getStringEnv("RESEND_API_KEY");
     const resendFromEmail = getStringEnv("RESEND_FROM_EMAIL");
     const leadsToEmail = getStringEnv("LEADS_TO_EMAIL");
 
-    const hasSupabase = Boolean(supabaseUrl && supabaseServiceRoleKey);
-    const canSendInternalEmail = Boolean(resendApiKey && resendFromEmail && leadsToEmail);
-    const canSendConfirmationEmail = Boolean(resendApiKey && resendFromEmail);
-
-    if (!hasSupabase && !canSendInternalEmail) {
+    if (!resendApiKey || !resendFromEmail || !leadsToEmail) {
         return jsonResponse(
             { success: false, error: "Server is not configured for lead capture yet." },
             { status: 500, headers: corsHeaders },
         );
     }
 
-    let storedLead = false;
-    if (hasSupabase && supabaseUrl && supabaseServiceRoleKey) {
-        try {
-            const supabase = createClient(supabaseUrl, supabaseServiceRoleKey, {
-                auth: { persistSession: false },
-            });
-
-            const { error } = await supabase.from('leads').insert({
-                source,
-                email: payload.email,
-                website: payload.website ?? null,
-                message: payload.message ?? null,
-                origin: requestOrigin,
-                ip: getClientIp(request),
-                user_agent: userAgent,
-                referer,
-            });
-
-            if (!error) {
-                storedLead = true;
-            } else {
-                console.error("Supabase lead insert failed:", error.message);
-            }
-        } catch (err) {
-            console.error("Supabase client error:", err);
-        }
-    }
+    const userAgent = request.headers.get("user-agent") ?? "";
+    const referer = request.headers.get("referer") ?? "";
 
     const subject =
         source === "audit"
@@ -315,6 +371,10 @@ export default async function handler(request: Request): Promise<Response> {
         ? `<div><strong>Website:</strong> ${escapeHtml(payload.website)}</div>`
         : `<div><strong>Website:</strong> (none)</div>`;
 
+    const phoneHtml = payload.phone
+        ? `<div><strong>Phone:</strong> ${escapeHtml(payload.phone)}</div>`
+        : `<div><strong>Phone:</strong> (none)</div>`;
+
     const messageHtml = payload.message
         ? `<div><strong>Message:</strong><br/>${escapeHtml(payload.message)}</div>`
         : "";
@@ -324,30 +384,26 @@ export default async function handler(request: Request): Promise<Response> {
   <h2 style="margin: 0 0 12px;">New lead</h2>
   <div><strong>Source:</strong> ${escapeHtml(source)}</div>
   <div><strong>Email:</strong> ${escapeHtml(payload.email)}</div>
+  ${phoneHtml}
   ${websiteHtml}
   ${messageHtml}
+  <div><strong>Origin:</strong> ${escapeHtml(requestOrigin ?? "")}</div>
+  <div><strong>IP:</strong> ${escapeHtml(getClientIp(request))}</div>
   <div><strong>Referer:</strong> ${escapeHtml(referer)}</div>
   <div><strong>User-Agent:</strong> ${escapeHtml(userAgent)}</div>
 </div>`;
 
-    let sentInternal = false;
-    if (canSendInternalEmail && resendApiKey && resendFromEmail && leadsToEmail) {
-        const internalSend = await sendResendEmail({
-            apiKey: resendApiKey,
-            from: resendFromEmail,
-            to: leadsToEmail,
-            subject,
-            html: internalHtml,
-            replyTo: payload.email,
-        });
+    const internalSend = await sendResendEmail({
+        apiKey: resendApiKey,
+        from: resendFromEmail,
+        to: leadsToEmail,
+        subject,
+        html: internalHtml,
+        replyTo: payload.email,
+    });
 
-        sentInternal = internalSend.ok;
-        if (!internalSend.ok) {
-            console.error("Resend internal lead email failed:", internalSend.error);
-        }
-    }
-
-    if (!storedLead && !sentInternal) {
+    if (!internalSend.ok) {
+        console.error("Resend internal lead email failed:", internalSend.error);
         return jsonResponse(
             { success: false, error: "Lead capture failed. Please try again later." },
             { status: 502, headers: corsHeaders },
@@ -380,10 +436,6 @@ export default async function handler(request: Request): Promise<Response> {
   <p>AGSEO</p>
 </div>`;
 
-    if (!canSendConfirmationEmail || !resendApiKey || !resendFromEmail) {
-        return jsonResponse({ success: true }, { headers: corsHeaders });
-    }
-
     const confirmationSend = await sendResendEmail({
         apiKey: resendApiKey,
         from: resendFromEmail,
@@ -398,4 +450,4 @@ export default async function handler(request: Request): Promise<Response> {
     }
 
     return jsonResponse({ success: true }, { headers: corsHeaders });
-}
+});

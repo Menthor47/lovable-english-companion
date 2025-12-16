@@ -1,76 +1,105 @@
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
-import { api } from '@/lib/api';
-import { useToast } from '@/hooks/use-toast';
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { api } from "@/lib/api";
+import { useToast } from "@/hooks/use-toast";
+import { useState } from "react";
+
+const PHONE_ALLOWED_REGEX = /^[0-9+()\-.\s]+$/;
+
+function isValidPhone(value: string): boolean {
+    if (value.length < 7 || value.length > 50) return false;
+    if (!PHONE_ALLOWED_REGEX.test(value)) return false;
+    const digitCount = (value.match(/\d/g) ?? []).length;
+    return digitCount >= 7;
+}
 
 const contactSchema = z.object({
-    email: z.string().email('Please enter a valid email address'),
+    email: z.string().email("Please enter a valid email address"),
+    phone: z.preprocess(
+        (value: unknown) => {
+            if (typeof value !== "string") return value;
+            const trimmed = value.trim();
+            if (!trimmed.length) return undefined;
+            return trimmed;
+        },
+        z
+            .string()
+            .max(50, "Please enter a valid phone number")
+            .refine((value) => isValidPhone(value), "Please enter a valid phone number")
+            .optional(),
+    ),
     website: z.preprocess(
         (value) => {
-            if (typeof value !== 'string') return value;
+            if (typeof value !== "string") return value;
             const trimmed = value.trim();
-            if (!trimmed.length) return '';
+            if (!trimmed.length) return "";
             if (/^https?:\/\//i.test(trimmed)) return trimmed;
             return `https://${trimmed}`;
         },
-        z.string().url('Please enter a valid URL (include https://)').optional().or(z.literal('')),
+        z
+            .string()
+            .url("Please enter a valid URL (e.g., https://example.com)")
+            .optional()
+            .or(z.literal("")),
     ),
-    message: z.string().min(10, 'Message must be at least 10 characters').optional(),
     website2: z.string().max(200).optional(),
 });
 
 export type ContactFormData = z.infer<typeof contactSchema>;
 
 export function useContactForm() {
-    const [isLoading, setIsLoading] = useState(false);
+    const [success, setSuccess] = useState(false);
+    const [error, setError] = useState<string | null>(null);
     const { toast } = useToast();
 
-    const form = useForm<ContactFormData>({
+    const {
+        register,
+        handleSubmit,
+        formState: { errors, isSubmitting },
+        reset,
+    } = useForm<ContactFormData>({
         resolver: zodResolver(contactSchema),
-        defaultValues: {
-            email: '',
-            website: '',
-            message: '', // Although unlikely to be used in the simple form, good to have in schema
-            website2: '',
-        },
     });
 
     const onSubmit = async (data: ContactFormData) => {
-        setIsLoading(true);
-        try {
-            if (!data.email) {
-                throw new Error('Missing email');
-            }
+        setError(null);
+        setSuccess(false);
 
+        try {
             await api.contact.submit({
                 email: data.email,
+                phone: data.phone || undefined,
                 website: data.website || undefined,
-                message: data.message || undefined,
+                source: "audit",
                 website2: data.website2 || undefined,
             });
-
+            setSuccess(true);
             toast({
-                title: "Audit Request Received",
-                description: "We'll analyze your site and send the report to your email shortly.",
+                title: "Audit Request Sent!",
+                description: "We'll analyze your site and get back to you soon.",
             });
-
-            form.reset();
-        } catch (error) {
+            reset();
+            return { success: true };
+        } catch (err) {
+            const message = err instanceof Error ? err.message : "Something went wrong";
+            setError(message);
             toast({
-                title: "Submission Failed",
-                description: "Please try again later or contact us directly.",
                 variant: "destructive",
+                title: "Error",
+                description: message,
             });
-        } finally {
-            setIsLoading(false);
+            return { success: false };
         }
     };
 
     return {
-        form,
-        isLoading,
-        onSubmit: form.handleSubmit(onSubmit),
+        register,
+        handleSubmit,
+        errors,
+        isSubmitting,
+        onSubmit,
+        success,
+        error
     };
 }

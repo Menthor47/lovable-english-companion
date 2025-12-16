@@ -1,6 +1,10 @@
 export const config = {
     api: {
-        baseUrl: import.meta.env.VITE_API_URL || "/api",
+        baseUrl:
+            import.meta.env.VITE_API_URL ||
+            (import.meta.env.VITE_SUPABASE_URL
+                ? `${import.meta.env.VITE_SUPABASE_URL}/functions/v1`
+                : "/api"),
     },
     whatsapp: {
         number: import.meta.env.VITE_WHATSAPP_NUMBER || '1234567890',
@@ -8,6 +12,13 @@ export const config = {
     },
     contact: {
         email: import.meta.env.VITE_CONTACT_EMAIL || 'hello@agseo.pro',
+        phone: import.meta.env.VITE_PHONE_NUMBER || '+15550123456',
+        address: {
+            street: import.meta.env.VITE_ADDRESS_STREET || "123 SEO Street",
+            city: import.meta.env.VITE_ADDRESS_CITY || "Tech City",
+            country: import.meta.env.VITE_ADDRESS_COUNTRY || "US"
+        },
+        siteUrl: import.meta.env.VITE_SITE_URL || "https://agseo.pro",
     },
     social: {
         twitter: "https://twitter.com/agseo",

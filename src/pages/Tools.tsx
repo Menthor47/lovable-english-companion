@@ -143,7 +143,7 @@ export default function Tools() {
                     {/* Remaining Tools Grid */}
                     <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
                         {tools.slice(1).map((tool, index) => (
-                            <AnimatedSection key={index} delay={index * 100} className="h-full">
+                            <AnimatedSection key={index} delay={index * 0.1} className="h-full">
                                 <div className="h-full p-8 rounded-2xl bg-card border border-border/50 hover:border-primary/50 transition-all duration-300 flex flex-col group">
                                     <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-6 text-primary group-hover:scale-110 transition-transform duration-300">
                                         <tool.icon className="w-6 h-6" />

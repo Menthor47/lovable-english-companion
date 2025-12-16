@@ -7,7 +7,7 @@ import { AnimatedSection } from "@/components/ui/animated-section";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Search, CheckCircle, Loader2 } from "lucide-react";
+import { Search, CheckCircle } from "lucide-react";
 import { motion } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
 import { api } from "@/lib/api";
@@ -15,7 +15,7 @@ import { SITE_OG_IMAGE_URL, getAbsoluteUrl } from "@/lib/siteMetadata";
 
 export default function Audit() {
     const [step, setStep] = useState<"form" | "scanning" | "results">("form");
-    const [formData, setFormData] = useState({ url: "", email: "", website2: "" });
+    const [formData, setFormData] = useState({ url: "", email: "", phone: "", website2: "" });
     const { toast } = useToast();
     const { t } = useTranslation();
 
@@ -53,8 +53,10 @@ export default function Audit() {
         }
 
         try {
+            const phone = formData.phone.trim();
             await api.contact.submit({
                 email: formData.email,
+                phone: phone.length ? phone : undefined,
                 website: formData.url,
                 source: "audit",
                 website2: formData.website2 || undefined,
@@ -150,6 +152,18 @@ export default function Audit() {
                                             />
                                         </div>
 
+                                        <div className="space-y-2">
+                                            <Label htmlFor="phone">{t("auditTool.form.phoneLabel")}</Label>
+                                            <Input
+                                                id="phone"
+                                                type="tel"
+                                                placeholder={t("auditTool.form.phonePlaceholder")}
+                                                value={formData.phone}
+                                                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                                                className="h-12 bg-background/50"
+                                            />
+                                        </div>
+
                                         <Button type="submit" variant="hero" size="xl" className="w-full text-lg">
                                             <Search className="w-5 h-5 mr-2" />
                                             {t("auditTool.form.submitCta")}
@@ -209,7 +223,7 @@ export default function Audit() {
 
                                 <Button variant="outline" size="lg" onClick={() => {
                                     setStep("form");
-                                    setFormData({ url: "", email: "", website2: "" });
+                                    setFormData({ url: "", email: "", phone: "", website2: "" });
                                 }}>
                                     {t("auditTool.results.scanAnotherCta")}
                                 </Button>

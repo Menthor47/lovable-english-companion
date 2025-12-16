@@ -303,6 +303,8 @@
             "urlPlaceholder": "https://example.com",
             "emailLabel": "Adresă de email",
             "emailPlaceholder": "you@company.com",
+            "phoneLabel": "Număr de telefon (opțional)",
+            "phonePlaceholder": "+40 712 345 678",
             "submitCta": "Primește auditul gratuit",
             "note": "Vei primi imediat un email de confirmare. Rezumatul auditului vine după revizuire."
         },
@@ -475,6 +477,7 @@
             "description": "AI-ul nostru va analiza site-ul tău și va oferi informații acționabile.",
             "name": "Nume",
             "email": "Email",
+            "phone": "Număr de telefon (opțional)",
             "website": "URL Site Web",
             "message": "Mesaj",
             "submit": "Obține Audit Gratuit",

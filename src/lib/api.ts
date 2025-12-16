@@ -2,9 +2,21 @@ import { config } from "./config";
 
 type LeadSource = "contact" | "audit";
 
+const SUPABASE_EDGE_FUNCTION_HOST_MARKER = ".functions.supabase.co";
+const SUPABASE_EDGE_FUNCTION_PATH_MARKER = "/functions/v1/";
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+function shouldAttachSupabaseAnonHeaders(endpoint: string): boolean {
+    return (
+        endpoint.includes(SUPABASE_EDGE_FUNCTION_HOST_MARKER) ||
+        endpoint.includes(SUPABASE_EDGE_FUNCTION_PATH_MARKER)
+    );
+}
+
 interface ContactSubmission {
     email: string;
     website?: string;
+    phone?: string;
     message?: string;
     source?: LeadSource;
     website2?: string;
@@ -44,13 +56,24 @@ export const api = {
 
             const endpoint = `${config.api.baseUrl}/contact`;
 
+            const headers: Record<string, string> = {
+                "Content-Type": "application/json",
+            };
+
+            if (
+                shouldAttachSupabaseAnonHeaders(endpoint) &&
+                typeof supabaseAnonKey === "string" &&
+                supabaseAnonKey.trim().length
+            ) {
+                headers.apikey = supabaseAnonKey;
+                headers.Authorization = `Bearer ${supabaseAnonKey}`;
+            }
+
             let response: Response;
             try {
                 response = await fetch(endpoint, {
                     method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
+                    headers,
                     body: JSON.stringify(data),
                 });
             } catch (error: unknown) {

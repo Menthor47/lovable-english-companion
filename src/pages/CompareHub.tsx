@@ -6,6 +6,8 @@ import { comparisons } from "@/data/comparisons";
 import { Link } from "react-router-dom";
 import { ArrowRight, CheckCircle2, Scale, ShieldCheck, Sparkles, type LucideIcon } from "lucide-react";
 import { Helmet } from "react-helmet-async";
+import { TrustSignals } from "@/components/sections/TrustSignals";
+import { ComparisonsMethodology } from "@/components/sections/ComparisonsMethodology";
 import { SITE_OG_IMAGE_URL, getAbsoluteUrl } from "@/lib/siteMetadata";
 
 type ValueProp = {
@@ -54,7 +56,7 @@ export default function CompareHub() {
     };
 
     return (
-        <div className="min-h-screen bg-background">
+        <div className="min-h-screen bg-background flex flex-col">
             <Helmet>
                 <title>AI SEO Tool Comparisons - AGSEO</title>
                 <meta name="description" content="Use AGSEO's unbiased comparison battles to find the best AI tools (Jasper, Copy.ai, Surfer) for your stack." />
@@ -67,7 +69,7 @@ export default function CompareHub() {
                 <script type="application/ld+json">{JSON.stringify(itemListSchema)}</script>
             </Helmet>
             <Header />
-            <main className="pt-24 pb-16">
+            <main className="pt-24 pb-16 flex-1">
                 <div className="container mx-auto px-4">
                     <AnimatedSection className="text-center max-w-3xl mx-auto mb-16">
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-md mb-6">
@@ -131,25 +133,36 @@ export default function CompareHub() {
 
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {comparisons.map((comp, index) => (
-                            <AnimatedSection key={index} delay={index * 100} className="group">
+                            <AnimatedSection key={index} delay={index * 0.1} className="group">
                                 <Link to={`/compare/${comp.slug}`} className="block h-full">
-                                    <div className="h-full bg-card border border-border/50 rounded-2xl p-8 hover:border-primary/50 transition-all hover:shadow-lg hover:shadow-primary/5">
-                                        <div className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-4">
-                                            {comp.category}
-                                        </div>
+                                    <div className="h-full bg-card border border-border/50 rounded-2xl overflow-hidden hover:border-primary/50 transition-all hover:shadow-lg hover:shadow-primary/5">
+                                        {comp.image && (
+                                            <div className="aspect-video w-full overflow-hidden">
+                                                <img
+                                                    src={comp.image}
+                                                    alt={`${comp.toolA.name} vs ${comp.toolB.name}`}
+                                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                                />
+                                            </div>
+                                        )}
+                                        <div className="p-8">
+                                            <div className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-4">
+                                                {comp.category}
+                                            </div>
 
-                                        <div className="flex items-center justify-between gap-4 mb-6">
-                                            <div className="text-xl font-bold font-heading">{comp.toolA.name}</div>
-                                            <div className="text-sm font-medium text-muted-foreground bg-secondary px-2 py-1 rounded">VS</div>
-                                            <div className="text-xl font-bold font-heading">{comp.toolB.name}</div>
-                                        </div>
+                                            <div className="flex items-center justify-between gap-4 mb-6">
+                                                <div className="text-xl font-bold font-heading">{comp.toolA.name}</div>
+                                                <div className="text-sm font-medium text-muted-foreground bg-secondary px-2 py-1 rounded">VS</div>
+                                                <div className="text-xl font-bold font-heading">{comp.toolB.name}</div>
+                                            </div>
 
-                                        <p className="text-muted-foreground text-sm mb-6 line-clamp-2">
-                                            {comp.verdict.summary}
-                                        </p>
+                                            <p className="text-muted-foreground text-sm mb-6 line-clamp-2">
+                                                {comp.verdict.summary}
+                                            </p>
 
-                                        <div className="flex items-center text-primary font-medium text-sm group-hover:translate-x-1 transition-transform">
-                                            Read Comparison <ArrowRight className="ml-2 w-4 h-4" />
+                                            <div className="flex items-center text-primary font-medium text-sm group-hover:translate-x-1 transition-transform">
+                                                Read Comparison <ArrowRight className="ml-2 w-4 h-4" />
+                                            </div>
                                         </div>
                                     </div>
                                 </Link>
@@ -177,8 +190,12 @@ export default function CompareHub() {
                         </div>
                     </AnimatedSection>
                 </div>
+                <div className="mt-20">
+                    <ComparisonsMethodology />
+                </div>
             </main>
+            <TrustSignals />
             <Footer />
-        </div>
+        </div >
     );
 }

@@ -3,7 +3,7 @@ import { config } from "@/lib/config";
 import { MessageCircle, Clock, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AnimatedSection, StaggerContainer, StaggerItem } from "@/components/ui/animated-section";
-import { useContactForm, type ContactFormData } from "@/hooks/useContactForm";
+import { useContactForm, type ContactFormData } from "@/hooks/use-contact-form";
 import { FormFeedback } from "@/components/ui/form-feedback";
 import { useTranslation } from "react-i18next";
 import { useAnalytics } from "@/hooks/useAnalytics";
@@ -120,6 +120,21 @@ export function Contact() {
                     />
                     {errors.email && (
                       <p className="text-xs text-destructive ml-1">{errors.email.message}</p>
+                    )}
+                  </div>
+
+                  <div className="space-y-2">
+                    <label htmlFor="phone" className="text-sm font-medium">{t("contact.form.phone")}</label>
+                    <input
+                      id="phone"
+                      type="tel"
+                      placeholder="+1 555 123 4567"
+                      className={`w-full px-4 py-3 rounded-lg bg-background border ${errors.phone ? "border-destructive focus:border-destructive" : "border-border focus:border-primary/50"} focus:outline-none focus:ring-1 focus:ring-primary/50 text-foreground placeholder:text-muted-foreground transition-all`}
+                      {...register("phone")}
+                      disabled={isSubmitting}
+                    />
+                    {errors.phone && (
+                      <p className="text-xs text-destructive ml-1">{errors.phone.message}</p>
                     )}
                   </div>
 

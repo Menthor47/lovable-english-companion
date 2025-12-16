@@ -3,8 +3,9 @@ import { Footer } from "@/components/layout/Footer";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, Brain, Bot, Network, Sparkles, MessageSquare, BookOpen, Link2, Gauge } from "lucide-react";
+import { Search, Brain, Bot, Network, Sparkles, MessageSquare, BookOpen, Link2, Gauge, ShieldCheck } from "lucide-react";
 import { Helmet } from "react-helmet-async";
+import { TrustSignals } from "@/components/sections/TrustSignals";
 import { SITE_OG_IMAGE_URL, getAbsoluteUrl } from "@/lib/siteMetadata";
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
@@ -107,9 +108,20 @@ const terms: GlossaryTerm[] = [
         icon: Gauge,
     },
     {
-        term: "Crawl Budget",
-        definition: "The amount of crawling and indexing attention a search engine allocates to your site. Technical SEO helps make sure important pages get discovered and updated quickly.",
-        icon: Search,
+        term: "YMYL (Your Money Your Life)",
+        definition: `YMYL stands for "Your Money or Your Life." It is a category of content that, if inaccurate, could significantly harm a person's health, financial stability, safety, or happiness. Google holds these pages to the absolute highest standards of quality and E-E-A-T (Experience, Expertise, Authoritativeness, Trustworthiness).
+        
+Examples of YMYL topics:
+- **Finance**: Investing, taxes, loans, banking.
+- **Medical**: Symptoms, drugs, mental health, nutrition.
+- **Legal**: Divorce, citizenship, wills.
+- **News/Civic**: Voting, disaster response, public policy.
+- **Ecommerce**: Any page asking for credit card info.
+
+If you write about YMYL topics, you cannot "fake it." A generic article written by a freelance generalist will not rank. Google expects verifiable expert authorship (MD, JD, CPA), citations to trusted consensus (medical journals, gov statutes), and pristine reputation signals (reviews, accreditation).
+        
+For AI-generated content, YMYL is the danger zone. LLMs hallucinate. If an AI gives bad medical advice, people get hurt. Google's systems are tuned to suppress unverified AI content in YMYL verticals. If you operate here, your "Human in the Loop" process must be rigorous, and your expert reviewers should be visible.`,
+        icon: ShieldCheck,
     },
     {
         term: "Topical Authority",
@@ -262,6 +274,90 @@ To measure whether disambiguation is working, look for stability: your brand SER
 A final warning: don’t add random sameAs links just to have more. Weak directories and low-trust profiles can dilute signals. Pick a small set of authoritative profiles (LinkedIn, Crunchbase, GitHub, major review sites) and keep them consistent. Entity disambiguation is about clarity, not volume.`,
         icon: Link2,
     },
+    {
+        term: "Programmatic SEO (pSEO)",
+        definition: `Programmatic SEO is the practice of automatically generating large volumes of landing pages to target long-tail keywords at scale. Unlike traditional SEO, where you write one page at a time, pSEO uses a database, a template, and a set of rules to create hundreds or thousands of pages instantly.
+        
+Common examples include "TripAdvisor" (Best Hotels in [City]), "Zapier" (Integrate [App A] with [App B]), and "G2" (Best [Category] Software). The goal isn't spam; it's to answer a specific, recurring user intent that exists across many variations.
+
+To execute pSEO correctly in 2025, you need three things: data, structure, and quality control. The data is your source of truth—product specs, location details, pricing, integrations. The structure is your page template, which must be technically sound and user-friendly. Quality control is the "moat" that stops you from being deindexed. Google hates "thin content" (pages that add no value). If your 5,000 pSEO pages are just the same paragraph with a swapped city name, you will be penalized.
+
+The "New" pSEO involves AI. Instead of just swapping variables ("Best Pizza in [City]"), you use LLMs to write unique introductions, local context, and FAQs for each page in the database. This raises the quality floor, making each page feel distinct. However, the risk of hallucination increases. The best pSEO strategies today mix hard data (proprietary stats, verified listings) with AI-assisted drafting.
+
+Success metrics for pSEO differ from editorial SEO. You look at reliable indexing rate (how many pages stuck?), aggregate traffic (sum of small volume keywords), and conversion rate. It's a technical game. If you have 10,000 pages, a small layout bug is a catastrophe. If you have 10,000 pages, a 1% conversion improvement is a fortune.`,
+        icon: Network,
+    },
+    {
+        term: "Semantic HTML",
+        definition: `Semantic HTML means using correct HTML tags that convey the *meaning* of the content, not just its look. Using <button> for buttons (not <div>), <article> for posts, <nav> for menus, and heading tags (<h1> through <h6>) in a logical hierarchy.
+        
+Why does this matter for AI SEO? Because modern crawlers and LLMs read code structure to understand context. If your site is a soup of nested <div> tags, the AI has to guess what's a heading and what's a footer. If you use semantic tags, you are explicitly telling the bot: "This is the main navigation," "This is a sidebar," "This is the primary headline."
+
+Accessibility is the other half of the coin. Screen readers rely entirely on semantic structure. Since Google weighs accessibility/UX markers in ranking (via Core Web Vitals and general quality guidelines), semantic HTML is a direct ranking factor proxy.
+
+Common mistakes include: using <b> instead of <strong> (visual vs semantic), skipping heading levels (h2 to h4), and using non-interactive elements like <span> for clickable actions without ARIA roles. In the age of AI agents, semantic HTML is the API for your content. If an agent tries to "read" your page to book a flight or extract a price, it looks for semantic markers. Clean code is now a marketing asset.`,
+        icon: Bot,
+    },
+    {
+        term: "Canonicalization",
+        definition: `Canonicalization is the process of selecting the "master" URL for a piece of content when multiple versions exist. It tells search engines: "Ignore these duplicates; credit this one." The tool for this is the <link rel="canonical"> tag.
+        
+Duplicate content happens naturally. A product might exist at /products/shirt-blue, /shirts/blue, and /sale/shirt-blue?sort=price. Without a canonical tag pointing to one version, Google splits the ranking equity (PageRank) across all three. Wose, it might mistake them for spammy duplicates and filter them all out.
+
+In large sites, canonical/index bloat is a silent killer. An ecommerce site with 1,000 products might generate 50,000 URLs due to filter parameters alone. If you don't canonicalize the filtered pages back to the category root (or self-canonicalize if they are unique enough), you waste crawl budget on junk.
+
+Cross-domain canonicals allow you to syndicate content. If you post on Medium or LinkedIn, you can (sometimes) set a canonical pointing back to your blog. This tells Google your site is the original source, protecting your rank even if the other site has higher authority.
+
+Testing canonicals is critical. A common disaster is self-canonicalizing every page in a paginated series (pointing page 2 to page 2), or accidentally pointing strictly to "http" versions on an "https" site. In the AI era, canonicals help models verify the "source of truth" node in their knowledge graph.`,
+        icon: Link2,
+    },
+    {
+        term: "Log File Analysis",
+        definition: `Log file analysis is the forensic science of SEO. It involves reading the raw server access logs to see exactly when, how often, and which search bots (Googlebot, Bingbot, GPTBot) are hitting your site.
+        
+Most SEO tools (Ahrefs, Semrush) simulate a crawl. Log files show the *actual* crawl. They reveal the truth: "Googlebot spent 80% of its budget crawling our calendar archive from 2018 and ignored our new product pages."
+        
+Key insights from log analysis:
+1. Crawl Budget Waste: Are bots stuck in spider traps (infinite calendar loops, faceted navigation)?
+2. Orphan Pages: Are bots finding pages that aren't in your sitemap or internal links?
+3. Status Code Errors: Are bots hitting 5xx errors that users don't see?
+4. Bot Priority: Did Googlebot-Mobile visit your new post immediately, or wait 3 weeks?
+
+With the rise of AI agents, log analysis now includes tracking "GPTBot" and "ClaudeBot." You can see if your content is being ingested for training data or RAG retrieval. If you block these bots in robots.txt, log files confirm if they are obeying. For large sites (10k+ pages), log analysis is often the only way to diagnose deep indexing problems.`,
+        icon: Gauge,
+    },
+    {
+        term: "Schema Markup (JSON-LD)",
+        definition: `Schema markup is a standardized vocabulary (code) you put on your website to help search engines understand the *entities* on your page. It changes your content from "strings" (text) to "things" (objects with properties).
+        
+The most common format is JSON-LD (JavaScript Object Notation for Linked Data). It sits in the <head> of your page, invisible to users. For example, instead of just writing "4.5 stars" on a page, you wrap it in "AggregateRating" schema. Google sees this code and can display those stars in the search results (Rich Snippets).
+
+Types of schema driving ROI in 2025:
+- **Product**: Price, availability, shipping. Crucial for Google Shopping graph.
+- **FAQPage**: Questions and answers. Feeds directly into AI Overviews.
+- **Organization/LocalBusiness**: Logo, address, social profiles. Builds the Knowledge Panel.
+- **Article/NewsArticle**: Author, date, publisher. fights fake news/E-E-A-T issues.
+- **Recipe/Event/JobPosting**: Industry-specific rich results.
+
+Schema is also the language of AI. When a bot like Perplexity scans your site, it prioritizes structured data because it's machine-readable. It doesn't have to "guess" your price; you explicitly stated it in JSON. Implementing robust schema is one of the highest-leverage activities for Agentic SEO.`,
+        icon: Network,
+    },
+    {
+        term: "Core Updates",
+        definition: `A Core Update is a significant, broad change to Google's ranking algorithms and systems. Unlike minor daily tweaks, Core Updates (released a few times a year) reassess how the engine values content quality, relevance, and authority across the entire web.
+        
+When a Core Update hits, rankings can swing wildly. Sites that were stable for years might drop 40% overnight, or jump 50%. Google's advice is always consistent: "There is nothing to fix." They mean there is no single technical error (like a broken tag) to repair. Instead, the update likely re-weighted factors like "helpfulness," "user satisfaction," or "brand authority."
+        
+Recovery from a Core Update hit is a long game (months). It involves honest content auditing: Is your content actually better than the current #1 result? Do you have real expertise? Is the UX aggressive with ads? Is the information outdated?
+        
+In the AI era, Core Updates specifically target "unhelpful content" (SEO spam, mass-generated AI slop). The "Helpful Content System" is now part of the core algorithm. This means "writing for users first" isn't just a platitude; it's a survival requirement. If your traffic drops during a Core Update, don't panic-edit meta tags. Audit your user value proposition.`,
+        icon: Sparkles,
+    },
+    {
+        term: "Crawl Budget",
+        definition: "The amount of crawling and indexing attention a search engine allocates to your site. Technical SEO helps make sure important pages get discovered and updated quickly.",
+        icon: Search,
+    },
 ];
 
 export default function Glossary() {
@@ -294,7 +390,7 @@ export default function Glossary() {
     };
 
     return (
-        <div className="min-h-screen bg-background">
+        <div className="min-h-screen bg-background flex flex-col">
             <Helmet>
                 <title>AI SEO Glossary | AGSEO</title>
                 <meta name="description" content="Definitions for GEO, RAG, agentic workflows, knowledge graphs, and other AI SEO terms." />
@@ -307,7 +403,7 @@ export default function Glossary() {
                 <script type="application/ld+json">{JSON.stringify(definedTermSetSchema)}</script>
             </Helmet>
             <Header />
-            <main className="pt-24 pb-16">
+            <main className="pt-24 pb-16 flex-1">
                 <div className="container mx-auto px-4">
                     <AnimatedSection className="text-center max-w-3xl mx-auto mb-16">
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-md mb-6">
@@ -387,7 +483,7 @@ export default function Glossary() {
 
                     <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
                         {filteredTerms.map((item, index) => (
-                            <AnimatedSection key={index} delay={index * 100}>
+                            <AnimatedSection key={index} delay={Math.min(index * 0.05, 0.5)}>
                                 <div className="bg-card border border-border/50 rounded-2xl p-8 hover:border-primary/50 transition-colors h-full">
                                     <div className="flex items-start gap-4">
                                         <div className="mt-1 bg-primary/10 p-3 rounded-xl text-primary flex-shrink-0">
@@ -436,7 +532,8 @@ export default function Glossary() {
                     </AnimatedSection>
                 </div>
             </main>
+            <TrustSignals />
             <Footer />
-        </div>
+        </div >
     );
 }

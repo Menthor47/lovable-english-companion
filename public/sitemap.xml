@@ -194,6 +194,31 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
+  <url>
+    <loc>https://agseo.pro/compare/ahrefs-vs-moz</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://agseo.pro/compare/jasper-vs-writer</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://agseo.pro/compare/surfer-vs-marketmuse</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://agseo.pro/compare/mangools-vs-ubersuggest</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://agseo.pro/compare/rankmath-vs-yoast</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
   
   <!-- Blog -->
   <url>

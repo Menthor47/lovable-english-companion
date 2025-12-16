@@ -273,6 +273,8 @@
             "urlPlaceholder": "https://example.com",
             "emailLabel": "Email address",
             "emailPlaceholder": "you@company.com",
+            "phoneLabel": "Phone number (optional)",
+            "phonePlaceholder": "+1 555 123 4567",
             "submitCta": "Get My Free Audit",
             "note": "You’ll receive a confirmation email now. Your audit summary follows after review."
         },
@@ -515,6 +517,7 @@
             "description": "Our AI will analyze your website and provide actionable insights.",
             "name": "Name",
             "email": "Email",
+            "phone": "Phone number (optional)",
             "website": "Website URL",
             "message": "Message",
             "submit": "Get Free Audit",

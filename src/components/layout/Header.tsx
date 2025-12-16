@@ -70,6 +70,7 @@ export function Header() {
               alt="AGSEO Logo"
               width="40"
               height="40"
+              fetchPriority="high"
               className="w-10 h-10 rounded-lg object-contain"
             />
             <span className="font-heading font-bold text-xl text-foreground">
@@ -169,7 +170,7 @@ export function Header() {
 
           {/* Mobile Menu */}
           {isMobileMenuOpen && (
-            <div className="lg:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur-xl border-b border-border/50 py-6 overflow-y-auto max-h-[80vh]">
+            <div id="mobile-menu" className="lg:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur-xl border-b border-border/50 py-6 overflow-y-auto max-h-[80vh]">
               <nav className="flex flex-col gap-4 px-4">
                 {navigationConfig.map((item) => (
                   <div key={item.title}>

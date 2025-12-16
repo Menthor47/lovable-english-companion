@@ -1,22 +1,26 @@
 import { Helmet } from 'react-helmet-async';
+import { config } from '@/lib/config';
 
 export function StructuredData() {
     const schema = {
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
         "name": "AGSEO",
-        "image": "https://agseo.pro/og-image.png",
+        "image": `${config.contact.siteUrl}/og-image.png`,
         "description": "AGSEO combines AI with proven SEO strategies to multiply your visibility and conversions.",
-        "url": "https://agseo.pro",
-        "telephone": "+1-555-0123",
+        "url": config.contact.siteUrl,
+        "telephone": config.contact.phone,
+        "email": config.contact.email,
         "address": {
             "@type": "PostalAddress",
-            "addressCountry": "US"
+            "streetAddress": config.contact.address.street,
+            "addressLocality": config.contact.address.city,
+            "addressCountry": config.contact.address.country
         },
         "priceRange": "$$$",
         "sameAs": [
-            "https://twitter.com/AGSEO",
-            "https://linkedin.com/company/agseo"
+            config.social.twitter,
+            config.social.linkedin
         ]
     };
 

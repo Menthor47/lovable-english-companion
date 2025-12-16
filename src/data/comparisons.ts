@@ -3,6 +3,7 @@ import { LucideIcon, PenTool, Search, Zap } from "lucide-react";
 export interface ComparisonData {
     id: string;
     slug: string;
+    image?: string;
     toolA: {
         name: string;
         description: string;
@@ -32,6 +33,7 @@ export const comparisons: ComparisonData[] = [
     {
         id: "jasper-vs-copyai",
         slug: "jasper-vs-copyai",
+        image: "/images/comparisons/jasper-vs-copyai.png",
         category: "AI Writing",
         toolA: {
             name: "Jasper AI",
@@ -58,6 +60,7 @@ export const comparisons: ComparisonData[] = [
     {
         id: "surfer-vs-frase",
         slug: "surfer-vs-frase",
+        image: "/images/comparisons/surfer-vs-frase.png",
         category: "Content Optimization",
         toolA: {
             name: "Surfer SEO",
@@ -84,6 +87,7 @@ export const comparisons: ComparisonData[] = [
     {
         id: "semrush-vs-ahrefs",
         slug: "semrush-vs-ahrefs",
+        image: "/images/comparisons/semrush-vs-ahrefs.png",
         category: "SEO Analysis",
         toolA: {
             name: "Semrush",
@@ -110,6 +114,7 @@ export const comparisons: ComparisonData[] = [
     {
         id: "chatgpt-vs-claude",
         slug: "chatgpt-vs-claude",
+        image: "/images/comparisons/chatgpt-vs-claude.svg",
         category: "AI Writing",
         toolA: {
             name: "ChatGPT (GPT-4)",
@@ -136,6 +141,7 @@ export const comparisons: ComparisonData[] = [
     {
         id: "seranking-vs-moz",
         slug: "seranking-vs-moz",
+        image: "/images/comparisons/seranking-vs-moz.svg",
         category: "SEO Analysis",
         toolA: {
             name: "SE Ranking",
@@ -162,6 +168,7 @@ export const comparisons: ComparisonData[] = [
     {
         id: "surfer-vs-clearscope",
         slug: "surfer-vs-clearscope",
+        image: "/images/comparisons/surfer-vs-clearscope.svg",
         category: "Content Optimization",
         toolA: {
             name: "Surfer SEO",
@@ -219,6 +226,7 @@ Finally, remember that neither tool replaces basic SEO hygiene: good internal li
     {
         id: "semrush-vs-seranking",
         slug: "semrush-vs-seranking",
+        image: "/images/comparisons/semrush-vs-seranking.svg",
         category: "SEO Analysis",
         toolA: {
             name: "Semrush",
@@ -270,5 +278,215 @@ A practical way to decide is to list the workflows you will actually run weekly.
 During a trial, don’t judge dashboards. Judge outputs. Can you build a report your client understands in 15 minutes? Can you find a competitor keyword gap and turn it into a publishable brief? Can you crawl your site and produce a prioritized fix list that an engineer can execute? The better tool is the one that shortens that loop.
 
 One more warning: teams often overpay for suite breadth and underpay for implementation. If budgets are tight, buy SE Ranking, pair it with Google Search Console and GA4, and invest the saved money into content updates and technical fixes. Those moves create compounding returns; tool upgrades don’t.`
-    }
+    },
+    {
+        id: "ahrefs-vs-moz",
+        slug: "ahrefs-vs-moz",
+        image: "/images/comparisons/ahrefs-vs-moz.png",
+        category: "SEO Analysis",
+        toolA: {
+            name: "Ahrefs",
+            description: "The gold standard for backlink analysis and technical SEO crawling, favorite of power users.",
+            pros: ["Unmatched backlink index", "Content Explorer is unique", "Fastest crawler on the market"],
+            cons: ["Expensive credit system", "No social media tools", "Steep learning curve"],
+            price: "$99+/mo",
+            rating: "4.9/5"
+        },
+        toolB: {
+            name: "Moz Pro",
+            description: "The legacy champion of SEO education and Domain Authority, focusing on community and ease of use.",
+            pros: ["Invented 'Domain Authority'", "Great learning resources", "Keyword Explorer is intuitive"],
+            cons: ["Backlink index is smaller", "Tools feel slower/dated", "Less frequent updates"],
+            price: "$99+/mo",
+            rating: "4.5/5"
+        },
+        verdict: {
+            winner: "ToolA",
+            summary: "Ahrefs has simply outpaced Moz in data quality, speed, and innovation over the last decade. Moz is still fine for beginners, but serious SEOs choose Ahrefs.",
+            bestFor: "Power Users (Ahrefs) vs Beginners (Moz)"
+        },
+        article: `The battle between Ahrefs and Moz is a story of "The King vs. The Challenger," except the roles flipped a decade ago. Moz (formerly SEOMoz) practically invented the modern SEO software industry. They created Domain Authority (DA), they built the community, and they set the standard. Ahrefs entered as a simple backlink checker and relentlessly iterated until it became the dominant infrastructure of the industry.
+        
+In 2025, the choice is usually clear, but let's break down why.
+
+**Data is the Product**
+SEO tools are validity engines. You pay them to tell you the truth about the web. On this front, Ahrefs is widely considered superior. Their crawler (AhrefsBot) is one of the most active on the internet, often beating Bing and Yahoo. This means when you look for new backlinks, Ahrefs finds them faster. When you look for keyword volume, Ahrefs' clickstream data tends to be more granular. Moz's index is respectable, but it often feels like a snapshot of the web from last month, whereas Ahrefs feels like a snapshot from this morning.
+
+**User Interface & Speed**
+Ahrefs is built for speed. The UI is dense, data-heavy, and fast. You can pivot from a keyword list to a SERP analysis to a backlink profile in seconds. It rewards exploration. Moz Pro feels like a wizard-driven interface. It guides you step-by-step, which is comforting for novices but excruciating for experts who just want the raw CSV. If you calculate the "time to insight," Ahrefs wins.
+
+**Feature Sets**
+Moz sticks to the classics: Rankings, Links, On-page Grader. They also have a local SEO offering (Moz Local) that Ahrefs completely ignores. If you are a Local SEO agency managing 50 coffee shops, Moz is actually the relevant tool here. Ahrefs doesn't care about your Google Business Profile; it cares about your organic global footprint.
+Ahrefs, however, has expanded into "Content Marketing" with Content Explorer (a BuzzSumo killer) and "Keywords Explorer," which supports YouTube, Amazon, and Bing.
+
+**Pricing Model Controversy**
+Here is where Ahrefs stumbles. They introduced a "credits" system that charges users for generating reports, effectively punishing you for being a power user. The community hated it. Moz has retained a more traditional "seat-based" model. If you are a small agency on a budget that needs to run unlimited reports, Ahrefs' new pricing might break your bank. Moz is safer cost-wise.
+
+**The Verdict**
+If you want to know what is actually happening on the web right now, you buy Ahrefs. It is the professional's choice. If you are an in-house marketer who needs to explain SEO to a boss and manage local listings, Moz Pro + Moz Local is a valid, safer, friendlier stack.`
+    },
+    {
+        id: "jasper-vs-writer",
+        slug: "jasper-vs-writer",
+        image: "/images/comparisons/jasper-vs-writer.png",
+        category: "AI Writing",
+        toolA: {
+            name: "Jasper",
+            description: "The 'prosumer' AI writing tool that brought GPT-3 to the masses, focusing on marketing templates and speed.",
+            pros: ["Huge community & templates", "SurferSEO Integration", "Brand Voice features"],
+            cons: ["Quality can vary", "Prices rose significantly", "UI changes constantly"],
+            price: "$39+/mo",
+            rating: "4.7/5"
+        },
+        toolB: {
+            name: "Writer.com",
+            description: "Enterprise-first AI that prioritizes brand compliance, security, and factual accuracy for big teams.",
+            pros: ["Top-tier data security", "Fact-checking built-in", "Enforces style guides"],
+            cons: ["Very expensive", "Not for solo freelancers", "Requires setup"],
+            price: "$18/user/mo (min 5)",
+            rating: "4.8/5"
+        },
+        verdict: {
+            winner: "ToolB",
+            summary: "Jasper is great for creative solo marketers. Writer.com is the only choice for enterprises that care about compliance, security, and not getting sued.",
+            bestFor: "Creatives (Jasper) vs Enterprise & Legal (Writer)"
+        },
+        article: `When Comparing Jasper and Writer (formerly Writer.com), you are looking at a classic "Speed vs. Control" tradeoff. Jasper is built for the marketer who needs 50 blog post ideas, 10 Instagram captions, and a sales email *right now*. Writer is built for the Managing Editor at a Fortune 500 company who is terrified that the AI will hallucinate a fake product feature or use off-brand tone.
+
+**The Case for Jasper**
+Jasper is fun. It feels like a creative partner. The "Templates" library is vast—AIDA framework, Amazon product bullets, Ridiculous Marketing Ideas. It breaks writer's block instantly. For agencies, Jasper is a productivity multiplier. You can define a "Brand Voice" by uploading past blogs, and it does a decent job mimicking you. It's the Swiss Army Knife of AI generation.
+
+**The Case for Writer**
+Writer is boring, in the best possible way. It doesn't want to be "creative"; it wants to be *correct*. Writer integrates deeply into corporate workflows (Google Docs, Word, Chrome). It checks your content against your proprietary Style Guide (do we say "e-commerce" or "ecommerce"?). It has a "Knowledge Graph" feature where you upload your PDFs and earnings reports, and it cites them accurately. It does not hallucinate facts as often because it is grounded in *your* data. Use Writer if you are in regulated industries (Finance, Healthcare, Law).
+
+**Security and Privacy**
+This is the kill shot for Writer. They explicitly promise not to train their open models on your private data. Their enterprise security compliance (SOC 2, HIPAA, etc.) is the main selling point. Jasper has improved here, but it still feels like a consumer tool trying to go upmarket. Writer was born upmarket.
+
+**Conclusion**
+If you are a freelancer or a creative agency, buy Jasper. It pays for itself in speed. If you are a team of 50 people trying to speak with one voice and avoid legal liability, buy Writer.`
+    },
+    {
+        id: "surfer-vs-marketmuse",
+        slug: "surfer-vs-marketmuse",
+        image: "/images/comparisons/surfer-vs-marketmuse.png",
+        category: "Content Optimization",
+        toolA: {
+            name: "Surfer SEO",
+            description: "The crowd favorite for on-page correlation. Tells you exactly which words to add to rank.",
+            pros: ["Easy 0-100 Score", "Jasper integration", "Great for writers"],
+            cons: ["Correlation isn't causation", "Can lead to keyword stuffing"],
+            price: "$89/mo",
+            rating: "4.8/5"
+        },
+        toolB: {
+            name: "MarketMuse",
+            description: "The topic authority engine. Focuses on content inventory, gap analysis, and expertise depth.",
+            pros: ["Better inventory auditing", "Focuses on authority", "Predictive ROI metrics"],
+            cons: ["Interface is slow/clunky", "Expensive", "Steep learning curve"],
+            price: "$149+/mo",
+            rating: "4.7/5"
+        },
+        verdict: {
+            winner: "Tie",
+            summary: "Surfer helps you write one great page. MarketMuse helps you plan a great website. Use Surfer for execution, MarketMuse for strategy.",
+            bestFor: "Writers (Surfer) vs Strategists (MarketMuse)"
+        },
+        article: `This is a battle of philosophies. Surfer SEO believes the secret to ranking is *looking like the winners*. It analyzes the top 10 results for "best shoes," sees they all use the word "comfort" 12 times, and tells you to do the same. This is "TF-IDF" (Term Frequency-Inverse Document Frequency) on steroids. It works remarkably well for getting a single page to the first page of Google.
+
+MarketMuse believes the secret to ranking is *being the expert*. It uses a massive topic modeling engine to map out what an "expert" on shoes would talk about. It might tell you, "Hey, every competitor mentions 'comfort', but nobody is talking about 'arch support materials'. If you write about that, you win." MarketMuse is about Information Gain and Topical Authority.
+
+**Workflow Differences**
+Surfer is tactical. You give it a keyword, it gives you a content editor. You fill the bar to 100/100, you publish.
+MarketMuse is strategic. You audit your whole site. It tells you, "You have low authority on 'Running Shoes', so don't write a guide yet. First write 10 definitions/support articles to build the cluster." It helps you prioritize *what* to write.
+
+**The 'Gameification' Trap**
+Surfer's green score bar is addictive. Writers love it. But it leads to weird "Frankenstein" content where you shoehorn the word "synergy" into a sentence just to get points. MarketMuse's difficulty scores are more abstract but usually lead to more comprehensive content.
+
+**Price**
+MarketMuse used to be enterprise-only ($1,000/mo) but has come downmarket. Still, it's pricier than Surfer. Surfer is accessible to every freelancer.
+
+**Summary**
+If you need to optimize a blog post today, use Surfer. If you need to plan your content calendar for the next 6 months to overtake a competitor, use MarketMuse.`
+    },
+    {
+        id: "mangools-vs-ubersuggest",
+        slug: "mangools-vs-ubersuggest",
+        image: "/images/comparisons/mangools-vs-ubersuggest.svg",
+        category: "SEO Analysis",
+        toolA: {
+            name: "Mangools (KWFinder)",
+            description: "A beautiful, simple suite of 5 tools. Best known for KWFinder, the easiest keyword tool to use.",
+            pros: ["Stunning Design", "KWFinder is accurate", "Very affordable"],
+            cons: ["Crawler is weak", "Not for enterprise", "Limited data limits"],
+            price: "$29/mo",
+            rating: "4.6/5"
+        },
+        toolB: {
+            name: "Ubersuggest",
+            description: "Neil Patel's entry-level SEO tool. Offers a lot of data for a very low price (and lifetime deals).",
+            pros: ["Lifetime deal option", "Good local SEO data", "Content ideas"],
+            cons: ["Data accuracy varies", "Heavy upsells", "Slow interface"],
+            price: "$29/mo (or Lifetime)",
+            rating: "4.4/5"
+        },
+        verdict: {
+            winner: "ToolA",
+            summary: "Mangools is a polished, accurate software product. Ubersuggest is a value play. For pure UX and trust, Mangools wins.",
+            bestFor: "Design Lovers (Mangools) vs Budget Hunters (Ubersuggest)"
+        },
+        article: `Not everyone needs Ahrefs or Semrush. If you are a blogger, a small affiliate site owner, or a freelancer, spending $129/mo is painful. That's where Mangools and Ubersuggest fight.
+
+**Mangools: The Apple of SEO**
+Mangools is just pleasant. It's not one app; it's five separate apps (KWFinder, SERPWatcher, LinkMiner, etc.) tied together. KWFinder is genuinely world-class. It finds long-tail keywords that the big tools sometimes ignore, and its "Keyword Difficulty" score is often more realistic for new sites. The UI is bright, fast, and simple. You never feel overwhelmed.
+
+**Ubersuggest: The Walmart of SEO**
+Ubersuggest gives you A LOT for very little. It tries to clone Semrush features: site audit, backlink checker, keyword tracking, content ideas. The selling point is the Lifetime Deal (pay once, use forever). For a hobbyist, this is unbeatable math. However, the data accuracy is often questioned by pros, and the interface can be laggy. Also, be prepared for Neil Patel's face appearing everywhere offering consulting upsells.
+
+**Bot Capabilities**
+Mangools uses Majestic's data for backlinks, which is solid reliability. Ubersuggest uses its own crawl data (MOZ API in the past, now mixed), which can be hit-or-miss. Neither tool will help you do a technical audit on a 100,000 page site.
+
+**Recommendation**
+If you want to enjoy your work, get Mangools. KWFinder alone is worth the sub. If you have $200 and never want to pay a monthly bill again, grab the Ubersuggest lifetime deal and accept its limitations.`
+    },
+    {
+        id: "rankmath-vs-yoast",
+        slug: "rankmath-vs-yoast",
+        image: "/images/comparisons/rankmath-vs-yoast.svg",
+        category: "Content Optimization",
+        toolA: {
+            name: "RankMath",
+            description: "The modern WordPress SEO plugin. Lightweight, packed with features, and offers a great free version.",
+            pros: ["Bloat-free code", "Schema module included", "Instant indexing support"],
+            cons: ["Aggressive marketing", "Updates can be buggy"],
+            price: "Free / $59/yr",
+            rating: "4.9/5"
+        },
+        toolB: {
+            name: "Yoast SEO",
+            description: "The original WordPress SEO plugin. Stable, reliable, and runs on millions of sites.",
+            pros: ["Rock solid stability", "Great readability analysis", "Huge support ecosystem"],
+            cons: ["Expensive premium upsells", "Feature-gated basics (redirects)", "Heavy on ads"],
+            price: "Free / $99/yr",
+            rating: "4.7/5"
+        },
+        verdict: {
+            winner: "ToolA",
+            summary: "RankMath gives you almost everything in the free version that Yoast charges $99 for (Redirects, Schema, multiple keywords). It is the modern choice.",
+            bestFor: "Performance Seekers (RankMath) vs Conservatives (Yoast)"
+        },
+        article: `For a decade, Yoast SEO was the only plugin that mattered. Then RankMath showed up and changed the game by giving away premium features for free.
+
+**Feature Parity**
+Yoast is famous for holding back features. Want to manage Redirects (301s)? Buy Premium. Want to optimize for more than one keyword? Buy Premium.
+RankMath gives you Redirects, 5 keywords per post, 404 monitoring, and advanced Schema markup *in the free version*. It was a competitive shockwave.
+
+**Performance**
+RankMath prides itself on being lightweight. It has fewer lines of code and allows you to toggle modules off. If you don't need "Local SEO," you turn it off. Yoast has improved here, but it historically suffered from "bloat" inside the WP Admin dashboard.
+
+**Schema Markup**
+This is where RankMath dominates. Its Schema builder is incredible. You can mark up a Review, a Recipe, a Course, or a Job Posting with a few clicks. Yoast handles basic schema well automatically, but RankMath gives you power-user control.
+
+**Why use Yoast?**
+Stability. Yoast runs on 13+ million sites. They are very careful with updates. RankMath moves fast and breaks things occasionally. If you manage a client site and you assume "set and forget," Yoast is safer. If you are an SEO who wants maximum control, RankMath is the weapon of choice.`
+    },
 ];

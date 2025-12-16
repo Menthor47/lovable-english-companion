@@ -1,4 +1,5 @@
 import { useParams, Link, Navigate } from "react-router-dom";
+import ReactMarkdown from "react-markdown";
 import { comparisons } from "@/data/comparisons";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -16,6 +17,7 @@ import {
     WEBSITE_ID,
     getAbsoluteUrl
 } from "@/lib/siteMetadata";
+import { TrustSignals } from "@/components/sections/TrustSignals";
 
 export default function CompareDetail() {
     const { slug } = useParams();
@@ -65,7 +67,7 @@ export default function CompareDetail() {
     };
 
     return (
-        <div className="min-h-screen bg-background">
+        <div className="min-h-screen bg-background flex flex-col">
             <Helmet>
                 <title>{comp.toolA.name} vs {comp.toolB.name} (2025 Review) - AGSEO</title>
                 <meta name="description" content={`Head-to-head comparison: ${comp.toolA.name} vs ${comp.toolB.name}. See features, pricing, and our expert verdict on which AI tool wins.`} />
@@ -78,7 +80,7 @@ export default function CompareDetail() {
                 <script type="application/ld+json">{JSON.stringify(articleSchema)}</script>
             </Helmet>
             <Header />
-            <main className="pt-24 pb-16">
+            <main className="pt-24 pb-16 flex-1">
                 <div className="container mx-auto px-4 max-w-5xl">
                     <Breadcrumbs items={breadcrumbItems} className="mb-6" />
                     <Link to="/compare" className="inline-flex items-center text-muted-foreground hover:text-primary mb-8 transition-colors">
@@ -180,17 +182,18 @@ export default function CompareDetail() {
                                     Full comparison
                                 </h2>
                                 <div className="prose prose-lg dark:prose-invert max-w-none">
-                                    {comp.article
-                                        .split("\n\n")
-                                        .map((paragraph, index) => {
-                                            const trimmed = paragraph.trim();
-                                            if (!trimmed.length) return null;
-                                            return (
-                                                <p key={index} className="leading-relaxed text-muted-foreground">
-                                                    {trimmed}
-                                                </p>
-                                            );
-                                        })}
+                                    <ReactMarkdown
+                                        components={{
+                                            p: ({ node, ...props }) => <p className="leading-relaxed text-muted-foreground mb-6" {...props} />,
+                                            h2: ({ node, ...props }) => <h2 className="font-heading text-2xl font-bold mt-10 mb-4" {...props} />,
+                                            h3: ({ node, ...props }) => <h3 className="font-heading text-xl font-bold mt-8 mb-3" {...props} />,
+                                            ul: ({ node, ...props }) => <ul className="list-disc pl-6 mb-6 space-y-2 text-muted-foreground" {...props} />,
+                                            li: ({ node, ...props }) => <li className="pl-1" {...props} />,
+                                            strong: ({ node, ...props }) => <strong className="font-bold text-foreground" {...props} />,
+                                        }}
+                                    >
+                                        {comp.article}
+                                    </ReactMarkdown>
                                 </div>
                             </div>
                         </AnimatedSection>
@@ -204,7 +207,8 @@ export default function CompareDetail() {
                     </div>
                 </div>
             </main>
+            <TrustSignals />
             <Footer />
-        </div>
+        </div >
     );
 }
