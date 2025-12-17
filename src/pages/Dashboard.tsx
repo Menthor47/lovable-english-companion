@@ -59,6 +59,7 @@ export default function Dashboard() {
             <Helmet>
                 <title>Client Dashboard Demo | AGSEO</title>
                 <meta name="description" content="Preview the AGSEO client dashboard demo. Data shown is illustrative sample data (not live client metrics)." />
+                <meta name="robots" content="noindex, nofollow" />
                 <link rel="canonical" href={pageUrl} />
                 <meta property="og:url" content={pageUrl} />
                 <meta property="og:title" content="Client Dashboard Demo | AGSEO" />

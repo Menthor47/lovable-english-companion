@@ -8,6 +8,10 @@
         "services": "Servicii",
         "testimonials": "Testimoniale",
         "faq": "Întrebări Frecvente",
+        "mobileMenu": {
+            "open": "Deschide meniul",
+            "close": "Închide meniul"
+        },
         "solutionsMenu": {
             "badge": "AG SEO",
             "description": "AEO + GEO + SEO. Formula completă pentru dominarea căutărilor moderne.",
@@ -40,6 +44,28 @@
             "blog": "Blog"
         }
     },
+    "footer": {
+        "description": "Servicii SEO profesionale ghidate de date și AI. Ajutăm companiile ambițioase să își domine piața.",
+        "company": "Companie",
+        "resources": "Resurse",
+        "legal": "Legal",
+        "links": {
+            "contentProgrammatic": "Conținut & SEO Programatic",
+            "geoOptimization": "Optimizare GEO",
+            "localSeo": "SEO Local",
+            "ecommerceSeo": "SEO E-commerce",
+            "aboutUs": "Despre Noi",
+            "pricing": "Prețuri",
+            "caseStudies": "Studii de Caz",
+            "blog": "Blog",
+            "freeAudit": "Audit Gratuit",
+            "roiCalculator": "Calculator ROI",
+            "contactUs": "Contactează-ne",
+            "privacyPolicy": "Politica de Confidențialitate",
+            "termsOfService": "Termeni și Condiții",
+            "cookiePolicy": "Politica Cookie"
+        }
+    },
     "hero": {
         "title": "Domină Căutările & Răspunsurile AI",
         "subtitle": "Viitorul SEO este Generative Engine Optimization (GEO). Te ajutăm să fii vizibil nu doar pe Google, ci și pe ChatGPT, Gemini și Claude.",
@@ -47,7 +73,28 @@
             "primary": "Audit Gratuit",
             "secondary": "Vezi Serviciile"
         },
-        "badge": "Soluții SEO Bazate pe AI"
+        "badge": "Soluții SEO Bazate pe AI",
+        "metaTitle": "AGSEO - Agenție SEO Bazată pe AI | Viitorul Clasamentului Web",
+        "metaDescription": "AGSEO combină AI-ul cu strategii SEO dovedite pentru a-ți multiplica vizibilitatea și conversiile. Obține rezultate măsurabile cu metodologia noastră bazată pe date.",
+        "stats": {
+            "ai": {
+                "value": "AI",
+                "label": "Strategie"
+            },
+            "geo": {
+                "value": "GEO",
+                "label": "Vizibilitate LLM"
+            },
+            "seo": {
+                "value": "SEO",
+                "label": "Tehnic + Conținut"
+            }
+        },
+        "features": {
+            "ai": "AI Avansat",
+            "roadmap": "Roadmap Clar",
+            "reporting": "Raportare Măsurabilă"
+        }
     },
     "services": {
         "title": "Servicii SEO Bazate pe AI",
@@ -486,16 +533,6 @@
             "error": "Trimitere eșuată. Te rugăm să încerci din nou."
         }
     },
-    "footer": {
-        "company": "Companie",
-        "resources": "Resurse",
-        "legal": "Legal",
-        "privacy": "Politica de Confidențialitate",
-        "terms": "Termeni și Condiții",
-        "cookies": "Politica de Cookie-uri",
-        "rights": "Toate drepturile rezervate.",
-        "description": "Agenție SEO bazată pe AI care transformă modul în care afacerile se clasează online."
-    },
     "cookieConsent": {
         "title": "Setări Cookie-uri",
         "description": "Folosim cookie-uri pentru a îmbunătăți experiența de navigare și a analiza traficul site-ului.",
@@ -505,5 +542,272 @@
         "acceptAll": "Acceptă Toate",
         "rejectAll": "Respinge Toate",
         "savePreferences": "Salvează Preferințele"
+    },
+    "cookieBanner": {
+        "title": "Îți respectăm intimitatea",
+        "description": "Folosim cookie-uri pentru a îmbunătăți experiența de navigare, a livra reclame sau conținut personalizat și pentru a analiza traficul. Făcând clic pe 'Acceptă Toate', ești de acord cu utilizarea cookie-urilor.",
+        "acceptAll": "Acceptă Toate",
+        "rejectAll": "Respinge Toate",
+        "customize": "Personalizează",
+        "savePreferences": "Salvează Preferințele",
+        "preferences": {
+            "title": "Preferințe Cookie",
+            "necessary": {
+                "title": "Necesare",
+                "description": "Esențiale pentru funcționarea corectă a site-ului."
+            },
+            "analytics": {
+                "title": "Analiză",
+                "description": "Ne ajută să înțelegem cum interacționează vizitatorii cu site-ul."
+            },
+            "marketing": {
+                "title": "Marketing",
+                "description": "Folosite pentru a livra reclame relevante vizitatorilor."
+            }
+        }
+    },
+    "termsOfService": {
+        "title": "Termeni și Condiții",
+        "description": "Termeni și Condiții AGSEO. Citește termenii și condițiile noastre pentru utilizarea serviciilor SEO AI.",
+        "lastUpdated": "Ultima actualizare: 12 Decembrie 2024",
+        "sections": {
+            "agreement": {
+                "title": "1. Acordul asupra Termenilor",
+                "content": "Acești Termeni și Condiții constituie un acord obligatoriu legal între dumneavoastră, fie personal sau în numele unei entități ('dumneavoastră') și AGSEO ('noi', 'nostru' sau 'nouă'), privind accesul și utilizarea site-ului AGSEO."
+            },
+            "ip": {
+                "title": "2. Drepturi de Proprietate Intelectuală",
+                "content": "Cu excepția cazului în care se indică altfel, Site-ul este proprietatea noastră exclusivă și tot codul sursă, bazele de date, funcționalitatea, software-ul, designul site-ului, audio, video, text, fotografii și grafică de pe Site (colectiv, 'Conținutul') sunt deținute sau controlate de noi."
+            },
+            "userRep": {
+                "title": "3. Reprezentări ale Utilizatorului",
+                "content": "Prin utilizarea Site-ului, declarați și garantați că: (1) Toate informațiile de înregistrare pe care le trimiteți vor fi adevărate, exacte, actuale și complete; (2) Veți menține acuratețea acestor informații.",
+                "items": [
+                    "Toate informațiile de înregistrare vor fi adevărate, exacte, actuale și complete.",
+                    "Veți menține acuratețea acestor informații.",
+                    "Aveți capacitatea legală și sunteți de acord să respectați acești Termeni.",
+                    "Nu sunteți minor în jurisdicția în care locuiți.",
+                    "Nu veți accesa Site-ul prin mijloace automatizate."
+                ]
+            },
+            "prohibited": {
+                "title": "4. Activități Interzise",
+                "content": "Nu puteți accesa sau utiliza Site-ul în niciun alt scop decât cel pentru care punem la dispoziție Site-ul. Site-ul nu poate fi utilizat în legătură cu nicio activitate comercială, cu excepția celor susținute sau aprobate în mod specific de noi."
+            },
+            "disclaimer": {
+                "title": "5. Declinarea Responsabilității",
+                "content": "Site-ul este furnizat 'așa cum este' și 'așa cum este disponibil'. Sunteți de acord că utilizarea site-ului și a serviciilor noastre va fi pe riscul dumneavoastră exclusiv."
+            },
+            "sla": {
+                "title": "6. Acord privind Nivelul Serviciilor (SLA)",
+                "content": "Ne angajăm să oferim servicii fiabile clienților noștri. Acest SLA subliniază angajamentele noastre privind timpul de funcționare și asistența.",
+                "items": [
+                    "Angajament Uptime: Țintim un uptime lunar de 99.5% pentru serviciile noastre de bază.",
+                    "Răspuns Suport: Ne străduim să răspundem la toate tichetele critice de suport în termen de 24 de ore lucrătoare.",
+                    "Mentenanță: Vom oferi un preaviz de cel puțin 48 de ore pentru mentenanța programată care poate afecta disponibilitatea serviciului."
+                ]
+            }
+        }
+    },
+    "roiCalculator": {
+        "metaTitle": "Calculator ROI SEO | AGSEO",
+        "metaDescription": "Calculează ROI-ul potențial SEO. Vezi cât venit ai putea câștiga cu o strategie SEO bazată pe AI.",
+        "titlePrefix": "Calculator",
+        "titleSuffix": "ROI SEO",
+        "subtitle": "Vezi câți bani lași pe masă. Strategia noastră bazată pe AI crește de obicei traficul cu 150% și intenția de conversie cu 20%.",
+        "inputs": {
+            "traffic": {
+                "label": "Trafic Lunar Curent",
+                "helper": "Vizitatori pe lună"
+            },
+            "conversion": {
+                "label": "Rata de Conversie",
+                "helper": "Procentul de vizitatori care cumpără/contactează"
+            },
+            "orderValue": {
+                "label": "Valoarea Medie a Comenzii",
+                "helper": "Venitul mediu per client"
+            }
+        },
+        "results": {
+            "title": "Venit Lunar Potențial",
+            "current": "Venit Curent",
+            "projected": "Venit Proiectat",
+            "growth": "Creștere Lunară",
+            "chart": {
+                "now": "Acum",
+                "projected": "Proiectat",
+                "revenue": "Venit"
+            },
+            "cta": "Cere o Ofertă pentru a Atinge Aceste Cifre",
+            "disclaimer": "*Proiecții bazate pe rezultatele medii ale clienților după 6 luni de execuție AGSEO."
+        }
+    },
+    "serpSimulator": {
+        "metaTitle": "Simulator SERP Gratuit | AGSEO",
+        "metaDescription": "Previzualizează cum va apărea site-ul tău în rezultatele Google. Optimizează titlurile și descrierile pentru rate maxime de clic.",
+        "backToTools": "Înapoi la Tool-uri",
+        "title": "Simulator SERP Google",
+        "subtitle": "Optimizează Tag-urile de Titlu și Meta Descrierile pentru a îmbunătăți Rata de Clic (CTR) organică.",
+        "editor": {
+            "title": "Editor",
+            "pageTitle": {
+                "label": "Titlu Pagină",
+                "placeholder": "Introdu titlul paginii...",
+                "default": "Titlul Paginii Tale Aici | Nume Brand"
+            },
+            "metaDescription": {
+                "label": "Meta Descriere",
+                "placeholder": "Introdu meta descrierea...",
+                "default": "Acesta este un exemplu de meta descriere care va apărea în rezultatele căutării. Păstreaz-o sub 160 de caractere pentru vizibilitate maximă."
+            },
+            "url": {
+                "label": "URL / Breadcrumb",
+                "placeholder": "https://...",
+                "default": "https://exemplu.ro/pagina-ta"
+            }
+        },
+        "preview": {
+            "title": "Previzualizare Google",
+            "live": "Live",
+            "desktopStart": "Vizualizare Desktop",
+            "mobileStart": "Vizualizare Mobil",
+            "optimizationTips": {
+                "title": "Sfaturi Optimizare",
+                "items": [
+                    "Păstrează titlurile sub 60 caractere (580px) pentru a evita trunchierea.",
+                    "Meta descrierile ar trebui să fie sub 160 de caractere.",
+                    "Include cuvântul cheie principal la începutul titlului.",
+                    "Fă descrierea acționabilă pentru a încuraja clicurile."
+                ]
+            }
+        }
+    },
+    "keywordMixer": {
+        "metaTitle": "Mixer Cuvinte Cheie Gratuit | AGSEO",
+        "metaDescription": "Combină liste multiple de cuvinte cheie pentru a descoperi oportunități long-tail. Perfect pentru campanii PPC și SEO programatic.",
+        "backToTools": "Înapoi la Tool-uri",
+        "title": "Mixer Cuvinte Cheie",
+        "subtitle": "Combină coloane de cuvinte pentru a genera sute de variații long-tail în secunde. Excelent pentru permutări 'Oraș + Serviciu' sau 'Acțiune + Produs'.",
+        "columns": {
+            "a": {
+                "label": "Coloana A (ex. Servicii)",
+                "placeholder": "Audit SEO\nWeb Design\nScriere Conținut"
+            },
+            "b": {
+                "label": "Coloana B (ex. Locații / Modificatori)",
+                "placeholder": "în București\nAgenție\nCompanie\nsector 1"
+            },
+            "c": {
+                "label": "Coloana C (Opțional)",
+                "placeholder": "2025\nCel mai bun\nIeftin"
+            },
+            "items": "elemente"
+        },
+        "controls": {
+            "matchType": "Tip Potrivire:",
+            "types": {
+                "broad": "broad",
+                "phrase": "phrase",
+                "exact": "exact"
+            },
+            "results": "rezultate",
+            "copy": "Copiază Lista",
+            "copied": "Au fost copiate {{count}} cuvinte cheie",
+            "placeholder": "Cuvintele cheie generate vor apărea aici..."
+        }
+    },
+    "schemaGenerator": {
+        "metaTitle": "Generator Schema Markup Gratuit | AGSEO",
+        "metaDescription": "Generează markup JSON-LD valid pentru FAQ și Articole pentru a ajuta motoarele de căutare să înțeleagă mai bine conținutul tău.",
+        "backToTools": "Înapoi la Tool-uri",
+        "title": "Generator Schema Markup",
+        "subtitle": "Construiește date structurate (JSON-LD) pentru a ajuta Google să înțeleagă conținutul și să obțină rezultate bogate (rich snippets).",
+        "selectType": "Selectează Tip Schema",
+        "types": {
+            "faq": "Pagină FAQ",
+            "article": "Articol / Postare Blog"
+        },
+        "faq": {
+            "question": "Întrebare",
+            "answer": "Răspuns",
+            "add": "Adaugă Întrebare"
+        },
+        "article": {
+            "headline": "Titlu Articol",
+            "headlinePlaceholder": "ex. 10 Sfaturi SEO pentru 2025",
+            "image": "URL Imagine",
+            "imagePlaceholder": "https://exemplu.ro/imagine.jpg",
+            "author": "Nume Autor",
+            "authorPlaceholder": "Ion Popescu",
+            "publisher": "Nume Editor/Org",
+            "publisherPlaceholder": "Compania Mea SRL",
+            "date": "Data Publicării"
+        },
+        "output": {
+            "title": "Rezultat JSON-LD",
+            "copy": "Copiază Cod",
+            "copied": "Schema a fost copiată în clipboard!",
+            "instructions": "Lipește acest cod în secțiunea <1><0>&lt;head&gt;</0></1> a HTML-ului tău sau folosește Google Tag Manager."
+        }
+    },
+    "geo": {
+        "metaTitle": "Generative Engine Optimization (GEO) | AGSEO",
+        "metaDescription": "Asigură-ți clasamentul în viitor cu Generative Engine Optimization. Optimizează pentru răspunsurile AI de la ChatGPT, Gemini, Claude și Perplexity.",
+        "hero": {
+            "badge": "Noul Standard",
+            "title": "Generative Engine Optimization",
+            "subtitle": "SEO a murit. Trăiască GEO. Nu optimizăm doar pentru 10 linkuri albastre. Optimizăm pentru singurul răspuns oferit de ChatGPT, Gemini, Claude și Perplexity."
+        },
+        "comparison": {
+            "traditional": {
+                "title": "SEO Tradițional",
+                "items": [
+                    "Îndesare cuvinte cheie",
+                    "Cantitate backlink-uri",
+                    "Vizibilitate \"10 Linkuri Albastre\"",
+                    "Focus pe click-uri"
+                ]
+            },
+            "agseo": {
+                "title": "AGSEO GEO",
+                "items": [
+                    "Autoritate Entitate & Subiect",
+                    "Mențiuni Brand (Citații)",
+                    "Plasare în \"Răspuns Direct\"",
+                    "Focus pe Încredere Brand"
+                ]
+            }
+        },
+        "pillars": {
+            "graph": {
+                "title": "Grafic Entitate",
+                "desc": "Structurăm datele brandului tău pentru ca AI-ul să înțeleagă CINE ești."
+            },
+            "citations": {
+                "title": "Citații",
+                "desc": "Obținem mențiuni pentru brandul tău în surse pe care LLM-urile le consideră de încredere."
+            },
+            "context": {
+                "title": "Context",
+                "desc": "Creăm conținut care răspunde direct interogărilor complexe ale utilizatorilor."
+            },
+            "velocity": {
+                "title": "Viteză",
+                "desc": "Publicăm la viteza AI pentru a semnala actualitatea."
+            }
+        },
+        "cta": {
+            "title": "Gata Să-ți Asiguri Viitorul Clasamentului?",
+            "button": "Începe Optimizarea GEO"
+        },
+        "faq": {
+            "q1": "Ce este Generative Engine Optimization (GEO)?",
+            "a1": "GEO este procesul de optimizare a conținutului pentru a se clasa în răspunsurile generate de AI de la motoare precum ChatGPT, Gemini, Claude și Perplexity, nu doar în rezultatele tradiționale de căutare.",
+            "q2": "Cum diferă GEO de SEO tradițional?",
+            "a2": "SEO tradițional se concentrează pe clasarea linkurilor pe o pagină de căutare. GEO se concentrează pe citarea ca sursă autoritară în cadrul unui răspuns direct generat de AI. Prioritizează autoritatea entității și contextul direct în detrimentul densității cuvintelor cheie.",
+            "q3": "Pentru ce motoare AI optimizează AGSEO?",
+            "a3": "Optimizăm pentru toate experiențele majore de căutare bazate pe LLM, inclusiv ChatGPT (OpenAI), Gemini (Google), Claude (Anthropic) și Perplexity AI."
+        }
     }
 }

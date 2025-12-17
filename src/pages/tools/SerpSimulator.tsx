@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { AnimatedSection } from "@/components/ui/animated-section";
@@ -10,9 +11,10 @@ import { Link } from "react-router-dom";
 import { ArrowLeft, Search, Monitor, Smartphone, MoreVertical } from "lucide-react";
 
 export default function SerpSimulator() {
-    const [title, setTitle] = useState("Your Page Title Goes Here | Brand Name");
-    const [description, setDescription] = useState("This is an example meta description that will show up in search results. Keep it under 160 characters for best visibility.");
-    const [url, setUrl] = useState("https://example.com/your-page-slug");
+    const { t } = useTranslation();
+    const [title, setTitle] = useState(t("serpSimulator.editor.pageTitle.default"));
+    const [description, setDescription] = useState(t("serpSimulator.editor.metaDescription.default"));
+    const [url, setUrl] = useState(t("serpSimulator.editor.url.default"));
     const [isMobile, setIsMobile] = useState(false);
 
     // Approximate pixel width calculation (simplified)
@@ -26,8 +28,8 @@ export default function SerpSimulator() {
     return (
         <div className="min-h-screen bg-background">
             <Helmet>
-                <title>Free SERP Simulator | AGSEO</title>
-                <meta name="description" content="Preview how your website will appear in Google Search results. Optimize titles and descriptions for maximum click-through rates." />
+                <title>{t("serpSimulator.metaTitle")}</title>
+                <meta name="description" content={t("serpSimulator.metaDescription")} />
             </Helmet>
             <Header />
             <main className="pt-24 pb-16">
@@ -36,13 +38,13 @@ export default function SerpSimulator() {
                         <div className="mb-8">
                             <Link to="/tools" className="inline-flex items-center text-sm text-muted-foreground hover:text-primary mb-4 transition-colors">
                                 <ArrowLeft className="w-4 h-4 mr-2" />
-                                Back to Tools
+                                {t("serpSimulator.backToTools")}
                             </Link>
                             <h1 className="font-heading text-3xl md:text-4xl font-bold mb-4">
-                                Google SERP Simulator
+                                {t("serpSimulator.title")}
                             </h1>
                             <p className="text-muted-foreground">
-                                Optimize your Title Tags and Meta Descriptions to improve your organic Click-Through Rate (CTR).
+                                {t("serpSimulator.subtitle")}
                             </p>
                         </div>
 
@@ -52,16 +54,16 @@ export default function SerpSimulator() {
                                 <div className="p-6 rounded-2xl bg-card border border-border/50 shadow-sm">
                                     <h2 className="font-bold text-xl mb-6 flex items-center gap-2">
                                         <Search className="w-5 h-5 text-primary" />
-                                        Editor
+                                        {t("serpSimulator.editor.title")}
                                     </h2>
 
                                     <div className="space-y-4">
                                         <div className="space-y-2">
-                                            <label className="text-sm font-medium">Page Title</label>
+                                            <label className="text-sm font-medium">{t("serpSimulator.editor.pageTitle.label")}</label>
                                             <Input
                                                 value={title}
                                                 onChange={(e) => setTitle(e.target.value)}
-                                                placeholder="Enter page title..."
+                                                placeholder={t("serpSimulator.editor.pageTitle.placeholder")}
                                             />
                                             <div className="flex justify-between text-xs text-muted-foreground">
                                                 <span>{title.length} chars</span>
@@ -78,11 +80,11 @@ export default function SerpSimulator() {
                                         </div>
 
                                         <div className="space-y-2">
-                                            <label className="text-sm font-medium">Meta Description</label>
+                                            <label className="text-sm font-medium">{t("serpSimulator.editor.metaDescription.label")}</label>
                                             <Textarea
                                                 value={description}
                                                 onChange={(e) => setDescription(e.target.value)}
-                                                placeholder="Enter meta description..."
+                                                placeholder={t("serpSimulator.editor.metaDescription.placeholder")}
                                                 className="h-24 resize-none"
                                             />
                                             <div className="flex justify-between text-xs text-muted-foreground">
@@ -100,11 +102,11 @@ export default function SerpSimulator() {
                                         </div>
 
                                         <div className="space-y-2">
-                                            <label className="text-sm font-medium">URL / Breadcrumb</label>
+                                            <label className="text-sm font-medium">{t("serpSimulator.editor.url.label")}</label>
                                             <Input
                                                 value={url}
                                                 onChange={(e) => setUrl(e.target.value)}
-                                                placeholder="https://..."
+                                                placeholder={t("serpSimulator.editor.url.placeholder")}
                                             />
                                         </div>
                                     </div>
@@ -116,21 +118,21 @@ export default function SerpSimulator() {
                                 <div className="p-6 rounded-2xl bg-card border border-border/50 shadow-sm h-full">
                                     <div className="flex items-center justify-between mb-6">
                                         <h2 className="font-bold text-xl flex items-center gap-2">
-                                            Google Preview
-                                            <span className="text-xs font-normal px-2 py-0.5 rounded-full bg-primary/10 text-primary">Live</span>
+                                            {t("serpSimulator.preview.title")}
+                                            <span className="text-xs font-normal px-2 py-0.5 rounded-full bg-primary/10 text-primary">{t("serpSimulator.preview.live")}</span>
                                         </h2>
                                         <div className="flex bg-secondary p-1 rounded-lg">
                                             <button
                                                 onClick={() => setIsMobile(false)}
                                                 className={`p-1.5 rounded-md transition-all ${!isMobile ? "bg-background shadow-sm" : "text-muted-foreground hover:text-foreground"}`}
-                                                title="Desktop View"
+                                                title={t("serpSimulator.preview.desktopStart")}
                                             >
                                                 <Monitor className="w-4 h-4" />
                                             </button>
                                             <button
                                                 onClick={() => setIsMobile(true)}
                                                 className={`p-1.5 rounded-md transition-all ${isMobile ? "bg-background shadow-sm" : "text-muted-foreground hover:text-foreground"}`}
-                                                title="Mobile View"
+                                                title={t("serpSimulator.preview.mobileStart")}
                                             >
                                                 <Smartphone className="w-4 h-4" />
                                             </button>
@@ -138,16 +140,20 @@ export default function SerpSimulator() {
                                     </div>
 
                                     {/* Google SERP Container */}
-                                    <div className="bg-white p-4 rounded-xl shadow-inner min-h-[300px]">
+                                    <div className="bg-white p-4 rounded-xl shadow-inner min-h-[300px] overflow-x-auto">
                                         <div className={`mx-auto ${isMobile ? "max-w-[375px]" : "w-full"}`}>
                                             <div className="font-sans text-left">
                                                 {/* URL Row */}
                                                 <div className="flex items-center gap-2 mb-1 group cursor-pointer">
                                                     <div className="w-7 h-7 bg-gray-100 rounded-full flex items-center justify-center border border-gray-200">
                                                         <img
-                                                            src="https://www.google.com/s2/favicons?domain=example.com"
+                                                            src={`https://www.google.com/s2/favicons?domain=${url.startsWith('http') ? new URL(url).hostname : url}`}
                                                             alt="Favicon"
                                                             className="w-4 h-4 opacity-60"
+                                                            onError={(e) => {
+                                                                // Fallback to generic icon if favicon fails
+                                                                (e.target as HTMLImageElement).src = "https://www.google.com/s2/favicons?domain=google.com";
+                                                            }}
                                                         />
                                                     </div>
                                                     <div className="flex flex-col leading-tight">
@@ -171,12 +177,11 @@ export default function SerpSimulator() {
                                     </div>
 
                                     <div className="mt-6 p-4 rounded-xl bg-primary/5 border border-primary/10">
-                                        <h4 className="font-bold text-sm mb-2 text-primary">Optimization Tips</h4>
+                                        <h4 className="font-bold text-sm mb-2 text-primary">{t("serpSimulator.preview.optimizationTips.title")}</h4>
                                         <ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
-                                            <li>Keep titles under 60 characters (580px) to prevent truncation.</li>
-                                            <li>Meta descriptions should be under 160 characters.</li>
-                                            <li>Include your main keyword near the start of the title.</li>
-                                            <li>Make the description actionable to encourage clicks.</li>
+                                            {(t("serpSimulator.preview.optimizationTips.items", { returnObjects: true }) as string[]).map((tip, index) => (
+                                                <li key={index}>{tip}</li>
+                                            ))}
                                         </ul>
                                     </div>
                                 </div>

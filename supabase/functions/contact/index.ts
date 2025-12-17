@@ -240,9 +240,15 @@ function getSupabaseAdmin(): ReturnType<typeof createClient> | null {
 }
 
 async function storeSubmission(params: {
+    source: LeadSource;
     email: string;
     website?: string;
     phone?: string;
+    message?: string;
+    origin: string | null;
+    ip: string;
+    userAgent: string;
+    referer: string;
 }): Promise<{ ok: true } | { ok: false; error: string }> {
     const supabaseAdmin = getSupabaseAdmin();
     if (!supabaseAdmin) {
@@ -250,8 +256,14 @@ async function storeSubmission(params: {
     }
 
     const baseRow: Record<string, unknown> = {
+        source: params.source,
         email: params.email,
         website: params.website ?? null,
+        message: params.message ?? null,
+        origin: params.origin,
+        ip: params.ip,
+        user_agent: params.userAgent,
+        referer: params.referer,
     };
 
     const tryWithPhone: Record<string, unknown> = {
@@ -260,7 +272,7 @@ async function storeSubmission(params: {
     };
 
     const { error: firstError } = await supabaseAdmin
-        .from("contact_submissions")
+        .from("leads")
         .insert([tryWithPhone]);
 
     if (!firstError) return { ok: true };
@@ -277,7 +289,7 @@ async function storeSubmission(params: {
     }
 
     const { error: secondError } = await supabaseAdmin
-        .from("contact_submissions")
+        .from("leads")
         .insert([baseRow]);
 
     if (secondError) {
@@ -334,10 +346,20 @@ Deno.serve(async (request: Request): Promise<Response> => {
         return jsonResponse({ success: true }, { headers: corsHeaders });
     }
 
+    const userAgent = request.headers.get("user-agent") ?? "";
+    const referer = request.headers.get("referer") ?? "";
+    const clientIp = getClientIp(request);
+
     const stored = await storeSubmission({
+        source,
         email: payload.email,
         website: payload.website,
         phone: payload.phone,
+        message: payload.message,
+        origin: requestOrigin,
+        ip: clientIp,
+        userAgent,
+        referer,
     });
 
     if (!stored.ok) {
@@ -358,9 +380,6 @@ Deno.serve(async (request: Request): Promise<Response> => {
             { status: 500, headers: corsHeaders },
         );
     }
-
-    const userAgent = request.headers.get("user-agent") ?? "";
-    const referer = request.headers.get("referer") ?? "";
 
     const subject =
         source === "audit"
@@ -388,7 +407,7 @@ Deno.serve(async (request: Request): Promise<Response> => {
   ${websiteHtml}
   ${messageHtml}
   <div><strong>Origin:</strong> ${escapeHtml(requestOrigin ?? "")}</div>
-  <div><strong>IP:</strong> ${escapeHtml(getClientIp(request))}</div>
+  <div><strong>IP:</strong> ${escapeHtml(clientIp)}</div>
   <div><strong>Referer:</strong> ${escapeHtml(referer)}</div>
   <div><strong>User-Agent:</strong> ${escapeHtml(userAgent)}</div>
 </div>`;

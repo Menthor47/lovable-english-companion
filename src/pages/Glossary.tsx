@@ -3,6 +3,7 @@ import { Footer } from "@/components/layout/Footer";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Search, Brain, Bot, Network, Sparkles, MessageSquare, BookOpen, Link2, Gauge, ShieldCheck } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 import { TrustSignals } from "@/components/sections/TrustSignals";
@@ -375,7 +376,7 @@ export default function Glossary() {
         });
     }, [query]);
 
-    const definedTermSetSchema = {
+    const definedTermSetSchema = useMemo(() => ({
         "@context": "https://schema.org",
         "@type": "DefinedTermSet",
         "@id": `${pageUrl}#definedtermset`,
@@ -387,7 +388,7 @@ export default function Glossary() {
             name: item.term,
             description: item.definition
         }))
-    };
+    }), [pageUrl]);
 
     return (
         <div className="min-h-screen bg-background flex flex-col">
@@ -481,35 +482,53 @@ export default function Glossary() {
                         </div>
                     </AnimatedSection>
 
-                    <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-                        {filteredTerms.map((item, index) => (
-                            <AnimatedSection key={index} delay={Math.min(index * 0.05, 0.5)}>
-                                <div className="bg-card border border-border/50 rounded-2xl p-8 hover:border-primary/50 transition-colors h-full">
-                                    <div className="flex items-start gap-4">
-                                        <div className="mt-1 bg-primary/10 p-3 rounded-xl text-primary flex-shrink-0">
-                                            <item.icon className="w-6 h-6" />
-                                        </div>
-                                        <div>
-                                            <h3 className="font-heading text-xl font-bold mb-3 text-foreground">
-                                                {item.term}
-                                            </h3>
-                                            <div className="space-y-4 text-muted-foreground leading-relaxed">
-                                                {item.definition.split("\n\n").map((paragraph, paragraphIndex) => {
+                    <Accordion type="multiple" className="grid md:grid-cols-2 gap-4 max-w-5xl mx-auto">
+                        {filteredTerms.map((item, index) => {
+                            const Icon = item.icon;
+                            // Truncate definition for preview (first ~100 chars)
+                            const previewText = item.definition.length > 120
+                                ? item.definition.substring(0, 120).trim() + "…"
+                                : item.definition;
+
+                            return (
+                                <AnimatedSection key={item.term} delay={Math.min(index * 0.03, 0.3)}>
+                                    <AccordionItem
+                                        value={item.term}
+                                        className="bg-card border border-border/50 rounded-2xl hover:border-primary/50 transition-colors overflow-hidden"
+                                    >
+                                        <AccordionTrigger className="px-6 py-5 hover:no-underline [&[data-state=open]>div>.preview]:hidden">
+                                            <div className="flex items-start gap-4 text-left w-full">
+                                                <div className="bg-primary/10 p-3 rounded-xl text-primary flex-shrink-0">
+                                                    <Icon className="w-5 h-5" />
+                                                </div>
+                                                <div className="flex-1 min-w-0">
+                                                    <h3 className="font-heading text-lg font-bold text-foreground leading-tight">
+                                                        {item.term}
+                                                    </h3>
+                                                    <p className="preview text-sm text-muted-foreground mt-1 line-clamp-2">
+                                                        {previewText}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </AccordionTrigger>
+                                        <AccordionContent className="px-6 pb-6">
+                                            <div className="pl-[60px] space-y-3 text-muted-foreground leading-relaxed">
+                                                {item.definition.split("\n\n").map((paragraph, pIdx) => {
                                                     const trimmed = paragraph.trim();
                                                     if (!trimmed.length) return null;
                                                     return (
-                                                        <p key={paragraphIndex}>
+                                                        <p key={pIdx} className="text-sm">
                                                             {trimmed}
                                                         </p>
                                                     );
                                                 })}
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </AnimatedSection>
-                        ))}
-                    </div>
+                                        </AccordionContent>
+                                    </AccordionItem>
+                                </AnimatedSection>
+                            );
+                        })}
+                    </Accordion>
 
                     <AnimatedSection className="max-w-5xl mx-auto mt-16">
                         <div className="rounded-3xl border border-primary/20 bg-gradient-to-br from-primary/10 via-background to-background p-8 md:p-12">

@@ -1,155 +1,65 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { Button } from "@/components/ui/button";
-import { AnimatedSection } from "@/components/ui/animated-section";
-
-const testimonialKeys = ["t1", "t2", "t3", "t4"] as const;
+import { AnimatedSection, StaggerContainer, StaggerItem } from "@/components/ui/animated-section";
+import { Star, Quote } from "lucide-react";
 
 export function Testimonials() {
   const { t } = useTranslation();
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [direction, setDirection] = useState(0);
-
-  const testimonials = testimonialKeys.map((key) => ({
-    company: t(`testimonials.items.${key}.company`),
-    role: t(`testimonials.items.${key}.role`),
-    quote: t(`testimonials.items.${key}.quote`),
-    date: t(`testimonials.items.${key}.date`),
-  }));
-
-  const nextTestimonial = () => {
-    setDirection(1);
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-  };
-
-  const prevTestimonial = () => {
-    setDirection(-1);
-    setCurrentIndex(
-      (prev) => (prev - 1 + testimonials.length) % testimonials.length
-    );
-  };
-
-  const slideVariants = {
-    enter: (direction: number) => ({
-      x: direction > 0 ? 300 : -300,
-      opacity: 0,
-    }),
-    center: {
-      x: 0,
-      opacity: 1,
-    },
-    exit: (direction: number) => ({
-      x: direction < 0 ? 300 : -300,
-      opacity: 0,
-    }),
-  };
+  const testimonialKeys = ["t1", "t2", "t3", "t4"] as const;
 
   return (
-    <section id="testimonials" className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/10 to-background" />
-
-      <div className="container mx-auto px-4 relative z-10">
-        <AnimatedSection className="text-center mb-16">
+    <section className="py-24 bg-gradient-to-br from-background via-card/50 to-background border-t border-border/50">
+      <div className="container mx-auto px-4">
+        <AnimatedSection className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
-            <span className="text-sm font-medium text-primary uppercase tracking-wider">
-              {t("nav.testimonials")}
+            <Star className="w-4 h-4 text-primary fill-primary" />
+            <span className="text-sm font-medium text-primary tracking-wide">
+              Client Success Stories
             </span>
           </div>
-          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
+          <h2 className="font-heading text-3xl md:text-5xl font-bold mb-6">
             {t("testimonials.title")}
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground">
             {t("testimonials.subtitle")}
           </p>
         </AnimatedSection>
 
-        <div className="max-w-4xl mx-auto">
-          <div className="relative">
-            {/* Quote Icon */}
-            <motion.div
-              className="absolute -top-4 -left-4 w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center z-20"
-              initial={{ scale: 0, rotate: -180 }}
-              whileInView={{ scale: 1, rotate: 0 }}
-              viewport={{ once: true }}
-              transition={{ type: "spring", stiffness: 200, damping: 15 }}
-            >
-              <Quote className="w-8 h-8 text-primary" />
-            </motion.div>
+        <StaggerContainer className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto" staggerDelay={0.1}>
+          {testimonialKeys.map((key, index) => (
+            <StaggerItem key={key}>
+              <div className="h-full bg-card border border-border/50 p-8 rounded-3xl relative hover:border-primary/30 transition-colors group">
+                <Quote className="absolute top-8 right-8 w-12 h-12 text-primary/10 group-hover:text-primary/20 transition-colors" />
 
-            {/* Testimonial Card */}
-            <div className="bg-card/60 backdrop-blur-sm border border-border rounded-2xl p-8 md:p-12 ml-6 overflow-hidden relative min-h-[300px]">
-              <AnimatePresence mode="wait" custom={direction}>
-                <motion.div
-                  key={currentIndex}
-                  custom={direction}
-                  variants={slideVariants}
-                  initial="enter"
-                  animate="center"
-                  exit="exit"
-                  transition={{ duration: 0.4, ease: "easeInOut" }}
-                >
-                  <div className="mb-8">
-                    <h3 className="font-heading text-xl font-semibold text-foreground">
-                      {testimonials[currentIndex].company}
-                    </h3>
-                    <p className="text-sm text-primary">
-                      {testimonials[currentIndex].role}
-                    </p>
+                <div className="flex gap-1 mb-6">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <Star key={star} className="w-4 h-4 text-primary fill-primary" />
+                  ))}
+                </div>
+
+                <blockquote className="text-lg text-foreground/90 font-medium leading-relaxed mb-8">
+                  "{t(`testimonials.items.${key}.quote`)}"
+                </blockquote>
+
+                <div className="flex items-center gap-4 mt-auto">
+                  <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-lg">
+                    {t(`testimonials.items.${key}.company`).charAt(0)}
                   </div>
-
-                  <blockquote className="text-lg md:text-xl text-muted-foreground italic leading-relaxed mb-8">
-                    "{testimonials[currentIndex].quote}"
-                  </blockquote>
-
-                  <p className="text-sm text-muted-foreground">
-                    {testimonials[currentIndex].date}
-                  </p>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-          </div>
-
-          {/* Navigation */}
-          <div className="flex items-center justify-center gap-4 mt-8">
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={prevTestimonial}
-              className="rounded-full"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </Button>
-
-            <div className="flex gap-2">
-              {testimonials.map((_, index) => (
-                <motion.button
-                  key={index}
-                  onClick={() => {
-                    setDirection(index > currentIndex ? 1 : -1);
-                    setCurrentIndex(index);
-                  }}
-                  className={`h-2 rounded-full transition-all ${index === currentIndex
-                    ? "bg-primary"
-                    : "bg-muted hover:bg-muted-foreground/50"
-                    }`}
-                  animate={{ width: index === currentIndex ? 32 : 8 }}
-                  transition={{ duration: 0.3 }}
-                />
-              ))}
-            </div>
-
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={nextTestimonial}
-              className="rounded-full"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </Button>
-          </div>
-        </div>
+                  <div>
+                    <div className="font-bold text-foreground">
+                      {t(`testimonials.items.${key}.company`)}
+                    </div>
+                    <div className="text-sm text-muted-foreground">
+                      {t(`testimonials.items.${key}.role`)}
+                    </div>
+                  </div>
+                  <div className="ml-auto text-sm text-muted-foreground/60 border-l border-border/50 pl-4">
+                    {t(`testimonials.items.${key}.date`)}
+                  </div>
+                </div>
+              </div>
+            </StaggerItem>
+          ))}
+        </StaggerContainer>
       </div>
     </section>
   );

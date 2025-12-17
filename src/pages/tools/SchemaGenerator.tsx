@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation, Trans } from "react-i18next";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { AnimatedSection } from "@/components/ui/animated-section";
@@ -19,6 +20,7 @@ interface FAQItem {
 }
 
 export default function SchemaGenerator() {
+    const { t } = useTranslation();
     const [type, setType] = useState<SchemaType>("FAQPage");
 
     // FAQ State
@@ -71,7 +73,7 @@ export default function SchemaGenerator() {
 
     const copyToClipboard = () => {
         navigator.clipboard.writeText(generateSchema());
-        toast.success("Schema copied to clipboard!");
+        toast.success(t("schemaGenerator.output.copied"));
     };
 
     const addFaq = () => setFaqs([...faqs, { question: "", answer: "" }]);
@@ -85,8 +87,8 @@ export default function SchemaGenerator() {
     return (
         <div className="min-h-screen bg-background">
             <Helmet>
-                <title>Free Schema Markup Generator | AGSEO</title>
-                <meta name="description" content="Generate valid JSON-LD Schema markup for FAQs and Articles to help search engines understand your content better." />
+                <title>{t("schemaGenerator.metaTitle")}</title>
+                <meta name="description" content={t("schemaGenerator.metaDescription")} />
             </Helmet>
             <Header />
             <main className="pt-24 pb-16">
@@ -95,13 +97,13 @@ export default function SchemaGenerator() {
                         <div className="mb-8">
                             <Link to="/tools" className="inline-flex items-center text-sm text-muted-foreground hover:text-primary mb-4 transition-colors">
                                 <ArrowLeft className="w-4 h-4 mr-2" />
-                                Back to Tools
+                                {t("schemaGenerator.backToTools")}
                             </Link>
                             <h1 className="font-heading text-3xl md:text-4xl font-bold mb-4">
-                                Schema Markup Generator
+                                {t("schemaGenerator.title")}
                             </h1>
                             <p className="text-muted-foreground">
-                                Build structured data (JSON-LD) to help Google understand your content and win rich snippets.
+                                {t("schemaGenerator.subtitle")}
                             </p>
                         </div>
 
@@ -110,14 +112,14 @@ export default function SchemaGenerator() {
                             <AnimatedSection className="space-y-6">
                                 <div className="p-6 rounded-2xl bg-card border border-border/50 shadow-sm">
                                     <div className="mb-6">
-                                        <label className="text-sm font-medium mb-2 block">Select Schema Type</label>
+                                        <label className="text-sm font-medium mb-2 block">{t("schemaGenerator.selectType")}</label>
                                         <Select value={type} onValueChange={(v) => setType(v as SchemaType)}>
                                             <SelectTrigger>
                                                 <SelectValue />
                                             </SelectTrigger>
                                             <SelectContent>
-                                                <SelectItem value="FAQPage">FAQ Page</SelectItem>
-                                                <SelectItem value="Article">Article / Blog Post</SelectItem>
+                                                <SelectItem value="FAQPage">{t("schemaGenerator.types.faq")}</SelectItem>
+                                                <SelectItem value="Article">{t("schemaGenerator.types.article")}</SelectItem>
                                             </SelectContent>
                                         </Select>
                                     </div>
@@ -136,7 +138,7 @@ export default function SchemaGenerator() {
                                                         <Trash2 className="w-4 h-4" />
                                                     </Button>
                                                     <div>
-                                                        <label className="text-xs font-medium uppercase text-muted-foreground">Question</label>
+                                                        <label className="text-xs font-medium uppercase text-muted-foreground">{t("schemaGenerator.faq.question")}</label>
                                                         <Input
                                                             value={faq.question}
                                                             onChange={(e) => updateFaq(index, "question", e.target.value)}
@@ -144,7 +146,7 @@ export default function SchemaGenerator() {
                                                         />
                                                     </div>
                                                     <div>
-                                                        <label className="text-xs font-medium uppercase text-muted-foreground">Answer</label>
+                                                        <label className="text-xs font-medium uppercase text-muted-foreground">{t("schemaGenerator.faq.answer")}</label>
                                                         <Textarea
                                                             value={faq.answer}
                                                             onChange={(e) => updateFaq(index, "answer", e.target.value)}
@@ -154,7 +156,7 @@ export default function SchemaGenerator() {
                                                 </div>
                                             ))}
                                             <Button variant="outline" onClick={addFaq} className="w-full border-dashed">
-                                                <Plus className="w-4 h-4 mr-2" /> Add Question
+                                                <Plus className="w-4 h-4 mr-2" /> {t("schemaGenerator.faq.add")}
                                             </Button>
                                         </div>
                                     )}
@@ -162,23 +164,23 @@ export default function SchemaGenerator() {
                                     {type === "Article" && (
                                         <div className="space-y-4">
                                             <div>
-                                                <label className="text-sm font-medium">Article Headline</label>
-                                                <Input value={headline} onChange={(e) => setHeadline(e.target.value)} placeholder="e.g. 10 SEO Tips for 2025" />
+                                                <label className="text-sm font-medium">{t("schemaGenerator.article.headline")}</label>
+                                                <Input value={headline} onChange={(e) => setHeadline(e.target.value)} placeholder={t("schemaGenerator.article.headlinePlaceholder")} />
                                             </div>
                                             <div>
-                                                <label className="text-sm font-medium">Image URL</label>
-                                                <Input value={image} onChange={(e) => setImage(e.target.value)} placeholder="https://example.com/image.jpg" />
+                                                <label className="text-sm font-medium">{t("schemaGenerator.article.image")}</label>
+                                                <Input value={image} onChange={(e) => setImage(e.target.value)} placeholder={t("schemaGenerator.article.imagePlaceholder")} />
                                             </div>
                                             <div>
-                                                <label className="text-sm font-medium">Author Name</label>
-                                                <Input value={authorName} onChange={(e) => setAuthorName(e.target.value)} placeholder="John Doe" />
+                                                <label className="text-sm font-medium">{t("schemaGenerator.article.author")}</label>
+                                                <Input value={authorName} onChange={(e) => setAuthorName(e.target.value)} placeholder={t("schemaGenerator.article.authorPlaceholder")} />
                                             </div>
                                             <div>
-                                                <label className="text-sm font-medium">Publisher/Org Name</label>
-                                                <Input value={publisherName} onChange={(e) => setPublisherName(e.target.value)} placeholder="My Company Inc." />
+                                                <label className="text-sm font-medium">{t("schemaGenerator.article.publisher")}</label>
+                                                <Input value={publisherName} onChange={(e) => setPublisherName(e.target.value)} placeholder={t("schemaGenerator.article.publisherPlaceholder")} />
                                             </div>
                                             <div>
-                                                <label className="text-sm font-medium">Date Published</label>
+                                                <label className="text-sm font-medium">{t("schemaGenerator.article.date")}</label>
                                                 <Input type="date" value={datePublished} onChange={(e) => setDatePublished(e.target.value)} />
                                             </div>
                                         </div>
@@ -192,11 +194,11 @@ export default function SchemaGenerator() {
                                     <div className="flex items-center justify-between mb-4">
                                         <h2 className="font-bold text-xl flex items-center gap-2">
                                             <Code2 className="w-5 h-5 text-primary" />
-                                            JSON-LD Output
+                                            {t("schemaGenerator.output.title")}
                                         </h2>
                                         <Button size="sm" onClick={copyToClipboard}>
                                             <Copy className="w-4 h-4 mr-2" />
-                                            Copy Code
+                                            {t("schemaGenerator.output.copy")}
                                         </Button>
                                     </div>
                                     <div className="relative">
@@ -208,7 +210,9 @@ export default function SchemaGenerator() {
                                         </pre>
                                     </div>
                                     <p className="mt-4 text-sm text-muted-foreground">
-                                        Paste this code into the <code className="bg-secondary px-1 py-0.5 rounded text-foreground">&lt;head&gt;</code> section of your HTML or use Google Tag Manager.
+                                        <Trans i18nKey="schemaGenerator.output.instructions">
+                                            Paste this code into the <code className="bg-secondary px-1 py-0.5 rounded text-foreground">&lt;head&gt;</code> section of your HTML or use Google Tag Manager.
+                                        </Trans>
                                     </p>
                                 </div>
                             </AnimatedSection>

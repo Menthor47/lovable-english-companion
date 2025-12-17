@@ -103,35 +103,35 @@ export const footerLinks: Record<string, FooterLinkGroup> = {
     services: {
         titleKey: "nav.services",
         links: [
-            { label: "Content & Programmatic SEO", href: "/services/content" },
-            { label: "GEO Optimization", href: "/geo-optimization" },
-            { label: "Local SEO", href: "/#services" },
-            { label: "E-commerce SEO", href: "/#services" },
+            { label: "footer.links.contentProgrammatic", href: "/services/content" },
+            { label: "footer.links.geoOptimization", href: "/geo-optimization" },
+            { label: "footer.links.localSeo", href: "/#services" },
+            { label: "footer.links.ecommerceSeo", href: "/#services" },
         ]
     },
     company: {
         titleKey: "footer.company",
         links: [
-            { label: "About Us", href: "/about" },
-            { label: "Pricing", href: "/pricing" },
-            { label: "Case Studies", href: "/case-studies" },
-            { label: "Blog", href: "/blog" },
+            { label: "footer.links.aboutUs", href: "/about" },
+            { label: "footer.links.pricing", href: "/pricing" },
+            { label: "footer.links.caseStudies", href: "/case-studies" },
+            { label: "footer.links.blog", href: "/blog" },
         ]
     },
     resources: {
         titleKey: "footer.resources",
         links: [
-            { label: "Free Audit", href: "/tools/audit" },
-            { label: "ROI Calculator", href: "/tools/roi-calculator" },
-            { label: "Contact Us", href: "/contact" },
+            { label: "footer.links.freeAudit", href: "/tools/audit" },
+            { label: "footer.links.roiCalculator", href: "/tools/roi-calculator" },
+            { label: "footer.links.contactUs", href: "/contact" },
         ]
     },
     legal: {
         titleKey: "footer.legal",
         links: [
-            { label: "Privacy Policy", href: "/privacy" },
-            { label: "Terms of Service", href: "/terms" },
-            { label: "Cookie Policy", href: "/cookies" },
+            { label: "footer.links.privacyPolicy", href: "/privacy" },
+            { label: "footer.links.termsOfService", href: "/terms" },
+            { label: "footer.links.cookiePolicy", href: "/cookies" },
         ]
     }
 };

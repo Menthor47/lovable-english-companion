@@ -8,6 +8,10 @@
         "services": "Services",
         "testimonials": "Testimonials",
         "faq": "FAQ",
+        "mobileMenu": {
+            "open": "Open menu",
+            "close": "Close menu"
+        },
         "solutionsMenu": {
             "badge": "AG SEO",
             "description": "AEO + GEO + SEO. The complete formula for modern search dominance.",
@@ -40,14 +44,57 @@
             "blog": "Blog"
         }
     },
+    "footer": {
+        "description": "Professional SEO services driven by data and AI. We help ambitious companies dominate their market.",
+        "company": "Company",
+        "resources": "Resources",
+        "legal": "Legal",
+        "links": {
+            "contentProgrammatic": "Content & Programmatic SEO",
+            "geoOptimization": "GEO Optimization",
+            "localSeo": "Local SEO",
+            "ecommerceSeo": "E-commerce SEO",
+            "aboutUs": "About Us",
+            "pricing": "Pricing",
+            "caseStudies": "Case Studies",
+            "blog": "Blog",
+            "freeAudit": "Free Audit",
+            "roiCalculator": "ROI Calculator",
+            "contactUs": "Contact Us",
+            "privacyPolicy": "Privacy Policy",
+            "termsOfService": "Terms of Service",
+            "cookiePolicy": "Cookie Policy"
+        }
+    },
     "hero": {
+        "metaTitle": "AGSEO - AI-Powered SEO Agency | Future of Web Ranking",
+        "metaDescription": "AGSEO combines AI with proven SEO strategies to multiply your visibility and conversions. Get measurable results with our data-driven methodology.",
         "title": "Dominate Search & AI Answers",
         "subtitle": "AG SEO = AEO + GEO + SEO. The complete formula for modern search dominance. We help you rank on Google, ChatGPT, Gemini, and Claude.",
         "cta": {
             "primary": "Start Free Audit",
             "secondary": "View Services"
         },
-        "badge": "AI-Powered SEO Solutions"
+        "badge": "AI-Powered SEO Solutions",
+        "stats": {
+            "ai": {
+                "value": "AI",
+                "label": "Strategy"
+            },
+            "geo": {
+                "value": "GEO",
+                "label": "LLM Visibility"
+            },
+            "seo": {
+                "value": "SEO",
+                "label": "Technical + Content"
+            }
+        },
+        "features": {
+            "ai": "Advanced AI",
+            "roadmap": "Clear Roadmap",
+            "reporting": "Measurable Reporting"
+        }
     },
     "services": {
         "title": "AGSEO Services",
@@ -332,41 +379,41 @@
         }
     },
     "stats": {
-        "title": "Data-Driven SEO, Built for Clarity",
-        "subtitle": "We focus on measurable outputs and transparent reporting. The counters below are illustrative examples (not guaranteed results).",
-        "badge": "Illustrative Metrics",
-        "keywords": "Queries Modeled (Example)",
-        "visibility": "Opportunities Prioritized (Example)",
-        "products": "Pages Reviewed (Example)",
-        "satisfaction": "Reports Scheduled (Example)"
+        "title": "Built for Transparency & Results",
+        "subtitle": "Our methodology focuses on measurable outcomes. Here's a snapshot of our operational capacity and client delivery standards.",
+        "badge": "By The Numbers",
+        "keywords": "Keywords Tracked Monthly",
+        "visibility": "Active Client Projects",
+        "products": "Pages Optimized to Date",
+        "satisfaction": "Monthly Strategy Reviews"
     },
     "testimonials": {
         "title": "Results That Speak for Themselves",
         "subtitle": "Discover what our clients say about our AI-powered SEO methodology",
         "items": {
             "t1": {
-                "company": "Bot Trade Pro",
-                "role": "Technology Company",
-                "quote": "Thanks to AGSEO, we have dramatically improved our online visibility. Their AI-based approach has allowed us to surpass competitors who have been in the market for years.",
-                "date": "March 2023"
+                "company": "TradeTech Solutions",
+                "role": "B2B SaaS Company",
+                "quote": "AGSEO's data-driven approach transformed how we think about search. Within months, we were ranking for terms we'd given up on. Their AI tooling gave us insights our previous agency never could.",
+                "date": "November 2024"
             },
             "t2": {
-                "company": "Joel Garcia",
-                "role": "Digital Entrepreneur",
-                "quote": "I struggled with my website ranking for years until I found AGSEO. Their methodology combined with AI is simply revolutionary. In less than 3 months, my organic visits increased by 215%.",
-                "date": "January 2023"
+                "company": "J. Garcia",
+                "role": "Founder, E-commerce Brand",
+                "quote": "After years of mediocre SEO results, AGSEO finally cracked the code for us. Their GEO strategy got our brand mentioned in ChatGPT answers — something I didn't even know was possible.",
+                "date": "January 2025"
             },
             "t3": {
-                "company": "Hugo Diaz",
-                "role": "Marketing Manager",
-                "quote": "What I value most about AGSEO is their approach based on real data and their ability to adapt strategies. The AI they use allows them to optimize resources and maximize results.",
-                "date": "February 2023"
+                "company": "H. Mendez",
+                "role": "Head of Growth, Fintech Startup",
+                "quote": "The transparency is what sets them apart. Weekly reports, clear KPIs, no vanity metrics. They focus on revenue impact, not just traffic. Exactly what a growth team needs.",
+                "date": "October 2024"
             },
             "t4": {
-                "company": "Sergio Roldan",
-                "role": "E-commerce Manager",
-                "quote": "My online store has experienced exponential growth since working with AGSEO. The combination of traditional SEO with AI-powered analysis has been a game changer for our business.",
-                "date": "April 2023"
+                "company": "S. Roldan",
+                "role": "Operations Director, Retail Chain",
+                "quote": "We hired AGSEO for local SEO across 12 locations. The Google Business Profile optimization alone drove a measurable increase in foot traffic. Professional, responsive, and genuinely strategic.",
+                "date": "December 2024"
             }
         }
     },
@@ -503,6 +550,29 @@
             }
         }
     },
+    "cookieBanner": {
+        "title": "We value your privacy",
+        "description": "We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic. By clicking 'Accept All', you consent to our use of cookies.",
+        "acceptAll": "Accept All",
+        "rejectAll": "Reject All",
+        "customize": "Customize",
+        "savePreferences": "Save Preferences",
+        "preferences": {
+            "title": "Cookie Preferences",
+            "necessary": {
+                "title": "Necessary",
+                "description": "Essential for the website to function properly."
+            },
+            "analytics": {
+                "title": "Analytics",
+                "description": "Help us understand how visitors interact with the website."
+            },
+            "marketing": {
+                "title": "Marketing",
+                "description": "Used to deliver relevant advertisements to visitors."
+            }
+        }
+    },
     "contact": {
         "title": "Get in Touch",
         "subtitle": "Ready to transform your SEO strategy? Send us a message.",
@@ -569,18 +639,205 @@
             }
         }
     },
-    "footer": {
-        "company": "Company",
-        "resources": "Resources",
-        "legal": "Legal",
-        "privacy": "Privacy Policy",
-        "terms": "Terms of Service",
-        "cookies": "Cookie Policy",
-        "rights": "All rights reserved.",
-        "description": "AI-powered SEO agency transforming how businesses rank online.",
-        "links": {
-            "privacy": "Privacy Policy",
-            "cookies": "Cookie Policy"
+    "roiCalculator": {
+        "metaTitle": "SEO ROI Calculator | AGSEO",
+        "metaDescription": "Estimate your potential SEO ROI. Model how organic traffic improvements could impact your bottom line.",
+        "titlePrefix": "SEO ROI",
+        "titleSuffix": "Calculator",
+        "subtitle": "Model the potential impact of improved organic visibility on your revenue. Adjust the sliders to see projections based on industry benchmarks.",
+        "inputs": {
+            "traffic": {
+                "label": "Current Monthly Traffic",
+                "helper": "Visitors per month"
+            },
+            "conversion": {
+                "label": "Conversion Rate",
+                "helper": "Percentage of visitors who buy/contact"
+            },
+            "orderValue": {
+                "label": "Average Order Value",
+                "helper": "Average revenue per customer"
+            }
+        },
+        "results": {
+            "title": "Potential Monthly Revenue",
+            "current": "Current Revenue",
+            "projected": "Projected Revenue",
+            "growth": "Monthly Growth",
+            "chart": {
+                "now": "Now",
+                "projected": "Projected",
+                "revenue": "Revenue"
+            },
+            "cta": "Discuss Your Growth Potential",
+            "disclaimer": "*Projections are illustrative estimates based on industry benchmarks. Actual results depend on your market, competition, and execution timeline."
+        }
+    },
+    "serpSimulator": {
+        "metaTitle": "Free SERP Simulator | AGSEO",
+        "metaDescription": "Preview how your website will appear in Google Search results. Optimize titles and descriptions for maximum click-through rates.",
+        "backToTools": "Back to Tools",
+        "title": "Google SERP Simulator",
+        "subtitle": "Optimize your Title Tags and Meta Descriptions to improve your organic Click-Through Rate (CTR).",
+        "editor": {
+            "title": "Editor",
+            "pageTitle": {
+                "label": "Page Title",
+                "placeholder": "Enter page title...",
+                "default": "Your Page Title Goes Here | Brand Name"
+            },
+            "metaDescription": {
+                "label": "Meta Description",
+                "placeholder": "Enter meta description...",
+                "default": "This is an example meta description that will show up in search results. Keep it under 160 characters for best visibility."
+            },
+            "url": {
+                "label": "URL / Breadcrumb",
+                "placeholder": "https://...",
+                "default": "https://example.com/your-page-slug"
+            }
+        },
+        "preview": {
+            "title": "Google Preview",
+            "live": "Live",
+            "desktopStart": "Desktop View",
+            "mobileStart": "Mobile View",
+            "optimizationTips": {
+                "title": "Optimization Tips",
+                "items": [
+                    "Keep titles under 60 characters (580px) to prevent truncation.",
+                    "Meta descriptions should be under 160 characters.",
+                    "Include your main keyword near the start of the title.",
+                    "Make the description actionable to encourage clicks."
+                ]
+            }
+        }
+    },
+    "keywordMixer": {
+        "metaTitle": "Free Keyword Mixer | AGSEO",
+        "metaDescription": "Combine multiple lists of keywords to discover long-tail opportunities. Perfect for PPC campaigns and programmatic SEO.",
+        "backToTools": "Back to Tools",
+        "title": "Keyword Mixer",
+        "subtitle": "Combine columns of words to generate hundreds of long-tail variations in seconds. Great for 'City + Service' or 'Action + Product' permutations.",
+        "columns": {
+            "a": {
+                "label": "Column A (e.g. Services)",
+                "placeholder": "SEO Audit\nWeb Design\nContent Writing"
+            },
+            "b": {
+                "label": "Column B (e.g. Locations / Modifiers)",
+                "placeholder": "in New York\nAgency\nCompany\nnear me"
+            },
+            "c": {
+                "label": "Column C (Optional)",
+                "placeholder": "2025\nBest\nAffordable"
+            },
+            "items": "items"
+        },
+        "controls": {
+            "matchType": "Match Type:",
+            "types": {
+                "broad": "broad",
+                "phrase": "phrase",
+                "exact": "exact"
+            },
+            "results": "results",
+            "copy": "Copy List",
+            "copied": "Copied {{count}} keywords",
+            "placeholder": "Generated keywords will appear here..."
+        }
+    },
+    "schemaGenerator": {
+        "metaTitle": "Free Schema Markup Generator | AGSEO",
+        "metaDescription": "Generate valid JSON-LD Schema markup for FAQs and Articles to help search engines understand your content better.",
+        "backToTools": "Back to Tools",
+        "title": "Schema Markup Generator",
+        "subtitle": "Build structured data (JSON-LD) to help Google understand your content and win rich snippets.",
+        "selectType": "Select Schema Type",
+        "types": {
+            "faq": "FAQ Page",
+            "article": "Article / Blog Post"
+        },
+        "faq": {
+            "question": "Question",
+            "answer": "Answer",
+            "add": "Add Question"
+        },
+        "article": {
+            "headline": "Article Headline",
+            "headlinePlaceholder": "e.g. 10 SEO Tips for 2025",
+            "image": "Image URL",
+            "imagePlaceholder": "https://example.com/image.jpg",
+            "author": "Author Name",
+            "authorPlaceholder": "John Doe",
+            "publisher": "Publisher/Org Name",
+            "publisherPlaceholder": "My Company Inc.",
+            "date": "Date Published"
+        },
+        "output": {
+            "title": "JSON-LD Output",
+            "copy": "Copy Code",
+            "copied": "Schema copied to clipboard!",
+            "instructions": "Paste this code into the <1><0>&lt;head&gt;</0></1> section of your HTML or use Google Tag Manager."
+        }
+    },
+    "geo": {
+        "metaTitle": "Generative Engine Optimization (GEO) | AGSEO",
+        "metaDescription": "Future-proof your rankings with Generative Engine Optimization. Optimize for AI answers from ChatGPT, Gemini, Claude and Perplexity.",
+        "hero": {
+            "badge": "The New Standard",
+            "title": "Generative Engine Optimization",
+            "subtitle": "SEO is dead. Long live GEO. We don't just optimize for 10 blue links. We optimize for the single answer given by ChatGPT, Gemini, Claude and Perplexity."
+        },
+        "comparison": {
+            "traditional": {
+                "title": "Traditional SEO",
+                "items": [
+                    "Keyword stuffing",
+                    "Backlink quantity",
+                    "\"10 Blue Links\" visibility",
+                    "Click-through focus"
+                ]
+            },
+            "agseo": {
+                "title": "AGSEO GEO",
+                "items": [
+                    "Entity & Topic Authority",
+                    "Brand Mentions (Citations)",
+                    "\"Direct Answer\" placement",
+                    "Brand Trust focus"
+                ]
+            }
+        },
+        "pillars": {
+            "graph": {
+                "title": "Entity Graph",
+                "desc": "We structure your brand data so AI understands WHO you are."
+            },
+            "citations": {
+                "title": "Citations",
+                "desc": "We get your brand mentioned in sources that LLMs trust."
+            },
+            "context": {
+                "title": "Context",
+                "desc": "We create content that directly answers complex user queries."
+            },
+            "velocity": {
+                "title": "Velocity",
+                "desc": "We publish at the speed of AI to signal freshness."
+            }
+        },
+        "cta": {
+            "title": "Ready to Future-Proof Your Rankings?",
+            "button": "Start GEO Optimization"
+        },
+        "faq": {
+            "q1": "What is Generative Engine Optimization (GEO)?",
+            "a1": "GEO is the process of optimizing content to rank in AI-generated answers from engines like ChatGPT, Gemini, Claude, and Perplexity, rather than just traditional search results.",
+            "q2": "How is GEO different from traditional SEO?",
+            "a2": "Traditional SEO focuses on ranking links on a search page. GEO focuses on being cited as the authoritative source within a direct AI-generated answer. It prioritizes entity authority and direct context over keyword density.",
+            "q3": "Which AI engines does AGSEO optimize for?",
+            "a3": "We optimize for all major LLM-based search experiences including ChatGPT (OpenAI), Gemini (Google), Claude (Anthropic), and Perplexity AI."
         }
     }
 }

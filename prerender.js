@@ -1,4 +1,3 @@
-
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -53,21 +52,47 @@ console.log(`Prerendering ${routesToPrerender.length} routes...`);
         const { html: appContent, helmetContext } = appHtml;
         const { helmet } = helmetContext;
 
-        // Inject Helmet head tags
-        let headTags = '';
-        if (helmet) {
-            headTags = `
-        ${helmet.title.toString()}
-        ${helmet.meta.toString()}
-        ${helmet.link.toString()}
-        ${helmet.script.toString()}
-        `;
-        }
-
         let html = template.replace(`<!--app-html-->`, appContent);
 
-        // Inject head tags before </head>
-        html = html.replace('</head>', `${headTags}</head>`);
+        // Replace placeholder SEO tags with Helmet output (avoids duplicate tags)
+        if (helmet) {
+            const titleTag = helmet.title.toString();
+            const metaTags = helmet.meta.toString();
+            const linkTags = helmet.link.toString();
+            const scriptTags = helmet.script.toString();
+
+            // Replace title placeholder
+            html = html.replace(/<!--seo-title-->.*?<!--\/seo-title-->/s, titleTag);
+
+            // Replace description - extract from helmet meta or remove placeholder markers
+            const descMatch = metaTags.match(/<meta[^>]*name="description"[^>]*>/);
+            if (descMatch) {
+                html = html.replace(/<!--seo-description-->.*?<!--\/seo-description-->/s, descMatch[0]);
+            } else {
+                // No Helmet description, remove the placeholder markers but keep fallback content
+                html = html.replace(/<!--seo-description-->/g, '').replace(/<!--\/seo-description-->/g, '');
+            }
+
+            // Replace robots placeholder if Helmet provides one (e.g., noindex pages)
+            const robotsMatch = metaTags.match(/<meta[^>]*name="robots"[^>]*>/);
+            if (robotsMatch) {
+                html = html.replace(/<!--seo-robots-->.*?<!--\/seo-robots-->/s, robotsMatch[0]);
+            } else {
+                html = html.replace(/<!--seo-robots-->/g, '').replace(/<!--\/seo-robots-->/g, '');
+            }
+
+            // Replace meta placeholder with remaining helmet metas (excluding description and robots)
+            const metaTagsFiltered = metaTags
+                .replace(/<meta[^>]*name="description"[^>]*>/g, '')
+                .replace(/<meta[^>]*name="robots"[^>]*>/g, '');
+            html = html.replace(/<!--seo-meta-->.*?<!--\/seo-meta-->/s, metaTagsFiltered);
+
+            // Replace link placeholder (canonical, preload, etc.)
+            html = html.replace(/<!--seo-link-->.*?<!--\/seo-link-->/s, linkTags);
+
+            // Replace script placeholder (JSON-LD structured data)
+            html = html.replace(/<!--seo-script-->.*?<!--\/seo-script-->/s, scriptTags);
+        }
 
         // Cleanup any helmet-specific attributes if needed (optional)
 

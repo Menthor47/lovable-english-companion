@@ -1,23 +1,26 @@
 import { config } from "./config";
+import type { CookieConsentState } from "@/types/cookie-consent";
+export type { CookieConsentState } from "@/types/cookie-consent";
 
 // Declare global dataLayer for TypeScript
 declare global {
     interface Window {
         dataLayer?: unknown[];
         gtag?: (...args: unknown[]) => void;
+        google_tag_manager?: unknown;
+        Cookiebot?: {
+            consent?: {
+                necessary?: boolean;
+                preferences?: boolean;
+                statistics?: boolean;
+                marketing?: boolean;
+            };
+        };
     }
 }
 
 const COOKIE_CONSENT_KEY = "agseo_cookie_consent";
 const CONSENT_EVENT_NAME = "agseo:cookie-consent";
-
-type CookieConsentState = {
-    necessary: boolean;
-    analytics: boolean;
-    marketing: boolean;
-    preferences: boolean;
-    timestamp: number;
-};
 
 let hasLoadedGtm = false;
 let hasLoadedGa = false;
@@ -74,6 +77,46 @@ function readStoredConsent(): CookieConsentState | null {
     return parseStoredConsent(raw);
 }
 
+function readCookiebotConsent(): CookieConsentState | null {
+    if (typeof window === "undefined") return null;
+    const consent = window.Cookiebot?.consent;
+    if (!consent) return null;
+
+    const necessary = consent.necessary;
+    const preferences = consent.preferences;
+    const statistics = consent.statistics;
+    const marketing = consent.marketing;
+
+    if (
+        typeof necessary !== "boolean" ||
+        typeof preferences !== "boolean" ||
+        typeof statistics !== "boolean" ||
+        typeof marketing !== "boolean"
+    ) {
+        return null;
+    }
+
+    return {
+        necessary,
+        analytics: statistics,
+        marketing,
+        preferences,
+        timestamp: Date.now(),
+    };
+}
+
+function readEffectiveConsent(): CookieConsentState | null {
+    const hasCookiebot =
+        (typeof window !== "undefined" && "Cookiebot" in window) ||
+        (typeof document !== "undefined" && Boolean(document.getElementById("Cookiebot")));
+
+    if (hasCookiebot) {
+        return readCookiebotConsent();
+    }
+
+    return readStoredConsent();
+}
+
 function loadScriptOnce(id: string, src: string): void {
     if (typeof document === "undefined") return;
     if (document.getElementById(id)) return;
@@ -83,6 +126,24 @@ function loadScriptOnce(id: string, src: string): void {
     script.async = true;
     script.src = src;
     document.head.appendChild(script);
+}
+
+function syncExistingGtmInstall(): void {
+    if (hasLoadedGtm) return;
+    if (typeof window === "undefined") return;
+    if (typeof document === "undefined") return;
+
+    if (window.google_tag_manager) {
+        hasLoadedGtm = true;
+        return;
+    }
+
+    const existingScript = document.querySelector(
+        'script[src*="googletagmanager.com/gtm.js?id="]',
+    );
+    if (existingScript) {
+        hasLoadedGtm = true;
+    }
 }
 
 function loadGtm(containerId: string): void {
@@ -146,6 +207,8 @@ function updateConsentMode(consent: CookieConsentState): void {
 function syncTrackingToConsent(consent: CookieConsentState | null): void {
     if (!consent) return;
 
+    syncExistingGtmInstall();
+
     updateConsentMode(consent);
 
     const gtmContainerId = config.analytics.gtmContainerId;
@@ -153,7 +216,8 @@ function syncTrackingToConsent(consent: CookieConsentState | null): void {
     if (shouldLoadGtm) loadGtm(gtmContainerId ?? "");
 
     const gaMeasurementId = config.analytics.gaMeasurementId;
-    const shouldLoadGa = Boolean(gaMeasurementId) && consent.analytics && !gtmContainerId;
+    const shouldLoadGa =
+        Boolean(gaMeasurementId) && consent.analytics && !gtmContainerId && !hasLoadedGtm;
     if (shouldLoadGa) loadGa(gaMeasurementId ?? "");
 
     const ahrefsAnalyticsKey = config.analytics.ahrefsAnalyticsKey;
@@ -162,7 +226,7 @@ function syncTrackingToConsent(consent: CookieConsentState | null): void {
 }
 
 function hasAnalyticsConsent(): boolean {
-    return Boolean(readStoredConsent()?.analytics);
+    return Boolean(readEffectiveConsent()?.analytics);
 }
 
 /**
@@ -178,13 +242,24 @@ export const initAnalytics = () => {
     // Define gtag function if it doesn't exist
     ensureGtag();
 
+    syncExistingGtmInstall();
+
     // Get Measurement ID from config (or use placeholder if not set)
     // In a real app, this would come from env vars in config.ts
-    syncTrackingToConsent(readStoredConsent());
+    syncTrackingToConsent(readEffectiveConsent());
+
+    const handleCookiebotConsentUpdate = () => {
+        syncTrackingToConsent(readCookiebotConsent());
+        trackPageView(window.location.pathname + window.location.search);
+    };
+
+    window.addEventListener("CookiebotOnConsentReady", handleCookiebotConsentUpdate);
+    window.addEventListener("CookiebotOnAccept", handleCookiebotConsentUpdate);
+    window.addEventListener("CookiebotOnDecline", handleCookiebotConsentUpdate);
 
     window.addEventListener(CONSENT_EVENT_NAME, (event: Event) => {
         const customEvent = event as CustomEvent<CookieConsentState | undefined>;
-        syncTrackingToConsent(customEvent.detail ?? readStoredConsent());
+        syncTrackingToConsent(customEvent.detail ?? readEffectiveConsent());
         trackPageView(window.location.pathname + window.location.search);
     });
 };
@@ -197,6 +272,8 @@ export const initAnalytics = () => {
 export const trackEvent = (eventName: string, params?: Record<string, unknown>) => {
     if (typeof window === "undefined") return;
     if (!hasAnalyticsConsent()) return;
+
+    syncExistingGtmInstall();
 
     if (hasLoadedGtm) {
         ensureDataLayer().push({ event: eventName, ...(params ?? {}) });
@@ -211,6 +288,8 @@ export const trackEvent = (eventName: string, params?: Record<string, unknown>) 
 export const trackPageView = (pagePath: string) => {
     if (typeof window === "undefined") return;
     if (!hasAnalyticsConsent()) return;
+
+    syncExistingGtmInstall();
 
     if (hasLoadedGtm) {
         ensureDataLayer().push({ event: "page_view", page_path: pagePath });

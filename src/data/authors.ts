@@ -18,14 +18,15 @@ export interface Author {
 export const authors: Author[] = [
     {
         id: "agseo-team",
-        name: "AGSEO Team",
-        role: "Editorial Team",
-        bio: "The AGSEO editorial team brings together experts in SEO, AI, content marketing, and technical optimization. Our collective experience spans various industries including e-commerce, SaaS, and local businesses.",
+        
+        name: "AGSEO Editorial",
+        role: "Research & Strategy Team",
+        bio: "Our editorial team combines hands-on SEO practitioners, AI engineers, and content strategists. Every piece we publish is reviewed for accuracy and aligned with current best practices.",
         image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=200&h=200&fit=crop",
         credentials: [
-            "Combined 50+ years industry experience",
-            "Certified across Google, HubSpot, and Semrush",
-            "Published in leading SEO publications"
+            "Google Analytics & Ads Certified",
+            "Semrush Academy Certified",
+            "Active practitioners across e-commerce, SaaS, and local SEO"
         ],
         socialLinks: {
             linkedin: config.social.linkedin,

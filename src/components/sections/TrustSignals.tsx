@@ -3,29 +3,29 @@ import { ShieldCheck, Users, Zap, Award } from "lucide-react";
 
 const stats = [
     {
-        label: "Tools Analyzed",
+        label: "Tools Integrated",
         value: "50+",
         icon: Zap,
     },
     {
-        label: "Data Points",
+        label: "Data Points Analyzed",
         value: "10k+",
         icon: Users,
     },
     {
-        label: "Unbiased Reviews",
+        label: "Transparent Reporting",
         value: "100%",
         icon: ShieldCheck,
     },
     {
-        label: "SEO Experts",
-        value: "12",
+        label: "Certifications Held",
+        value: "15+",
         icon: Award,
     },
 ];
 
 const logos = [
-    "Google", "HubSpot", "Semrush", "Ahrefs", "Shopify", "Salesforce"
+    "Google Ads", "GA4", "Semrush", "Ahrefs", "Screaming Frog", "Looker Studio"
 ];
 
 export function TrustSignals() {
@@ -34,10 +34,10 @@ export function TrustSignals() {
             <div className="container mx-auto px-4">
                 <AnimatedSection className="text-center mb-16">
                     <h2 className="font-heading text-2xl md:text-3xl font-bold mb-4">
-                        Trusted by modern growth teams
+                        Built on Industry-Leading Standards
                     </h2>
                     <p className="text-muted-foreground max-w-2xl mx-auto">
-                        Our benchmarks and methodologies are used by SEOs at the world's fastest-growing companies.
+                        We combine proprietary AI with the same tools trusted by enterprise SEO teams worldwide.
                     </p>
                 </AnimatedSection>
 
@@ -59,7 +59,7 @@ export function TrustSignals() {
 
                 <AnimatedSection delay={400} className="text-center">
                     <p className="text-sm font-medium text-muted-foreground mb-8 uppercase tracking-widest">
-                        As seen in
+                        Tools We Work With
                     </p>
                     <div className="flex flex-wrap justify-center gap-8 md:gap-16 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
                         {logos.map((logo) => (

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { z } from "zod";
 import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 import { Header } from "@/components/layout/Header";
@@ -41,12 +42,25 @@ export default function Audit() {
 
     const [currentSimulationStep, setCurrentSimulationStep] = useState(0);
 
+
+
+    const auditSchema = z.object({
+        url: z.string().url({ message: "Please enter a valid URL (e.g. https://example.com)" }),
+        email: z.string().email({ message: "Please enter a valid email address" }),
+        phone: z.string().optional(),
+        website2: z.string().optional() // honeypot
+    });
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (!formData.url || !formData.email) {
+
+        const result = auditSchema.safeParse(formData);
+
+        if (!result.success) {
+            const firstError = result.error.errors[0]?.message || t("auditTool.toast.missingDescription");
             toast({
                 title: t("auditTool.toast.missingTitle"),
-                description: t("auditTool.toast.missingDescription"),
+                description: firstError,
                 variant: "destructive",
             });
             return;

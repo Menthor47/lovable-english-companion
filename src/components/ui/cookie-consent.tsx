@@ -4,24 +4,10 @@ import { useTranslation } from "react-i18next";
 import { X } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { Link } from "react-router-dom";
-
-declare global {
-    interface Window {
-        dataLayer?: unknown[];
-        gtag?: (...args: unknown[]) => void;
-    }
-}
+import { CookieConsentState } from "@/types/cookie-consent";
 
 const COOKIE_CONSENT_KEY = "agseo_cookie_consent";
 const CONSENT_EVENT_NAME = "agseo:cookie-consent";
-
-interface CookieConsentState {
-    necessary: boolean;
-    analytics: boolean;
-    marketing: boolean;
-    preferences: boolean;
-    timestamp: number;
-}
 
 export const CookieConsent = () => {
     const { t } = useTranslation();
@@ -37,6 +23,14 @@ export const CookieConsent = () => {
     });
 
     useEffect(() => {
+        const hasCookiebot =
+            (typeof window !== "undefined" && "Cookiebot" in window) ||
+            (typeof document !== "undefined" && Boolean(document.getElementById("Cookiebot")));
+
+        if (hasCookiebot) {
+            return;
+        }
+
         const storedConsent = localStorage.getItem(COOKIE_CONSENT_KEY);
 
         if (storedConsent) {
@@ -125,10 +119,10 @@ export const CookieConsent = () => {
                     <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
                         <div className="flex-1 space-y-2">
                             <h2 id="cookie-consent-title" className="font-semibold text-lg flex items-center gap-2">
-                                🍪 {t("cookies.title", "Cookie & Privacy Notice")}
+                                🍪 {t("cookieBanner.title")}
                             </h2>
                             <p id="cookie-consent-description" className="text-sm text-muted-foreground leading-relaxed">
-                                {t("cookies.description", "We use first-party and third-party cookies to analyze our services and show you advertising related to your preferences based on a profile compiled from your browsing habits.")}
+                                {t("cookieBanner.description")}
                             </p>
                             <div className="flex flex-wrap gap-2 text-xs text-primary underline cursor-pointer">
                                 <Link to="/privacy" className="hover:text-primary/80">
@@ -142,13 +136,13 @@ export const CookieConsent = () => {
                         </div>
                         <div className="flex flex-row flex-wrap items-center gap-3 shrink-0 w-full md:w-auto">
                             <Button variant="outline" onClick={handleRejectAll} className="flex-1 md:flex-none">
-                                {t("cookies.buttons.necessary", "Necessary Only")}
+                                {t("cookieBanner.rejectAll")}
                             </Button>
                             <Button variant="outline" onClick={() => setShowSettings(true)} className="flex-1 md:flex-none">
-                                {t("cookies.buttons.customize", "Customize")}
+                                {t("cookieBanner.customize")}
                             </Button>
                             <Button onClick={handleAcceptAll} className="flex-1 md:flex-none min-w-[120px]">
-                                {t("cookies.buttons.accept", "Accept All")}
+                                {t("cookieBanner.acceptAll")}
                             </Button>
                         </div>
                     </div>
@@ -156,7 +150,7 @@ export const CookieConsent = () => {
                     <div className="space-y-6 animate-in fade-in zoom-in-95 duration-300">
                         <div className="flex items-center justify-between border-b pb-4">
                             <h3 className="font-semibold text-lg">
-                                {t("cookies.settings.title", "Privacy Preferences")}
+                                {t("cookieBanner.preferences.title")}
                             </h3>
                             <Button variant="ghost" size="icon" onClick={() => setShowSettings(false)}>
                                 <X className="h-4 w-4" />
@@ -171,13 +165,13 @@ export const CookieConsent = () => {
                                 </div>
                                 <div className="space-y-1">
                                     <div className="font-medium flex items-center gap-2">
-                                        {t("cookies.settings.necessary.title", "Necessary")}
+                                        {t("cookieBanner.preferences.necessary.title")}
                                         <span className="text-[10px] bg-primary/10 text-primary px-1.5 py-0.5 rounded uppercase tracking-wider font-bold">
                                             {t("cookies.settings.necessary.badge", "Required")}
                                         </span>
                                     </div>
                                     <p className="text-sm text-muted-foreground">
-                                        {t("cookies.settings.necessary.description", "Essential for security and basic site functionality. Cannot be disabled.")}
+                                        {t("cookieBanner.preferences.necessary.description")}
                                     </p>
                                 </div>
                             </div>
@@ -192,10 +186,10 @@ export const CookieConsent = () => {
                                 </div>
                                 <div className="space-y-1">
                                     <div className="font-medium">
-                                        {t("cookies.settings.analytics.title", "Analytics")}
+                                        {t("cookieBanner.preferences.analytics.title")}
                                     </div>
                                     <p className="text-sm text-muted-foreground">
-                                        {t("cookies.settings.analytics.description", "Help us understand how you use the site to improve experience.")}
+                                        {t("cookieBanner.preferences.analytics.description")}
                                     </p>
                                 </div>
                             </div>
@@ -210,10 +204,10 @@ export const CookieConsent = () => {
                                 </div>
                                 <div className="space-y-1">
                                     <div className="font-medium">
-                                        {t("cookies.settings.marketing.title", "Marketing")}
+                                        {t("cookieBanner.preferences.marketing.title")}
                                     </div>
                                     <p className="text-sm text-muted-foreground">
-                                        {t("cookies.settings.marketing.description", "Allow showing relevant ads and measuring campaign effectiveness.")}
+                                        {t("cookieBanner.preferences.marketing.description")}
                                     </p>
                                 </div>
                             </div>
@@ -242,10 +236,10 @@ export const CookieConsent = () => {
                                 {t("common.back", "Back")}
                             </Button>
                             <Button onClick={handleSavePreferences} className="min-w-[140px]">
-                                {t("cookies.buttons.save", "Save Preferences")}
+                                {t("cookieBanner.savePreferences")}
                             </Button>
                             <Button variant="secondary" onClick={handleAcceptAll}>
-                                {t("cookies.buttons.accept", "Accept All")}
+                                {t("cookieBanner.acceptAll")}
                             </Button>
                         </div>
                     </div>

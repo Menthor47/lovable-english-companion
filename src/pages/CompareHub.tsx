@@ -3,6 +3,7 @@ import { Footer } from "@/components/layout/Footer";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import { Button } from "@/components/ui/button";
 import { comparisons } from "@/data/comparisons";
+import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, CheckCircle2, Scale, ShieldCheck, Sparkles, type LucideIcon } from "lucide-react";
 import { Helmet } from "react-helmet-async";
@@ -41,7 +42,7 @@ const valueProps: ValueProp[] = [
 export default function CompareHub() {
     const pageUrl = getAbsoluteUrl("/compare");
 
-    const itemListSchema = {
+    const itemListSchema = useMemo(() => ({
         "@context": "https://schema.org",
         "@type": "ItemList",
         "@id": `${pageUrl}#itemlist`,
@@ -53,7 +54,7 @@ export default function CompareHub() {
             name: `${comp.toolA.name} vs ${comp.toolB.name}`,
             url: getAbsoluteUrl(`/compare/${comp.slug}`)
         }))
-    };
+    }), [pageUrl]);
 
     return (
         <div className="min-h-screen bg-background flex flex-col">

@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { useTranslation } from "react-i18next";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { AnimatedSection } from "@/components/ui/animated-section";
@@ -7,9 +8,11 @@ import { Slider } from "@/components/ui/slider";
 import { useState, useEffect } from "react";
 import { DollarSign, TrendingUp, Users, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { SITE_OG_IMAGE_URL, getAbsoluteUrl } from "@/lib/siteMetadata";
 
 export default function ROICalculator() {
+    const { t } = useTranslation();
     const [traffic, setTraffic] = useState([5000]);
     const [conversionRate, setConversionRate] = useState([2]);
     const [orderValue, setOrderValue] = useState([150]);
@@ -22,9 +25,9 @@ export default function ROICalculator() {
         // Current Monthly Revenue = Traffic * (Conv Rate / 100) * Order Value
         const current = traffic[0] * (conversionRate[0] / 100) * orderValue[0];
 
-        // Projected: We assume AI SEO drives 150% traffic growth and 20% better conversion (targeting intent)
-        // Traffic * 2.5 (150% increase)
-        // Conversion * 1.2 (20% increase)
+        // Projected: Industry benchmark model assuming strong SEO execution
+        // Traffic multiplier based on competitive keyword capture potential
+        // Conversion improvement from better intent-targeting
         const projectedTraffic = traffic[0] * 2.5;
         const projectedConv = conversionRate[0] * 1.2;
         const projected = projectedTraffic * (projectedConv / 100) * orderValue[0];
@@ -47,12 +50,12 @@ export default function ROICalculator() {
     return (
         <div className="min-h-screen bg-background">
             <Helmet>
-                <title>SEO ROI Calculator | AGSEO</title>
-                <meta name="description" content="Calculate your potential SEO ROI. See how much revenue you could gain with AI-driven SEO strategy." />
+                <title>{t("roiCalculator.metaTitle")}</title>
+                <meta name="description" content={t("roiCalculator.metaDescription")} />
                 <link rel="canonical" href={pageUrl} />
                 <meta property="og:url" content={pageUrl} />
-                <meta property="og:title" content="SEO ROI Calculator | AGSEO" />
-                <meta property="og:description" content="Calculate your potential SEO ROI. See how much revenue you could gain with AI-driven SEO strategy." />
+                <meta property="og:title" content={t("roiCalculator.metaTitle")} />
+                <meta property="og:description" content={t("roiCalculator.metaDescription")} />
                 <meta property="og:image" content={SITE_OG_IMAGE_URL} />
             </Helmet>
             <Header />
@@ -60,10 +63,10 @@ export default function ROICalculator() {
                 <div className="container mx-auto px-4">
                     <AnimatedSection className="text-center max-w-3xl mx-auto mb-16">
                         <h1 className="font-heading text-4xl md:text-5xl font-bold mb-6">
-                            SEO ROI <span className="text-primary">Calculator</span>
+                            {t("roiCalculator.titlePrefix")} <span className="text-primary">{t("roiCalculator.titleSuffix")}</span>
                         </h1>
                         <p className="text-xl text-muted-foreground">
-                            See how much revenue you are leaving on the table. Our AI-driven strategy typically boosts traffic by 150% and conversion intent by 20%.
+                            {t("roiCalculator.subtitle")}
                         </p>
                     </AnimatedSection>
 
@@ -74,7 +77,7 @@ export default function ROICalculator() {
                                 <div className="space-y-4">
                                     <div className="flex justify-between">
                                         <label className="font-medium flex items-center gap-2">
-                                            <Users className="w-4 h-4 text-primary" /> Current Monthly Traffic
+                                            <Users className="w-4 h-4 text-primary" /> {t("roiCalculator.inputs.traffic.label")}
                                         </label>
                                         <span className="font-bold text-lg">{traffic[0].toLocaleString()}</span>
                                     </div>
@@ -86,13 +89,13 @@ export default function ROICalculator() {
                                         onValueChange={setTraffic}
                                         className="py-4"
                                     />
-                                    <p className="text-xs text-muted-foreground">Visitors per month</p>
+                                    <p className="text-xs text-muted-foreground">{t("roiCalculator.inputs.traffic.helper")}</p>
                                 </div>
 
                                 <div className="space-y-4">
                                     <div className="flex justify-between">
                                         <label className="font-medium flex items-center gap-2">
-                                            <TrendingUp className="w-4 h-4 text-primary" /> Conversion Rate
+                                            <TrendingUp className="w-4 h-4 text-primary" /> {t("roiCalculator.inputs.conversion.label")}
                                         </label>
                                         <span className="font-bold text-lg">{conversionRate[0]}%</span>
                                     </div>
@@ -104,13 +107,13 @@ export default function ROICalculator() {
                                         onValueChange={setConversionRate}
                                         className="py-4"
                                     />
-                                    <p className="text-xs text-muted-foreground">Percentage of visitors who buy/contact</p>
+                                    <p className="text-xs text-muted-foreground">{t("roiCalculator.inputs.conversion.helper")}</p>
                                 </div>
 
                                 <div className="space-y-4">
                                     <div className="flex justify-between">
                                         <label className="font-medium flex items-center gap-2">
-                                            <DollarSign className="w-4 h-4 text-primary" /> Average Order Value
+                                            <DollarSign className="w-4 h-4 text-primary" /> {t("roiCalculator.inputs.orderValue.label")}
                                         </label>
                                         <span className="font-bold text-lg">${orderValue[0]}</span>
                                     </div>
@@ -122,7 +125,7 @@ export default function ROICalculator() {
                                         onValueChange={setOrderValue}
                                         className="py-4"
                                     />
-                                    <p className="text-xs text-muted-foreground">Average revenue per customer</p>
+                                    <p className="text-xs text-muted-foreground">{t("roiCalculator.inputs.orderValue.helper")}</p>
                                 </div>
                             </div>
                         </AnimatedSection>
@@ -133,34 +136,76 @@ export default function ROICalculator() {
                             <div className="relative bg-card border border-primary/20 rounded-2xl p-8 shadow-2xl overflow-hidden">
                                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent" />
 
-                                <h3 className="text-2xl font-bold text-center mb-8">Potential Monthly Revenue</h3>
+                                <h3 className="text-2xl font-bold text-center mb-8">{t("roiCalculator.results.title")}</h3>
 
                                 <div className="space-y-6 mb-10">
                                     <div className="flex justify-between items-center p-4 rounded-lg bg-background/50 border border-border/50">
-                                        <span className="text-muted-foreground">Current Revenue</span>
+                                        <span className="text-muted-foreground">{t("roiCalculator.results.current")}</span>
                                         <span className="text-2xl font-bold font-mono">{formatCurrency(currentRevenue)}</span>
                                     </div>
 
                                     <div className="flex justify-between items-center p-6 rounded-xl bg-primary/10 border border-primary/20">
-                                        <span className="font-heading font-bold text-primary">Projected Revenue</span>
+                                        <span className="font-heading font-bold text-primary">{t("roiCalculator.results.projected")}</span>
                                         <span className="text-4xl font-bold font-mono text-primary">{formatCurrency(projectedRevenue)}</span>
                                     </div>
 
                                     <div className="text-center">
                                         <span className="inline-block px-4 py-1 rounded-full bg-green-500/10 text-green-500 text-sm font-bold">
-                                            +{formatCurrency(increase)} Monthly Growth
+                                            +{formatCurrency(increase)} {t("roiCalculator.results.growth")}
                                         </span>
                                     </div>
+                                </div>
+
+                                {/* Chart Visualization */}
+                                <div className="h-[250px] w-full mb-8">
+                                    <ResponsiveContainer width="100%" height="100%">
+                                        <BarChart
+                                            data={[
+                                                { name: t("roiCalculator.results.chart.now"), revenue: currentRevenue },
+                                                { name: t("roiCalculator.results.chart.projected"), revenue: projectedRevenue }
+                                            ]}
+                                            margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+                                        >
+                                            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="hsl(var(--border))" opacity={0.5} />
+                                            <XAxis
+                                                dataKey="name"
+                                                axisLine={false}
+                                                tickLine={false}
+                                                tick={{ fill: "hsl(var(--muted-foreground))" }}
+                                            />
+                                            <YAxis
+                                                axisLine={false}
+                                                tickLine={false}
+                                                tick={{ fill: "hsl(var(--muted-foreground))" }}
+                                                tickFormatter={(value) => `$${(value / 1000).toFixed(0)}k`}
+                                            />
+                                            <Tooltip
+                                                cursor={{ fill: "hsl(var(--primary)/0.1)" }}
+                                                contentStyle={{
+                                                    backgroundColor: "hsl(var(--card))",
+                                                    borderColor: "hsl(var(--border))",
+                                                    borderRadius: "8px"
+                                                }}
+                                                formatter={(value: number) => [formatCurrency(value), t("roiCalculator.results.chart.revenue")]}
+                                            />
+                                            <Bar
+                                                dataKey="revenue"
+                                                fill="hsl(var(--primary))"
+                                                radius={[4, 4, 0, 0]}
+                                                barSize={60}
+                                            />
+                                        </BarChart>
+                                    </ResponsiveContainer>
                                 </div>
 
                                 <div className="space-y-4">
                                     <Button variant="hero" size="xl" className="w-full" asChild>
                                         <Link to="/#contact">
-                                            Get a Quote to Hit These Numbers <ArrowRight className="ml-2 w-5 h-5" />
+                                            {t("roiCalculator.results.cta")} <ArrowRight className="ml-2 w-5 h-5" />
                                         </Link>
                                     </Button>
                                     <p className="text-xs text-center text-muted-foreground">
-                                        *Projections based on average client results after 6 months of AGSEO execution.
+                                        {t("roiCalculator.results.disclaimer")}
                                     </p>
                                 </div>
                             </div>

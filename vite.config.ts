@@ -162,7 +162,6 @@ function generateSitemapXml(projectRoot: string): string {
       { path: "/tools/serp-simulator", changefreq: "monthly", priority: 0.6 },
       { path: "/tools/keyword-mixer", changefreq: "monthly", priority: 0.6 },
       { path: "/tools/schema-generator", changefreq: "monthly", priority: 0.6 },
-      { path: "/dashboard", changefreq: "monthly", priority: 0.6 },
     ]),
     "  ",
     "  <!-- Resources -->",
@@ -211,49 +210,7 @@ function generateSitemapPlugin(): Plugin {
     },
   };
 }
-
-const MANUAL_CHUNK_RULES = [
-  {
-    chunkName: "react",
-    matchers: ["react-dom", "react/jsx-runtime", "node_modules/react/", "scheduler", "use-sync-external-store"],
-  },
-  {
-    chunkName: "supabase",
-    matchers: ["@supabase", "supabase-js"],
-  },
-  {
-    chunkName: "sentry",
-    matchers: ["@sentry"],
-  },
-  {
-    chunkName: "forms",
-    matchers: ["react-hook-form", "@hookform"],
-  },
-  {
-    chunkName: "zod",
-    matchers: ["zod"],
-  },
-] as const;
-
-function getManualChunkName(id: string): string | undefined {
-  if (!id.includes("node_modules")) return undefined;
-
-  if (id.includes("framer-motion")) return "framer-motion";
-  if (id.includes("recharts")) return "recharts";
-  if (id.includes("@radix-ui")) return "radix";
-  if (id.includes("@tanstack")) return "tanstack";
-  if (id.includes("react-router")) return "react-router";
-  if (id.includes("react-helmet-async")) return "helmet";
-  if (id.includes("i18next") || id.includes("react-i18next")) return "i18n";
-
-  for (const rule of MANUAL_CHUNK_RULES) {
-    if (rule.matchers.some((matcher) => id.includes(matcher))) {
-      return rule.chunkName;
-    }
-  }
-
-  return "vendor";
-}
+import { VitePWA } from 'vite-plugin-pwa';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
@@ -264,6 +221,29 @@ export default defineConfig(({ mode }) => ({
   plugins: [
     react(),
     generateSitemapPlugin(),
+    VitePWA({
+      registerType: 'autoUpdate',
+      includeAssets: ['favicon.ico', 'pwa-192x192.png', 'pwa-512x512.png'],
+      manifest: {
+        name: 'AGSEO - AI SEO Agency',
+        short_name: 'AGSEO',
+        description: 'AI-powered SEO agency transforming how businesses rank online.',
+        theme_color: '#0a0a0a',
+        background_color: '#0a0a0a',
+        icons: [
+          {
+            src: 'pwa-192x192.png',
+            sizes: '192x192',
+            type: 'image/png'
+          },
+          {
+            src: 'pwa-512x512.png',
+            sizes: '512x512',
+            type: 'image/png'
+          }
+        ]
+      }
+    }),
   ],
   test: {
     environment: "jsdom",
@@ -274,7 +254,11 @@ export default defineConfig(({ mode }) => ({
   build: {
     rollupOptions: {
       output: {
-        // manualChunks: (id) => getManualChunkName(id),
+        manualChunks: (id) => {
+          if (id.includes("node_modules")) {
+            return "vendor";
+          }
+        },
       },
     },
   },

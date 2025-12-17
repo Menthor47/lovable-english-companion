@@ -26,7 +26,7 @@
     --secondary-foreground: hsl(210, 40%, 98%);
 
     --muted: hsl(262, 30%, 30%);
-    --muted-foreground: hsl(215, 20%, 75%);
+    --muted-foreground: hsl(215, 20%, 80%);
 
     /* Electric Blue Accent */
     --accent: hsl(195, 100%, 50%);
@@ -79,6 +79,26 @@
   body {
     @apply bg-background text-foreground font-body antialiased;
   }
+
+  /* Progressive enhancement fallback: ensure content visibility even if JS animations fail */
+  /* This prevents blank pages when framer-motion doesn't trigger scroll-based animations */
+  /* Use animation to override inline styles set by framer-motion */
+  main section,
+  main>div,
+  [data-testid],
+  .py-12,
+  .py-16,
+  .py-20,
+  .py-24 {
+    animation: forceVisible 0.01s 0.3s forwards !important;
+  }
+}
+
+@keyframes forceVisible {
+  to {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 
 @layer utilities {
@@ -124,9 +144,7 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    filter: drop-shadow(0 0 8px hsl(184, 95%, 60% / 0.6))
-            drop-shadow(0 0 20px hsl(184, 95%, 60% / 0.4))
-            drop-shadow(0 0 40px hsl(195, 100%, 50% / 0.2));
+    filter: drop-shadow(0 0 8px hsl(184, 95%, 60% / 0.6)) drop-shadow(0 0 20px hsl(184, 95%, 60% / 0.4)) drop-shadow(0 0 40px hsl(195, 100%, 50% / 0.2));
   }
 
   /* Animated gradient background */

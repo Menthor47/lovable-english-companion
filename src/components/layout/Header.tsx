@@ -70,7 +70,7 @@ export function Header() {
               alt="AGSEO Logo"
               width="40"
               height="40"
-              fetchPriority="high"
+              {...{ fetchpriority: "high" }}
               className="w-10 h-10 rounded-lg object-contain"
             />
             <span className="font-heading font-bold text-xl text-foreground">

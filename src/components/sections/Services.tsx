@@ -53,7 +53,7 @@ export function Services() {
                 >
                   {service.popular && (
                     <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-primary to-emerald-500 rounded-full text-primary-foreground text-xs font-bold uppercase tracking-wider shadow-lg">
-                      {t("services.popular", "Most Popular")}
+                      {t("services.popular")}
                     </div>
                   )}
 

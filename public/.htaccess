@@ -28,8 +28,14 @@ RewriteBase /
   </FilesMatch>
 </IfModule>
 
-# SPA fallback: serve index.html for any route that doesn't exist as a file or directory
+# Return proper 404 status for non-existent routes (SEO-correct behavior)
+# The prerendered 404.html will be served with actual 404 HTTP status
+ErrorDocument 404 /404.html
+
+# Only rewrite known SPA routes that have prerendered HTML directories
+# Unknown routes will fall through to ErrorDocument 404
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI} !^/assets/
-RewriteRule ^ index.html [L]
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}/index.html -f
+RewriteRule ^(.*)$ /$1/index.html [L]

@@ -99,9 +99,9 @@ export const industries: IndustryData[] = [
             ]
         },
         metrics: [
-            { label: "Revenue Lift", value: "+215%", description: "Increase in non-branded organic revenue" },
-            { label: "Indexed Pages", value: "100%", description: "Coverage of your total inventory" },
-            { label: "Traffic Value", value: "$45k", description: "Monthly equivalent ad spend saved" }
+            { label: "Revenue Growth", value: "2-3x", description: "Typical improvement in non-branded organic revenue" },
+            { label: "Indexed Pages", value: "100%", description: "Full coverage of your product inventory" },
+            { label: "Organic Share", value: "40%+", description: "Target share of total site revenue from organic" }
         ]
     },
     {

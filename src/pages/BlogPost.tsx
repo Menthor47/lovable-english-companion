@@ -76,29 +76,35 @@ const BlogPost = () => {
     const breadcrumbItems = [
         { label: "Home", href: "/" },
         { label: "Blog", href: "/blog" },
-        { label: post.title, href: postPath }
+        { label: post.title, href: postPath },
     ];
     const datePublished = parseDateToIso(post.date);
 
-    const authorSchema =
-        author?.id === "agseo-team"
-            ? {
+    const authorSchema = (() => {
+        if (author?.id === "agseo-team") {
+            return {
                 "@type": "Organization",
                 "@id": TEAM_ID,
                 name: author.name,
-                ...(authorUrl ? { url: authorUrl } : {})
-            }
-            : author
-                ? {
-                    "@type": "Person",
-                    "@id": `${SITE_BASE_URL}/#author-${author.id}`,
-                    name: author.name,
-                    ...(authorUrl ? { url: authorUrl } : {})
-                }
-                : {
-                    "@type": "Person",
-                    name: post.author
-                };
+                ...(authorUrl ? { url: authorUrl } : {}),
+            };
+        }
+
+        if (author) {
+            return {
+                "@type": "Person",
+                "@id": `${SITE_BASE_URL}/#author-${author.id}`,
+                name: author.name,
+                ...(authorUrl ? { url: authorUrl } : {}),
+            };
+        }
+
+        return {
+            "@type": "Person",
+            "@id": `${SITE_BASE_URL}/#person-${post.author.replace(/\s+/g, '-').toLowerCase()}`, // Ensure valid ID format
+            name: post.author,
+        };
+    })();
 
     // Schema.org structured data for Article
     const articleSchema = {
@@ -109,7 +115,7 @@ const BlogPost = () => {
         url: postUrl,
         mainEntityOfPage: {
             "@type": "WebPage",
-            "@id": postUrl
+            "@id": postUrl,
         },
         image: post.image,
         author: authorSchema,
@@ -119,13 +125,13 @@ const BlogPost = () => {
             name: SITE_NAME,
             logo: {
                 "@type": "ImageObject",
-                url: SITE_LOGO_URL
-            }
+                url: SITE_LOGO_URL,
+            },
         },
         isPartOf: {
-            "@id": WEBSITE_ID
+            "@id": WEBSITE_ID,
         },
-        ...(datePublished ? { datePublished } : {})
+        ...(datePublished ? { datePublished } : {}),
     };
 
     const handleShare = async () => {

@@ -9,21 +9,21 @@ import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { OptimizedImage } from "@/components/ui/optimized-image";
 
-const stats = [
-  { value: "AI", label: "Strategy" },
-  { value: "GEO", label: "LLM Visibility" },
-  { value: "SEO", label: "Technical + Content" },
-];
-
-const features = [
-  { icon: Sparkles, label: "Advanced AI" },
-  { icon: Zap, label: "Clear Roadmap" },
-  { icon: TrendingUp, label: "Measurable Reporting" },
-];
-
 export function Hero() {
   const { t } = useTranslation();
   usePrefersReducedMotion();
+
+  const stats = [
+    { value: t("hero.stats.ai.value"), label: t("hero.stats.ai.label") },
+    { value: t("hero.stats.geo.value"), label: t("hero.stats.geo.label") },
+    { value: t("hero.stats.seo.value"), label: t("hero.stats.seo.label") },
+  ];
+
+  const features = [
+    { icon: Sparkles, label: t("hero.features.ai") },
+    { icon: Zap, label: t("hero.features.roadmap") },
+    { icon: TrendingUp, label: t("hero.features.reporting") },
+  ];
 
   return (
     <section id="home" className="relative min-h-screen flex items-center pt-20 overflow-hidden">
@@ -52,7 +52,6 @@ export function Hero() {
             {/* Headline */}
             <div className="relative">
               <motion.h1
-                initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
                 className="font-heading text-4xl md:text-5xl lg:text-7xl font-bold leading-tight tracking-tight"
@@ -65,7 +64,6 @@ export function Hero() {
 
             {/* Description */}
             <motion.p
-              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-lg md:text-xl text-muted-foreground/90 max-w-xl leading-relaxed"
@@ -75,7 +73,6 @@ export function Hero() {
 
             {/* CTA Buttons */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
               className="flex flex-wrap gap-4"
@@ -138,6 +135,8 @@ export function Hero() {
                   priority={true}
                   width={1200}
                   height={675}
+                  srcSet="/img/hero-480.webp 480w, /img/hero-800.webp 800w, /img/hero-1200.webp 1200w"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 600px"
                 />
                 {/* Overlay Gradient */}
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60" />

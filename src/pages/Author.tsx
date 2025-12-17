@@ -49,7 +49,7 @@ export default function Author() {
     const authorEntitySchema =
         author.id === "agseo-team"
             ? {
-                "@id": TEAM_ID
+                "@id": TEAM_ID,
             }
             : {
                 "@type": "Person",
@@ -60,9 +60,9 @@ export default function Author() {
                 jobTitle: author.role,
                 url: pageUrl,
                 worksFor: {
-                    "@id": ORGANIZATION_ID
+                    "@id": ORGANIZATION_ID,
                 },
-                ...(authorSameAs.length ? { sameAs: authorSameAs } : {})
+                ...(authorSameAs.length ? { sameAs: authorSameAs } : {}),
             };
 
     const profilePageSchema = {
@@ -73,13 +73,13 @@ export default function Author() {
         name: `${author.name} | ${SITE_NAME}`,
         description: author.bio,
         isPartOf: {
-            "@id": WEBSITE_ID
+            "@id": WEBSITE_ID,
         },
         mainEntity: authorEntitySchema,
         about: authorEntitySchema,
         publisher: {
-            "@id": ORGANIZATION_ID
-        }
+            "@id": ORGANIZATION_ID,
+        },
     };
 
     const ogType: "profile" | "website" = author.id === "agseo-team" ? "website" : "profile";

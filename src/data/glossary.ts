@@ -1,10 +1,10 @@
-import { Bot, Brain, Gauge, Link2, MessageSquare, Network, Search, ShieldCheck, Sparkles } from "lucide-react";
+import { Bot, Brain, Gauge, Link2, MessageSquare, Network, Search, ShieldCheck, Sparkles, type LucideIcon } from "lucide-react";
 
 export type GlossaryTerm = {
     term: string;
     slug: string;
     definition: string;
-    icon: any;
+    icon: LucideIcon;
     image?: string;
     article?: string;
 };

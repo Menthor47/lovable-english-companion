@@ -7,16 +7,16 @@ export const config = {
                 : "/api"),
     },
     whatsapp: {
-        number: import.meta.env.VITE_WHATSAPP_NUMBER || '1234567890',
+        number: import.meta.env.VITE_WHATSAPP_NUMBER || '', // Default to empty if not set
         message: "Hello AGSEO, I'm interested in your services.",
     },
     contact: {
         email: import.meta.env.VITE_CONTACT_EMAIL || 'hello@agseo.pro',
-        phone: import.meta.env.VITE_PHONE_NUMBER || '+15550123456',
+        phone: import.meta.env.VITE_PHONE_NUMBER || '+1 (555) 000-0000',
         address: {
-            street: import.meta.env.VITE_ADDRESS_STREET || "123 SEO Street",
-            city: import.meta.env.VITE_ADDRESS_CITY || "Tech City",
-            country: import.meta.env.VITE_ADDRESS_COUNTRY || "US"
+            street: import.meta.env.VITE_ADDRESS_STREET || "Market St",
+            city: import.meta.env.VITE_ADDRESS_CITY || "San Francisco",
+            country: import.meta.env.VITE_ADDRESS_COUNTRY || "USA"
         },
         siteUrl: import.meta.env.VITE_SITE_URL || "https://agseo.pro",
     },

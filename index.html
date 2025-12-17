@@ -4,8 +4,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <!--seo-robots--><meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" /><!--/seo-robots-->
   <meta name="theme-color" content="#0ea5e9" />
+
+  <!-- Cookiebot is now loaded via GTM (Cookiebot CMP tag) -->
 
   <!-- Google Consent Mode v2 -->
   <script>
@@ -25,20 +27,29 @@
     });
   </script>
 
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KDH93VS4');</script>
+  <!-- End Google Tag Manager -->
+
   <!-- Performance Optimization -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-  <!-- Fallback Title & Description for non-JS crawlers. Overridden by React Helmet. -->
-  <title>AGSEO - AI-Powered SEO Agency | Future of Web Ranking</title>
-  <meta name="description"
-    content="AGSEO combines AI with proven SEO strategies to multiply your visibility and conversions. Get measurable results with our data-driven methodology." />
-  <meta name="keywords"
-    content="SEO agency, AI SEO, artificial intelligence, web ranking, local SEO, e-commerce SEO, digital marketing" />
+  <!-- SEO Tags - replaced by prerender with Helmet output -->
+  <!--seo-title--><title>AGSEO - AI-Powered SEO Agency | Future of Web Ranking</title><!--/seo-title-->
+  <!--seo-description--><meta name="description" content="AGSEO combines AI with proven SEO strategies to multiply your visibility and conversions. Get measurable results with our data-driven methodology." /><!--/seo-description-->
+  <!--seo-meta--><!--/seo-meta-->
+  <meta name="keywords" content="SEO agency, AI SEO, artificial intelligence, web ranking, local SEO, e-commerce SEO, digital marketing" />
   <meta name="author" content="AGSEO Inc." />
   <meta name="language" content="English" />
 
-  <!-- Canonical URL - managed per-page via React Helmet -->
+  <!-- Canonical URL - replaced by prerender with Helmet output -->
+  <!--seo-link--><!--/seo-link-->
+  <!--seo-script--><!--/seo-script-->
 
   <!-- OpenGraph Defaults (page-specific tags set via React Helmet) -->
   <meta property="og:locale" content="en_US" />
@@ -52,10 +63,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@AGSEO" />
   <meta name="twitter:creator" content="@AGSEO" />
-  <meta name="twitter:title" content="AGSEO - AI-Powered SEO Agency" />
-  <meta name="twitter:description"
-    content="AI-powered SEO for local, e-commerce, and SaaS businesses. Measurable growth with data-driven strategies." />
-  <meta name="twitter:image" content="/og-image.png" />
+  <meta name="twitter:image" content="https://agseo.pro/og-image.png" />
 
   <!-- Favicons -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -64,6 +72,10 @@
 </head>
 
 <body class="dark">
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KDH93VS4"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
   <div id="root"><!--app-html--></div>
   <script type="module" src="/src/main.tsx"></script>
 </body>

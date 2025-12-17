@@ -10,91 +10,91 @@ import { Button } from "@/components/ui/button";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { caseStudies } from "@/data/caseStudies";
 import {
-  ORGANIZATION_ID,
-  SITE_LOGO_URL,
-  SITE_NAME,
-  SITE_OG_IMAGE_URL,
-  TEAM_ID,
-  WEBSITE_ID,
-  getAbsoluteUrl
+    ORGANIZATION_ID,
+    SITE_LOGO_URL,
+    SITE_NAME,
+    SITE_OG_IMAGE_URL,
+    TEAM_ID,
+    WEBSITE_ID,
+    getAbsoluteUrl
 } from "@/lib/siteMetadata";
 
 export default function CaseStudy() {
-  const { id } = useParams();
-  const topRef = useRef<HTMLDivElement>(null);
+    const { id } = useParams();
+    const topRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    topRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [id]);
+    useEffect(() => {
+        topRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, [id]);
 
-  if (!id) {
-    return <Navigate to="/404" replace />;
-  }
-
-  const study = caseStudies.find((s) => s.id === id);
-
-  if (!study) {
-    return <Navigate to="/404" replace />;
-  }
-
-  const pageUrl = getAbsoluteUrl(`/case-studies/${study.id}`);
-
-  const breadcrumbItems = [
-    { label: "Home", href: "/" },
-    { label: "Case Studies", href: "/case-studies" },
-    { label: study.title, href: `/case-studies/${study.id}` }
-  ];
-
-  const articleSchema = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: study.title,
-    description: study.description,
-    url: pageUrl,
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": pageUrl
-    },
-    image: SITE_OG_IMAGE_URL,
-    articleSection: study.category,
-    author: {
-      "@type": "Organization",
-      "@id": TEAM_ID,
-      name: "AGSEO Team"
-    },
-    publisher: {
-      "@type": "Organization",
-      "@id": ORGANIZATION_ID,
-      name: SITE_NAME,
-      logo: {
-        "@type": "ImageObject",
-        url: SITE_LOGO_URL
-      }
-    },
-    isPartOf: {
-      "@id": WEBSITE_ID
+    if (!id) {
+        return <Navigate to="/404" replace />;
     }
-  };
 
-  return (
-    <div ref={topRef} className="min-h-screen bg-background flex flex-col">
-      <Helmet>
-        <title>{study.title} | Case Study | AGSEO</title>
-        <meta name="description" content={study.description} />
-        <link rel="canonical" href={pageUrl} />
-        <meta property="og:url" content={pageUrl} />
-        <meta property="og:title" content={`${study.title} | Case Study | AGSEO`} />
-        <meta property="og:description" content={study.description} />
-        <meta property="og:image" content={SITE_OG_IMAGE_URL} />
-        <meta property="og:type" content="article" />
-        <script type="application/ld+json">{JSON.stringify(articleSchema)}</script>
-      </Helmet>
+    const study = caseStudies.find((s) => s.id === id);
 
-      <Header />
+    if (!study) {
+        return <Navigate to="/404" replace />;
+    }
 
-      <main className="flex-grow">
-        <div className="container mx-auto px-4 pt-24">
-          <Breadcrumbs items={breadcrumbItems} />
+    const pageUrl = getAbsoluteUrl(`/case-studies/${study.id}`);
+
+    const breadcrumbItems = [
+        { label: "Home", href: "/" },
+        { label: "Case Studies", href: "/case-studies" },
+        { label: study.title, href: `/case-studies/${study.id}` }
+    ];
+
+    const articleSchema = {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        headline: study.title,
+        description: study.description,
+        url: pageUrl,
+        mainEntityOfPage: {
+            "@type": "WebPage",
+            "@id": pageUrl
+        },
+        image: SITE_OG_IMAGE_URL,
+        articleSection: study.category,
+        author: {
+            "@type": "Organization",
+            "@id": TEAM_ID,
+            name: "AGSEO Team"
+        },
+        publisher: {
+            "@type": "Organization",
+            "@id": ORGANIZATION_ID,
+            name: SITE_NAME,
+            logo: {
+                "@type": "ImageObject",
+                url: SITE_LOGO_URL
+            }
+        },
+        isPartOf: {
+            "@id": WEBSITE_ID
+        }
+    };
+
+    return (
+        <div ref={topRef} className="min-h-screen bg-background flex flex-col">
+            <Helmet>
+                <title>{study.title} | Case Study | AGSEO</title>
+                <meta name="description" content={study.description} />
+                <link rel="canonical" href={pageUrl} />
+                <meta property="og:url" content={pageUrl} />
+                <meta property="og:title" content={`${study.title} | Case Study | AGSEO`} />
+                <meta property="og:description" content={study.description} />
+                <meta property="og:image" content={SITE_OG_IMAGE_URL} />
+                <meta property="og:type" content="article" />
+                <script type="application/ld+json">{JSON.stringify(articleSchema)}</script>
+            </Helmet>
+
+            <Header />
+
+            <main className="flex-grow">
+                <div className="container mx-auto px-4 pt-24">
+                    <Breadcrumbs items={breadcrumbItems} />
                 </div>
 
                 <section className="pt-8 pb-16">

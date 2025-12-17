@@ -11,19 +11,19 @@ interface AnimatedSectionProps {
 
 const variants: Record<string, Variants> = {
   up: {
-    hidden: { opacity: 0, y: 60 },
+    hidden: { opacity: 1, y: 0 }, // Was opacity: 0, y: 60
     visible: { opacity: 1, y: 0 },
   },
   down: {
-    hidden: { opacity: 0, y: -60 },
+    hidden: { opacity: 1, y: 0 }, // Was opacity: 0, y: -60
     visible: { opacity: 1, y: 0 },
   },
   left: {
-    hidden: { opacity: 0, x: -60 },
+    hidden: { opacity: 1, x: 0 }, // Was opacity: 0, x: -60
     visible: { opacity: 1, x: 0 },
   },
   right: {
-    hidden: { opacity: 0, x: 60 },
+    hidden: { opacity: 1, x: 0 }, // Was opacity: 0, x: 60
     visible: { opacity: 1, x: 0 },
   },
 };
@@ -44,6 +44,14 @@ export function AnimatedSection({
       controls.start("visible");
     }
   }, [isInView, controls]);
+
+  // Safety timeout: Ensure content becomes visible even if observer fails
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      controls.start("visible");
+    }, 500); // Slightly longer timeout for local dev to see animations
+    return () => clearTimeout(timer);
+  }, [controls]);
 
   const activeVariants = prefersReducedMotion ? {
     hidden: { opacity: 0 },

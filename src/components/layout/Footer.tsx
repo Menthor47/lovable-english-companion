@@ -54,7 +54,7 @@ export function Footer() {
                     to={link.href}
                     className="text-sm text-muted-foreground hover:text-primary transition-colors"
                   >
-                    {link.label}
+                    {t(link.label)}
                   </Link>
                 </li>
               ))}
@@ -73,7 +73,7 @@ export function Footer() {
                     to={link.href}
                     className="text-sm text-muted-foreground hover:text-primary transition-colors"
                   >
-                    {link.label}
+                    {t(link.label)}
                   </Link>
                 </li>
               ))}
@@ -92,7 +92,7 @@ export function Footer() {
                     to={link.href}
                     className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-1"
                   >
-                    {link.label}
+                    {t(link.label)}
                     <ArrowUpRight className="w-3 h-3" />
                   </Link>
                 </li>
@@ -113,7 +113,7 @@ export function Footer() {
                 to={link.href}
                 className="text-sm text-muted-foreground hover:text-primary transition-colors"
               >
-                {link.label}
+                {t(link.label)}
               </Link>
             ))}
           </div>
