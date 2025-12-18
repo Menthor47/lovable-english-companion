@@ -2,7 +2,7 @@ import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
 import { z } from "npm:zod@3.25.76";
 
-type LeadSource = "contact" | "audit";
+type LeadSource = "contact" | "audit" | "newsletter";
 
 const PHONE_ALLOWED_REGEX = /^[0-9+()\-.\s]+$/;
 
@@ -45,7 +45,7 @@ const leadSchema = z.object({
         (value: unknown) => (typeof value === "string" ? value.trim() : value),
         z.string().max(5000).optional(),
     ),
-    source: z.union([z.literal("contact"), z.literal("audit")]).optional(),
+    source: z.union([z.literal("contact"), z.literal("audit"), z.literal("newsletter")]).optional(),
     website2: z.string().max(200).optional(),
 });
 
@@ -119,6 +119,7 @@ function parseCsv(value: string): string[] {
 }
 
 function isOriginAllowed(origin: string, allowedOrigins: string[]): boolean {
+    if (origin.startsWith("http://localhost:") || origin === "http://localhost") return true;
     return allowedOrigins.some((allowed) => allowed === origin);
 }
 
@@ -129,22 +130,32 @@ function getCorsDecision(request: Request): {
 } {
     const requestOrigin = getRequestOrigin(request);
     const allowedOriginsRaw = getStringEnv("ALLOWED_ORIGINS");
+
+    // If no ALLOWED_ORIGINS is set, allow the request's origin (or fallback to *)
     if (!allowedOriginsRaw) {
-        return { requestOrigin, allowedOrigins: null, allowedOrigin: null };
+        return {
+            requestOrigin,
+            allowedOrigins: null,
+            allowedOrigin: requestOrigin || "*"
+        };
     }
 
     const allowedOrigins = parseCsv(allowedOriginsRaw);
-    const allowedOrigin =
-        requestOrigin && isOriginAllowed(requestOrigin, allowedOrigins) ? requestOrigin : null;
+    const isAllowed = requestOrigin && isOriginAllowed(requestOrigin, allowedOrigins);
 
-    return { requestOrigin, allowedOrigins, allowedOrigin };
+    // We always want to return a mirror origin for headers to avoid CORS blocks,
+    // but the actual 'allowedOrigin' for logic check will be null if not in list.
+    return {
+        requestOrigin,
+        allowedOrigins,
+        allowedOrigin: isAllowed ? requestOrigin : null
+    };
 }
 
-function buildCorsHeaders(allowedOrigin: string | null): HeadersInit {
-    if (!allowedOrigin) return {};
+function buildCorsHeaders(requestOrigin: string | null): HeadersInit {
     return {
-        "access-control-allow-origin": allowedOrigin,
-        vary: "origin",
+        "access-control-allow-origin": requestOrigin || "*",
+        "vary": "Origin",
     };
 }
 
@@ -152,7 +163,7 @@ function buildPreflightHeaders(allowedOrigin: string): HeadersInit {
     return {
         "access-control-allow-origin": allowedOrigin,
         "access-control-allow-methods": "POST, OPTIONS",
-        "access-control-allow-headers": "content-type, authorization, apikey",
+        "access-control-allow-headers": "content-type, authorization, apikey, x-client-info",
         "access-control-max-age": "86400",
         vary: "origin",
     };
@@ -255,25 +266,31 @@ async function storeSubmission(params: {
         return { ok: false, error: "Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY" };
     }
 
+    const tableName = params.source === "newsletter" ? "newsletter_subscribers" : "leads";
+
     const baseRow: Record<string, unknown> = {
-        source: params.source,
         email: params.email,
-        website: params.website ?? null,
-        message: params.message ?? null,
-        origin: params.origin,
-        ip: params.ip,
-        user_agent: params.userAgent,
-        referer: params.referer,
+        ...(params.source !== "newsletter"
+            ? {
+                source: params.source,
+                website: params.website ?? null,
+                message: params.message ?? null,
+                origin: params.origin,
+                ip: params.ip,
+                user_agent: params.userAgent,
+                referer: params.referer,
+            }
+            : {}),
     };
 
-    const tryWithPhone: Record<string, unknown> = {
+    const tryWithOptionalFields: Record<string, unknown> = {
         ...baseRow,
-        phone: params.phone ?? null,
+        ...(params.source !== "newsletter" ? { phone: params.phone ?? null } : {}),
     };
 
     const { error: firstError } = await supabaseAdmin
-        .from("leads")
-        .insert([tryWithPhone]);
+        .from(tableName)
+        .insert([tryWithOptionalFields]);
 
     if (!firstError) return { ok: true };
 
@@ -289,7 +306,7 @@ async function storeSubmission(params: {
     }
 
     const { error: secondError } = await supabaseAdmin
-        .from("leads")
+        .from(tableName)
         .insert([baseRow]);
 
     if (secondError) {
@@ -300,14 +317,22 @@ async function storeSubmission(params: {
 }
 
 Deno.serve(async (request: Request): Promise<Response> => {
-    const { requestOrigin, allowedOrigins, allowedOrigin } = getCorsDecision(request);
-    const corsHeaders = buildCorsHeaders(allowedOrigin);
+    const requestOrigin = getRequestOrigin(request);
+    const corsHeaders = buildCorsHeaders(requestOrigin);
 
     if (request.method === "OPTIONS") {
-        if (!allowedOrigins) return new Response(null, { status: 204 });
-        if (!allowedOrigin) return new Response(null, { status: 403 });
-        return new Response(null, { status: 204, headers: buildPreflightHeaders(allowedOrigin) });
+        return new Response(null, {
+            status: 204,
+            headers: {
+                ...corsHeaders,
+                "access-control-allow-methods": "POST, OPTIONS",
+                "access-control-allow-headers": "content-type, authorization, apikey, x-client-info",
+                "access-control-max-age": "86400",
+            },
+        });
     }
+
+    const { allowedOrigins, allowedOrigin } = getCorsDecision(request);
 
     if (request.method !== "POST") {
         return jsonResponse(

@@ -1,12 +1,13 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useMemo } from "react";
 import { useParams, Navigate, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import ReactMarkdown from "react-markdown";
 import { blogPosts } from "@/data/blogPosts";
-import { getAuthorByName } from "@/data/authors";
+import { getAuthorById } from "@/data/authors";
 import { Header } from "@/components/layout/Header";
-
 import { OptimizedImage } from "@/components/ui/optimized-image";
 import { Footer } from "@/components/layout/Footer";
+import { Newsletter } from "@/components/sections/Newsletter";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { ArrowLeft, ArrowRight, Calendar, Clock, User, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -23,62 +24,61 @@ import {
 } from "@/lib/siteMetadata";
 import { useToast } from "@/hooks/use-toast";
 
-// Simple markdown renderer component since we don't have react-markdown installed
-// and we want to keep dependencies minimal as requested.
-const MarkdownRenderer = ({ content }: { content: string }) => {
-    return (
-        <div className="prose prose-lg dark:prose-invert max-w-none">
-            {content.split('\n').map((line, index) => {
-                // Headers
-                if (line.startsWith('# ')) return <h1 key={index} className="text-3xl sm:text-4xl font-bold mt-10 mb-6 text-foreground">{line.replace('# ', '')}</h1>;
-                if (line.startsWith('## ')) return <h2 key={index} className="text-2xl sm:text-3xl font-bold mt-8 mb-4 text-foreground">{line.replace('## ', '')}</h2>;
-                if (line.startsWith('### ')) return <h3 key={index} className="text-xl sm:text-2xl font-bold mt-6 mb-3 text-foreground">{line.replace('### ', '')}</h3>;
-
-                // Lists (basic support)
-                if (line.trim().startsWith('- ')) return <li key={index} className="ml-4 mb-2">{line.replace('- ', '')}</li>;
-                if (line.trim().match(/^\d+\. /)) return <div key={index} className="ml-4 mb-2 flex"><span className="font-bold mr-2">{line.split('.')[0]}.</span><span>{line.substring(line.indexOf('.') + 1).trim()}</span></div>;
-
-                // Code blocks (very basic)
-                if (line.startsWith('```')) return null; // Skip code formatting for now or handle simply
-
-                // Empty lines
-                if (line.trim() === '') return <div key={index} className="h-4"></div>;
-
-                // Paragraphs
-                return <p key={index} className="mb-4 leading-relaxed text-muted-foreground">{line}</p>;
-            })}
-        </div>
-    );
-};
-
 const BlogPost = () => {
     const { toast } = useToast();
     const { t } = useTranslation();
     const { slug } = useParams();
-    const post = blogPosts.find((p) => p.slug === slug);
+    const rawPost = blogPosts.find((p) => p.slug === slug);
     const topRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         topRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [slug]);
 
+    const post = useMemo(() => {
+        if (!rawPost) return null;
+        return {
+            ...rawPost,
+            title: t(`blog.posts.${rawPost.slug}.title`),
+            excerpt: t(`blog.posts.${rawPost.slug}.excerpt`),
+            category: t(`blog.posts.${rawPost.slug}.category`),
+            date: t(`blog.posts.${rawPost.slug}.date`),
+            content: t(`blog.posts.${rawPost.slug}.content`),
+        };
+    }, [rawPost, t]);
+
+    // For now everything uses agseo-team id as per the current data structure
+    const authorId = "agseo-team";
+    const rawAuthor = getAuthorById(authorId);
+
+    const author = useMemo(() => {
+        if (!rawAuthor) return null;
+        return {
+            ...rawAuthor,
+            name: t(`authors.${rawAuthor.id}.name`),
+            role: t(`authors.${rawAuthor.id}.role`),
+            bio: t(`authors.${rawAuthor.id}.bio`),
+            credentials: t(`authors.${rawAuthor.id}.credentials`, { returnObjects: true }) as string[] || rawAuthor.credentials,
+        };
+    }, [rawAuthor, t]);
+
     if (!post) {
         return <Navigate to="/blog" replace />;
     }
-
-    const author = getAuthorByName(post.author);
 
     const authorPath = author ? `/authors/${author.id}` : undefined;
     const authorUrl = authorPath ? getAbsoluteUrl(authorPath) : undefined;
 
     const postPath = `/blog/${post.slug}`;
     const postUrl = getAbsoluteUrl(postPath);
+
     const breadcrumbItems = [
-        { label: "Home", href: "/" },
-        { label: "Blog", href: "/blog" },
+        { label: t("common.nav.home") || "Home", href: "/" },
+        { label: t("blog.hub.title") || "Blog", href: "/blog" },
         { label: post.title, href: postPath },
     ];
-    const datePublished = parseDateToIso(post.date);
+
+    const datePublished = parseDateToIso(rawPost?.date || "");
 
     const authorSchema = (() => {
         if (author?.id === "agseo-team") {
@@ -101,12 +101,11 @@ const BlogPost = () => {
 
         return {
             "@type": "Person",
-            "@id": `${SITE_BASE_URL}/#person-${post.author.replace(/\s+/g, '-').toLowerCase()}`, // Ensure valid ID format
+            "@id": `${SITE_BASE_URL}/#person-${post.author.replace(/\s+/g, '-').toLowerCase()}`,
             name: post.author,
         };
     })();
 
-    // Schema.org structured data for Article
     const articleSchema = {
         "@context": "https://schema.org",
         "@type": "BlogPosting",
@@ -138,17 +137,29 @@ const BlogPost = () => {
         try {
             await navigator.clipboard.writeText(window.location.href);
             toast({
-                title: "Link copied",
-                description: "Article link copied to clipboard",
+                title: t("blog.share.title"),
+                description: t("blog.share.description"),
             });
         } catch (err) {
             toast({
-                title: "Failed to copy",
-                description: "Could not copy link to clipboard",
+                title: t("blog.share.failed"),
+                description: t("blog.share.failedDesc"),
                 variant: "destructive",
             });
         }
     };
+
+    const relatedPosts = useMemo(() => {
+        return blogPosts
+            .filter(p => p.slug !== post.slug)
+            .slice(0, 3)
+            .map(p => ({
+                ...p,
+                title: t(`blog.posts.${p.slug}.title`),
+                excerpt: t(`blog.posts.${p.slug}.excerpt`),
+                category: t(`blog.posts.${p.slug}.category`),
+            }));
+    }, [post.slug, t]);
 
     return (
         <div ref={topRef} className="min-h-screen bg-background flex flex-col">
@@ -169,7 +180,6 @@ const BlogPost = () => {
             <Header />
 
             <main className="flex-grow pt-24 pb-20">
-                {/* Hero Section */}
                 <div className="relative h-[40vh] min-h-[400px] w-full overflow-hidden">
                     <img
                         src={post.image}
@@ -184,7 +194,7 @@ const BlogPost = () => {
                             <Breadcrumbs items={breadcrumbItems} className="mb-4" />
                             <Link to="/blog" className="inline-flex items-center text-primary mb-6 hover:underline font-medium">
                                 <ArrowLeft className="mr-2 h-4 w-4" />
-                                Back to Blog
+                                {t("blog.backToBlog")}
                             </Link>
 
                             <div className="flex flex-wrap gap-4 mb-6">
@@ -205,10 +215,10 @@ const BlogPost = () => {
                                             to={authorPath}
                                             className="hover:text-primary transition-colors"
                                         >
-                                            {post.author}
+                                            {author?.name || post.author}
                                         </Link>
                                     ) : (
-                                        <span>{post.author}</span>
+                                        <span>{author?.name || post.author}</span>
                                     )}
                                 </div>
                                 <div className="flex items-center gap-2">
@@ -224,16 +234,30 @@ const BlogPost = () => {
                     </div>
                 </div>
 
-                {/* Content Section */}
                 <article className="container mx-auto px-4 max-w-4xl mt-12">
                     <div className="bg-card/50 backdrop-blur-sm border border-border rounded-2xl p-8 md:p-12 shadow-sm">
-                        <MarkdownRenderer content={post.content} />
+                        <div className="prose prose-lg dark:prose-invert max-w-none">
+                            <ReactMarkdown
+                                components={{
+                                    h1: ({ children }) => <h1 className="text-3xl sm:text-4xl font-bold mt-10 mb-6 text-foreground">{children}</h1>,
+                                    h2: ({ children }) => <h2 className="text-2xl sm:text-3xl font-bold mt-8 mb-4 text-foreground">{children}</h2>,
+                                    h3: ({ children }) => <h3 className="text-xl sm:text-2xl font-bold mt-6 mb-3 text-foreground">{children}</h3>,
+                                    p: ({ children }) => <p className="mb-4 leading-relaxed text-muted-foreground">{children}</p>,
+                                    ul: ({ children }) => <ul className="list-disc ml-6 mb-6 text-muted-foreground">{children}</ul>,
+                                    ol: ({ children }) => <ol className="list-decimal ml-6 mb-6 text-muted-foreground">{children}</ol>,
+                                    li: ({ children }) => <li className="mb-2">{children}</li>,
+                                    strong: ({ children }) => <strong className="font-bold text-foreground">{children}</strong>,
+                                }}
+                            >
+                                {post.content}
+                            </ReactMarkdown>
+                        </div>
 
                         <div className="mt-12 pt-8 border-t border-border flex justify-between items-center">
                             <Link to="/blog">
                                 <Button variant="outline">
                                     <ArrowLeft className="mr-2 h-4 w-4" />
-                                    All Articles
+                                    {t("blog.hub.allArticles")}
                                 </Button>
                             </Link>
 
@@ -241,46 +265,70 @@ const BlogPost = () => {
                                 <Share2 className="h-4 w-4" />
                             </Button>
                         </div>
+
+                        {/* Localized Author Bio Section */}
+                        {author && (
+                            <div className="mt-16 p-8 rounded-2xl bg-primary/5 border border-primary/10">
+                                <div className="flex flex-col md:flex-row gap-8 items-start">
+                                    <div className="w-20 h-20 rounded-full overflow-hidden shrink-0 border-2 border-primary/20">
+                                        <img src={author.image} alt={author.name} className="w-full h-full object-cover" />
+                                    </div>
+                                    <div className="flex-1">
+                                        <h3 className="text-xl font-bold mb-2">{author.name}</h3>
+                                        <p className="text-primary font-medium text-sm mb-4">{author.role}</p>
+                                        <p className="text-muted-foreground leading-relaxed mb-6 italic">
+                                            "{author.bio}"
+                                        </p>
+                                        <div className="space-y-2">
+                                            {author.credentials.map((cred, idx) => (
+                                                <div key={idx} className="flex items-center gap-2 text-xs text-muted-foreground">
+                                                    <div className="w-1.5 h-1.5 rounded-full bg-primary/40" />
+                                                    {cred}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        <Newsletter className="mt-16" />
                     </div>
 
-                    {/* Related Articles */}
-                    {blogPosts.filter(p => p.slug !== post.slug).length > 0 && (
+                    {relatedPosts.length > 0 && (
                         <div className="mt-20 mb-12">
-                            <h2 className="text-3xl font-bold mb-8 text-center">{t("blog.relatedArticles") || "Related Articles"}</h2>
+                            <h2 className="text-3xl font-bold mb-8 text-center">{t("blog.relatedArticles")}</h2>
                             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                                {blogPosts
-                                    .filter(p => p.slug !== post.slug)
-                                    .slice(0, 3)
-                                    .map((relatedPost) => (
-                                        <Link key={relatedPost.slug} to={`/blog/${relatedPost.slug}`} className="group">
-                                            <div className="bg-card rounded-xl overflow-hidden border border-border hover:border-primary/50 transition-all duration-300 h-full flex flex-col">
-                                                <div className="relative h-48 overflow-hidden">
-                                                    <OptimizedImage
-                                                        src={relatedPost.image}
-                                                        alt={relatedPost.title}
-                                                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                                                    />
+                                {relatedPosts.map((relatedPost) => (
+                                    <Link key={relatedPost.slug} to={`/blog/${relatedPost.slug}`} className="group">
+                                        <div className="bg-card rounded-xl overflow-hidden border border-border hover:border-primary/50 transition-all duration-300 h-full flex flex-col">
+                                            <div className="relative h-48 overflow-hidden">
+                                                <OptimizedImage
+                                                    src={relatedPost.image}
+                                                    alt={relatedPost.title}
+                                                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                                />
+                                            </div>
+                                            <div className="p-6 flex flex-col flex-grow">
+                                                <div className="flex items-center gap-2 text-xs text-muted-foreground mb-3">
+                                                    <span className="px-2 py-1 rounded-full bg-primary/10 text-primary font-medium">
+                                                        {relatedPost.category}
+                                                    </span>
+                                                    <span>{relatedPost.readTime}</span>
                                                 </div>
-                                                <div className="p-6 flex flex-col flex-grow">
-                                                    <div className="flex items-center gap-2 text-xs text-muted-foreground mb-3">
-                                                        <span className="px-2 py-1 rounded-full bg-primary/10 text-primary font-medium">
-                                                            {relatedPost.category}
-                                                        </span>
-                                                        <span>{relatedPost.readTime}</span>
-                                                    </div>
-                                                    <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors line-clamp-2">
-                                                        {relatedPost.title}
-                                                    </h3>
-                                                    <p className="text-muted-foreground text-sm line-clamp-2 mb-4 flex-grow">
-                                                        {relatedPost.excerpt}
-                                                    </p>
-                                                    <div className="flex items-center text-primary text-sm font-medium mt-auto">
-                                                        Read More <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-                                                    </div>
+                                                <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors line-clamp-2">
+                                                    {relatedPost.title}
+                                                </h3>
+                                                <p className="text-muted-foreground text-sm line-clamp-2 mb-4 flex-grow">
+                                                    {relatedPost.excerpt}
+                                                </p>
+                                                <div className="flex items-center text-primary text-sm font-medium mt-auto">
+                                                    {t("blog.home.readMore")} <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
                                                 </div>
                                             </div>
-                                        </Link>
-                                    ))}
+                                        </div>
+                                    </Link>
+                                ))}
                             </div>
                         </div>
                     )}

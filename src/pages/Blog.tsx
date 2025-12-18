@@ -3,25 +3,37 @@ import { Footer } from "@/components/layout/Footer";
 import { Calendar, User, ArrowRight, Clock } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { AnimatedSection, StaggerContainer, StaggerItem, ScaleOnHover } from "@/components/ui/animated-section";
+import { Newsletter } from "@/components/sections/Newsletter";
 import { blogPosts } from "@/data/blogPosts";
 import { getAuthorByName } from "@/data/authors";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { SITE_OG_IMAGE_URL, getAbsoluteUrl } from "@/lib/siteMetadata";
+import { useMemo } from "react";
 
 const Blog = () => {
     const { t } = useTranslation();
     const pageUrl = getAbsoluteUrl("/blog");
 
+    const translatedPosts = useMemo(() => {
+        return blogPosts.map((post) => ({
+            ...post,
+            title: t(`blog.posts.${post.slug}.title`),
+            excerpt: t(`blog.posts.${post.slug}.excerpt`),
+            category: t(`blog.posts.${post.slug}.category`),
+            date: t(`blog.posts.${post.slug}.date`),
+        }));
+    }, [t]);
+
     return (
         <div className="min-h-screen bg-background flex flex-col">
             <Helmet>
-                <title>Blog | AGSEO - AI SEO Agency</title>
-                <meta name="description" content="Latest insights and strategies on AI, SEO, and Digital Marketing to help your business grow." />
+                <title>{t("blog.hub.metaTitle")}</title>
+                <meta name="description" content={t("blog.hub.metaDescription")} />
                 <link rel="canonical" href={pageUrl} />
                 <meta property="og:url" content={pageUrl} />
-                <meta property="og:title" content="Blog | AGSEO - AI SEO Agency" />
-                <meta property="og:description" content="Latest insights and strategies on AI, SEO, and Digital Marketing to help your business grow." />
+                <meta property="og:title" content={t("blog.hub.metaTitle")} />
+                <meta property="og:description" content={t("blog.hub.metaDescription")} />
                 <meta property="og:image" content={SITE_OG_IMAGE_URL} />
             </Helmet>
 
@@ -32,19 +44,19 @@ const Blog = () => {
                     <AnimatedSection className="text-center mb-16">
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
                             <span className="text-sm font-medium text-primary uppercase tracking-wider">
-                                {t("blog.badge") || "Our Blog"}
+                                {t("blog.hub.badge")}
                             </span>
                         </div>
                         <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-                            {t("blog.title") || "Latest Insights"}
+                            {t("blog.hub.title")}
                         </h1>
                         <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                            {t("blog.subtitle") || "Discover strategies to dominate search rankings with AI-powered SEO."}
+                            {t("blog.hub.subtitle")}
                         </p>
                     </AnimatedSection>
 
                     <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-8" staggerDelay={0.1}>
-                        {blogPosts.map((post) => {
+                        {translatedPosts.map((post) => {
                             const author = getAuthorByName(post.author);
                             const authorPath = author ? `/authors/${author.id}` : undefined;
 
@@ -119,7 +131,7 @@ const Blog = () => {
                                                         to={`/blog/${post.slug}`}
                                                         className="flex items-center gap-1 text-sm font-medium text-primary hover:underline"
                                                     >
-                                                        Read Article
+                                                        {t("blog.readArticle")}
                                                         <ArrowRight className="w-4 h-4" />
                                                     </Link>
                                                 </div>
@@ -130,6 +142,7 @@ const Blog = () => {
                             );
                         })}
                     </StaggerContainer>
+                    <Newsletter className="mt-24" />
                 </div>
             </main>
 

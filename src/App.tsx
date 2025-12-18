@@ -7,7 +7,6 @@ import { HelmetProvider } from "react-helmet-async";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { AnalyticsTracker } from "@/components/analytics/AnalyticsTracker";
 import { AnimatedRoutes } from "@/components/layout/AnimatedRoutes";
-import { CookieConsent } from "@/components/ui/cookie-consent";
 
 import { useState } from 'react';
 
@@ -28,7 +27,6 @@ const App = ({ helmetContext }: { helmetContext?: HelmetContext }) => {
               <Sonner />
               <AnalyticsTracker />
               <AnimatedRoutes />
-              <CookieConsent />
             </ErrorBoundary>
           </TooltipProvider>
         </ThemeProvider>

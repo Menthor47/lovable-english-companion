@@ -11,6 +11,7 @@ import { AdvancedServices } from "@/components/sections/AdvancedServices";
 import { BlogPreview } from "@/components/sections/BlogPreview";
 import { FAQ } from "@/components/sections/FAQ";
 import { Contact } from "@/components/sections/Contact";
+import { Newsletter } from "@/components/sections/Newsletter";
 import { Footer } from "@/components/layout/Footer";
 import { Helmet } from "react-helmet-async";
 import { SITE_OG_IMAGE_URL, getAbsoluteUrl } from "@/lib/siteMetadata";
@@ -55,6 +56,7 @@ const Index = () => {
         <BlogPreview />
         <FAQ />
         <Contact />
+        <Newsletter className="container mx-auto px-4 py-24" />
       </main>
       <Footer />
     </div>

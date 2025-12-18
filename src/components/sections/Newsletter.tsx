@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import { Mail, CheckCircle2, Loader2, AlertCircle, Sparkles } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface NewsletterProps {
     className?: string;
@@ -10,6 +12,7 @@ interface NewsletterProps {
 }
 
 export function Newsletter({ className = "", variant = "card" }: NewsletterProps) {
+    const { t } = useTranslation();
     const [email, setEmail] = useState("");
     const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
     const [message, setMessage] = useState("");
@@ -19,126 +22,163 @@ export function Newsletter({ className = "", variant = "card" }: NewsletterProps
 
         if (!email || !email.includes("@")) {
             setStatus("error");
-            setMessage("Please enter a valid email address.");
+            setMessage(t("newsletter.errorInvalid"));
             return;
         }
 
         setStatus("loading");
 
         try {
-            const { supabase } = await import("@/lib/supabase");
+            const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+            const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-            if (!supabase) {
+            if (!supabaseUrl || !supabaseAnonKey) {
                 console.warn("[AGSEO] Supabase not configured. Demo mode.");
                 await new Promise(resolve => setTimeout(resolve, 1000));
                 setStatus("success");
-                setMessage("Thanks for subscribing! (Demo Mode)");
+                setMessage(t("newsletter.success"));
                 setEmail("");
                 return;
             }
 
-            const { data, error } = await supabase.functions.invoke('contact', {
-                body: {
+            const response = await fetch(`${supabaseUrl}/functions/v1/contact`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${supabaseAnonKey}`,
+                    'apikey': supabaseAnonKey
+                },
+                body: JSON.stringify({
                     email,
                     source: 'newsletter'
-                }
+                })
             });
 
-            if (error) throw error;
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({}));
+                throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
             if (data && !data.success) throw new Error(data.error || "Subscription failed");
 
             setStatus("success");
-            setMessage("Thanks for subscribing!");
+            setMessage(t("newsletter.success"));
             setEmail("");
         } catch {
             setStatus("error");
-            setMessage("Something went wrong. Please try again.");
+            setMessage(t("newsletter.errorGeneral"));
         }
     };
 
     if (variant === "inline") {
         return (
-            <form onSubmit={handleSubmit} className={`flex gap-2 ${className}`}>
-                <Input
-                    type="email"
-                    placeholder="Enter your email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    disabled={status === "loading" || status === "success"}
-                    className="flex-1"
-                    aria-label="Email address for newsletter"
-                />
-                <Button type="submit" disabled={status === "loading" || status === "success"}>
-                    {status === "loading" && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
-                    {status === "success" ? "Subscribed!" : "Subscribe"}
-                </Button>
+            <form onSubmit={handleSubmit} className={`flex flex-col gap-2 ${className}`}>
+                <div className="flex gap-2">
+                    <Input
+                        type="email"
+                        placeholder={t("newsletter.placeholder")}
+                        value={email}
+                        onChange={(e) => {
+                            setEmail(e.target.value);
+                            if (status === "error") setStatus("idle");
+                        }}
+                        disabled={status === "loading" || status === "success"}
+                        className="flex-1 bg-background/50 backdrop-blur-sm border-primary/20 focus:border-primary/50"
+                        aria-label={t("newsletter.placeholder")}
+                    />
+                    <Button
+                        type="submit"
+                        disabled={status === "loading" || status === "success"}
+                        className="whitespace-nowrap"
+                    >
+                        {status === "loading" && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
+                        {status === "success" ? t("newsletter.subscribed") : t("newsletter.button")}
+                    </Button>
+                </div>
+                {status === "error" && (
+                    <p className="text-[10px] text-red-500 flex items-center gap-1">
+                        <AlertCircle className="w-3 h-3" />
+                        {message}
+                    </p>
+                )}
             </form>
         );
     }
 
     return (
         <AnimatedSection className={className}>
-            <div className="relative rounded-3xl border border-primary/20 bg-gradient-to-br from-primary/10 via-background to-accent/5 p-8 md:p-12 overflow-hidden">
+            <div className="relative rounded-3xl border border-primary/20 bg-card/60 backdrop-blur-xl p-8 md:p-12 overflow-hidden shadow-2xl shadow-primary/5 ring-1 ring-white/10">
                 {/* Background decoration */}
-                <div className="absolute -top-20 -right-20 w-40 h-40 bg-primary/10 rounded-full blur-3xl" />
-                <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-accent/10 rounded-full blur-3xl" />
+                <div className="absolute -top-24 -right-24 w-64 h-64 bg-primary/20 rounded-full blur-[100px] animate-pulse" />
+                <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-accent/20 rounded-full blur-[100px] animate-pulse [animation-delay:1s]" />
 
                 <div className="relative z-10 max-w-2xl mx-auto text-center">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
-                        <Sparkles className="w-4 h-4 text-primary" />
-                        <span className="text-sm font-medium text-primary">Stay Updated</span>
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6 group hover:bg-primary/20 transition-colors">
+                        <Sparkles className="w-4 h-4 text-primary group-hover:scale-110 transition-transform" />
+                        <span className="text-sm font-medium text-primary uppercase tracking-wider">
+                            {t("newsletter.badge")}
+                        </span>
                     </div>
 
-                    <h2 className="font-heading text-2xl md:text-3xl font-bold mb-4">
-                        Get AI SEO Insights Weekly
+                    <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-foreground via-foreground to-foreground/70 bg-clip-text text-transparent">
+                        {t("newsletter.title")}
                     </h2>
-                    <p className="text-muted-foreground mb-8">
-                        Join 2,000+ marketers receiving actionable tips on ranking in AI search engines,
-                        GEO strategies, and the future of SEO.
+                    <p className="text-lg text-muted-foreground mb-8 text-balance">
+                        {t("newsletter.subtitle")}
                     </p>
 
                     {status === "success" ? (
-                        <div className="flex items-center justify-center gap-3 p-4 rounded-xl bg-green-500/10 border border-green-500/20 text-green-500">
-                            <CheckCircle2 className="w-5 h-5" />
-                            <span className="font-medium">{message}</span>
+                        <div className="flex items-center justify-center gap-3 p-6 rounded-2xl bg-green-500/10 border border-green-500/20 text-green-500 animate-in zoom-in duration-300">
+                            <CheckCircle2 className="w-6 h-6" />
+                            <span className="text-lg font-medium">{message}</span>
                         </div>
                     ) : (
-                        <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+                        <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto relative group">
                             <div className="relative flex-1">
-                                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground group-focus-within:text-primary transition-colors" />
                                 <Input
                                     type="email"
-                                    placeholder="Enter your email"
+                                    placeholder={t("newsletter.placeholder")}
                                     value={email}
                                     onChange={(e) => {
                                         setEmail(e.target.value);
                                         if (status === "error") setStatus("idle");
                                     }}
                                     disabled={status === "loading"}
-                                    className="pl-10"
-                                    aria-label="Email address for newsletter"
+                                    className="pl-12 py-6 bg-background/50 backdrop-blur-sm border-primary/20 focus:border-primary/50 text-lg rounded-xl shadow-inner transition-all sm:min-w-[300px]"
+                                    aria-label={t("newsletter.placeholder")}
                                 />
                             </div>
-                            <Button type="submit" variant="hero" disabled={status === "loading"}>
+                            <Button
+                                type="submit"
+                                variant="hero"
+                                size="lg"
+                                disabled={status === "loading"}
+                                className="py-6 rounded-xl shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all font-bold min-w-[140px]"
+                            >
                                 {status === "loading" ? (
-                                    <Loader2 className="w-4 h-4 animate-spin" />
+                                    <Loader2 className="w-5 h-5 animate-spin" />
                                 ) : (
-                                    "Subscribe"
+                                    t("newsletter.button")
                                 )}
                             </Button>
                         </form>
                     )}
 
                     {status === "error" && (
-                        <div className="flex items-center justify-center gap-2 mt-4 text-red-500 text-sm">
+                        <div className="flex items-center justify-center gap-2 mt-4 text-red-500 text-sm animate-in slide-in-from-top-2">
                             <AlertCircle className="w-4 h-4" />
                             <span>{message}</span>
                         </div>
                     )}
 
-                    <p className="text-xs text-muted-foreground mt-6">
-                        No spam, unsubscribe anytime. Read our{" "}
-                        <a href="/privacy" className="underline hover:text-primary">Privacy Policy</a>.
+                    <p className="text-xs text-muted-foreground mt-8 opacity-70">
+                        {t("newsletter.privacyPrefix")}
+                        <Link to="/privacy" className="underline hover:text-primary transition-colors decoration-primary/30 underline-offset-4">
+                            {t("newsletter.privacyLink")}
+                        </Link>
+                        .
                     </p>
                 </div>
             </div>

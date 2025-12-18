@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Helmet } from "react-helmet-async";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -11,26 +11,57 @@ import { caseStudies } from "@/data/caseStudies";
 import { motion, AnimatePresence } from "framer-motion";
 import { SITE_OG_IMAGE_URL, getAbsoluteUrl } from "@/lib/siteMetadata";
 
+import { useTranslation } from "react-i18next";
+
 export default function CaseStudies() {
+    const { t } = useTranslation();
     const [filter, setFilter] = useState("All");
 
     const pageUrl = getAbsoluteUrl("/case-studies");
 
+    const translatedStudies = useMemo(() => {
+        const items = t("caseStudies.items", { returnObjects: true }) as Record<string, any>;
+        return caseStudies.map(study => {
+            const translatedItem = items[study.id];
+            if (!translatedItem) return study;
+            return {
+                ...study,
+                category: translatedItem.category,
+                title: translatedItem.title,
+                description: translatedItem.description,
+                stats: translatedItem.stats,
+                content: translatedItem.content
+            };
+        });
+    }, [t]);
+
     const filteredStudies = filter === "All"
-        ? caseStudies
-        : caseStudies.filter(study => study.category === filter);
+        ? translatedStudies
+        : translatedStudies.filter(study => {
+            // Find parent original study to check original category
+            const originalStudy = caseStudies.find(s => s.id === study.id);
+            return originalStudy?.category === filter;
+        });
+
+    const categoryLabels: Record<string, string> = {
+        "All": t("caseStudies.allCategories"),
+        "E-commerce": "E-commerce",
+        "SaaS": "SaaS",
+        "Local Service": t("caseStudies.items.legal-firm-local.category"),
+        "Enterprise": "Enterprise"
+    };
 
     const categories = ["All", "E-commerce", "SaaS", "Local Service", "Enterprise"];
 
     return (
         <div className="min-h-screen bg-background">
             <Helmet>
-                <title>Case Studies | AGSEO - AI SEO Success Stories</title>
-                <meta name="description" content="See how AGSEO has transformed businesses across industries with our AI-powered SEO methodologies. Real results, measurable growth." />
+                <title>{t("caseStudies.metaTitle")}</title>
+                <meta name="description" content={t("caseStudies.metaDescription")} />
                 <link rel="canonical" href={pageUrl} />
                 <meta property="og:url" content={pageUrl} />
-                <meta property="og:title" content="Case Studies | AGSEO - AI SEO Success Stories" />
-                <meta property="og:description" content="See how AGSEO has transformed businesses across industries with our AI-powered SEO methodologies. Real results, measurable growth." />
+                <meta property="og:title" content={t("caseStudies.metaTitle")} />
+                <meta property="og:description" content={t("caseStudies.metaDescription")} />
                 <meta property="og:image" content={SITE_OG_IMAGE_URL} />
             </Helmet>
             <Header />
@@ -38,14 +69,16 @@ export default function CaseStudies() {
                 <div className="container mx-auto px-4">
                     <Breadcrumbs className="mb-8" />
                     <AnimatedSection className="text-center max-w-3xl mx-auto mb-16">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-md mb-6">
+                            <span className="text-sm font-medium text-primary tracking-wide">
+                                {t("caseStudies.badge")}
+                            </span>
+                        </div>
                         <h1 className="font-heading text-4xl md:text-5xl font-bold mb-6">
-                            Real Results, <span className="text-primary">Powered by AI</span>
+                            {t("caseStudies.titlePrefix")} <span className="text-primary">{t("caseStudies.titleSuffix")}</span>
                         </h1>
                         <p className="text-xl text-muted-foreground mb-8">
-                            See how AGSEO has transformed businesses across industries with our proprietary AI methodologies.
-                        </p>
-                        <p className="text-sm text-muted-foreground">
-                            Results are illustrative and may vary. Client details may be anonymized to protect privacy.
+                            {t("caseStudies.subtitle")}
                         </p>
 
                         {/* Filters */}
@@ -59,7 +92,7 @@ export default function CaseStudies() {
                                         : "bg-card border border-border hover:border-primary/50 text-muted-foreground"
                                         }`}
                                 >
-                                    {cat}
+                                    {categoryLabels[cat] || cat}
                                 </button>
                             ))}
                         </div>
@@ -93,14 +126,14 @@ export default function CaseStudies() {
                                                     asChild
                                                 >
                                                     <Link to={`/case-studies/${study.id}`}>
-                                                        Read Full Story <ArrowRight className="ml-2 w-4 h-4" />
+                                                        {t("nav.readMore")} <ArrowRight className="ml-2 w-4 h-4" />
                                                     </Link>
                                                 </Button>
                                             </div>
 
                                             <div className="lg:col-span-2">
                                                 <div className="grid grid-cols-2 gap-4">
-                                                    {study.stats.map((stat, i) => (
+                                                    {study.stats.map((stat: any, i: number) => (
                                                         <div key={i} className={`bg-background/50 rounded-2xl p-6 text-center border border-border/50 ${i === 2 ? 'col-span-2' : ''}`}>
                                                             <div className="text-3xl font-bold font-heading mb-1 text-foreground">
                                                                 {stat.value}
@@ -120,10 +153,10 @@ export default function CaseStudies() {
                     </div>
 
                     <AnimatedSection className="mt-20 text-center bg-primary/5 rounded-3xl p-12 border border-primary/20">
-                        <h2 className="text-3xl font-bold font-heading mb-4">Ready to be our next success story?</h2>
-                        <p className="text-muted-foreground mb-8 text-lg">Join the hundreds of businesses growing with AGSEO.</p>
+                        <h2 className="text-3xl font-bold font-heading mb-4">{t("caseStudies.cta.title")}</h2>
+                        <p className="text-muted-foreground mb-8 text-lg">{t("caseStudies.cta.desc")}</p>
                         <Button variant="hero" size="xl" asChild>
-                            <Link to="/#contact">Get Your Free Audit</Link>
+                            <Link to="/#contact">{t("caseStudies.cta.button")}</Link>
                         </Button>
                     </AnimatedSection>
                 </div>

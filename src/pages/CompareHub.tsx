@@ -4,67 +4,75 @@ import { AnimatedSection } from "@/components/ui/animated-section";
 import { Button } from "@/components/ui/button";
 import { comparisons } from "@/data/comparisons";
 import { useMemo } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ArrowRight, CheckCircle2, Scale, ShieldCheck, Sparkles, type LucideIcon } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 import { TrustSignals } from "@/components/sections/TrustSignals";
 import { ComparisonsMethodology } from "@/components/sections/ComparisonsMethodology";
 import { SITE_OG_IMAGE_URL, getAbsoluteUrl } from "@/lib/siteMetadata";
+import { useTranslation, Trans } from "react-i18next";
 
-type ValueProp = {
-    title: string;
-    description: string;
-    bullets: string[];
-    icon: LucideIcon;
+const VALUE_PROP_ICONS: Record<string, LucideIcon> = {
+    "Decision-ready verdicts": CheckCircle2,
+    "No pay-to-win rankings": ShieldCheck,
+    "Built for modern search": Sparkles,
+    "Verdicturi gata de decizie": CheckCircle2,
+    "Fără clasamente plătite": ShieldCheck,
+    "Construit pentru căutarea modernă": Sparkles,
 };
 
-const valueProps: ValueProp[] = [
-    {
-        title: "Decision-ready verdicts",
-        description: "Clear winners, tradeoffs, and best-for recommendations so you can choose quickly.",
-        bullets: ["Pricing & limits", "Workflow fit", "Who it’s best for"],
-        icon: CheckCircle2,
-    },
-    {
-        title: "No pay-to-win rankings",
-        description: "We don’t sell winner placements. If a tool wins, it’s because it fits the use case.",
-        bullets: ["Pros/cons", "Contextual guidance", "Updated as tools change"],
-        icon: ShieldCheck,
-    },
-    {
-        title: "Built for modern search",
-        description: "We care about GEO/AEO workflows and ranking reality — not just feature checklists.",
-        bullets: ["AI output quality", "SEO integrations", "Team scalability"],
-        icon: Sparkles,
-    },
-];
-
 export default function CompareHub() {
+    const { t } = useTranslation();
+    const navigate = useNavigate();
     const pageUrl = getAbsoluteUrl("/compare");
+
+    const translatedValueProps = useMemo(() => {
+        const props = t("comparisons.valueProps", { returnObjects: true }) as any[];
+        return props.map(prop => ({
+            ...prop,
+            icon: VALUE_PROP_ICONS[prop.title] || CheckCircle2
+        }));
+    }, [t]);
+
+    const translatedComparisons = useMemo(() => {
+        const items = t("comparisons.items", { returnObjects: true }) as Record<string, any>;
+        return comparisons.map((comp) => {
+            const tComp = items[comp.slug];
+            if (!tComp) return comp;
+            return {
+                ...comp,
+                category: tComp.category || comp.category,
+                verdict: {
+                    ...comp.verdict,
+                    summary: tComp.verdict?.summary || comp.verdict.summary
+                }
+            };
+        });
+    }, [t]);
 
     const itemListSchema = useMemo(() => ({
         "@context": "https://schema.org",
         "@type": "ItemList",
         "@id": `${pageUrl}#itemlist`,
         url: pageUrl,
-        name: "AI SEO Tool Comparisons",
-        itemListElement: comparisons.map((comp, index) => ({
+        name: t("comparisons.metaTitle"),
+        itemListElement: translatedComparisons.map((comp, index) => ({
             "@type": "ListItem",
             position: index + 1,
             name: `${comp.toolA.name} vs ${comp.toolB.name}`,
             url: getAbsoluteUrl(`/compare/${comp.slug}`)
         }))
-    }), [pageUrl]);
+    }), [pageUrl, t, translatedComparisons]);
 
     return (
         <div className="min-h-screen bg-background flex flex-col">
             <Helmet>
-                <title>AI SEO Tool Comparisons - AGSEO</title>
-                <meta name="description" content="Use AGSEO's unbiased comparison battles to find the best AI tools (Jasper, Copy.ai, Surfer) for your stack." />
+                <title>{t("comparisons.metaTitle")}</title>
+                <meta name="description" content={t("comparisons.metaDescription")} />
                 <link rel="canonical" href={pageUrl} />
                 <meta property="og:url" content={pageUrl} />
-                <meta property="og:title" content="AI SEO Tool Comparisons - AGSEO" />
-                <meta property="og:description" content="Use AGSEO's unbiased comparison battles to find the best AI tools (Jasper, Copy.ai, Surfer) for your stack." />
+                <meta property="og:title" content={t("comparisons.metaTitle")} />
+                <meta property="og:description" content={t("comparisons.metaDescription")} />
                 <meta property="og:image" content={SITE_OG_IMAGE_URL} />
                 <meta property="og:type" content="website" />
                 <script type="application/ld+json">{JSON.stringify(itemListSchema)}</script>
@@ -76,30 +84,33 @@ export default function CompareHub() {
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-md mb-6">
                             <Scale className="w-4 h-4 text-primary" />
                             <span className="text-sm font-medium text-primary tracking-wide">
-                                Tool Comparisons
+                                {t("comparisons.badge")}
                             </span>
                         </div>
                         <h1 className="font-heading text-4xl md:text-5xl font-bold mb-6">
-                            Unbiased <span className="text-primary">AI Tool Battles</span>
+                            {t("comparisons.titlePrefix")} <span className="text-primary">{t("comparisons.titleSuffix")}</span>
                         </h1>
                         <p className="text-xl text-muted-foreground">
-                            We test every AI SEO tool so you don't have to. Find the perfect stack for your growth.
+                            {t("comparisons.subtitle")}
                         </p>
                     </AnimatedSection>
 
                     <AnimatedSection className="max-w-5xl mx-auto mb-16">
                         <div className="bg-card border border-border/50 rounded-3xl p-8 md:p-10">
                             <h2 className="font-heading text-2xl md:text-3xl font-bold mb-4">
-                                What you’ll find here
+                                {t("comparisons.hubTitle")}
                             </h2>
                             <p className="text-muted-foreground leading-relaxed mb-8">
-                                Use these comparisons to pick tools that actually match your workflow — whether you’re building an
-                                AI writing stack, optimizing content, or choosing an SEO suite. If you’re newer to the terminology,
-                                start with the <Link to="/resources/glossary" className="text-primary underline underline-offset-4">AI SEO Glossary</Link>.
+                                <Trans
+                                    i18nKey="comparisons.hubDesc"
+                                    components={{
+                                        glossaryLink: <Link to="/resources/glossary" className="text-primary underline underline-offset-4" />
+                                    }}
+                                />
                             </p>
 
                             <div className="grid md:grid-cols-3 gap-6">
-                                {valueProps.map((item) => {
+                                {translatedValueProps.map((item: any) => {
                                     const Icon = item.icon;
                                     return (
                                         <div key={item.title} className="rounded-2xl border border-border/50 bg-background/40 p-6">
@@ -109,7 +120,7 @@ export default function CompareHub() {
                                             <h3 className="font-heading text-xl font-bold mb-3">{item.title}</h3>
                                             <p className="text-sm text-muted-foreground mb-5 leading-relaxed">{item.description}</p>
                                             <ul className="space-y-2 text-sm text-muted-foreground">
-                                                {item.bullets.map((bullet) => (
+                                                {item.bullets.map((bullet: string) => (
                                                     <li key={bullet} className="flex items-center gap-2">
                                                         <span className="h-1.5 w-1.5 rounded-full bg-primary/60" />
                                                         <span>{bullet}</span>
@@ -125,15 +136,15 @@ export default function CompareHub() {
 
                     <AnimatedSection className="max-w-5xl mx-auto mb-8">
                         <h2 className="font-heading text-2xl md:text-3xl font-bold">
-                            Latest comparisons
+                            {t("comparisons.latestTitle")}
                         </h2>
                         <p className="text-muted-foreground mt-2">
-                            Open any matchup to see pricing, pros/cons, and our recommendation.
+                            {t("comparisons.latestSubtitle")}
                         </p>
                     </AnimatedSection>
 
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {comparisons.map((comp, index) => (
+                        {translatedComparisons.map((comp, index) => (
                             <AnimatedSection key={index} delay={index * 0.1} className="group">
                                 <Link to={`/compare/${comp.slug}`} className="block h-full">
                                     <div className="h-full bg-card border border-border/50 rounded-2xl overflow-hidden hover:border-primary/50 transition-all hover:shadow-lg hover:shadow-primary/5">
@@ -162,7 +173,7 @@ export default function CompareHub() {
                                             </p>
 
                                             <div className="flex items-center text-primary font-medium text-sm group-hover:translate-x-1 transition-transform">
-                                                Read Comparison <ArrowRight className="ml-2 w-4 h-4" />
+                                                {t("comparisons.readComparison")} <ArrowRight className="ml-2 w-4 h-4" />
                                             </div>
                                         </div>
                                     </div>
@@ -174,18 +185,17 @@ export default function CompareHub() {
                     <AnimatedSection className="max-w-5xl mx-auto mt-16">
                         <div className="rounded-3xl border border-primary/20 bg-gradient-to-br from-primary/10 via-background to-background p-8 md:p-12">
                             <h2 className="font-heading text-2xl md:text-4xl font-bold mb-4">
-                                Want a stack that actually ranks?
+                                {t("comparisons.ctaTitle")}
                             </h2>
                             <p className="text-muted-foreground text-lg leading-relaxed mb-8 max-w-3xl">
-                                Tools are only half the battle. If you want to rank across Google and AI answers (ChatGPT, Gemini,
-                                Perplexity), run a quick audit or talk to us about a strategy.
+                                {t("comparisons.ctaDesc")}
                             </p>
                             <div className="flex flex-col sm:flex-row gap-3">
                                 <Button variant="hero" size="lg" asChild>
-                                    <Link to="/tools/audit">Run a Free AI Audit</Link>
+                                    <Link to="/tools/audit">{t("comparisons.ctaAudit")}</Link>
                                 </Button>
                                 <Button variant="outline" size="lg" asChild>
-                                    <Link to="/#contact">Talk to AGSEO</Link>
+                                    <Link to="/#contact">{t("comparisons.ctaTalk")}</Link>
                                 </Button>
                             </div>
                         </div>

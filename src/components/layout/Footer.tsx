@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { Mail, ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Newsletter } from "@/components/sections/Newsletter";
 import logo from "@/assets/logo.webp";
 import { footerLinks } from "@/config/navigation";
 import { config } from "@/lib/config";
@@ -30,6 +31,12 @@ export function Footer() {
             <p className="text-sm text-muted-foreground mb-6">
               {t("footer.description")}
             </p>
+            <div className="mb-8">
+              <p className="text-xs font-semibold text-foreground uppercase tracking-wider mb-3">
+                {t("newsletter.badge")}
+              </p>
+              <Newsletter variant="inline" />
+            </div>
             <div className="space-y-2">
               <a
                 href={`mailto:${email}`}
@@ -104,7 +111,7 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} AGSEO. All rights reserved.
+            © {new Date().getFullYear()} AGSEO. {t("footer.links.allRightsReserved")}
           </p>
           <div className="flex items-center gap-6">
             {footerLinks.legal.links.map((link) => (

@@ -3,7 +3,7 @@ import { createClient } from "@supabase/supabase-js";
 
 export const config = { runtime: "edge" };
 
-type LeadSource = "contact" | "audit";
+type LeadSource = "contact" | "audit" | "newsletter";
 
 const leadSchema = z.object({
     email: z.preprocess(
@@ -21,7 +21,7 @@ const leadSchema = z.object({
         z.string().url().optional(),
     ),
     message: z.string().max(5000).optional(),
-    source: z.union([z.literal("contact"), z.literal("audit")]).optional(),
+    source: z.union([z.literal("contact"), z.literal("audit"), z.literal("newsletter")]).optional(),
     website2: z.string().max(200).optional(),
 });
 
@@ -102,6 +102,7 @@ function parseCsv(value: string): string[] {
 }
 
 function isOriginAllowed(origin: string, allowedOrigins: string[]): boolean {
+    if (origin.startsWith("http://localhost:") || origin === "http://localhost") return true;
     return allowedOrigins.some((allowed) => allowed === origin);
 }
 
@@ -112,8 +113,14 @@ function getCorsDecision(request: Request): {
 } {
     const requestOrigin = getRequestOrigin(request);
     const allowedOriginsRaw = getStringEnv("ALLOWED_ORIGINS");
+
+    // If no ALLOWED_ORIGINS is set, be permissive and allow the request's origin (or fallback to *)
     if (!allowedOriginsRaw) {
-        return { requestOrigin, allowedOrigins: null, allowedOrigin: null };
+        return {
+            requestOrigin,
+            allowedOrigins: null,
+            allowedOrigin: requestOrigin || "*"
+        };
     }
 
     const allowedOrigins = parseCsv(allowedOriginsRaw);
@@ -122,11 +129,10 @@ function getCorsDecision(request: Request): {
     return { requestOrigin, allowedOrigins, allowedOrigin };
 }
 
-function buildCorsHeaders(allowedOrigin: string | null): HeadersInit {
-    if (!allowedOrigin) return {};
+function buildCorsHeaders(requestOrigin: string | null): HeadersInit {
     return {
-        "access-control-allow-origin": allowedOrigin,
-        vary: "origin",
+        "access-control-allow-origin": requestOrigin || "*",
+        "vary": "Origin",
     };
 }
 
@@ -134,7 +140,7 @@ function buildPreflightHeaders(allowedOrigin: string): HeadersInit {
     return {
         "access-control-allow-origin": allowedOrigin,
         "access-control-allow-methods": "POST, OPTIONS",
-        "access-control-allow-headers": "content-type",
+        "access-control-allow-headers": "content-type, authorization, apikey, x-client-info",
         "access-control-max-age": "86400",
         vary: "origin",
     };
@@ -208,17 +214,22 @@ async function sendResendEmail(params: {
 }
 
 export default async function handler(request: Request): Promise<Response> {
-    const { requestOrigin, allowedOrigins, allowedOrigin } = getCorsDecision(request);
-    const corsHeaders = buildCorsHeaders(allowedOrigin);
+    const requestOrigin = getRequestOrigin(request);
+    const corsHeaders = buildCorsHeaders(requestOrigin);
 
     if (request.method === "OPTIONS") {
-        if (!allowedOrigins) return new Response(null, { status: 204 });
-        if (!allowedOrigin) return new Response(null, { status: 403 });
         return new Response(null, {
             status: 204,
-            headers: buildPreflightHeaders(allowedOrigin),
+            headers: {
+                ...corsHeaders,
+                "access-control-allow-methods": "POST, OPTIONS",
+                "access-control-allow-headers": "content-type, authorization, apikey, x-client-info",
+                "access-control-max-age": "86400",
+            },
         });
     }
+
+    const { allowedOrigins, allowedOrigin } = getCorsDecision(request);
 
     if (request.method !== "POST") {
         return jsonResponse(
@@ -285,21 +296,28 @@ export default async function handler(request: Request): Promise<Response> {
                 auth: { persistSession: false },
             });
 
-            const { error } = await supabase.from('leads').insert({
-                source,
+            const tableName = source === "newsletter" ? "newsletter_subscribers" : "leads";
+            const row: Record<string, unknown> = {
                 email: payload.email,
-                website: payload.website ?? null,
-                message: payload.message ?? null,
-                origin: requestOrigin,
-                ip: getClientIp(request),
-                user_agent: userAgent,
-                referer,
-            });
+                ...(source !== "newsletter"
+                    ? {
+                        source,
+                        website: payload.website ?? null,
+                        message: payload.message ?? null,
+                        origin: requestOrigin,
+                        ip: getClientIp(request),
+                        user_agent: userAgent,
+                        referer,
+                    }
+                    : {}),
+            };
+
+            const { error } = await supabase.from(tableName).insert(row);
 
             if (!error) {
                 storedLead = true;
             } else {
-                console.error("Supabase lead insert failed:", error.message);
+                console.error(`Supabase ${tableName} insert failed:`, error.message);
             }
         } catch (err) {
             console.error("Supabase client error:", err);

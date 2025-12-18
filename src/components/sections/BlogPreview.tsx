@@ -3,13 +3,23 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { AnimatedSection, StaggerContainer, StaggerItem, ScaleOnHover } from "@/components/ui/animated-section";
-
+import { useMemo } from "react";
 import { blogPosts } from "@/data/blogPosts";
 
 export function BlogPreview() {
   const { t } = useTranslation();
 
-  const previewPosts = blogPosts.slice(0, 4);
+  const translatedPosts = useMemo(() => {
+    return blogPosts.slice(0, 4).map((post) => ({
+      ...post,
+      title: t(`blog.posts.${post.slug}.title`),
+      excerpt: t(`blog.posts.${post.slug}.excerpt`),
+      category: t(`blog.posts.${post.slug}.category`),
+      date: t(`blog.posts.${post.slug}.date`),
+      // For the preview, we just use the translated team name
+      authorName: t("authors.agseo-team.name")
+    }));
+  }, [t]);
 
   return (
     <section className="py-24 relative overflow-hidden">
@@ -19,19 +29,19 @@ export function BlogPreview() {
         <AnimatedSection className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
             <span className="text-sm font-medium text-primary uppercase tracking-wider">
-              {t("blog.badge")}
+              {t("blog.home.badge")}
             </span>
           </div>
           <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
-            {t("blog.title")}
+            {t("blog.home.title")}
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            {t("blog.subtitle")}
+            {t("blog.home.subtitle")}
           </p>
         </AnimatedSection>
 
         <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-4 gap-6" staggerDelay={0.1}>
-          {previewPosts.map((post, index) => (
+          {translatedPosts.map((post, index) => (
             <StaggerItem key={index}>
               <ScaleOnHover scale={1.02}>
                 <Link to={`/blog/${post.slug}`} className="block h-full">
@@ -83,11 +93,11 @@ export function BlogPreview() {
                         <div className="flex items-center gap-2">
                           <User className="w-4 h-4 text-muted-foreground" />
                           <span className="text-xs text-muted-foreground">
-                            {post.author}
+                            {post.authorName}
                           </span>
                         </div>
                         <span className="flex items-center gap-1 text-xs font-medium text-primary hover:underline">
-                          {t("blog.readMore")}
+                          {t("blog.home.readMore")}
                           <ArrowRight className="w-3 h-3" />
                         </span>
                       </div>
@@ -102,7 +112,7 @@ export function BlogPreview() {
         <AnimatedSection delay={0.4} className="text-center mt-12">
           <Button variant="outline" size="lg" asChild>
             <Link to="/blog">
-              {t("blog.viewAll")}
+              {t("blog.home.viewAll")}
               <ArrowRight className="w-4 h-4" />
             </Link>
           </Button>
