@@ -8,6 +8,7 @@
         "subscribed": "Subscribed!",
         "success": "Thanks for subscribing!",
         "errorInvalid": "Please enter a valid email address.",
+        "errorAlreadySubscribed": "You are already subscribed to our newsletter!",
         "errorGeneral": "Something went wrong. Please try again.",
         "privacyPrefix": "No spam, unsubscribe anytime. Read our ",
         "privacyLink": "Privacy Policy"

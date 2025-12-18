@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Mail, ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -8,7 +9,12 @@ import { config } from "@/lib/config";
 
 export function Footer() {
   const { t } = useTranslation();
+  const [currentYear, setCurrentYear] = useState<number | string>(2025);
   const email = config.contact.email;
+
+  useEffect(() => {
+    setCurrentYear(new Date().getFullYear());
+  }, []);
 
   return (
     <footer className="bg-card border-t border-border">
@@ -111,7 +117,7 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} AGSEO. {t("footer.links.allRightsReserved")}
+            © {currentYear} AGSEO. {t("footer.links.allRightsReserved")}
           </p>
           <div className="flex items-center gap-6">
             {footerLinks.legal.links.map((link) => (

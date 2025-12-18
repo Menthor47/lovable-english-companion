@@ -388,10 +388,17 @@ Deno.serve(async (request: Request): Promise<Response> => {
     });
 
     if (!stored.ok) {
+        const errorMsg = String(stored.error);
+        const isDuplicate = errorMsg.toLowerCase().includes("duplicate key");
+
         console.error("Supabase insert failed:", stored.error);
         return jsonResponse(
-            { success: false, error: "Failed to store submission." },
-            { status: 502, headers: corsHeaders },
+            {
+                success: false,
+                error: isDuplicate ? "Already subscribed" : `Database error: ${stored.error}`,
+                code: isDuplicate ? "ALREADY_SUBSCRIBED" : "DB_ERROR"
+            },
+            { status: isDuplicate ? 409 : 500, headers: corsHeaders },
         );
     }
 
@@ -400,8 +407,13 @@ Deno.serve(async (request: Request): Promise<Response> => {
     const leadsToEmail = getStringEnv("LEADS_TO_EMAIL");
 
     if (!resendApiKey || !resendFromEmail || !leadsToEmail) {
+        // If it's just a newsletter signup, we can treat it as a success even if email fails
+        if (source === "newsletter") {
+            console.warn("Newsletter stored but Resend not configured for internal notification.");
+            return jsonResponse({ success: true, warning: "Resend not configured" }, { headers: corsHeaders });
+        }
         return jsonResponse(
-            { success: false, error: "Server is not configured for lead capture yet." },
+            { success: false, error: "Server is not configured for email notifications yet." },
             { status: 500, headers: corsHeaders },
         );
     }

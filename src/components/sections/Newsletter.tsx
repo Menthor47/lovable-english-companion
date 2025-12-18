@@ -56,18 +56,30 @@ export function Newsletter({ className = "", variant = "card" }: NewsletterProps
 
             if (!response.ok) {
                 const errorData = await response.json().catch(() => ({}));
-                throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
-            }
+                const serverError = errorData.error || "";
 
-            const data = await response.json();
-            if (data && !data.success) throw new Error(data.error || "Subscription failed");
+                // Handle already subscribed (409 Conflict)
+                if (response.status === 409 || serverError.toLowerCase().includes("duplicate key")) {
+                    throw new Error("ALREADY_SUBSCRIBED");
+                }
+
+                throw new Error(serverError || `HTTP error! status: ${response.status}`);
+            }
 
             setStatus("success");
             setMessage(t("newsletter.success"));
             setEmail("");
-        } catch {
+        } catch (error: unknown) {
             setStatus("error");
-            setMessage(t("newsletter.errorGeneral"));
+            if (error instanceof Error) {
+                if (error.message === "ALREADY_SUBSCRIBED") {
+                    setMessage(t("newsletter.errorAlreadySubscribed"));
+                } else {
+                    setMessage(error.message);
+                }
+            } else {
+                setMessage(t("newsletter.errorGeneral"));
+            }
         }
     };
 

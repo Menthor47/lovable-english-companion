@@ -8,6 +8,7 @@
         "subscribed": "Abonat!",
         "success": "Îți mulțumim pentru abonare!",
         "errorInvalid": "Te rugăm să introduci o adresă de email validă.",
+        "errorAlreadySubscribed": "Ești deja abonat la newsletter-ul nostru!",
         "errorGeneral": "Ceva nu a mers bine. Te rugăm să încerci din nou.",
         "privacyPrefix": "Fără spam, dezabonează-te oricând. Citește ",
         "privacyLink": "Politica de Confidențialitate"
