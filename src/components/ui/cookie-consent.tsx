@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
 import { X } from "lucide-react";
@@ -13,6 +13,7 @@ export const CookieConsent = () => {
     const { t } = useTranslation();
     const [showBanner, setShowBanner] = useState(false);
     const [showSettings, setShowSettings] = useState(false);
+    const initTimeoutRef = useRef<number | null>(null);
 
     // State for toggles in settings
     const [consentSettings, setConsentSettings] = useState<Omit<CookieConsentState, 'timestamp'>>({
@@ -23,35 +24,66 @@ export const CookieConsent = () => {
     });
 
     useEffect(() => {
-        const hasCookiebot =
+        const hasCookiebotNow = () =>
             (typeof window !== "undefined" && "Cookiebot" in window) ||
             (typeof document !== "undefined" && Boolean(document.getElementById("Cookiebot")));
 
-        if (hasCookiebot) {
-            return;
+        const hideIfCookiebot = () => {
+            if (!hasCookiebotNow()) return;
+            setShowBanner(false);
+            setShowSettings(false);
+        };
+
+        const handleCookiebotEvent = () => {
+            hideIfCookiebot();
+        };
+
+        window.addEventListener("CookiebotOnConsentReady", handleCookiebotEvent);
+        window.addEventListener("CookiebotOnAccept", handleCookiebotEvent);
+        window.addEventListener("CookiebotOnDecline", handleCookiebotEvent);
+
+        hideIfCookiebot();
+        if (hasCookiebotNow()) {
+            return () => {
+                window.removeEventListener("CookiebotOnConsentReady", handleCookiebotEvent);
+                window.removeEventListener("CookiebotOnAccept", handleCookiebotEvent);
+                window.removeEventListener("CookiebotOnDecline", handleCookiebotEvent);
+            };
         }
 
-        const storedConsent = localStorage.getItem(COOKIE_CONSENT_KEY);
+        initTimeoutRef.current = window.setTimeout(() => {
+            hideIfCookiebot();
+            if (hasCookiebotNow()) return;
 
-        if (storedConsent) {
-            try {
-                const parsedConsent: CookieConsentState = JSON.parse(storedConsent);
-                // Apply stored consent
-                applyConsent(parsedConsent);
-                // Initialize settings state from stored consent
-                setConsentSettings({
-                    necessary: parsedConsent.necessary,
-                    analytics: parsedConsent.analytics,
-                    marketing: parsedConsent.marketing,
-                    preferences: parsedConsent.preferences,
-                });
-            } catch (error: unknown) {
-                console.error("Error parsing cookie consent:", error);
+            const storedConsent = localStorage.getItem(COOKIE_CONSENT_KEY);
+
+            if (storedConsent) {
+                try {
+                    const parsedConsent: CookieConsentState = JSON.parse(storedConsent);
+                    applyConsent(parsedConsent);
+                    setConsentSettings({
+                        necessary: parsedConsent.necessary,
+                        analytics: parsedConsent.analytics,
+                        marketing: parsedConsent.marketing,
+                        preferences: parsedConsent.preferences,
+                    });
+                } catch (error: unknown) {
+                    console.error("Error parsing cookie consent:", error);
+                    setShowBanner(true);
+                }
+            } else {
                 setShowBanner(true);
             }
-        } else {
-            setShowBanner(true);
-        }
+        }, 2000);
+
+        return () => {
+            if (initTimeoutRef.current) {
+                window.clearTimeout(initTimeoutRef.current);
+            }
+            window.removeEventListener("CookiebotOnConsentReady", handleCookiebotEvent);
+            window.removeEventListener("CookiebotOnAccept", handleCookiebotEvent);
+            window.removeEventListener("CookiebotOnDecline", handleCookiebotEvent);
+        };
     }, []);
 
     const applyConsent = (consent: CookieConsentState) => {
