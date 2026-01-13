@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Link2, Target, BarChart3, ArrowRight, CheckCircle2, Sparkles } from "lucide-react";
+import { Link2, Target, ArrowRight, CheckCircle2, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AnimatedSection, StaggerContainer, StaggerItem } from "@/components/ui/animated-section";
 import { useTranslation } from "react-i18next";

@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { AnimatedSection } from "@/components/ui/animated-section";
+import { OptimizedImage } from "@/components/ui/optimized-image";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import {
@@ -230,10 +231,9 @@ export default function About() {
                                 >
                                     <div className="flex flex-col sm:flex-row gap-6">
                                         <Link to={`/authors/${author.id}`} className="inline-flex">
-                                            <img
+                                            <OptimizedImage
                                                 src={author.image}
                                                 alt={author.name}
-                                                loading="lazy"
                                                 className="w-24 h-24 rounded-2xl object-cover border border-border"
                                             />
                                         </Link>

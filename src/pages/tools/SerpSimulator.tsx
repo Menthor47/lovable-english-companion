@@ -3,9 +3,10 @@ import { useTranslation } from "react-i18next";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { AnimatedSection } from "@/components/ui/animated-section";
-import { Button } from "@/components/ui/button";
+
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { OptimizedImage } from "@/components/ui/optimized-image";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Search, Monitor, Smartphone, MoreVertical } from "lucide-react";
@@ -146,13 +147,13 @@ export default function SerpSimulator() {
                                                 {/* URL Row */}
                                                 <div className="flex items-center gap-2 mb-1 group cursor-pointer">
                                                     <div className="w-7 h-7 bg-gray-100 rounded-full flex items-center justify-center border border-gray-200">
-                                                        <img
+                                                        <OptimizedImage
                                                             src={`https://www.google.com/s2/favicons?domain=${url.startsWith('http') ? new URL(url).hostname : url}`}
                                                             alt="Favicon"
                                                             className="w-4 h-4 opacity-60"
-                                                            onError={(e) => {
+                                                            onError={(e: any) => {
                                                                 // Fallback to generic icon if favicon fails
-                                                                (e.target as HTMLImageElement).src = "https://www.google.com/s2/favicons?domain=google.com";
+                                                                e.target.src = "https://www.google.com/s2/favicons?domain=google.com";
                                                             }}
                                                         />
                                                     </div>

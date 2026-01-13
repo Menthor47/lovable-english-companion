@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { AnimatedSection, StaggerContainer, StaggerItem, ScaleOnHover } from "@/components/ui/animated-section";
+import { OptimizedImage } from "@/components/ui/optimized-image";
 import { useMemo } from "react";
 import { blogPosts } from "@/data/blogPosts";
 
@@ -48,10 +49,9 @@ export function BlogPreview() {
                   <article className="group h-full flex flex-col rounded-2xl bg-card/60 backdrop-blur-sm border border-border hover:border-primary/50 overflow-hidden transition-all duration-300">
                     {/* Image */}
                     <div className="relative h-48 overflow-hidden">
-                      <img
+                      <OptimizedImage
                         src={post.image}
                         alt={post.title}
-                        loading="lazy"
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent" />

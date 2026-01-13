@@ -4,6 +4,7 @@ import { ArrowLeft, Share2 } from "lucide-react";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { OptimizedImage } from "@/components/ui/optimized-image";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { terms } from "@/data/glossary";
@@ -89,7 +90,7 @@ export default function GlossaryDetail() {
 
                         {term.image && (
                             <div className="mb-12 rounded-2xl overflow-hidden border border-border/50 shadow-2xl">
-                                <img
+                                <OptimizedImage
                                     src={term.image}
                                     alt={`Illustration for ${term.term}`}
                                     className="w-full h-auto object-cover aspect-video"

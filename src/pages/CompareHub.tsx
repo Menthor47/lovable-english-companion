@@ -1,10 +1,11 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { AnimatedSection } from "@/components/ui/animated-section";
+import { OptimizedImage } from "@/components/ui/optimized-image";
 import { Button } from "@/components/ui/button";
 import { comparisons } from "@/data/comparisons";
 import { useMemo } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ArrowRight, CheckCircle2, Scale, ShieldCheck, Sparkles, type LucideIcon } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 import { TrustSignals } from "@/components/sections/TrustSignals";
@@ -23,7 +24,6 @@ const VALUE_PROP_ICONS: Record<string, LucideIcon> = {
 
 export default function CompareHub() {
     const { t } = useTranslation();
-    const navigate = useNavigate();
     const pageUrl = getAbsoluteUrl("/compare");
 
     const translatedValueProps = useMemo(() => {
@@ -150,7 +150,7 @@ export default function CompareHub() {
                                     <div className="h-full bg-card border border-border/50 rounded-2xl overflow-hidden hover:border-primary/50 transition-all hover:shadow-lg hover:shadow-primary/5">
                                         {comp.image && (
                                             <div className="aspect-video w-full overflow-hidden">
-                                                <img
+                                                <OptimizedImage
                                                     src={comp.image}
                                                     alt={`${comp.toolA.name} vs ${comp.toolB.name}`}
                                                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"

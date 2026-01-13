@@ -152,7 +152,7 @@ export default function CompareDetail() {
 
                                 <div className="space-y-4">
                                     <h4 className="font-bold text-sm uppercase tracking-wide">{t("comparisons.detail.pros")}</h4>
-                                    {translatedComp.toolA.pros.map((pro, i) => (
+                                    {translatedComp.toolA.pros.map((pro: string, i: number) => (
                                         <div key={i} className="flex items-start gap-2 text-sm text-foreground/80">
                                             <Check className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
                                             {pro}
@@ -160,7 +160,7 @@ export default function CompareDetail() {
                                     ))}
 
                                     <h4 className="font-bold text-sm uppercase tracking-wide mt-6">{t("comparisons.detail.cons")}</h4>
-                                    {translatedComp.toolA.cons.map((con, i) => (
+                                    {translatedComp.toolA.cons.map((con: string, i: number) => (
                                         <div key={i} className="flex items-start gap-2 text-sm text-foreground/80">
                                             <X className="w-4 h-4 text-red-500 mt-0.5 flex-shrink-0" />
                                             {con}
@@ -180,7 +180,7 @@ export default function CompareDetail() {
 
                                 <div className="space-y-4">
                                     <h4 className="font-bold text-sm uppercase tracking-wide">{t("comparisons.detail.pros")}</h4>
-                                    {translatedComp.toolB.pros.map((pro, i) => (
+                                    {translatedComp.toolB.pros.map((pro: string, i: number) => (
                                         <div key={i} className="flex items-start gap-2 text-sm text-foreground/80">
                                             <Check className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
                                             {pro}
@@ -188,7 +188,7 @@ export default function CompareDetail() {
                                     ))}
 
                                     <h4 className="font-bold text-sm uppercase tracking-wide mt-6">{t("comparisons.detail.cons")}</h4>
-                                    {translatedComp.toolB.cons.map((con, i) => (
+                                    {translatedComp.toolB.cons.map((con: string, i: number) => (
                                         <div key={i} className="flex items-start gap-2 text-sm text-foreground/80">
                                             <X className="w-4 h-4 text-red-500 mt-0.5 flex-shrink-0" />
                                             {con}

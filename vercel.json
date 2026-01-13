@@ -1,6 +1,19 @@
 {
     "buildCommand": "npm run build",
     "outputDirectory": "dist/static",
+    "redirects": [
+        {
+            "source": "/:path*",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "www.agseo.pro"
+                }
+            ],
+            "destination": "https://agseo.pro/:path*",
+            "permanent": true
+        }
+    ],
     "headers": [
         {
             "source": "/(.*)",

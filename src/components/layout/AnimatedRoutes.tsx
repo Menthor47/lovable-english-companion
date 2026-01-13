@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { useScrollToAnchor } from "@/hooks/useScrollToAnchor";
 
@@ -43,6 +43,11 @@ export function AnimatedRoutes() {
             <Routes location={location} key={location.pathname}>
                 <Route path="/" element={<Index />} />
                 <Route path="/404" element={<NotFound />} />
+
+                {/* Legacy URL aliases */}
+                <Route path="/privacy-policy" element={<Navigate to="/privacy" replace />} />
+                <Route path="/privacy-policy/" element={<Navigate to="/privacy" replace />} />
+
                 <Route path="/privacy" element={<Privacy />} />
                 <Route path="/terms" element={<Terms />} />
                 <Route path="/tools" element={<Tools />} />

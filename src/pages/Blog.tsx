@@ -3,6 +3,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Calendar, User, ArrowRight, Clock } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { AnimatedSection, StaggerContainer, StaggerItem, ScaleOnHover } from "@/components/ui/animated-section";
+import { OptimizedImage } from "@/components/ui/optimized-image";
 import { Newsletter } from "@/components/sections/Newsletter";
 import { blogPosts } from "@/data/blogPosts";
 import { getAuthorByName } from "@/data/authors";
@@ -66,10 +67,9 @@ const Blog = () => {
                                         <article className="group h-full flex flex-col rounded-2xl bg-card/60 backdrop-blur-sm border border-border hover:border-primary/50 overflow-hidden transition-all duration-300 shadow-sm hover:shadow-md">
                                             {/* Image */}
                                             <Link to={`/blog/${post.slug}`} className="relative h-56 overflow-hidden block">
-                                                <img
+                                                <OptimizedImage
                                                     src={post.image}
                                                     alt={post.title}
-                                                    loading="lazy"
                                                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                                                 />
                                                 <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent opacity-60" />

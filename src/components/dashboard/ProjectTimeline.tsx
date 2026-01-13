@@ -1,4 +1,4 @@
-import { CheckCircle2, Circle } from "lucide-react";
+
 
 const steps = [
     { title: "Technical Audit", date: "Sep 01", status: "completed", desc: "Found 12 critical errors" },
@@ -16,8 +16,8 @@ export function ProjectTimeline() {
                 {steps.map((step, index) => (
                     <div key={index} className="relative pl-8">
                         <div className={`absolute -left-[5px] top-1 w-2.5 h-2.5 rounded-full border ${step.status === "completed" ? "bg-primary border-primary" :
-                                step.status === "active" ? "bg-background border-primary animate-pulse" :
-                                    "bg-background border-border"
+                            step.status === "active" ? "bg-background border-primary animate-pulse" :
+                                "bg-background border-border"
                             }`} />
 
                         <div className="flex flex-col">

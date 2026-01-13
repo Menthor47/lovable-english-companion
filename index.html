@@ -35,6 +35,87 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-KDH93VS4');</script>
   <!-- End Google Tag Manager -->
 
+  <!-- Silktide Cookie Banner -->
+  <link rel="stylesheet" href="/css/silktide-consent-manager.css">
+  <script src="/js/silktide-consent-manager.js"></script>
+  <script>
+    silktideCookieBannerManager.updateCookieBannerConfig({
+      background: {
+        showBackground: true
+      },
+      cookieIcon: {
+        position: "bottomLeft"
+      },
+      cookieTypes: [
+        {
+          id: "necessary",
+          name: "Necessary",
+          description: "<p>These cookies are necessary for the website to function properly and cannot be switched off.</p>",
+          required: true,
+          onAccept: function() { }
+        },
+        {
+          id: "analytics",
+          name: "Analytics",
+          description: "<p>These cookies help us improve the site by tracking which pages are most popular.</p>",
+          required: false,
+          onAccept: function() {
+            gtag('consent', 'update', {
+              'analytics_storage': 'granted',
+              'ad_user_data': 'granted',
+              'ad_personalization': 'granted'
+            });
+            dataLayer.push({ 'event': 'consent_accepted_analytics' });
+          },
+          onReject: function() {
+            gtag('consent', 'update', {
+              'analytics_storage': 'denied',
+              'ad_user_data': 'denied',
+              'ad_personalization': 'denied'
+            });
+          }
+        },
+        {
+          id: "advertising",
+          name: "Advertising",
+          description: "<p>These cookies provide extra features and personalization to improve your experience.</p>",
+          required: false,
+          onAccept: function() {
+            gtag('consent', 'update', {
+              'ad_storage': 'granted',
+              'ad_user_data': 'granted',
+              'ad_personalization': 'granted'
+            });
+            dataLayer.push({ 'event': 'consent_accepted_advertising' });
+          },
+          onReject: function() {
+            gtag('consent', 'update', {
+              'ad_storage': 'denied',
+              'ad_user_data': 'denied',
+              'ad_personalization': 'denied'
+            });
+          }
+        }
+      ],
+      text: {
+        banner: {
+          description: "<p>We use cookies on our site to enhance your user experience and analyze our traffic. <a href=\"/privacy\" target=\"_blank\">Privacy Policy.</a></p>",
+          acceptAllButtonText: "Accept all cookies",
+          rejectNonEssentialButtonText: "Deny",
+          preferencesButtonText: "Preferences"
+        },
+        preferences: {
+          title: "Customize your cookie preferences",
+          description: "<p>You can choose not to allow some types of cookies.</p>",
+          creditLinkText: "Cookie preferences"
+        }
+      },
+      position: {
+        banner: "center"
+      }
+    });
+  </script>
+
   <!-- Performance Optimization -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

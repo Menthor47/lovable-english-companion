@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { CheckCircle2, Users } from "lucide-react";
 import { AnimatedSection } from "@/components/ui/animated-section";
+import { OptimizedImage } from "@/components/ui/optimized-image";
 import aiRobot from "@/assets/ai-robot.png";
 
 const advantages = [
@@ -77,10 +78,9 @@ export function AIAdvantage() {
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
             >
-              <img
+              <OptimizedImage
                 src={aiRobot}
                 alt="AI Robot analyzing SEO dashboard"
-                loading="lazy"
                 className="w-full h-auto object-cover rounded-2xl"
               />
               {/* Glow effect */}

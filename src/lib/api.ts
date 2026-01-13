@@ -5,6 +5,7 @@ interface ContactSubmission {
     website?: string;
     phone?: string;
     message?: string;
+    source?: string;
     // Honeypot field (should be empty)
     website2?: string;
 }

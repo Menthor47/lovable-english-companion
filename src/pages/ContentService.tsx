@@ -2,7 +2,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import { Button } from "@/components/ui/button";
-import { CheckCircle2, Zap, BarChart, Database, FileText, Bot } from "lucide-react";
+import { CheckCircle2, Zap, Database, FileText, Bot } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { SITE_OG_IMAGE_URL, getAbsoluteUrl } from "@/lib/siteMetadata";

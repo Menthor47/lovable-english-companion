@@ -181,10 +181,10 @@ const BlogPost = () => {
 
             <main className="flex-grow pt-24 pb-20">
                 <div className="relative h-[40vh] min-h-[400px] w-full overflow-hidden">
-                    <img
+                    <OptimizedImage
                         src={post.image}
                         alt={post.title}
-                        loading="lazy"
+                        priority
                         className="w-full h-full object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent" />
@@ -271,7 +271,7 @@ const BlogPost = () => {
                             <div className="mt-16 p-8 rounded-2xl bg-primary/5 border border-primary/10">
                                 <div className="flex flex-col md:flex-row gap-8 items-start">
                                     <div className="w-20 h-20 rounded-full overflow-hidden shrink-0 border-2 border-primary/20">
-                                        <img src={author.image} alt={author.name} className="w-full h-full object-cover" />
+                                        <OptimizedImage src={author.image} alt={author.name} className="w-full h-full object-cover" />
                                     </div>
                                     <div className="flex-1">
                                         <h3 className="text-xl font-bold mb-2">{author.name}</h3>

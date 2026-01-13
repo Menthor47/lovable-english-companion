@@ -1,4 +1,4 @@
-import { MapPin, Globe, ShoppingCart, ArrowRight, CheckCircle2, Bot, Sparkles, Search, Megaphone, FileText, Link as LinkIcon, BarChart3, Target, Lightbulb } from "lucide-react";
+import { ArrowRight, CheckCircle2, Bot, Sparkles, Search, Megaphone, FileText, Link as LinkIcon, BarChart3, Target, Lightbulb } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { GlassCard } from "@/components/ui/glass-card";

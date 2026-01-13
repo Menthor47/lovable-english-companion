@@ -55,12 +55,14 @@ function getAbsoluteUrl(baseUrl: string, routePath: string): string {
 }
 
 function renderUrlEntries(baseUrl: string, entries: SitemapEntry[]): string[] {
+  const lastmod = new Date().toISOString().split('T')[0];
   return entries.flatMap((entry) => {
     const url = getAbsoluteUrl(baseUrl, entry.path);
     const priority = entry.priority.toFixed(1);
     const lines: string[] = [
       "  <url>",
       `    <loc>${url}</loc>`,
+      `    <lastmod>${lastmod}</lastmod>`,
       `    <changefreq>${entry.changefreq}</changefreq>`,
       `    <priority>${priority}</priority>`,
       "  </url>",

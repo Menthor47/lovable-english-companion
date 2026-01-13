@@ -1,4 +1,4 @@
-import { Shield, Target, Award, Zap, CheckCircle } from "lucide-react";
+import { Shield, Target, Award, Zap } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { AnimatedSection, StaggerContainer, StaggerItem, ScaleOnHover } from "@/components/ui/animated-section";
 import { motion } from "framer-motion";

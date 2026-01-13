@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { ArrowLeft, RefreshCw, Copy, Check, Trash2, List, MapPin, Calendar, X } from "lucide-react";
+import { ArrowLeft, Copy, List, MapPin, Calendar, X } from "lucide-react";
 import { toast } from "sonner";
 
 export default function KeywordMixer() {

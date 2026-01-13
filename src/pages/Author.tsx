@@ -5,6 +5,7 @@ import { CheckCircle2 } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { AnimatedSection } from "@/components/ui/animated-section";
+import { OptimizedImage } from "@/components/ui/optimized-image";
 import { Button } from "@/components/ui/button";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { getAuthorById } from "@/data/authors";
@@ -107,10 +108,9 @@ export default function Author() {
                     <AnimatedSection className="max-w-4xl mx-auto">
                         <div className="bg-card/60 backdrop-blur-sm border border-border rounded-3xl p-8 md:p-12">
                             <div className="flex flex-col md:flex-row gap-8 items-start">
-                                <img
+                                <OptimizedImage
                                     src={author.image}
                                     alt={author.name}
-                                    loading="lazy"
                                     className="w-28 h-28 rounded-2xl object-cover border border-border"
                                 />
 

@@ -6,8 +6,7 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Check, Globe } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Check } from "lucide-react";
 
 export const LanguageSwitcher = () => {
     const { i18n } = useTranslation();

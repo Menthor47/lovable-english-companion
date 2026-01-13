@@ -25,7 +25,7 @@ export function Testimonials() {
         </AnimatedSection>
 
         <StaggerContainer className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto" staggerDelay={0.1}>
-          {testimonialKeys.map((key, index) => (
+          {testimonialKeys.map((key) => (
             <StaggerItem key={key}>
               <div className="h-full bg-card border border-border/50 p-8 rounded-3xl relative hover:border-primary/30 transition-colors group">
                 <Quote className="absolute top-8 right-8 w-12 h-12 text-primary/10 group-hover:text-primary/20 transition-colors" />
