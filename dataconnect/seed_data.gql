@@ -1,0 +1,80 @@
+mutation CreateSeedData @transaction @auth(level: USER, insecureReason: "This operation is safe to expose to all logged in users.") {
+  user_insertMany(data: [
+    {
+      id: "550e8400-e29b-41d4-a716-446655440000",
+      displayName: "demouser1",
+      email: "demouser1@example.com",
+      createdAt: "2024-01-01T00:00:00Z"
+    },
+    {
+      id: "550e8400-e29b-41d4-a716-446655440001",
+      displayName: "demouser2",
+      email: "demouser2@example.com",
+      createdAt: "2024-01-01T00:00:00Z"
+    }
+  ])
+  project_insertMany(data: [
+    {
+      id: "650e8400-e29b-41d4-a716-446655440000",
+      userId: "550e8400-e29b-41d4-a716-446655440000",
+      name: "Project 1",
+      websiteUrl: "http://example.com/project1",
+      createdAt: "2024-01-02T00:00:00Z"
+    },
+    {
+      id: "650e8400-e29b-41d4-a716-446655440001",
+      userId: "550e8400-e29b-41d4-a716-446655440001",
+      name: "Project 2",
+      websiteUrl: "http://example.com/project2",
+      createdAt: "2024-01-02T00:00:00Z"
+    }
+  ])
+  task_insertMany(data: [
+    {
+      id: "750e8400-e29b-41d4-a716-446655440000",
+      projectId: "650e8400-e29b-41d4-a716-446655440000",
+      title: "Task 1 for Project 1",
+      status: "open",
+      dueDate: "2024-02-01",
+      createdAt: "2024-01-03T00:00:00Z"
+    },
+    {
+      id: "750e8400-e29b-41d4-a716-446655440001",
+      projectId: "650e8400-e29b-41d4-a716-446655440001",
+      title: "Task 2 for Project 2",
+      status: "in progress",
+      dueDate: "2024-02-01",
+      createdAt: "2024-01-03T00:00:00Z"
+    }
+  ])
+  competitor_insertMany(data: [
+    {
+      id: "850e8400-e29b-41d4-a716-446655440000",
+      projectId: "650e8400-e29b-41d4-a716-446655440000",
+      name: "Competitor 1 for Project 1",
+      websiteUrl: "http://example.com/competitor1",
+      createdAt: "2024-01-04T00:00:00Z"
+    },
+    {
+      id: "850e8400-e29b-41d4-a716-446655440001",
+      projectId: "650e8400-e29b-41d4-a716-446655440001",
+      name: "Competitor 2 for Project 2",
+      websiteUrl: "http://example.com/competitor2",
+      createdAt: "2024-01-04T00:00:00Z"
+    }
+  ])
+  keyword_insertMany(data: [
+    {
+      id: "950e8400-e29b-41d4-a716-446655440000",
+      projectId: "650e8400-e29b-41d4-a716-446655440000",
+      keywordText: "Keyword 1 for Project 1",
+      createdAt: "2024-01-05T00:00:00Z"
+    },
+    {
+      id: "950e8400-e29b-41d4-a716-446655440001",
+      projectId: "650e8400-e29b-41d4-a716-446655440001",
+      keywordText: "Keyword 2 for Project 2",
+      createdAt: "2024-01-05T00:00:00Z"
+    }
+  ])
+}

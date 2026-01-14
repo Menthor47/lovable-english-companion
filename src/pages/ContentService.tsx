@@ -13,7 +13,7 @@ export default function ContentService() {
     return (
         <div className="min-h-screen bg-background">
             <Helmet>
-                <title>AI Content & Programmatic SEO | AGSEO</title>
+                <title>AI Content & Programmatic SEO scale | AGSEO</title>
                 <meta name="description" content="Scale your content 10x faster with AI-powered programmatic SEO. Automated gap analysis, topic clustering, and human-verified content at scale." />
                 <link rel="canonical" href={pageUrl} />
                 <meta property="og:url" content={pageUrl} />
@@ -21,6 +21,21 @@ export default function ContentService() {
                 <meta property="og:description" content="Scale your content 10x faster with AI-powered programmatic SEO. Automated gap analysis, topic clustering, and human-verified content at scale." />
                 <meta property="og:image" content={SITE_OG_IMAGE_URL} />
                 <meta property="og:type" content="website" />
+                <script type="application/ld+json">
+                    {JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "Service",
+                        "name": "AI Content & Programmatic SEO",
+                        "description": "Scale your content 10x faster with AI-powered programmatic SEO. Automated gap analysis, topic clustering, and human-verified content at scale.",
+                        "provider": {
+                            "@type": "Organization",
+                            "name": "AGSEO",
+                            "url": "https://agseo.pro"
+                        },
+                        "serviceType": "SEO Content Strategy",
+                        "areaServed": "Worldwide"
+                    })}
+                </script>
             </Helmet>
             <Header />
             <main className="pt-24 pb-16">

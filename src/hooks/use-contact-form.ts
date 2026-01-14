@@ -48,7 +48,11 @@ const contactSchema = z.object({
 
 export type ContactFormData = z.infer<typeof contactSchema>;
 
-export function useContactForm() {
+export interface ContactFormOptions {
+    source?: "contact" | "audit";
+}
+
+export function useContactForm(options: ContactFormOptions = {}) {
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const { toast } = useToast();
@@ -67,17 +71,24 @@ export function useContactForm() {
         setSuccess(false);
 
         try {
-            await api.contact.submit({
+            const result = await api.contact.submit({
                 email: data.email,
                 phone: data.phone || undefined,
                 website: data.website || undefined,
-                source: "audit",
+                source: options.source || "contact",
                 website2: data.website2 || undefined,
             });
+
+            if (!result.success) {
+                throw new Error(result.message);
+            }
+
             setSuccess(true);
             toast({
-                title: "Audit Request Sent!",
-                description: "We'll analyze your site and get back to you soon.",
+                title: options.source === "audit" ? "Audit Request Sent!" : "Message Sent!",
+                description: options.source === "audit"
+                    ? "We'll analyze your site and get back to you soon."
+                    : "Thanks for reaching out! We'll get back to you shortly.",
             });
             reset();
             return { success: true };

@@ -7,19 +7,34 @@ import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { useState, useEffect } from "react";
 import { DollarSign, TrendingUp, Users, ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
+import { Share2 } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { SITE_OG_IMAGE_URL, getAbsoluteUrl } from "@/lib/siteMetadata";
 
 export default function ROICalculator() {
     const { t } = useTranslation();
-    const [traffic, setTraffic] = useState([5000]);
-    const [conversionRate, setConversionRate] = useState([2]);
-    const [orderValue, setOrderValue] = useState([150]);
+    const { toast } = useToast();
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    // Initialize from URL or defaults
+    const [traffic, setTraffic] = useState([parseInt(searchParams.get("traffic") || "5000")]);
+    const [conversionRate, setConversionRate] = useState([parseFloat(searchParams.get("conv") || "2")]);
+    const [orderValue, setOrderValue] = useState([parseInt(searchParams.get("aov") || "150")]);
 
     const [currentRevenue, setCurrentRevenue] = useState(0);
     const [projectedRevenue, setProjectedRevenue] = useState(0);
     const [increase, setIncrease] = useState(0);
+
+    // Sync URL with state
+    useEffect(() => {
+        const params = new URLSearchParams(searchParams);
+        params.set("traffic", traffic[0].toString());
+        params.set("conv", conversionRate[0].toString());
+        params.set("aov", orderValue[0].toString());
+        setSearchParams(params, { replace: true });
+    }, [traffic, conversionRate, orderValue, setSearchParams, searchParams]);
 
     useEffect(() => {
         // Current Monthly Revenue = Traffic * (Conv Rate / 100) * Order Value
@@ -199,11 +214,27 @@ export default function ROICalculator() {
                                 </div>
 
                                 <div className="space-y-4">
-                                    <Button variant="hero" size="xl" className="w-full" asChild>
-                                        <Link to="/#contact">
-                                            {t("roiCalculator.results.cta")} <ArrowRight className="ml-2 w-5 h-5" />
-                                        </Link>
-                                    </Button>
+                                    <div className="flex flex-col sm:flex-row gap-3">
+                                        <Button variant="hero" size="xl" className="flex-1" asChild>
+                                            <Link to="/#contact">
+                                                {t("roiCalculator.results.cta")} <ArrowRight className="ml-2 w-5 h-5" />
+                                            </Link>
+                                        </Button>
+                                        <Button
+                                            variant="outline"
+                                            size="xl"
+                                            onClick={() => {
+                                                navigator.clipboard.writeText(window.location.href);
+                                                toast({
+                                                    title: t("blog.share.title") || "Link copied!",
+                                                    description: t("blog.share.description") || "Calculator state saved in URL.",
+                                                });
+                                            }}
+                                            className="sm:w-auto"
+                                        >
+                                            <Share2 className="w-5 h-5" />
+                                        </Button>
+                                    </div>
                                     <p className="text-xs text-center text-muted-foreground">
                                         {t("roiCalculator.results.disclaimer")}
                                     </p>

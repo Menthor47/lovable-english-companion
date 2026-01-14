@@ -1,0 +1,35 @@
+mutation CreateDemoUser @auth(level: PUBLIC, insecureReason: "This mutation is for demo purposes and does not require authentication") {
+  user_insert(data: {
+    id: "550e8400-e29b-41d4-a716-446655440000",
+    displayName: "demouser1",
+    email: "demo1@example.com",
+    createdAt: "2024-04-02T12:00:00Z"
+  })
+}
+
+query ListProjectsForCurrentUser @auth(level: USER) {
+  projects(where: {userId: {eq_expr: "auth.uid"}}) {
+    id
+    name
+    description
+  }
+}
+
+mutation CreateTask($projectId: UUID!, $title: String!, $dueDate: Date!, $status: String!) @auth(level: USER) {
+  task_insert(data: {
+    projectId: $projectId,
+    title: $title,
+    dueDate: $dueDate,
+    status: $status,
+    createdAt_expr: "request.time"
+  })
+}
+
+query ListCompetitors @auth(level: PUBLIC, insecureReason: "This query is safe to expose to the public") {
+  competitors {
+    id
+    name
+    description
+    websiteUrl
+  }
+}

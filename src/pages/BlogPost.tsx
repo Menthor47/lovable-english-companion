@@ -62,6 +62,19 @@ const BlogPost = () => {
         };
     }, [rawAuthor, t]);
 
+    const relatedPosts = useMemo(() => {
+        if (!post) return [];
+        return blogPosts
+            .filter(p => p.slug !== post.slug)
+            .slice(0, 3)
+            .map(p => ({
+                ...p,
+                title: t(`blog.posts.${p.slug}.title`),
+                excerpt: t(`blog.posts.${p.slug}.excerpt`),
+                category: t(`blog.posts.${p.slug}.category`),
+            }));
+    }, [post, t]);
+
     if (!post) {
         return <Navigate to="/blog" replace />;
     }
@@ -140,7 +153,7 @@ const BlogPost = () => {
                 title: t("blog.share.title"),
                 description: t("blog.share.description"),
             });
-        } catch (err) {
+        } catch (err: unknown) {
             toast({
                 title: t("blog.share.failed"),
                 description: t("blog.share.failedDesc"),
@@ -148,18 +161,6 @@ const BlogPost = () => {
             });
         }
     };
-
-    const relatedPosts = useMemo(() => {
-        return blogPosts
-            .filter(p => p.slug !== post.slug)
-            .slice(0, 3)
-            .map(p => ({
-                ...p,
-                title: t(`blog.posts.${p.slug}.title`),
-                excerpt: t(`blog.posts.${p.slug}.excerpt`),
-                category: t(`blog.posts.${p.slug}.category`),
-            }));
-    }, [post.slug, t]);
 
     return (
         <div ref={topRef} className="min-h-screen bg-background flex flex-col">

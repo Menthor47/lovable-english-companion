@@ -5,6 +5,9 @@ import { Input } from "@/components/ui/input";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import { Mail, CheckCircle2, Loader2, AlertCircle, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useAnalytics } from "@/hooks/useAnalytics";
+import { db } from "@/lib/firebase";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 interface NewsletterProps {
     className?: string;
@@ -13,7 +16,9 @@ interface NewsletterProps {
 
 export function Newsletter({ className = "", variant = "card" }: NewsletterProps) {
     const { t } = useTranslation();
+    const { trackFormSubmit } = useAnalytics();
     const [email, setEmail] = useState("");
+    const [honeypot, setHoneypot] = useState("");
     const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
     const [message, setMessage] = useState("");
 
@@ -26,48 +31,43 @@ export function Newsletter({ className = "", variant = "card" }: NewsletterProps
             return;
         }
 
+        // Honeypot check
+        if (honeypot) {
+            console.warn("[AGSEO] Bot submission detected.");
+            setStatus("success"); // Silently fail for the bot
+            setMessage(t("newsletter.success"));
+            setEmail("");
+            setHoneypot("");
+            return;
+        }
+
         setStatus("loading");
 
         try {
-            const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-            const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+            const isConfigured = !!import.meta.env.VITE_FIREBASE_API_KEY;
 
-            if (!supabaseUrl || !supabaseAnonKey) {
-                console.warn("[AGSEO] Supabase not configured. Demo mode.");
-                await new Promise(resolve => setTimeout(resolve, 1000));
+            if (!db || !isConfigured) {
+                console.warn("[AGSEO] Firebase not configured. Demo mode.");
+                await new Promise(resolve => setTimeout(resolve, 1500));
                 setStatus("success");
                 setMessage(t("newsletter.success"));
+                trackFormSubmit("newsletter_form");
                 setEmail("");
                 return;
             }
 
-            const response = await fetch(`${supabaseUrl}/functions/v1/contact`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${supabaseAnonKey}`,
-                    'apikey': supabaseAnonKey
-                },
-                body: JSON.stringify({
-                    email,
-                    source: 'newsletter'
-                })
+            // We skip the client-side duplicate check to avoid needing public read permissions (privacy risk).
+            // Cloud functions can handle de-duplication if needed, or we just accept the submission.
+
+            await addDoc(collection(db, "newsletter_signups"), {
+                email,
+                timestamp: serverTimestamp(),
+                source: 'newsletter'
             });
-
-            if (!response.ok) {
-                const errorData = await response.json().catch(() => ({}));
-                const serverError = errorData.error || "";
-
-                // Handle already subscribed (409 Conflict)
-                if (response.status === 409 || serverError.toLowerCase().includes("duplicate key")) {
-                    throw new Error("ALREADY_SUBSCRIBED");
-                }
-
-                throw new Error(serverError || `HTTP error! status: ${response.status}`);
-            }
 
             setStatus("success");
             setMessage(t("newsletter.success"));
+            trackFormSubmit("newsletter_form");
             setEmail("");
         } catch (error: unknown) {
             setStatus("error");
@@ -87,6 +87,15 @@ export function Newsletter({ className = "", variant = "card" }: NewsletterProps
         return (
             <form onSubmit={handleSubmit} className={`flex flex-col gap-2 ${className}`}>
                 <div className="flex gap-2">
+                    <input
+                        type="text"
+                        name="website_url"
+                        style={{ display: 'none' }}
+                        tabIndex={-1}
+                        autoComplete="off"
+                        value={honeypot}
+                        onChange={(e) => setHoneypot(e.target.value)}
+                    />
                     <Input
                         type="email"
                         placeholder={t("newsletter.placeholder")}
@@ -149,6 +158,15 @@ export function Newsletter({ className = "", variant = "card" }: NewsletterProps
                         <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto relative group">
                             <div className="relative flex-1">
                                 <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground group-focus-within:text-primary transition-colors" />
+                                <input
+                                    type="text"
+                                    name="website_url"
+                                    style={{ display: 'none' }}
+                                    tabIndex={-1}
+                                    autoComplete="off"
+                                    value={honeypot}
+                                    onChange={(e) => setHoneypot(e.target.value)}
+                                />
                                 <Input
                                     type="email"
                                     placeholder={t("newsletter.placeholder")}

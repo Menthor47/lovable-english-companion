@@ -68,13 +68,17 @@ export default function Audit() {
 
         try {
             const phone = formData.phone.trim();
-            await api.contact.submit({
+            const result = await api.contact.submit({
                 email: formData.email,
                 phone: phone.length ? phone : undefined,
                 website: formData.url,
                 source: "audit",
                 website2: formData.website2 || undefined,
             });
+
+            if (!result.success) {
+                throw new Error(result.message);
+            }
         } catch (error) {
             console.error("Audit submission failed:", error);
             toast({

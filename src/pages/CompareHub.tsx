@@ -27,7 +27,11 @@ export default function CompareHub() {
     const pageUrl = getAbsoluteUrl("/compare");
 
     const translatedValueProps = useMemo(() => {
-        const props = t("comparisons.valueProps", { returnObjects: true }) as any[];
+        const props = t("comparisons.valueProps", { returnObjects: true }) as Array<{
+            title: string;
+            description: string;
+            bullets: string[];
+        }>;
         return props.map(prop => ({
             ...prop,
             icon: VALUE_PROP_ICONS[prop.title] || CheckCircle2
@@ -35,7 +39,10 @@ export default function CompareHub() {
     }, [t]);
 
     const translatedComparisons = useMemo(() => {
-        const items = t("comparisons.items", { returnObjects: true }) as Record<string, any>;
+        const items = t("comparisons.items", { returnObjects: true }) as Record<string, {
+            category?: string;
+            verdict?: { summary?: string };
+        }>;
         return comparisons.map((comp) => {
             const tComp = items[comp.slug];
             if (!tComp) return comp;
@@ -110,7 +117,7 @@ export default function CompareHub() {
                             </p>
 
                             <div className="grid md:grid-cols-3 gap-6">
-                                {translatedValueProps.map((item: any) => {
+                                {translatedValueProps.map((item) => {
                                     const Icon = item.icon;
                                     return (
                                         <div key={item.title} className="rounded-2xl border border-border/50 bg-background/40 p-6">

@@ -20,6 +20,19 @@ import {
 import { TrustSignals } from "@/components/sections/TrustSignals";
 import { useTranslation } from "react-i18next";
 
+interface TranslatedComparison {
+    slug: string;
+    category?: string;
+    description?: string;
+    pros?: string[];
+    cons?: string[];
+    bestFor?: string;
+    article?: string;
+    verdict?: { summary?: string; winner?: 'ToolA' | 'ToolB' | 'Tie' };
+    toolA?: { name?: string; description?: string; pros?: string[]; cons?: string[] };
+    toolB?: { name?: string; description?: string; pros?: string[]; cons?: string[] };
+}
+
 export default function CompareDetail() {
     const { slug } = useParams();
     const { t } = useTranslation();
@@ -27,7 +40,7 @@ export default function CompareDetail() {
 
     const translatedComp = useMemo(() => {
         if (!comp) return null;
-        const items = t("comparisons.items", { returnObjects: true }) as Record<string, any>;
+        const items = t("comparisons.items", { returnObjects: true }) as Record<string, TranslatedComparison>;
         const tComp = items[comp.slug];
         if (!tComp) return comp;
 
@@ -49,11 +62,55 @@ export default function CompareDetail() {
             verdict: {
                 ...comp.verdict,
                 summary: tComp.verdict?.summary || comp.verdict.summary,
-                bestFor: tComp.verdict?.bestFor || comp.verdict.bestFor,
+                winner: tComp.verdict?.winner || comp.verdict.winner,
+                bestFor: tComp.bestFor || comp.verdict.bestFor
             },
             article: tComp.article || comp.article
         };
     }, [t, comp]);
+
+    const winnerDisplay = useMemo(() => {
+        if (!translatedComp) return "";
+        const { winner } = translatedComp.verdict;
+        if (winner === 'Tie') return t("comparisons.detail.tie");
+        const winnerName = winner === 'ToolA' ? translatedComp.toolA.name : translatedComp.toolB.name;
+        return `${winnerName} ${t("comparisons.detail.wins")}`;
+    }, [t, translatedComp]);
+
+    const articleSchema = useMemo(() => {
+        if (!translatedComp) return {};
+        const pageUrlLocal = getAbsoluteUrl(`/compare/${translatedComp.slug}`);
+        return {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            headline: `${translatedComp.toolA.name} vs ${translatedComp.toolB.name} (2025 Review)`,
+            description: `Head-to-head comparison: ${translatedComp.toolA.name} vs ${translatedComp.toolB.name}. See features, pricing, and our expert verdict on which AI tool wins.`,
+            url: pageUrlLocal,
+            mainEntityOfPage: {
+                "@type": "WebPage",
+                "@id": pageUrlLocal
+            },
+            image: getAbsoluteUrl("/og-image.png"),
+            author: {
+                "@type": "Organization",
+                "@id": TEAM_ID,
+                name: "AGSEO Team"
+            },
+            publisher: {
+                "@type": "Organization",
+                "@id": ORGANIZATION_ID,
+                name: SITE_NAME,
+                logo: {
+                    "@type": "ImageObject",
+                    url: SITE_LOGO_URL
+                }
+            },
+            isPartOf: {
+                "@id": WEBSITE_ID
+            },
+            ...(translatedComp.article ? { articleBody: translatedComp.article } : {})
+        };
+    }, [translatedComp]);
 
     if (!translatedComp) {
         return <Navigate to="/404" replace />;
@@ -66,44 +123,6 @@ export default function CompareDetail() {
         { label: t("nav.resources.comparisons") || t("nav.mobile.comparisons") || "Comparisons", href: "/compare" },
         { label: `${translatedComp.toolA.name} vs ${translatedComp.toolB.name}`, href: `/compare/${translatedComp.slug}` }
     ];
-
-    const articleSchema = useMemo(() => ({
-        "@context": "https://schema.org",
-        "@type": "Article",
-        headline: `${translatedComp.toolA.name} vs ${translatedComp.toolB.name} (2025 Review)`,
-        description: `Head-to-head comparison: ${translatedComp.toolA.name} vs ${translatedComp.toolB.name}. See features, pricing, and our expert verdict on which AI tool wins.`,
-        url: pageUrl,
-        mainEntityOfPage: {
-            "@type": "WebPage",
-            "@id": pageUrl
-        },
-        image: getAbsoluteUrl("/og-image.png"),
-        author: {
-            "@type": "Organization",
-            "@id": TEAM_ID,
-            name: "AGSEO Team"
-        },
-        publisher: {
-            "@type": "Organization",
-            "@id": ORGANIZATION_ID,
-            name: SITE_NAME,
-            logo: {
-                "@type": "ImageObject",
-                url: SITE_LOGO_URL
-            }
-        },
-        isPartOf: {
-            "@id": WEBSITE_ID
-        },
-        ...(translatedComp.article ? { articleBody: translatedComp.article } : {})
-    }), [translatedComp, pageUrl]);
-
-    const winnerDisplay = useMemo(() => {
-        const { winner } = translatedComp.verdict;
-        if (winner === 'Tie') return t("comparisons.detail.tie");
-        const winnerName = winner === 'ToolA' ? translatedComp.toolA.name : translatedComp.toolB.name;
-        return `${winnerName} ${t("comparisons.detail.wins")}`;
-    }, [t, translatedComp]);
 
     return (
         <div className="min-h-screen bg-background flex flex-col">

@@ -151,9 +151,9 @@ export default function SerpSimulator() {
                                                             src={`https://www.google.com/s2/favicons?domain=${url.startsWith('http') ? new URL(url).hostname : url}`}
                                                             alt="Favicon"
                                                             className="w-4 h-4 opacity-60"
-                                                            onError={(e: any) => {
-                                                                // Fallback to generic icon if favicon fails
-                                                                e.target.src = "https://www.google.com/s2/favicons?domain=google.com";
+                                                            onError={(e) => {
+                                                                const target = e.target as HTMLImageElement;
+                                                                target.src = "https://www.google.com/s2/favicons?domain=google.com";
                                                             }}
                                                         />
                                                     </div>

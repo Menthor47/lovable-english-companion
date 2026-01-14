@@ -24,36 +24,47 @@ export default function GEO() {
                 <meta property="og:description" content={t("geo.metaDescription")} />
                 <meta property="og:image" content={SITE_OG_IMAGE_URL} />
                 <script type="application/ld+json">
-                    {JSON.stringify({
-                        "@context": "https://schema.org",
-                        "@type": "FAQPage",
-                        "mainEntity": [
-                            {
-                                "@type": "Question",
-                                "name": t("geo.faq.q1"),
-                                "acceptedAnswer": {
-                                    "@type": "Answer",
-                                    "text": t("geo.faq.a1")
+                    {JSON.stringify([
+                        {
+                            "@context": "https://schema.org",
+                            "@type": "FAQPage",
+                            "mainEntity": [
+                                {
+                                    "@type": "Question",
+                                    "name": t("geo.faq.q1"),
+                                    "acceptedAnswer": {
+                                        "@type": "Answer",
+                                        "text": t("geo.faq.a1")
+                                    }
+                                },
+                                {
+                                    "@type": "Question",
+                                    "name": t("geo.faq.q2"),
+                                    "acceptedAnswer": {
+                                        "@type": "Answer",
+                                        "text": t("geo.faq.a2")
+                                    }
+                                },
+                                {
+                                    "@type": "Question",
+                                    "name": t("geo.faq.q3"),
+                                    "acceptedAnswer": {
+                                        "@type": "Answer",
+                                        "text": t("geo.faq.a3")
+                                    }
                                 }
-                            },
-                            {
-                                "@type": "Question",
-                                "name": t("geo.faq.q2"),
-                                "acceptedAnswer": {
-                                    "@type": "Answer",
-                                    "text": t("geo.faq.a2")
-                                }
-                            },
-                            {
-                                "@type": "Question",
-                                "name": t("geo.faq.q3"),
-                                "acceptedAnswer": {
-                                    "@type": "Answer",
-                                    "text": t("geo.faq.a3")
-                                }
+                            ]
+                        },
+                        {
+                            "@context": "https://schema.org",
+                            "@type": "Service",
+                            "name": t("geo.metaTitle"),
+                            "description": t("geo.metaDescription"),
+                            "provider": {
+                                "@id": "https://agseo.pro/#organization"
                             }
-                        ]
-                    })}
+                        }
+                    ])}
                 </script>
             </Helmet>
             <Header />

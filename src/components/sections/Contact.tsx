@@ -11,7 +11,7 @@ import { useAnalytics } from "@/hooks/useAnalytics";
 export function Contact() {
   const { t } = useTranslation();
   const { trackFormSubmit } = useAnalytics();
-  const { register, handleSubmit, errors, isSubmitting, onSubmit, success, error } = useContactForm();
+  const { register, handleSubmit, errors, isSubmitting, onSubmit, success, error } = useContactForm({ source: "contact" });
 
   const onFormSubmit = async (data: ContactFormData) => {
     const result = await onSubmit(data);

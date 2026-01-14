@@ -1,0 +1,26 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Allow public write access to specific collections used by the forms
+    match /newsletter_signups/{document} {
+      allow create: if true;
+      allow read: if false; // Only allow writes, not reads
+    }
+    
+    match /contact_requests/{document} {
+      allow create: if true;
+      allow read: if false;
+    }
+    
+    match /audit_requests/{document} {
+      allow create: if true;
+      allow read: if false;
+    }
+
+    // Default deny ALL other access
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

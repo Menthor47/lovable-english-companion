@@ -65,9 +65,9 @@ export function AnimatedSection({
       animate={controls}
       variants={activeVariants}
       transition={{
-        duration: 0.6,
+        duration: 0.7,
         delay,
-        ease: [0.25, 0.1, 0.25, 1],
+        ease: [0.16, 1, 0.3, 1], // Custom premium ease-out (Quartic)
       }}
       className={className}
     >

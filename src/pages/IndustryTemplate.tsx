@@ -22,7 +22,7 @@ export default function IndustryTemplate() {
     return (
         <div className="min-h-screen bg-background">
             <Helmet>
-                <title>{industry.hero.title} - AGSEO</title>
+                <title>{industry.hero.title} | {industry.name} SEO Agency | AGSEO</title>
                 <meta name="description" content={industry.hero.subtitle} />
                 <link rel="canonical" href={pageUrl} />
                 <meta property="og:url" content={pageUrl} />
@@ -30,6 +30,31 @@ export default function IndustryTemplate() {
                 <meta property="og:description" content={industry.hero.subtitle} />
                 <meta property="og:image" content={SITE_OG_IMAGE_URL} />
                 <meta property="og:type" content="website" />
+                <script type="application/ld+json">
+                    {JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "Service",
+                        "name": industry.hero.title,
+                        "description": industry.hero.subtitle,
+                        "provider": {
+                            "@type": "Organization",
+                            "name": "AGSEO",
+                            "url": "https://agseo.pro"
+                        },
+                        "areaServed": "Worldwide",
+                        "hasOfferCatalog": {
+                            "@type": "OfferCatalog",
+                            "name": `${industry.name} SEO Services`,
+                            "itemListElement": industry.solution.features.map((feature) => ({
+                                "@type": "Offer",
+                                "itemOffered": {
+                                    "@type": "Service",
+                                    "name": feature
+                                }
+                            }))
+                        }
+                    })}
+                </script>
             </Helmet>
 
             <Header />

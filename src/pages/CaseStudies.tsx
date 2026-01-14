@@ -20,7 +20,13 @@ export default function CaseStudies() {
     const pageUrl = getAbsoluteUrl("/case-studies");
 
     const translatedStudies = useMemo(() => {
-        const items = t("caseStudies.items", { returnObjects: true }) as Record<string, any>;
+        const items = t("caseStudies.items", { returnObjects: true }) as Record<string, {
+            category: string;
+            title: string;
+            description: string;
+            stats: Array<{ label: string; value: string }>;
+            content: string[];
+        }>;
         return caseStudies.map(study => {
             const translatedItem = items[study.id];
             if (!translatedItem) return study;
@@ -121,19 +127,20 @@ export default function CaseStudies() {
                                                     {study.description}
                                                 </p>
                                                 <Button
-                                                    variant="link"
-                                                    className="p-0 text-primary h-auto text-lg group-hover:translate-x-2 transition-transform"
+                                                    variant="hero"
+                                                    size="lg"
+                                                    className="group/btn"
                                                     asChild
                                                 >
                                                     <Link to={`/case-studies/${study.id}`}>
-                                                        {t("nav.readMore")} <ArrowRight className="ml-2 w-4 h-4" />
+                                                        {t("nav.readMore")} <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
                                                     </Link>
                                                 </Button>
                                             </div>
 
                                             <div className="lg:col-span-2">
                                                 <div className="grid grid-cols-2 gap-4">
-                                                    {study.stats.map((stat: any, i: number) => (
+                                                    {study.stats.map((stat, i) => (
                                                         <div key={i} className={`bg-background/50 rounded-2xl p-6 text-center border border-border/50 ${i === 2 ? 'col-span-2' : ''}`}>
                                                             <div className="text-3xl font-bold font-heading mb-1 text-foreground">
                                                                 {stat.value}

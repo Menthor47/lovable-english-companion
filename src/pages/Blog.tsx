@@ -1,6 +1,7 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Calendar, User, ArrowRight, Clock } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
 import { AnimatedSection, StaggerContainer, StaggerItem, ScaleOnHover } from "@/components/ui/animated-section";
 import { OptimizedImage } from "@/components/ui/optimized-image";
@@ -127,13 +128,15 @@ const Blog = () => {
                                                             </span>
                                                         )}
                                                     </div>
-                                                    <Link
-                                                        to={`/blog/${post.slug}`}
-                                                        className="flex items-center gap-1 text-sm font-medium text-primary hover:underline"
-                                                    >
-                                                        {t("blog.readArticle")}
-                                                        <ArrowRight className="w-4 h-4" />
-                                                    </Link>
+                                                    <Button variant="ghost" size="sm" className="text-primary hover:text-primary hover:bg-primary/10 group/btn" asChild>
+                                                        <Link
+                                                            to={`/blog/${post.slug}`}
+                                                            className="flex items-center gap-1"
+                                                        >
+                                                            {t("blog.readArticle")}
+                                                            <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
+                                                        </Link>
+                                                    </Button>
                                                 </div>
                                             </div>
                                         </article>
