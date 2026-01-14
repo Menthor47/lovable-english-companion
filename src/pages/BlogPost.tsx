@@ -53,12 +53,16 @@ const BlogPost = () => {
 
     const author = useMemo(() => {
         if (!rawAuthor) return null;
+        const translatedCredentials = t(`authors.${rawAuthor.id}.credentials`, { returnObjects: true });
+        const credentials = Array.isArray(translatedCredentials)
+            ? translatedCredentials.filter((value): value is string => typeof value === "string")
+            : rawAuthor.credentials;
         return {
             ...rawAuthor,
             name: t(`authors.${rawAuthor.id}.name`),
             role: t(`authors.${rawAuthor.id}.role`),
             bio: t(`authors.${rawAuthor.id}.bio`),
-            credentials: t(`authors.${rawAuthor.id}.credentials`, { returnObjects: true }) as string[] || rawAuthor.credentials,
+            credentials,
         };
     }, [rawAuthor, t]);
 

@@ -52,7 +52,6 @@ ErrorDocument 404 /404.html
 # Only rewrite known SPA routes that have prerendered HTML directories
 # Unknown routes will fall through to ErrorDocument 404
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI} !^/assets/
 RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}/index.html -f
 RewriteRule ^(.*)$ /$1/index.html [L]
