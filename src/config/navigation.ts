@@ -12,23 +12,19 @@ export const navigationConfig: NavItem[] = [
         items: [
             {
                 title: "aeoGeo",
-                href: "/geo-optimization",
-                description: "Dominate Voice Search & AI Answers"
+                href: "/geo-optimization"
             },
             {
                 title: "technical",
-                href: "/#services",
-                description: "Future-Proof Your Site Structure"
+                href: "/#services"
             },
             {
                 title: "paid",
-                href: "/#services",
-                description: "Maximize ROI with Smart Ads"
+                href: "/#services"
             },
             {
                 title: "content",
-                href: "/services/content",
-                description: "Authority-Building Content Strategy"
+                href: "/services/content"
             }
         ]
     },
@@ -38,23 +34,19 @@ export const navigationConfig: NavItem[] = [
         items: [
             {
                 title: "toolsHub",
-                href: "/tools",
-                description: "Free AI utilities to boost your workflow."
+                href: "/tools"
             },
             {
                 title: "aiAudit",
-                href: "/tools/audit",
-                description: "Get a comprehensive site analysis in seconds."
+                href: "/tools/audit"
             },
             {
                 title: "roi",
-                href: "/tools/roi-calculator",
-                description: "Project your potential revenue growth."
+                href: "/tools/roi-calculator"
             },
             {
                 title: "portal",
-                href: "/dashboard",
-                description: "Live analytics and project tracking demo."
+                href: "/dashboard"
             }
         ]
     },
@@ -64,23 +56,19 @@ export const navigationConfig: NavItem[] = [
         items: [
             {
                 title: "caseStudies",
-                href: "/case-studies",
-                description: "See how we drive measurable growth for clients."
+                href: "/case-studies"
             },
             {
                 title: "comparisons",
-                href: "/compare",
-                description: "Unbiased battles between top AI tools."
+                href: "/compare"
             },
             {
                 title: "glossary",
-                href: "/resources/glossary",
-                description: "Master the terminology of modern search."
+                href: "/resources/glossary"
             },
             {
                 title: "blog",
-                href: "/blog",
-                description: "Latest insights and industry updates."
+                href: "/blog"
             }
         ]
     },

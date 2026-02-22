@@ -3,7 +3,7 @@
   <!-- Homepage -->
   <url>
     <loc>https://agseo.pro/</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -11,7 +11,7 @@
   <!-- Services Hub -->
   <url>
     <loc>https://agseo.pro/services</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -19,44 +19,44 @@
   <!-- Services -->
   <url>
     <loc>https://agseo.pro/services/content</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://agseo.pro/geo-optimization</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://agseo.pro/industries/saas</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://agseo.pro/industries/ecommerce</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://agseo.pro/industries/local</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://agseo.pro/industries/healthcare</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://agseo.pro/industries/professional-services</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -64,13 +64,13 @@
   <!-- About -->
   <url>
     <loc>https://agseo.pro/about</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://agseo.pro/authors/agseo-team</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -78,25 +78,25 @@
   <!-- Pricing -->
   <url>
     <loc>https://agseo.pro/pricing</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://agseo.pro/pricing/starter</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://agseo.pro/pricing/business</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://agseo.pro/pricing/pro-business</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -104,37 +104,37 @@
   <!-- Tools -->
   <url>
     <loc>https://agseo.pro/tools</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://agseo.pro/tools/audit</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://agseo.pro/tools/roi-calculator</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://agseo.pro/tools/serp-simulator</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://agseo.pro/tools/keyword-mixer</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://agseo.pro/tools/schema-generator</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -142,115 +142,115 @@
   <!-- Resources -->
   <url>
     <loc>https://agseo.pro/case-studies</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://agseo.pro/case-studies/fashion-brand-seo</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://agseo.pro/case-studies/saas-growth</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://agseo.pro/case-studies/legal-firm-local</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://agseo.pro/case-studies/fintech-ai</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://agseo.pro/resources/glossary</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://agseo.pro/compare</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://agseo.pro/compare/jasper-vs-copyai</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://agseo.pro/compare/surfer-vs-frase</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://agseo.pro/compare/semrush-vs-ahrefs</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://agseo.pro/compare/chatgpt-vs-claude</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://agseo.pro/compare/seranking-vs-moz</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://agseo.pro/compare/surfer-vs-clearscope</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://agseo.pro/compare/semrush-vs-seranking</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://agseo.pro/compare/ahrefs-vs-moz</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://agseo.pro/compare/jasper-vs-writer</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://agseo.pro/compare/surfer-vs-marketmuse</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://agseo.pro/compare/mangools-vs-ubersuggest</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://agseo.pro/compare/rankmath-vs-yoast</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -258,31 +258,31 @@
   <!-- Blog -->
   <url>
     <loc>https://agseo.pro/blog</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://agseo.pro/blog/ai-business-success</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://agseo.pro/blog/react-seo-optimization</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://agseo.pro/blog/smart-seo-ai</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://agseo.pro/blog/ecommerce-product-pages</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -290,7 +290,7 @@
   <!-- Contact -->
   <url>
     <loc>https://agseo.pro/contact</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -298,19 +298,19 @@
   <!-- Legal -->
   <url>
     <loc>https://agseo.pro/privacy</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://agseo.pro/terms</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://agseo.pro/cookies</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>

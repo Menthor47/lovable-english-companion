@@ -30,21 +30,33 @@
             "badge": "AG SEO",
             "description": "AEO + GEO + SEO. Formula completă pentru dominarea căutărilor moderne.",
             "aeoGeo": "AEO & GEO",
+            "aeoGeoDescription": "Domină căutările vocale și răspunsurile AI",
             "technical": "SEO Tehnic",
+            "technicalDescription": "Pregătește-ți site-ul pentru viitoarele structuri",
             "paid": "Publicitate Plătită (Ads)",
-            "content": "Conținut & Linkuri"
+            "paidDescription": "Maximizează ROI cu reclame inteligente",
+            "content": "Conținut & Linkuri",
+            "contentDescription": "Strategie de conținut care construiește autoritate"
         },
         "productsMenu": {
             "toolsHub": "Hub de Tool-uri",
+            "toolsHubDescription": "Utilități AI gratuite pentru fluxul tău de lucru.",
             "aiAudit": "Audit AI Instant",
+            "aiAuditDescription": "Obține o analiză completă în câteva secunde.",
             "roi": "Calculator ROI",
-            "portal": "Portal Clienți"
+            "roiDescription": "Proiectează creșterea potențială a veniturilor.",
+            "portal": "Portal Clienți",
+            "portalDescription": "Analize live și urmărire proiecte."
         },
         "resourcesMenu": {
             "caseStudies": "Studii de Caz",
+            "caseStudiesDescription": "Vezi cum generăm creștere pentru clienți.",
             "comparisons": "Comparative Tool-uri",
+            "comparisonsDescription": "Lupte imparțiale între instrumente AI.",
             "glossary": "Glosar SEO",
-            "blog": "Blog"
+            "glossaryDescription": "Stăpânește terminologia căutării moderne.",
+            "blog": "Blog",
+            "blogDescription": "Ultimele noutăți și actualizări din industrie."
         },
         "mobile": {
             "solutions": "Soluții",

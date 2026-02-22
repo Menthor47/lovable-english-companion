@@ -1,32 +1,31 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
-import Backend from 'i18next-http-backend';
+
+// Import translations directly to bundle them and avoid 401 network errors
+import enTranslation from '../public/locales/en/translation.json';
+import roTranslation from '../public/locales/ro/translation.json';
 
 i18n
-    // load translation using http -> see /public/locales (i.e. https://github.com/i18next/react-i18next/tree/master/example/react/public/locales)
-    // learn more: https://github.com/i18next/i18next-http-backend
-    .use(Backend)
     // detect user language
-    // learn more: https://github.com/i18next/i18next-browser-languagedetector
     .use(LanguageDetector)
     // pass the i18n instance to react-i18next.
     .use(initReactI18next)
     // init i18next
-    // for all options read: https://www.i18next.com/overview/configuration-options
     .init({
+        resources: {
+            en: { translation: enTranslation },
+            ro: { translation: roTranslation }
+        },
         fallbackLng: 'en',
         supportedLngs: ['en', 'ro'],
-        load: 'languageOnly', // This ensures en-GB loads 'en' instead of failing
+        load: 'languageOnly',
         debug: false,
 
         interpolation: {
             escapeValue: false,
         },
 
-        backend: {
-            loadPath: '/locales/{{lng}}/translation.json',
-        },
         react: {
             useSuspense: false,
         }

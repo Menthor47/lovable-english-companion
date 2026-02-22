@@ -95,7 +95,10 @@ export default function GEO() {
                                 <div className="p-8 md:p-12 border-b md:border-b-0 md:border-r border-border/50 bg-background/50">
                                     <h3 className="text-2xl font-bold font-heading mb-6 text-muted-foreground">{t("geo.comparison.traditional.title")}</h3>
                                     <ul className="space-y-4">
-                                        {(t("geo.comparison.traditional.items", { returnObjects: true }) as string[]).map((item, i) => (
+                                        {(Array.isArray(t("geo.comparison.traditional.items", { returnObjects: true })) 
+                                            ? t("geo.comparison.traditional.items", { returnObjects: true }) as string[]
+                                            : []
+                                        ).map((item, i) => (
                                             <li key={i} className="flex items-center gap-3 text-muted-foreground"><Search className="w-5 h-5 opacity-50" /> {item}</li>
                                         ))}
                                     </ul>
@@ -103,7 +106,10 @@ export default function GEO() {
                                 <div className="p-8 md:p-12 bg-primary/5">
                                     <h3 className="text-2xl font-bold font-heading mb-6 text-primary">{t("geo.comparison.agseo.title")}</h3>
                                     <ul className="space-y-4">
-                                        {(t("geo.comparison.agseo.items", { returnObjects: true }) as string[]).map((item, i) => (
+                                        {(Array.isArray(t("geo.comparison.agseo.items", { returnObjects: true }))
+                                            ? t("geo.comparison.agseo.items", { returnObjects: true }) as string[]
+                                            : []
+                                        ).map((item, i) => (
                                             <li key={i} className="flex items-center gap-3 text-foreground"><Zap className="w-5 h-5 text-primary" /> {item}</li>
                                         ))}
                                     </ul>

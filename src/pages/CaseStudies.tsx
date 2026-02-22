@@ -20,13 +20,17 @@ export default function CaseStudies() {
     const pageUrl = getAbsoluteUrl("/case-studies");
 
     const translatedStudies = useMemo(() => {
-        const items = t("caseStudies.items", { returnObjects: true }) as Record<string, {
-            category: string;
-            title: string;
-            description: string;
-            stats: Array<{ label: string; value: string }>;
-            content: string[];
-        }>;
+        const rawItems = t("caseStudies.items", { returnObjects: true });
+        // Ensure rawItems is an object before casting to Record<string, ...>
+        const items = (rawItems && typeof rawItems === 'object' && !Array.isArray(rawItems))
+            ? rawItems as Record<string, {
+                category: string;
+                title: string;
+                description: string;
+                stats: Array<{ label: string; value: string }>;
+                content: string[];
+            }>
+            : {};
         return caseStudies.map(study => {
             const translatedItem = items[study.id];
             if (!translatedItem) return study;

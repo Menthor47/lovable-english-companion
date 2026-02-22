@@ -27,11 +27,12 @@ export default function CompareHub() {
     const pageUrl = getAbsoluteUrl("/compare");
 
     const translatedValueProps = useMemo(() => {
-        const props = t("comparisons.valueProps", { returnObjects: true }) as Array<{
+        const rawProps = t("comparisons.valueProps", { returnObjects: true });
+        const props = Array.isArray(rawProps) ? rawProps as Array<{
             title: string;
             description: string;
             bullets: string[];
-        }>;
+        }> : [];
         return props.map(prop => ({
             ...prop,
             icon: VALUE_PROP_ICONS[prop.title] || CheckCircle2
@@ -39,10 +40,13 @@ export default function CompareHub() {
     }, [t]);
 
     const translatedComparisons = useMemo(() => {
-        const items = t("comparisons.items", { returnObjects: true }) as Record<string, {
-            category?: string;
-            verdict?: { summary?: string };
-        }>;
+        const rawItems = t("comparisons.items", { returnObjects: true });
+        const items = (rawItems && typeof rawItems === 'object' && !Array.isArray(rawItems))
+            ? rawItems as Record<string, {
+                category?: string;
+                verdict?: { summary?: string };
+            }>
+            : {};
         return comparisons.map((comp) => {
             const tComp = items[comp.slug];
             if (!tComp) return comp;

@@ -9,7 +9,8 @@ import { AnalyticsTracker } from "@/components/analytics/AnalyticsTracker";
 import { AnimatedRoutes } from "@/components/layout/AnimatedRoutes";
 
 
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
+import { PageLoader } from "@/components/ui/PageLoader";
 
 // Removed global queryClient for SSR safety
 
@@ -27,8 +28,9 @@ const App = ({ helmetContext }: { helmetContext?: HelmetContext }) => {
               <Toaster />
               <Sonner />
               <AnalyticsTracker />
-              <AnimatedRoutes />
-
+              <Suspense fallback={<PageLoader />}>
+                <AnimatedRoutes />
+              </Suspense>
             </ErrorBoundary>
           </TooltipProvider>
         </ThemeProvider>

@@ -43,11 +43,14 @@ export default function Terms() {
                             </p>
 
                             {sectionKeys.map((key) => {
-                                const section = t(`termsOfService.sections.${key}`, { returnObjects: true }) as {
-                                    title: string;
-                                    content: string;
-                                    items?: string[];
-                                };
+                                const rawSection = t(`termsOfService.sections.${key}`, { returnObjects: true });
+                                const section = (rawSection && typeof rawSection === 'object' && !Array.isArray(rawSection))
+                                    ? rawSection as {
+                                        title: string;
+                                        content: string;
+                                        items?: string[];
+                                    }
+                                    : { title: key, content: '' };
 
                                 return (
                                     <section key={key} className="mb-8">

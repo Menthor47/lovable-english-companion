@@ -55,7 +55,10 @@ export default function Glossary() {
     const [query, setQuery] = useState("");
 
     const terms = useMemo(() => {
-        const termsObj = t("glossary.terms", { returnObjects: true }) as Record<string, { term: string; definition: string }>;
+        const rawItems = t("glossary.terms", { returnObjects: true });
+        const termsObj = (rawItems && typeof rawItems === 'object' && !Array.isArray(rawItems))
+            ? rawItems as Record<string, { term: string; definition: string }>
+            : {};
         return Object.entries(termsObj).map(([key, value]) => ({
             ...value,
             icon: TERM_ICONS[key] || Search,

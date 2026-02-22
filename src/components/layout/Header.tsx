@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { cn } from "@/lib/utils";
 import { Link, useLocation, type LinkProps } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -119,10 +120,7 @@ export function Header() {
                                 href={subItem.href}
                                 title={t(`nav.${item.title}Menu.${subItem.title}`)}
                               >
-                                {item.title === "solutions" // Solution descriptions use translation keys
-                                  ? t(`services.${subItem.description?.includes("Geo") ? "geo" : subItem.title === "technical" ? "seo" : subItem.title === "paid" ? "ads" : "content"}.description`)
-                                  : subItem.description // Others use direct strings from config (or should effectively be translated, but preserving current behavior for now)
-                                }
+                                {t(`nav.${item.title}Menu.${subItem.title}Description`)}
                               </ListItem>
                             ))}
                           </ul>
@@ -169,52 +167,71 @@ export function Header() {
           </div>
 
           {/* Mobile Menu */}
-          {isMobileMenuOpen && (
-            <div id="mobile-menu" className="lg:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur-xl border-b border-border/50 py-6 overflow-y-auto max-h-[80vh]">
-              <nav className="flex flex-col gap-4 px-4">
-                {navigationConfig.map((item) => (
-                  <div key={item.title}>
-                    {item.items ? (
-                      <>
-                        <div className="font-semibold text-primary px-2">{t(`nav.${item.title}`)}</div>
-                        <div className="flex flex-col mt-1">
-                          {item.items.map((subItem) => (
-                            <Link
-                              key={subItem.title}
-                              to={subItem.href}
-                              className="pl-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-                              onClick={() => handleNavClick(subItem.href)}
-                            >
-                              {t(`nav.${item.title}Menu.${subItem.title}`)}
-                            </Link>
-                          ))}
-                        </div>
-                      </>
-                    ) : (
-                      <Link
-                        to={item.href}
-                        className="font-semibold text-foreground px-2 mt-2 hover:text-primary transition-colors block"
-                        onClick={() => handleNavClick(item.href)}
-                      >
-                        {t(`nav.${item.title}`)}
-                      </Link>
-                    )}
-                  </div>
-                ))}
+          <AnimatePresence>
+            {isMobileMenuOpen && (
+              <motion.div
+                id="mobile-menu"
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="lg:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur-xl border-b border-border/50 overflow-hidden"
+              >
+                <nav className="flex flex-col gap-4 px-4 py-8 max-h-[70vh] overflow-y-auto">
+                  {navigationConfig.map((item, index) => (
+                    <motion.div
+                      key={item.title}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.05 }}
+                    >
+                      {item.items ? (
+                        <>
+                          <div className="font-heading font-semibold text-primary px-2 mb-2">{t(`nav.${item.title}`)}</div>
+                          <div className="flex flex-col gap-1">
+                            {item.items.map((subItem) => (
+                              <Link
+                                key={subItem.title}
+                                to={subItem.href}
+                                className="pl-4 py-2.5 text-foreground/70 hover:text-primary hover:bg-primary/5 rounded-lg transition-all"
+                                onClick={() => handleNavClick(subItem.href)}
+                              >
+                                {t(`nav.${item.title}Menu.${subItem.title}`)}
+                              </Link>
+                            ))}
+                          </div>
+                        </>
+                      ) : (
+                        <Link
+                          to={item.href}
+                          className="font-heading font-semibold text-foreground px-2 py-2 hover:text-primary transition-colors block text-lg"
+                          onClick={() => handleNavClick(item.href)}
+                        >
+                          {t(`nav.${item.title}`)}
+                        </Link>
+                      )}
+                    </motion.div>
+                  ))}
 
-                <div className="flex flex-col gap-2 pt-4 border-t border-border mt-2">
-                  <div className="flex justify-center py-2">
-                    <LanguageSwitcher />
-                  </div>
-                  <Button variant="hero" size="lg" className="w-full" asChild>
-                    <Link to="/#contact" onClick={() => handleNavClick("/#contact")}>
-                      {t("hero.cta.primary")}
-                    </Link>
-                  </Button>
-                </div>
-              </nav>
-            </div>
-          )}
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: navigationConfig.length * 0.05 }}
+                    className="flex flex-col gap-4 pt-6 border-t border-border/50 mt-4"
+                  >
+                    <div className="flex justify-center">
+                      <LanguageSwitcher />
+                    </div>
+                    <Button variant="hero" size="xl" className="w-full shadow-lg shadow-primary/20" asChild>
+                      <Link to="/#contact" onClick={() => handleNavClick("/#contact")}>
+                        {t("hero.cta.primary")}
+                      </Link>
+                    </Button>
+                  </motion.div>
+                </nav>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </header>

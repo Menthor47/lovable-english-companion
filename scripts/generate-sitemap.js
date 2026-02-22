@@ -35,7 +35,6 @@ const staticRoutes = [
     '/terms',
     '/tools',
     '/tools/audit',
-    '/dashboard',
     '/case-studies',
     '/resources/glossary',
     '/services',

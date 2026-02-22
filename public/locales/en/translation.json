@@ -31,21 +31,33 @@
             "badge": "AG SEO",
             "description": "AEO + GEO + SEO. The complete formula for modern search dominance.",
             "aeoGeo": "AEO & GEO",
+            "aeoGeoDescription": "Dominate Voice Search & AI Answers",
             "technical": "Technical SEO",
+            "technicalDescription": "Future-Proof Your Site Structure",
             "paid": "Paid Media (Ads)",
-            "content": "Content & Links"
+            "paidDescription": "Maximize ROI with Smart Ads",
+            "content": "Content & Links",
+            "contentDescription": "Authority-Building Content Strategy"
         },
         "productsMenu": {
             "toolsHub": "All Tools",
+            "toolsHubDescription": "Free AI utilities to boost your workflow.",
             "aiAudit": "Instant AI Audit",
+            "aiAuditDescription": "Get a comprehensive site analysis in seconds.",
             "roi": "ROI Calculator",
-            "portal": "Client Portal"
+            "roiDescription": "Project your potential revenue growth.",
+            "portal": "Client Portal",
+            "portalDescription": "Live analytics and project tracking demo."
         },
         "resourcesMenu": {
             "caseStudies": "Case Studies",
+            "caseStudiesDescription": "See how we drive measurable growth for clients.",
             "comparisons": "Tool Comparisons",
+            "comparisonsDescription": "Unbiased battles between top AI tools.",
             "glossary": "SEO Glossary",
-            "blog": "Blog"
+            "glossaryDescription": "Master the terminology of modern search.",
+            "blog": "Blog",
+            "blogDescription": "Latest insights and industry updates."
         },
         "mobile": {
             "solutions": "Solutions",

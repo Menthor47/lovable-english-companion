@@ -1,15 +1,16 @@
+import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { AnimatedSection } from "@/components/ui/animated-section";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
-import { useState, useEffect } from "react";
-import { DollarSign, TrendingUp, Users, ArrowRight } from "lucide-react";
+import { GlassCard } from "@/components/ui/glass-card";
+import { AnimatedSection } from "@/components/ui/animated-section";
+import { DollarSign, TrendingUp, Users, ArrowRight, Share2 } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
-import { Share2 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { SITE_OG_IMAGE_URL, getAbsoluteUrl } from "@/lib/siteMetadata";
 
@@ -147,99 +148,118 @@ export default function ROICalculator() {
 
                         {/* Result Section */}
                         <AnimatedSection delay={0.2} className="relative">
-                            <div className="absolute inset-0 bg-primary/20 blur-3xl opacity-20 rounded-full" />
-                            <div className="relative bg-card border border-primary/20 rounded-2xl p-8 shadow-2xl overflow-hidden">
-                                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent" />
+                            <AnimatePresence mode="wait">
+                                <GlassCard className="p-10 border-primary/20 shadow-2xl relative overflow-visible" gradient>
+                                    <h3 className="text-3xl font-bold text-center mb-10 font-heading bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/60">
+                                        {t("roiCalculator.results.title")}
+                                    </h3>
 
-                                <h3 className="text-2xl font-bold text-center mb-8">{t("roiCalculator.results.title")}</h3>
+                                    <div className="space-y-6 mb-12">
+                                        <div className="flex justify-between items-center p-5 rounded-2xl bg-white/5 border border-white/5 backdrop-blur-sm">
+                                            <span className="text-muted-foreground font-medium">{t("roiCalculator.results.current")}</span>
+                                            <span className="text-2xl font-bold font-mono text-foreground/80">{formatCurrency(currentRevenue)}</span>
+                                        </div>
 
-                                <div className="space-y-6 mb-10">
-                                    <div className="flex justify-between items-center p-4 rounded-lg bg-background/50 border border-border/50">
-                                        <span className="text-muted-foreground">{t("roiCalculator.results.current")}</span>
-                                        <span className="text-2xl font-bold font-mono">{formatCurrency(currentRevenue)}</span>
+                                        <div className="flex justify-between items-center p-8 rounded-3xl bg-primary/10 border border-primary/30 shadow-inner group relative overflow-hidden">
+                                            <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                                            <div className="relative z-10">
+                                                <span className="font-heading font-bold text-primary block text-sm uppercase tracking-widest mb-1">{t("roiCalculator.results.projected")}</span>
+                                                <span className="text-5xl font-bold font-mono text-primary drop-shadow-[0_0_15px_rgba(var(--primary),0.3)]">{formatCurrency(projectedRevenue)}</span>
+                                            </div>
+                                            <TrendingUp className="w-12 h-12 text-primary opacity-20 group-hover:scale-110 transition-transform" />
+                                        </div>
+
+                                        <div className="text-center">
+                                            <motion.span
+                                                initial={{ scale: 0.9 }}
+                                                animate={{ scale: 1 }}
+                                                className="inline-block px-6 py-2 rounded-full bg-green-500/10 text-green-500 text-base font-bold shadow-[0_0_20px_rgba(34,197,94,0.1)] border border-green-500/20"
+                                            >
+                                                +{formatCurrency(increase)} {t("roiCalculator.results.growth")}
+                                            </motion.span>
+                                        </div>
                                     </div>
 
-                                    <div className="flex justify-between items-center p-6 rounded-xl bg-primary/10 border border-primary/20">
-                                        <span className="font-heading font-bold text-primary">{t("roiCalculator.results.projected")}</span>
-                                        <span className="text-4xl font-bold font-mono text-primary">{formatCurrency(projectedRevenue)}</span>
+                                    {/* Chart Visualization */}
+                                    <div className="h-[280px] w-full mb-10 bg-black/20 p-4 rounded-2xl border border-white/5">
+                                        <ResponsiveContainer width="100%" height="100%">
+                                            <BarChart
+                                                data={[
+                                                    { name: t("roiCalculator.results.chart.now"), revenue: currentRevenue },
+                                                    { name: t("roiCalculator.results.chart.projected"), revenue: projectedRevenue }
+                                                ]}
+                                                margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+                                            >
+                                                <defs>
+                                                    <linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
+                                                        <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity={1} />
+                                                        <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity={0.6} />
+                                                    </linearGradient>
+                                                </defs>
+                                                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="white" opacity={0.05} />
+                                                <XAxis
+                                                    dataKey="name"
+                                                    axisLine={false}
+                                                    tickLine={false}
+                                                    tick={{ fill: "hsl(var(--muted-foreground))", fontSize: 12 }}
+                                                />
+                                                <YAxis
+                                                    axisLine={false}
+                                                    tickLine={false}
+                                                    tick={{ fill: "hsl(var(--muted-foreground))", fontSize: 12 }}
+                                                    tickFormatter={(value) => `$${(value / 1000).toFixed(0)}k`}
+                                                />
+                                                <Tooltip
+                                                    cursor={{ fill: "rgba(255,255,255,0.05)" }}
+                                                    contentStyle={{
+                                                        backgroundColor: "rgba(0,0,0,0.8)",
+                                                        backdropFilter: "blur(10px)",
+                                                        borderColor: "rgba(255,255,255,0.1)",
+                                                        borderRadius: "16px",
+                                                        borderWidth: "1px",
+                                                        padding: "12px"
+                                                    }}
+                                                    itemStyle={{ color: "hsl(var(--primary))", fontWeight: "bold" }}
+                                                    formatter={(value: number) => [formatCurrency(value), t("roiCalculator.results.chart.revenue")]}
+                                                />
+                                                <Bar
+                                                    dataKey="revenue"
+                                                    fill="url(#barGradient)"
+                                                    radius={[8, 8, 0, 0]}
+                                                    barSize={70}
+                                                />
+                                            </BarChart>
+                                        </ResponsiveContainer>
                                     </div>
 
-                                    <div className="text-center">
-                                        <span className="inline-block px-4 py-1 rounded-full bg-green-500/10 text-green-500 text-sm font-bold">
-                                            +{formatCurrency(increase)} {t("roiCalculator.results.growth")}
-                                        </span>
-                                    </div>
-                                </div>
-
-                                {/* Chart Visualization */}
-                                <div className="h-[250px] w-full mb-8">
-                                    <ResponsiveContainer width="100%" height="100%">
-                                        <BarChart
-                                            data={[
-                                                { name: t("roiCalculator.results.chart.now"), revenue: currentRevenue },
-                                                { name: t("roiCalculator.results.chart.projected"), revenue: projectedRevenue }
-                                            ]}
-                                            margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
-                                        >
-                                            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="hsl(var(--border))" opacity={0.5} />
-                                            <XAxis
-                                                dataKey="name"
-                                                axisLine={false}
-                                                tickLine={false}
-                                                tick={{ fill: "hsl(var(--muted-foreground))" }}
-                                            />
-                                            <YAxis
-                                                axisLine={false}
-                                                tickLine={false}
-                                                tick={{ fill: "hsl(var(--muted-foreground))" }}
-                                                tickFormatter={(value) => `$${(value / 1000).toFixed(0)}k`}
-                                            />
-                                            <Tooltip
-                                                cursor={{ fill: "hsl(var(--primary)/0.1)" }}
-                                                contentStyle={{
-                                                    backgroundColor: "hsl(var(--card))",
-                                                    borderColor: "hsl(var(--border))",
-                                                    borderRadius: "8px"
+                                    <div className="space-y-4">
+                                        <div className="flex flex-col sm:flex-row gap-4">
+                                            <Button variant="hero" size="xl" className="flex-1 text-lg shadow-[0_0_20px_rgba(var(--primary),0.2)]" asChild>
+                                                <Link to="/#contact">
+                                                    {t("roiCalculator.results.cta")} <ArrowRight className="ml-2 w-6 h-6" />
+                                                </Link>
+                                            </Button>
+                                            <Button
+                                                variant="outline"
+                                                size="xl"
+                                                onClick={() => {
+                                                    navigator.clipboard.writeText(window.location.href);
+                                                    toast({
+                                                        title: t("blog.share.title") || "Link copied!",
+                                                        description: t("blog.share.description") || "Calculator state saved in URL.",
+                                                    });
                                                 }}
-                                                formatter={(value: number) => [formatCurrency(value), t("roiCalculator.results.chart.revenue")]}
-                                            />
-                                            <Bar
-                                                dataKey="revenue"
-                                                fill="hsl(var(--primary))"
-                                                radius={[4, 4, 0, 0]}
-                                                barSize={60}
-                                            />
-                                        </BarChart>
-                                    </ResponsiveContainer>
-                                </div>
-
-                                <div className="space-y-4">
-                                    <div className="flex flex-col sm:flex-row gap-3">
-                                        <Button variant="hero" size="xl" className="flex-1" asChild>
-                                            <Link to="/#contact">
-                                                {t("roiCalculator.results.cta")} <ArrowRight className="ml-2 w-5 h-5" />
-                                            </Link>
-                                        </Button>
-                                        <Button
-                                            variant="outline"
-                                            size="xl"
-                                            onClick={() => {
-                                                navigator.clipboard.writeText(window.location.href);
-                                                toast({
-                                                    title: t("blog.share.title") || "Link copied!",
-                                                    description: t("blog.share.description") || "Calculator state saved in URL.",
-                                                });
-                                            }}
-                                            className="sm:w-auto"
-                                        >
-                                            <Share2 className="w-5 h-5" />
-                                        </Button>
+                                                className="sm:w-auto h-16 border-white/10 hover:bg-white/5"
+                                            >
+                                                <Share2 className="w-6 h-6" />
+                                            </Button>
+                                        </div>
+                                        <p className="text-xs text-center text-muted-foreground italic opacity-60">
+                                            {t("roiCalculator.results.disclaimer")}
+                                        </p>
                                     </div>
-                                    <p className="text-xs text-center text-muted-foreground">
-                                        {t("roiCalculator.results.disclaimer")}
-                                    </p>
-                                </div>
-                            </div>
+                                </GlassCard>
+                            </AnimatePresence>
                         </AnimatedSection>
                     </div>
                 </div>

@@ -40,7 +40,10 @@ export default function CompareDetail() {
 
     const translatedComp = useMemo(() => {
         if (!comp) return null;
-        const items = t("comparisons.items", { returnObjects: true }) as Record<string, TranslatedComparison>;
+        const rawItems = t("comparisons.items", { returnObjects: true });
+        const items = (rawItems && typeof rawItems === 'object' && !Array.isArray(rawItems))
+            ? rawItems as Record<string, TranslatedComparison>
+            : {};
         const tComp = items[comp.slug];
         if (!tComp) return comp;
 
