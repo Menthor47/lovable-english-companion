@@ -101,7 +101,7 @@ export default function Author() {
 
             <Header />
 
-            <main className="flex-grow pt-24 pb-16">
+            <main id="main" className="flex-grow pt-24 pb-16">
                 <div className="container mx-auto px-4">
                     <Breadcrumbs items={breadcrumbItems} className="mb-8" />
 

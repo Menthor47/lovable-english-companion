@@ -124,7 +124,7 @@ export default function Services() {
 
             <Header />
 
-            <main>
+            <main id="main">
                 {/* Breadcrumbs */}
                 <div className="container mx-auto px-4 pt-24">
                     <Breadcrumbs />

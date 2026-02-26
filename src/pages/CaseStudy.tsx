@@ -92,7 +92,7 @@ export default function CaseStudy() {
 
             <Header />
 
-            <main className="flex-grow">
+            <main id="main" className="flex-grow">
                 <div className="container mx-auto px-4 pt-24">
                     <Breadcrumbs items={breadcrumbItems} />
                 </div>

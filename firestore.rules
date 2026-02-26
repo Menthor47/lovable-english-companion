@@ -2,20 +2,69 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Allow public write access to specific collections used by the forms
+    function hasOnlyKeys(allowed) {
+      return request.resource.data.keys().hasOnly(allowed);
+    }
+
+    function hasKey(key) {
+      return request.resource.data.keys().hasAny([key]);
+    }
+
+    function optionalString(key, maxLen) {
+      return !hasKey(key) ||
+        (request.resource.data[key] is string && request.resource.data[key].size() <= maxLen);
+    }
+
+    function requiredEmail() {
+      return request.resource.data.email is string
+        && request.resource.data.email.size() <= 254
+        && request.resource.data.email.matches('^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$');
+    }
+
+    function hasServerTimestamp() {
+      return request.resource.data.timestamp is timestamp;
+    }
+
+    // Public write access is limited to strictly validated create operations.
+    // Reads are denied to avoid exposing lead/subscriber data.
     match /newsletter_signups/{document} {
-      allow create: if true;
-      allow read: if false; // Only allow writes, not reads
+      allow create: if hasOnlyKeys(['email', 'timestamp', 'source'])
+        && requiredEmail()
+        && request.resource.data.source == 'newsletter'
+        && hasServerTimestamp();
+      allow read: if false;
+      allow update, delete: if false;
     }
-    
+
     match /contact_requests/{document} {
-      allow create: if true;
+      allow create: if hasOnlyKeys(['email', 'phone', 'website', 'message', 'source', 'timestamp', 'emailSent', 'emailSentAt'])
+        && requiredEmail()
+        && request.resource.data.source == 'contact'
+        && optionalString('phone', 50)
+        && optionalString('website', 2048)
+        && optionalString('message', 5000)
+        && hasServerTimestamp();
       allow read: if false;
+      allow update, delete: if false;
     }
-    
+
     match /audit_requests/{document} {
-      allow create: if true;
+      allow create: if hasOnlyKeys(['email', 'phone', 'website', 'message', 'source', 'timestamp', 'emailSent', 'emailSentAt'])
+        && requiredEmail()
+        && request.resource.data.source == 'audit'
+        && optionalString('phone', 50)
+        && optionalString('website', 2048)
+        && optionalString('message', 5000)
+        && hasServerTimestamp();
       allow read: if false;
+      allow update, delete: if false;
+    }
+
+    // Rate limit tracking - managed server-side by Cloud Functions
+    // Clients should use the checkRateLimit HTTP function instead of direct access
+    // Cloud Functions bypass these rules via Firebase Admin SDK (elevated privileges)
+    match /rate_limits/{document} {
+      allow read, write: if false;
     }
 
     // Default deny ALL other access

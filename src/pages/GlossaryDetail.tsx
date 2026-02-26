@@ -67,7 +67,7 @@ export default function GlossaryDetail() {
 
             <Header />
 
-            <main className="flex-1 pt-24 pb-16">
+            <main id="main" className="flex-1 pt-24 pb-16">
                 <div className="container px-4 mx-auto max-w-4xl">
                     <AnimatedSection>
                         <Button variant="ghost" asChild className="mb-8 pl-0 hover:pl-2 transition-all">

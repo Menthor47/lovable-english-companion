@@ -1,7 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
+import { PageLayout } from "@/components/layout/PageLayout";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import { OptimizedImage } from "@/components/ui/optimized-image";
 import { Button } from "@/components/ui/button";
@@ -73,26 +72,16 @@ export default function About() {
     };
 
     return (
-        <div className="min-h-screen bg-background">
+        <PageLayout
+            title="About Us | AGSEO - AI-Powered SEO Agency"
+            description="Learn about AGSEO, the AI-powered SEO agency helping businesses dominate search engines and AI platforms. Meet our team and discover our mission."
+            canonicalUrl={pageUrl}
+            ogImage={SITE_OG_IMAGE_URL}
+        >
             <Helmet>
-                <title>About Us | AGSEO - AI-Powered SEO Agency</title>
-                <meta
-                    name="description"
-                    content="Learn about AGSEO, the AI-powered SEO agency helping businesses dominate search engines and AI platforms. Meet our team and discover our mission."
-                />
-                <link rel="canonical" href={pageUrl} />
-                <meta property="og:url" content={pageUrl} />
-                <meta property="og:title" content="About Us | AGSEO - AI-Powered SEO Agency" />
-                <meta property="og:description" content="Learn about AGSEO, the AI-powered SEO agency helping businesses dominate search engines and AI platforms." />
-                <meta property="og:image" content={SITE_OG_IMAGE_URL} />
-                <meta property="og:type" content="website" />
                 <script type="application/ld+json">{JSON.stringify(aboutPageSchema)}</script>
             </Helmet>
-
-            <Header />
-
-            <main>
-                {/* Breadcrumbs */}
+            {/* Breadcrumbs */}
                 <div className="container mx-auto px-4 pt-24">
                     <Breadcrumbs />
                 </div>
@@ -328,9 +317,6 @@ export default function About() {
                         </AnimatedSection>
                     </div>
                 </section>
-            </main>
-
-            <Footer />
-        </div>
+            </PageLayout>
     );
 }

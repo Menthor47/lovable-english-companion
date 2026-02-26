@@ -68,7 +68,7 @@ export default function GEO() {
                 </script>
             </Helmet>
             <Header />
-            <main className="pt-24 pb-16">
+            <main id="main" className="pt-24 pb-16">
                 <div className="container mx-auto px-4">
 
                     {/* Manifesto Hero */}

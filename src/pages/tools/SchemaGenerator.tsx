@@ -91,7 +91,7 @@ export default function SchemaGenerator() {
                 <meta name="description" content={t("schemaGenerator.metaDescription")} />
             </Helmet>
             <Header />
-            <main className="pt-24 pb-16">
+            <main id="main" className="pt-24 pb-16">
                 <div className="container mx-auto px-4">
                     <div className="max-w-5xl mx-auto">
                         <div className="mb-8">

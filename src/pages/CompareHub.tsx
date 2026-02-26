@@ -89,7 +89,7 @@ export default function CompareHub() {
                 <script type="application/ld+json">{JSON.stringify(itemListSchema)}</script>
             </Helmet>
             <Header />
-            <main className="pt-24 pb-16 flex-1">
+            <main id="main" className="pt-24 pb-16 flex-1">
                 <div className="container mx-auto px-4">
                     <AnimatedSection className="text-center max-w-3xl mx-auto mb-16">
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-md mb-6">

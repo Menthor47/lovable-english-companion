@@ -132,7 +132,7 @@ export default function Audit() {
                 <meta property="og:image" content={SITE_OG_IMAGE_URL} />
             </Helmet>
             <Header />
-            <main className="flex-grow pt-32 pb-16 flex items-center justify-center relative overflow-hidden">
+            <main id="main" className="flex-grow pt-32 pb-16 flex items-center justify-center relative overflow-hidden">
                 {/* Visual Flair Background */}
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none opacity-20">
                     <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/30 rounded-full blur-[120px] animate-pulse" />

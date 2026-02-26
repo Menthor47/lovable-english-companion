@@ -26,11 +26,10 @@ The intelligent companion for modern marketing teams.
 
 To run this project, you will need to add the following environment variables to your .env file:
 
-`VITE_SUPABASE_URL`: Your Supabase project URL
-`VITE_SUPABASE_ANON_KEY`: Your Supabase anonymous public key
-`VITE_API_URL`: (Optional) API URL
-`VITE_WHATSAPP_NUMBER`: (Optional) WhatsApp number for contact
-`VITE_CONTACT_EMAIL`: (Optional) Contact email address
+- `VITE_FIREBASE_API_KEY`, `VITE_FIREBASE_AUTH_DOMAIN`, `VITE_FIREBASE_PROJECT_ID`
+- `VITE_FIREBASE_STORAGE_BUCKET`, `VITE_FIREBASE_MESSAGING_SENDER_ID`, `VITE_FIREBASE_APP_ID`
+- `VITE_SITE_URL`, `VITE_CONTACT_EMAIL`, `VITE_WHATSAPP_NUMBER`
+- `VITE_SENTRY_DSN` (optional)
 
 ## Getting Started
 

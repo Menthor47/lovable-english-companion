@@ -21,7 +21,7 @@ const Contact = () => {
 
             <Header />
 
-            <main className="flex-grow pt-20">
+            <main id="main" className="flex-grow pt-20">
                 <ContactSection />
             </main>
 

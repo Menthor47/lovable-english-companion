@@ -33,7 +33,7 @@ export default function SerpSimulator() {
                 <meta name="description" content={t("serpSimulator.metaDescription")} />
             </Helmet>
             <Header />
-            <main className="pt-24 pb-16">
+            <main id="main" className="pt-24 pb-16">
                 <div className="container mx-auto px-4">
                     <div className="max-w-4xl mx-auto">
                         <div className="mb-8">

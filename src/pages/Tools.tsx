@@ -83,7 +83,7 @@ export default function Tools() {
                 <meta property="og:image" content={SITE_OG_IMAGE_URL} />
             </Helmet>
             <Header />
-            <main className="pt-24 pb-16">
+            <main id="main" className="pt-24 pb-16">
                 <div className="container mx-auto px-4">
                     <AnimatedSection className="text-center max-w-3xl mx-auto mb-16">
                         {/* Badge */}

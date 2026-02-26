@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { api } from "@/lib/api";
 import { useToast } from "@/hooks/use-toast";
-import { useState } from "react";
+import { useState, useCallback, useRef } from "react";
 
 const PHONE_ALLOWED_REGEX = /^[0-9+()\-.\s]+$/;
 
@@ -43,6 +43,13 @@ const contactSchema = z.object({
             .optional()
             .or(z.literal("")),
     ),
+    message: z.preprocess(
+        (value) => {
+            if (typeof value !== "string") return value;
+            return value.trim();
+        },
+        z.string().max(2000, "Message must be less than 2000 characters").optional(),
+    ),
     website2: z.string().max(200).optional(),
 });
 
@@ -52,10 +59,22 @@ export interface ContactFormOptions {
     source?: "contact" | "audit";
 }
 
+/**
+ * Rate limit state interface
+ */
+interface RateLimitState {
+    isLimited: boolean;
+    retryAfter: number; // seconds remaining
+}
+
 export function useContactForm(options: ContactFormOptions = {}) {
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const [rateLimit, setRateLimit] = useState<RateLimitState>({ isLimited: false, retryAfter: 0 });
     const { toast } = useToast();
+    
+    // Ref to track countdown timer
+    const countdownRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
     const {
         register,
@@ -66,7 +85,60 @@ export function useContactForm(options: ContactFormOptions = {}) {
         resolver: zodResolver(contactSchema),
     });
 
+    /**
+     * Start countdown timer for rate limit
+     */
+    const startCountdown = useCallback((seconds: number) => {
+        // Clear any existing countdown
+        if (countdownRef.current) {
+            clearInterval(countdownRef.current);
+        }
+
+        setRateLimit({ isLimited: true, retryAfter: seconds });
+
+        countdownRef.current = setInterval(() => {
+            setRateLimit(prev => {
+                const newRetryAfter = prev.retryAfter - 1;
+                if (newRetryAfter <= 0) {
+                    if (countdownRef.current) {
+                        clearInterval(countdownRef.current);
+                        countdownRef.current = null;
+                    }
+                    return { isLimited: false, retryAfter: 0 };
+                }
+                return { isLimited: true, retryAfter: newRetryAfter };
+            });
+        }, 1000);
+    }, []);
+
+    /**
+     * Handle rate limit response from API
+     */
+    const handleRateLimit = useCallback((retryAfter: number) => {
+        if (retryAfter > 0) {
+            startCountdown(retryAfter);
+            toast({
+                variant: "destructive",
+                title: "Too Many Requests",
+                description: `Please wait ${retryAfter} seconds before trying again.`,
+                duration: retryAfter * 1000,
+            });
+        }
+    }, [startCountdown, toast]);
+
     const onSubmit = async (data: ContactFormData) => {
+        // Check if rate limited
+        if (rateLimit.isLimited) {
+            const message = `Please wait ${rateLimit.retryAfter} seconds before submitting again.`;
+            setError(message);
+            toast({
+                variant: "destructive",
+                title: "Rate Limited",
+                description: message,
+            });
+            return { success: false };
+        }
+
         setError(null);
         setSuccess(false);
 
@@ -80,6 +152,13 @@ export function useContactForm(options: ContactFormOptions = {}) {
             });
 
             if (!result.success) {
+                // Check for rate limit error (429)
+                if (result.error?.includes("Too many requests") || result.error?.includes("rate")) {
+                    // Extract retry-after from error message if present
+                    const match = result.error?.match(/(\d+)\s*second/);
+                    const retryAfter = match ? parseInt(match[1], 10) : 60;
+                    handleRateLimit(retryAfter);
+                }
                 throw new Error(result.message);
             }
 
@@ -111,6 +190,8 @@ export function useContactForm(options: ContactFormOptions = {}) {
         isSubmitting,
         onSubmit,
         success,
-        error
+        error,
+        rateLimit,
+        isRateLimited: rateLimit.isLimited,
     };
 }

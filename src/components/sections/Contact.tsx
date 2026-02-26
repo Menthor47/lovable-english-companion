@@ -153,6 +153,21 @@ export function Contact() {
                     )}
                   </div>
 
+                  <div className="space-y-2">
+                    <label htmlFor="message" className="text-sm font-medium">{t("contact.form.message") || "Message"}</label>
+                    <textarea
+                      id="message"
+                      rows={4}
+                      placeholder="Tell us about your project or any questions you have..."
+                      className={`w-full px-4 py-3 rounded-lg bg-background border ${errors.message ? "border-destructive focus:border-destructive" : "border-border focus:border-primary/50"} focus:outline-none focus:ring-1 focus:ring-primary/50 text-foreground placeholder:text-muted-foreground transition-all resize-none`}
+                      {...register("message")}
+                      disabled={isSubmitting}
+                    />
+                    {errors.message && (
+                      <p className="text-xs text-destructive ml-1">{errors.message.message}</p>
+                    )}
+                  </div>
+
                   <Button
                     variant="hero"
                     size="lg"

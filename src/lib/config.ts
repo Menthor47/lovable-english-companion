@@ -1,35 +1,38 @@
+import { SITE_CONFIG } from "@/lib/constants";
+
+/**
+ * Backward-compatible configuration adapter.
+ *
+ * Prefer importing SITE_CONFIG directly from '@/lib/constants' for new code.
+ */
 export const config = {
     api: {
-        baseUrl:
-            import.meta.env.VITE_API_URL ||
-            (import.meta.env.VITE_SUPABASE_URL
-                ? `${import.meta.env.VITE_SUPABASE_URL}/functions/v1`
-                : "/api"),
+        baseUrl: "/api",
     },
     whatsapp: {
-        number: import.meta.env.VITE_WHATSAPP_NUMBER || '', // Default to empty if not set
-        message: "Hello AGSEO, I'm interested in your services.",
+        number: SITE_CONFIG.whatsapp.number,
+        message: SITE_CONFIG.whatsapp.message,
     },
     contact: {
-        email: import.meta.env.VITE_CONTACT_EMAIL || 'hello@agseo.pro',
-        phone: import.meta.env.VITE_PHONE_NUMBER || '+1 (555) 000-0000',
+        email: SITE_CONFIG.contact.email,
+        phone: SITE_CONFIG.contact.phone,
         address: {
-            street: import.meta.env.VITE_ADDRESS_STREET || "Market St",
-            city: import.meta.env.VITE_ADDRESS_CITY || "San Francisco",
-            country: import.meta.env.VITE_ADDRESS_COUNTRY || "USA"
+            street: SITE_CONFIG.contact.address.street,
+            city: SITE_CONFIG.contact.address.city,
+            country: SITE_CONFIG.contact.address.country,
         },
-        siteUrl: import.meta.env.VITE_SITE_URL || "https://agseo.pro",
+        siteUrl: SITE_CONFIG.baseUrl,
     },
     social: {
-        twitter: "https://twitter.com/agseo",
-        linkedin: "https://linkedin.com/company/agseo",
+        twitter: SITE_CONFIG.social.twitter,
+        linkedin: SITE_CONFIG.social.linkedin,
     },
     sentry: {
-        dsn: import.meta.env.VITE_SENTRY_DSN || "",
+        dsn: SITE_CONFIG.sentry.dsn,
     },
     analytics: {
-        gtmContainerId: import.meta.env.VITE_GTM_CONTAINER_ID || "",
-        gaMeasurementId: import.meta.env.VITE_GA_MEASUREMENT_ID || "",
-        ahrefsAnalyticsKey: import.meta.env.VITE_AHREFS_ANALYTICS_KEY || "",
-    }
+        gtmContainerId: SITE_CONFIG.analytics.gtmContainerId,
+        gaMeasurementId: SITE_CONFIG.analytics.gaMeasurementId,
+        ahrefsAnalyticsKey: SITE_CONFIG.analytics.ahrefsAnalyticsKey,
+    },
 } as const;

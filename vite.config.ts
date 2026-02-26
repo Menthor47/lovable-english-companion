@@ -215,7 +215,7 @@ function generateSitemapPlugin(): Plugin {
 import { VitePWA } from 'vite-plugin-pwa';
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => ({
+export default defineConfig(({ mode: _mode }) => ({
   server: {
     host: "localhost",
     port: 5173,

@@ -184,7 +184,7 @@ const BlogPost = () => {
 
             <Header />
 
-            <main className="flex-grow pt-24 pb-20">
+            <main id="main" className="flex-grow pt-24 pb-20">
                 <div className="relative h-[40vh] min-h-[400px] w-full overflow-hidden">
                     <OptimizedImage
                         src={post.image}

@@ -52,7 +52,7 @@ export default function Pricing() {
                 <meta property="og:image" content={SITE_OG_IMAGE_URL} />
             </Helmet>
             <Header />
-            <main className="pt-32 pb-24">
+            <main id="main" className="pt-32 pb-24">
                 <div className="container mx-auto px-4">
                     {/* Header */}
                     <AnimatedSection className="text-center max-w-3xl mx-auto mb-20">

@@ -37,7 +37,7 @@ const NotFound = () => {
 
       <Header />
 
-      <main className="flex-1 flex items-center justify-center pt-24 pb-16">
+      <main id="main" className="flex-1 flex items-center justify-center pt-24 pb-16">
         <div className="container mx-auto px-4">
           <AnimatedSection className="max-w-2xl mx-auto text-center">
             {/* Large 404 */}

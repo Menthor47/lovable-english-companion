@@ -67,7 +67,7 @@ export default function Dashboard() {
                 <meta property="og:image" content={SITE_OG_IMAGE_URL} />
             </Helmet>
             <Header />
-            <main className="pt-24 pb-16">
+            <main id="main" className="pt-24 pb-16">
                 <div className="container mx-auto px-4 max-w-7xl">
                     {/* Dashboard Header */}
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">

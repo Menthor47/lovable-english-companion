@@ -141,7 +141,7 @@ export default function CompareDetail() {
                 <script type="application/ld+json">{JSON.stringify(articleSchema)}</script>
             </Helmet>
             <Header />
-            <main className="pt-24 pb-16 flex-1">
+            <main id="main" className="pt-24 pb-16 flex-1">
                 <div className="container mx-auto px-4 max-w-5xl">
                     <Breadcrumbs items={breadcrumbItems} className="mb-6" />
                     <Link to="/compare" className="inline-flex items-center text-muted-foreground hover:text-primary mb-8 transition-colors">

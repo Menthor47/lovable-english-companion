@@ -3,6 +3,9 @@ import { AnimatePresence } from "framer-motion";
 import { useScrollToAnchor } from "@/hooks/useScrollToAnchor";
 import { lazy } from "react";
 
+// Auth guard
+import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
+
 // Dynamic imports for performance (Code Splitting)
 const Index = lazy(() => import("@/pages/Index"));
 const NotFound = lazy(() => import("@/pages/NotFound"));
@@ -35,6 +38,9 @@ const SerpSimulator = lazy(() => import("@/pages/tools/SerpSimulator"));
 const KeywordMixer = lazy(() => import("@/pages/tools/KeywordMixer"));
 const SchemaGenerator = lazy(() => import("@/pages/tools/SchemaGenerator"));
 
+// Auth pages
+const Login = lazy(() => import("@/pages/Login"));
+
 export function AnimatedRoutes() {
     const location = useLocation();
     useScrollToAnchor();
@@ -53,7 +59,12 @@ export function AnimatedRoutes() {
                 <Route path="/terms" element={<Terms />} />
                 <Route path="/tools" element={<Tools />} />
                 <Route path="/tools/audit" element={<Audit />} />
-                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/dashboard" element={
+                    <ProtectedRoute>
+                        <Dashboard />
+                    </ProtectedRoute>
+                } />
+                <Route path="/login" element={<Login />} />
                 <Route path="/case-studies" element={<CaseStudies />} />
                 <Route path="/case-studies/:id" element={<CaseStudy />} />
                 <Route path="/resources/glossary" element={<Glossary />} />

@@ -48,7 +48,7 @@ console.log(`Prerendering ${routesToPrerender.length} routes...`);
 (async () => {
     // pre-render each route...
     for (const url of routesToPrerender) {
-        const appHtml = render(url);
+        const appHtml = await render(url);
         const { html: appContent, helmetContext } = appHtml;
         const { helmet } = helmetContext;
 

@@ -23,7 +23,7 @@ export default function Privacy() {
                 <meta property="og:image" content={SITE_OG_IMAGE_URL} />
             </Helmet>
             <Header />
-            <main className="pt-24 pb-16">
+            <main id="main" className="pt-24 pb-16">
                 <div className="container mx-auto px-4">
                     <AnimatedSection className="max-w-4xl mx-auto">
                         <h1 className="font-heading text-4xl md:text-5xl font-bold mb-8">
