@@ -23,10 +23,16 @@ const variants: Record<string, Variants> = {
     visible: { opacity: 1, x: 0 },
   },
   right: {
-    hidden: { opacity: 1, x: 0 }, // Was opacity: 0, x: 60
+    hidden: { opacity: 0, x: 60 },
     visible: { opacity: 1, x: 0 },
   },
 };
+
+// Reverting to opacity 0 for proper animations, safety timeout handles the rest
+variants.up.hidden = { opacity: 0, y: 60 };
+variants.down.hidden = { opacity: 0, y: -60 };
+variants.left.hidden = { opacity: 0, x: -60 };
+variants.right.hidden = { opacity: 0, x: 60 };
 
 export function AnimatedSection({
   children,
@@ -89,12 +95,27 @@ export function StaggerContainer({
 }: StaggerContainerProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const controls = useAnimation();
+
+  useEffect(() => {
+    if (isInView) {
+      controls.start("visible");
+    }
+  }, [isInView, controls]);
+
+  // Safety timeout for StaggerContainer
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      controls.start("visible");
+    }, 600);
+    return () => clearTimeout(timer);
+  }, [controls]);
 
   return (
     <motion.div
       ref={ref}
       initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
+      animate={controls}
       variants={{
         hidden: {},
         visible: {

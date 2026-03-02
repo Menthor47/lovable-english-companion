@@ -5,12 +5,12 @@ import { Link } from "react-router-dom";
 import { Newsletter } from "@/components/sections/Newsletter";
 import logo from "@/assets/logo.webp";
 import { footerLinks } from "@/config/navigation";
-import { config } from "@/lib/config";
+import { SITE_CONFIG } from "@/lib/constants";
 
 export function Footer() {
   const { t } = useTranslation();
   const [currentYear, setCurrentYear] = useState<number | string>(2025);
-  const email = config.contact.email;
+  const email = SITE_CONFIG.contact.email;
 
   useEffect(() => {
     setCurrentYear(new Date().getFullYear());
@@ -35,7 +35,7 @@ export function Footer() {
               </span>
             </Link>
             <p className="text-sm text-muted-foreground mb-6">
-              {t("footer.description")}
+              {t("footer.description", { siteUrl: SITE_CONFIG.baseUrl })}
             </p>
             <div className="mb-8">
               <p className="text-xs font-semibold text-foreground uppercase tracking-wider mb-3">

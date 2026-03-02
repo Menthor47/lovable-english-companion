@@ -1,5 +1,5 @@
 import { Navigate, useLocation } from 'react-router-dom';
-import { useAuth } from '@/hooks/use-auth';
+import { useAuth, isAuthConfigured } from '@/hooks/use-auth';
 import { Loader2 } from 'lucide-react';
 
 /**
@@ -23,23 +23,18 @@ interface ProtectedRouteProps {
  * SECURITY: This component fails closed - if Firebase Auth is not configured,
  * access is denied by default to prevent accidental exposure of protected pages.
  */
-export function ProtectedRoute({ 
-    children, 
+export function ProtectedRoute({
+    children,
     redirectTo = '/login',
-    showLoading = true 
+    showLoading = true
 }: ProtectedRouteProps) {
     const location = useLocation();
-    
+
     // This will be gracefully handled by useAuth even if Firebase is not configured
     const { isAuthenticated, loading } = useAuth();
 
-    // Security check: verify Firebase is properly configured
-    const isFirebaseConfigured = !!import.meta.env.VITE_FIREBASE_API_KEY &&
-        !!import.meta.env.VITE_FIREBASE_AUTH_DOMAIN &&
-        !!import.meta.env.VITE_FIREBASE_PROJECT_ID;
-
     // If Firebase is not configured, deny access by default (fail closed)
-    if (!isFirebaseConfigured) {
+    if (!isAuthConfigured) {
         // In development, show a helpful message
         if (import.meta.env.DEV) {
             console.warn(
@@ -84,9 +79,9 @@ interface PublicRouteProps {
     redirectTo?: string;
 }
 
-export function PublicRoute({ 
-    children, 
-    redirectTo = '/dashboard' 
+export function PublicRoute({
+    children,
+    redirectTo = '/dashboard'
 }: PublicRouteProps) {
     const location = useLocation();
     const { isAuthenticated, loading } = useAuth();

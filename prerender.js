@@ -9,7 +9,7 @@ const template = fs.readFileSync(toAbsolute('dist/static/index.html'), 'utf-8');
 const { render, i18n } = await import('./dist/server/entry-server.js');
 
 // Load translations
-const enTranslations = JSON.parse(fs.readFileSync(toAbsolute('public/locales/en/translation.json'), 'utf-8'));
+const enTranslations = JSON.parse(fs.readFileSync(toAbsolute('src/locales/en/translation.json'), 'utf-8'));
 i18n.addResourceBundle('en', 'translation', enTranslations);
 i18n.changeLanguage('en');
 

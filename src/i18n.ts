@@ -3,8 +3,8 @@ import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
 // Import translations directly to bundle them and avoid 401 network errors
-import enTranslation from '../public/locales/en/translation.json';
-import roTranslation from '../public/locales/ro/translation.json';
+import enTranslation from './locales/en/translation.json';
+import roTranslation from './locales/ro/translation.json';
 
 i18n
     // detect user language

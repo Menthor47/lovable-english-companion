@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { config } from "@/lib/config";
+import { SITE_CONFIG } from "@/lib/constants";
 import { MessageCircle, Clock, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AnimatedSection, StaggerContainer, StaggerItem } from "@/components/ui/animated-section";
@@ -64,7 +64,7 @@ export function Contact() {
                   asChild
                 >
                   <a
-                    href={`https://wa.me/${config.whatsapp.number}?text=${encodeURIComponent(config.whatsapp.message)}`}
+                    href={`https://wa.me/${SITE_CONFIG.whatsapp.number}?text=${encodeURIComponent(SITE_CONFIG.whatsapp.message)}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -166,6 +166,28 @@ export function Contact() {
                     {errors.message && (
                       <p className="text-xs text-destructive ml-1">{errors.message.message}</p>
                     )}
+                  </div>
+
+                  {/* New Contact Info Section */}
+                  <div className="space-y-4 pt-4">
+                    <div className="flex gap-4 items-center">
+                      <div className="bg-primary/10 p-3 rounded-lg text-primary">
+                        <MessageCircle className="w-6 h-6" />
+                      </div>
+                      <div>
+                        <h3 className="font-bold">{t("contact.phone.title")}</h3>
+                        <p className="text-muted-foreground">{SITE_CONFIG.contact.phone}</p>
+                      </div>
+                    </div>
+                    <div className="flex gap-4 items-center">
+                      <div className="bg-primary/10 p-3 rounded-lg text-primary">
+                        <Send className="w-6 h-6" />
+                      </div>
+                      <div>
+                        <h3 className="font-bold">{t("contact.telegram.title")}</h3>
+                        <p className="text-muted-foreground">{SITE_CONFIG.social.twitter.split('/').pop()}</p>
+                      </div>
+                    </div>
                   </div>
 
                   <Button

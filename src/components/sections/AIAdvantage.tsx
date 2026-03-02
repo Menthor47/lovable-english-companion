@@ -1,6 +1,6 @@
-import { motion } from "framer-motion";
 import { CheckCircle2, Users } from "lucide-react";
-import { AnimatedSection } from "@/components/ui/animated-section";
+import { motion } from "framer-motion";
+import { AnimatedSection, StaggerContainer, StaggerItem } from "@/components/ui/animated-section";
 import { OptimizedImage } from "@/components/ui/optimized-image";
 import aiRobot from "@/assets/ai-robot.png";
 
@@ -38,23 +38,19 @@ export function AIAdvantage() {
               user behavior.
             </p>
 
-            <ul className="space-y-4">
+            <StaggerContainer className="space-y-4" staggerDelay={0.1}>
               {advantages.map((advantage, index) => (
-                <motion.li
+                <StaggerItem
                   key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: 0.1 * index }}
                   className="flex items-center gap-3 text-foreground"
                 >
                   <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
                     <CheckCircle2 className="w-4 h-4 text-primary" />
                   </div>
                   {advantage}
-                </motion.li>
+                </StaggerItem>
               ))}
-            </ul>
+            </StaggerContainer>
 
             <div className="flex items-center gap-3 pt-4">
               <div className="w-12 h-12 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center">

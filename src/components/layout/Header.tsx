@@ -244,7 +244,7 @@ type ListItemProps = Omit<LinkProps, "to"> & {
   children: ReactNode;
 };
 
-const ListItem = ({ className, title, children, href, ...props }: ListItemProps) => {
+function ListItem({ className, title, children, href, ...props }: ListItemProps) {
   return (
     <li>
       <NavigationMenuLink asChild>

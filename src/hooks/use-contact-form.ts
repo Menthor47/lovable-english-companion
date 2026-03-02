@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { api } from "@/lib/api";
 import { useToast } from "@/hooks/use-toast";
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 
 const PHONE_ALLOWED_REGEX = /^[0-9+()\-.\s]+$/;
 
@@ -72,9 +72,16 @@ export function useContactForm(options: ContactFormOptions = {}) {
     const [error, setError] = useState<string | null>(null);
     const [rateLimit, setRateLimit] = useState<RateLimitState>({ isLimited: false, retryAfter: 0 });
     const { toast } = useToast();
-    
+
     // Ref to track countdown timer
     const countdownRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+    // Cleanup interval on unmount to prevent memory leaks
+    useEffect(() => {
+        return () => {
+            if (countdownRef.current) clearInterval(countdownRef.current);
+        };
+    }, []);
 
     const {
         register,
@@ -147,6 +154,7 @@ export function useContactForm(options: ContactFormOptions = {}) {
                 email: data.email,
                 phone: data.phone || undefined,
                 website: data.website || undefined,
+                message: data.message || undefined,
                 source: options.source || "contact",
                 website2: data.website2 || undefined,
             });

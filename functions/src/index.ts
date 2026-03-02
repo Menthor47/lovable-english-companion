@@ -72,6 +72,18 @@ async function markEmailProcessed(
   });
 }
 
+async function markEmailResult(
+  collectionName: string,
+  docId: string,
+  status: { ok: boolean; reason?: string }
+): Promise<void> {
+  await db.collection(collectionName).doc(docId).update({
+    emailSent: status.ok,
+    emailSentAt: status.ok ? FieldValue.serverTimestamp() : null,
+    emailError: status.ok ? null : (status.reason ?? "unknown_error"),
+  });
+}
+
 // --- Newsletter Signup Function ---
 export const sendNewsletterConfirmation = onDocumentCreated("newsletter_signups/{docId}", async (event) => {
   const snapshot = event.data;
@@ -108,16 +120,12 @@ export const sendNewsletterConfirmation = onDocumentCreated("newsletter_signups/
       html: `<p>New subscriber: <strong>${escapeHtml(userEmail)}</strong></p>`,
     });
 
-    await db.collection("newsletter_signups").doc(docId).update({
-      emailSent: true,
-      emailSentAt: FieldValue.serverTimestamp(),
-      emailError: null,
-    });
+    await markEmailResult("newsletter_signups", docId, { ok: true });
   } catch (error) {
     logger.error("Error sending newsletter emails:", error);
-    await db.collection("newsletter_signups").doc(docId).update({
-      emailSent: false,
-      emailError: error instanceof Error ? error.message : "unknown_error",
+    await markEmailResult("newsletter_signups", docId, {
+      ok: false,
+      reason: error instanceof Error ? error.message : "unknown_error",
     });
   }
 });
@@ -172,16 +180,12 @@ export const sendContactEmails = onDocumentCreated("contact_requests/{docId}", a
       `,
     });
 
-    await db.collection("contact_requests").doc(docId).update({
-      emailSent: true,
-      emailSentAt: FieldValue.serverTimestamp(),
-      emailError: null,
-    });
+    await markEmailResult("contact_requests", docId, { ok: true });
   } catch (error) {
     logger.error("Error sending contact emails:", error);
-    await db.collection("contact_requests").doc(docId).update({
-      emailSent: false,
-      emailError: error instanceof Error ? error.message : "unknown_error",
+    await markEmailResult("contact_requests", docId, {
+      ok: false,
+      reason: error instanceof Error ? error.message : "unknown_error",
     });
   }
 });
@@ -233,16 +237,12 @@ export const sendAuditEmails = onDocumentCreated("audit_requests/{docId}", async
       `,
     });
 
-    await db.collection("audit_requests").doc(docId).update({
-      emailSent: true,
-      emailSentAt: FieldValue.serverTimestamp(),
-      emailError: null,
-    });
+    await markEmailResult("audit_requests", docId, { ok: true });
   } catch (error) {
     logger.error("Error sending audit emails:", error);
-    await db.collection("audit_requests").doc(docId).update({
-      emailSent: false,
-      emailError: error instanceof Error ? error.message : "unknown_error",
+    await markEmailResult("audit_requests", docId, {
+      ok: false,
+      reason: error instanceof Error ? error.message : "unknown_error",
     });
   }
 });
@@ -261,22 +261,36 @@ const DEFAULT_RATE_LIMIT: RateLimitConfig = {
 };
 
 export const checkRateLimit = onRequest({ cors: true }, async (req, res) => {
+  const allowedOrigins = new Set([
+    "https://agseo.pro",
+    "https://www.agseo.pro",
+  ]);
+
+  const requestOrigin = req.headers.origin;
+  if (requestOrigin && !allowedOrigins.has(requestOrigin)) {
+    res.status(403).json({
+      success: false,
+      error: "Origin not allowed",
+    });
+    return;
+  }
+
   // Extract IP from request (Express-like object in Firebase Functions)
   const forwardedFor = req.headers["x-forwarded-for"];
-  const ip = (req as { ip?: string }).ip || 
-    (Array.isArray(forwardedFor) ? forwardedFor[0] : forwardedFor?.split(",")[0]?.trim()) || 
+  const ip = (req as { ip?: string }).ip ||
+    (Array.isArray(forwardedFor) ? forwardedFor[0] : forwardedFor?.split(",")[0]?.trim()) ||
     "unknown";
   const now = Date.now();
   const windowMs = DEFAULT_RATE_LIMIT.windowSeconds * 1000;
-  
+
   try {
     // Get rate limit document
     const rateLimitRef = db.collection("rate_limits").doc(ip);
     const doc = await rateLimitRef.get();
-    
+
     let count = 1;
     let resetAt = now + windowMs;
-    
+
     if (doc.exists) {
       const data = doc.data();
       if (data && data.resetAt > now) {
@@ -285,7 +299,7 @@ export const checkRateLimit = onRequest({ cors: true }, async (req, res) => {
         resetAt = data.resetAt;
       }
     }
-    
+
     // Check if rate limited
     if (count > DEFAULT_RATE_LIMIT.maxRequests) {
       const retryAfter = Math.ceil((resetAt - now) / 1000);
@@ -297,14 +311,14 @@ export const checkRateLimit = onRequest({ cors: true }, async (req, res) => {
       });
       return;
     }
-    
+
     // Clean up stale rate limit documents (older than 2 windows)
     // This prevents accumulation of stale documents in Firestore
     const cleanupThreshold = now - (windowMs * 2); // Clean entries older than 2 windows
     const oldDocs = await db.collection("rate_limits")
       .where("resetAt", "<", cleanupThreshold)
       .get();
-    
+
     if (!oldDocs.empty) {
       const batch = db.batch();
       oldDocs.docs.forEach((doc) => {
@@ -313,14 +327,14 @@ export const checkRateLimit = onRequest({ cors: true }, async (req, res) => {
       await batch.commit();
       logger.info(`Cleaned up ${oldDocs.size} stale rate limit documents`);
     }
-    
+
     // Update rate limit document
     await rateLimitRef.set({
       count,
       resetAt,
       lastRequest: FieldValue.serverTimestamp(),
     }, { merge: true });
-    
+
     res.status(200).json({
       success: true,
       remaining: Math.max(0, DEFAULT_RATE_LIMIT.maxRequests - count),
@@ -331,8 +345,8 @@ export const checkRateLimit = onRequest({ cors: true }, async (req, res) => {
     // On error, fail closed for security - deny the request
     const retryAfter = 60;
     res.set("Retry-After", String(retryAfter));
-    res.status(500).json({ 
-      success: false, 
+    res.status(500).json({
+      success: false,
       error: "Rate limit unavailable",
       retryAfter,
     });

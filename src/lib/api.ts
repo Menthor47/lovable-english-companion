@@ -14,14 +14,6 @@ import { db } from "./firebase";
 import { collection, addDoc, serverTimestamp, Firestore } from "firebase/firestore";
 
 /**
- * Rate limit configuration from environment
- */
-const RATE_LIMIT_CONFIG = {
-    maxRequests: parseInt(import.meta.env.VITE_RATE_LIMIT_MAX || '8', 10),
-    windowSeconds: parseInt(import.meta.env.VITE_RATE_LIMIT_WINDOW_SECONDS || '600', 10),
-};
-
-/**
  * Check rate limit before making a request
  * Calls the Firebase Cloud Function for server-side rate limiting
  */
@@ -35,19 +27,19 @@ async function checkRateLimit(): Promise<{ allowed: boolean; retryAfter?: number
         // Try to call the rate limit Cloud Function
         // Note: You'll need to deploy the checkRateLimit function and configure its URL
         const rateLimitUrl = import.meta.env.VITE_RATE_LIMIT_FUNCTION_URL;
-        
+
         if (rateLimitUrl) {
             const response = await fetch(rateLimitUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
             });
-            
+
             if (response.status === 429) {
                 const data = await response.json();
                 return { allowed: false, retryAfter: data.retryAfter };
             }
         }
-        
+
         // If no rate limit URL configured, allow request
         return { allowed: true };
     } catch (error) {
@@ -90,8 +82,8 @@ export const api = {
             // Check rate limit first
             const rateCheck = await checkRateLimit();
             if (!rateCheck.allowed) {
-                return { 
-                    success: false, 
+                return {
+                    success: false,
                     message: `Too many requests. Please wait ${rateCheck.retryAfter} seconds before trying again.`,
                     error: `Too many requests - retry after ${rateCheck.retryAfter} second`
                 };
@@ -103,8 +95,8 @@ export const api = {
             if (!isConfigured) {
                 console.warn("[AGSEO] Firebase not configured. Using demo mode.");
                 await new Promise((resolve) => setTimeout(resolve, 1500));
-                return { 
-                    success: true, 
+                return {
+                    success: true,
                     message: "Message sent! (Demo Mode - Firebase Not Configured)"
                 };
             }
@@ -112,8 +104,8 @@ export const api = {
             // Check if Firestore is initialized
             if (!db) {
                 console.error("[AGSEO] Firestore is not initialized.");
-                return { 
-                    success: false, 
+                return {
+                    success: false,
                     message: "Database not available. Please try again later."
                 };
             }
@@ -136,8 +128,8 @@ export const api = {
                     emailSentAt: null,
                 });
 
-                return { 
-                    success: true, 
+                return {
+                    success: true,
                     message: "Message sent successfully! We'll get back to you shortly."
                 };
 

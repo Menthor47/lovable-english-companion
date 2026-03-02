@@ -43,6 +43,10 @@ export function PageLayout({
   const pageTitle = title || ogTitle || twitterTitle;
   const pageDescription = description || ogDescription || twitterDescription;
   const pageImage = ogImage || twitterImage;
+  const resolvedOgTitle = ogTitle || pageTitle;
+  const resolvedOgDescription = ogDescription || pageDescription;
+  const resolvedTwitterTitle = twitterTitle || pageTitle;
+  const resolvedTwitterDescription = twitterDescription || pageDescription;
 
   return (
     <>
@@ -52,19 +56,19 @@ export function PageLayout({
           {pageDescription && <meta name="description" content={pageDescription} />}
           {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
           {noIndex && <meta name="robots" content="noindex, nofollow" />}
-          
+
           {/* Open Graph */}
-          {ogTitle && <meta property="og:title" content={ogTitle} />}
-          {ogDescription && <meta property="og:description" content={ogDescription} />}
-          {ogImage && <meta property="og:image" content={ogImage} />}
+          {resolvedOgTitle && <meta property="og:title" content={resolvedOgTitle} />}
+          {resolvedOgDescription && <meta property="og:description" content={resolvedOgDescription} />}
+          {pageImage && <meta property="og:image" content={pageImage} />}
           {ogType && <meta property="og:type" content={ogType} />}
           {(ogUrl || canonicalUrl) && <meta property="og:url" content={ogUrl || canonicalUrl} />}
-          
+
           {/* Twitter Card */}
           <meta name="twitter:card" content={twitterCard} />
-          {twitterTitle && <meta name="twitter:title" content={twitterTitle} />}
-          {twitterDescription && <meta name="twitter:description" content={twitterDescription} />}
-          {twitterImage && <meta name="twitter:image" content={twitterImage} />}
+          {resolvedTwitterTitle && <meta name="twitter:title" content={resolvedTwitterTitle} />}
+          {resolvedTwitterDescription && <meta name="twitter:description" content={resolvedTwitterDescription} />}
+          {pageImage && <meta name="twitter:image" content={pageImage} />}
         </Helmet>
       )}
       <div className="min-h-screen bg-background flex flex-col">

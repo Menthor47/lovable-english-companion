@@ -34,7 +34,7 @@
     "rules": "storage.rulez"
   },
   "hosting": {
-    "public": "dist",
+    "public": "dist/static",
     "ignore": [
       "firebase.json",
       "**/.*",

@@ -17,6 +17,7 @@ const Dashboard = lazy(() => import("@/pages/Dashboard"));
 const CaseStudies = lazy(() => import("@/pages/CaseStudies"));
 const CaseStudy = lazy(() => import("@/pages/CaseStudy"));
 const Glossary = lazy(() => import("@/pages/Glossary"));
+const GlossaryDetail = lazy(() => import("@/pages/GlossaryDetail"));
 const ContentService = lazy(() => import("@/pages/ContentService"));
 const ROICalculator = lazy(() => import("@/pages/ROICalculator"));
 const Pricing = lazy(() => import("@/pages/Pricing"));
@@ -68,6 +69,7 @@ export function AnimatedRoutes() {
                 <Route path="/case-studies" element={<CaseStudies />} />
                 <Route path="/case-studies/:id" element={<CaseStudy />} />
                 <Route path="/resources/glossary" element={<Glossary />} />
+                <Route path="/resources/glossary/:slug" element={<GlossaryDetail />} />
                 <Route path="/services" element={<Services />} />
                 <Route path="/services/content" element={<ContentService />} />
                 <Route path="/tools/roi-calculator" element={<ROICalculator />} />

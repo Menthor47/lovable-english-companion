@@ -1,4 +1,4 @@
-import { Header } from "@/components/layout/Header";
+import { PageLayout } from "@/components/layout/PageLayout";
 import { Hero } from "@/components/sections/Hero";
 import { Partners } from "@/components/sections/Partners";
 import { WhyChooseUs } from "@/components/sections/WhyChooseUs";
@@ -12,11 +12,8 @@ import { BlogPreview } from "@/components/sections/BlogPreview";
 import { FAQ } from "@/components/sections/FAQ";
 import { Contact } from "@/components/sections/Contact";
 import { Newsletter } from "@/components/sections/Newsletter";
-import { Footer } from "@/components/layout/Footer";
-import { Helmet } from "react-helmet-async";
 import { SITE_OG_IMAGE_URL, getAbsoluteUrl } from "@/lib/siteMetadata";
 import { StructuredData } from "@/components/seo/StructuredData";
-
 import { useTranslation } from "react-i18next";
 
 const Index = () => {
@@ -24,17 +21,12 @@ const Index = () => {
   const pageUrl = getAbsoluteUrl("/");
 
   return (
-    <div className="min-h-screen bg-background">
-      <Helmet>
-        <html lang="en" />
-        <title>{t("hero.metaTitle")}</title>
-        <meta name="description" content={t("hero.metaDescription")} />
-        <link rel="canonical" href={pageUrl} />
-        <meta property="og:url" content={pageUrl} />
-        <meta property="og:title" content={t("hero.metaTitle")} />
-        <meta property="og:description" content={t("hero.metaDescription")} />
-        <meta property="og:image" content={SITE_OG_IMAGE_URL} />
-      </Helmet>
+    <PageLayout
+      title={t("hero.metaTitle")}
+      description={t("hero.metaDescription")}
+      canonicalUrl={pageUrl}
+      ogImage={SITE_OG_IMAGE_URL}
+    >
       <StructuredData />
       <a
         href="#main"
@@ -42,24 +34,20 @@ const Index = () => {
       >
         Skip to main content
       </a>
-      <Header />
-      <main id="main">
-        <Hero />
-        <Partners />
-        <WhyChooseUs />
-        <Services />
-        <Process />
-        <AIAdvantage />
-        <Testimonials />
-        <Stats />
-        <AdvancedServices />
-        <BlogPreview />
-        <FAQ />
-        <Contact />
-        <Newsletter className="container mx-auto px-4 py-24" />
-      </main>
-      <Footer />
-    </div>
+      <Hero />
+      <Partners />
+      <WhyChooseUs />
+      <Services />
+      <Process />
+      <AIAdvantage />
+      <Testimonials />
+      <Stats />
+      <AdvancedServices />
+      <BlogPreview />
+      <FAQ />
+      <Contact />
+      <Newsletter className="container mx-auto px-4 py-24" />
+    </PageLayout>
   );
 };
 

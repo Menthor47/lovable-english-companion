@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
-import { 
-    getAuth, 
-    signInWithEmailAndPassword, 
-    signOut, 
+import {
+    getAuth,
+    signInWithEmailAndPassword,
+    signOut,
     onAuthStateChanged,
     User,
     AuthError
@@ -14,8 +14,8 @@ import { app } from '@/lib/firebase';
 /**
  * Check if Firebase Auth is configured and available
  */
-const isAuthConfigured = typeof window !== 'undefined' && 
-    !!app && 
+export const isAuthConfigured = typeof window !== 'undefined' &&
+    !!app &&
     !!import.meta.env.VITE_FIREBASE_API_KEY &&
     !!import.meta.env.VITE_FIREBASE_AUTH_DOMAIN &&
     !!import.meta.env.VITE_FIREBASE_PROJECT_ID;

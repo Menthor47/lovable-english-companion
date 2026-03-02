@@ -1,5 +1,6 @@
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import { ArrowRight, Sparkles, Zap, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AnimatedBackground } from "@/components/ui/animated-background";
@@ -13,7 +14,17 @@ import { useAnalytics } from "@/hooks/useAnalytics";
 export function Hero() {
   const { t } = useTranslation();
   const { trackClick } = useAnalytics();
-  usePrefersReducedMotion();
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const controls = useAnimation();
+
+  useEffect(() => {
+    controls.start("visible");
+    // Safety timer for Hero entries
+    const timer = setTimeout(() => {
+      controls.set({ opacity: 1, y: 0, scale: 1, rotateY: 0 });
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [controls]);
 
   const stats = [
     { value: t("hero.stats.ai.value"), label: t("hero.stats.ai.label") },
@@ -54,7 +65,11 @@ export function Hero() {
             {/* Headline */}
             <div className="relative">
               <motion.h1
-                animate={{ opacity: 1, y: 0 }}
+                initial={prefersReducedMotion ? undefined : { opacity: 0, y: 20 }}
+                animate={controls}
+                variants={{
+                  visible: { opacity: 1, y: 0 }
+                }}
                 transition={{ duration: 0.6, delay: 0.1 }}
                 className="font-heading text-4xl md:text-5xl lg:text-7xl font-bold leading-tight tracking-tight"
               >
@@ -103,12 +118,15 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="flex flex-wrap gap-4"
             >
-              {features.map((feature, index) => (
+              {features.map((feature) => (
                 <motion.div
-                  key={index}
+                  key={feature.label}
                   initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.4, delay: 0.5 + index * 0.1 }}
+                  animate={controls}
+                  variants={{
+                    visible: { opacity: 1, scale: 1 }
+                  }}
+                  transition={{ duration: 0.4, delay: 0.5 + features.indexOf(feature) * 0.1 }}
                   className="flex items-center gap-2 px-4 py-2 rounded-lg bg-card/40 border border-white/5 backdrop-blur-md hover:border-primary/30 transition-colors"
                 >
                   <feature.icon className="w-4 h-4 text-primary" />
@@ -148,7 +166,7 @@ export function Hero() {
                   <div className="grid grid-cols-3 gap-3">
                     {stats.map((stat, index) => (
                       <motion.div
-                        key={index}
+                        key={stat.label}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}

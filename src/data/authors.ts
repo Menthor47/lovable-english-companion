@@ -1,5 +1,5 @@
 // Author profiles for E-E-A-T signals
-import { config } from "@/lib/config";
+import { SITE_CONFIG } from "@/lib/constants";
 
 export interface Author {
     id: string;
@@ -18,7 +18,7 @@ export interface Author {
 export const authors: Author[] = [
     {
         id: "agseo-team",
-        
+
         name: "AGSEO Editorial",
         role: "Research & Strategy Team",
         bio: "Our editorial team combines hands-on SEO practitioners, AI engineers, and content strategists. Every piece we publish is reviewed for accuracy and aligned with current best practices.",
@@ -29,8 +29,8 @@ export const authors: Author[] = [
             "Active practitioners across e-commerce, SaaS, and local SEO"
         ],
         socialLinks: {
-            linkedin: config.social.linkedin,
-            twitter: config.social.twitter
+            linkedin: SITE_CONFIG.social.linkedin,
+            twitter: SITE_CONFIG.social.twitter
         }
     }
 ];

@@ -1,7 +1,7 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Helmet } from "react-helmet-async";
-import { config } from "@/lib/config";
+import { SITE_CONFIG } from "@/lib/constants";
 import { SITE_OG_IMAGE_URL, getAbsoluteUrl } from "@/lib/siteMetadata";
 
 interface CookiePolicySubsection {
@@ -16,7 +16,7 @@ interface CookiePolicySection {
 }
 
 export default function CookiePolicy() {
-    const email = config.contact.email;
+    const email = SITE_CONFIG.contact.email;
     const pageUrl = getAbsoluteUrl("/cookies");
 
     const sections: CookiePolicySection[] = [

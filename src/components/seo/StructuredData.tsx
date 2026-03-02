@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet-async";
-import { config } from "@/lib/config";
+import { SITE_CONFIG } from "@/lib/constants";
 
 const DEFAULT_PHONE = "+15550123456";
 const DEFAULT_STREET = "123 SEO Street";
@@ -14,12 +14,12 @@ function isPlaceholderAddress(street: string, city: string): boolean {
 }
 
 export function StructuredData() {
-    const sameAs = [config.social.twitter, config.social.linkedin].filter(Boolean);
+    const sameAs = [SITE_CONFIG.social.twitter, SITE_CONFIG.social.linkedin].filter(Boolean);
 
-    const hasValidPhone = !isPlaceholderPhone(config.contact.phone);
+    const hasValidPhone = !isPlaceholderPhone(SITE_CONFIG.contact.phone);
     const hasValidAddress = !isPlaceholderAddress(
-        config.contact.address.street,
-        config.contact.address.city,
+        SITE_CONFIG.contact.address.street,
+        SITE_CONFIG.contact.address.city,
     );
 
     const schema: Record<string, unknown> = {
@@ -27,24 +27,24 @@ export function StructuredData() {
         "@type": hasValidAddress ? "LocalBusiness" : "ProfessionalService",
         "name": "AGSEO",
         "description": "AGSEO combines AI with proven SEO strategies to multiply your visibility and conversions.",
-        "url": config.contact.siteUrl,
-        "image": `${config.contact.siteUrl}/og-image.png`,
+        "url": SITE_CONFIG.baseUrl,
+        "image": `${SITE_CONFIG.baseUrl}/og-image.png`,
     };
 
     if (hasValidPhone) {
-        schema.telephone = config.contact.phone;
+        schema.telephone = SITE_CONFIG.contact.phone;
     }
 
-    if (config.contact.email) {
-        schema.email = config.contact.email;
+    if (SITE_CONFIG.contact.email) {
+        schema.email = SITE_CONFIG.contact.email;
     }
 
     if (hasValidAddress) {
         schema.address = {
             "@type": "PostalAddress",
-            streetAddress: config.contact.address.street,
-            addressLocality: config.contact.address.city,
-            addressCountry: config.contact.address.country,
+            streetAddress: SITE_CONFIG.contact.address.street,
+            addressLocality: SITE_CONFIG.contact.address.city,
+            addressCountry: SITE_CONFIG.contact.address.country,
         };
     }
 

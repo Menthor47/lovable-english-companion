@@ -1,7 +1,6 @@
 import { Shield, Target, Award, Zap } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { AnimatedSection, StaggerContainer, StaggerItem, ScaleOnHover } from "@/components/ui/animated-section";
-import { motion } from "framer-motion";
 
 const reasonIcons = [Shield, Target, Award, Zap];
 const reasonKeys = ["exclusive", "aiFirst", "proven", "sustainable"] as const;
@@ -50,11 +49,8 @@ export function WhyChooseUs() {
         </StaggerContainer>
 
         {/* Technology Partners Trust Stack */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+        <AnimatedSection
+          delay={0.4}
           className="mt-20 pt-10 border-t border-border/50 text-center"
         >
           <p className="text-sm text-muted-foreground uppercase tracking-wider mb-6">
@@ -75,7 +71,7 @@ export function WhyChooseUs() {
               <span className="text-2xl font-bold">G</span> Google Cloud
             </div>
           </div>
-        </motion.div>
+        </AnimatedSection>
       </div>
     </section>
   );
