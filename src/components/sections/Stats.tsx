@@ -16,7 +16,8 @@ const statValues = [
 function AnimatedNumber({ value, suffix }: { value: number; suffix: string }) {
   const [displayValue, setDisplayValue] = useState(0);
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  // Vertical margin only: a side margin keeps left-column counters at 0 on narrow screens.
+  const isInView = useInView(ref, { once: true, margin: "-100px 0px" });
 
   useEffect(() => {
     if (!isInView) return;
