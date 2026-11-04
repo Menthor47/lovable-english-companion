@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Search, CheckCircle, ShieldCheck, Zap, BarChart3, Globe, Sparkles } from "lucide-react";
+import { Search, CheckCircle, BarChart3, Globe, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
 import { api } from "@/lib/api";
@@ -275,30 +275,6 @@ export default function Audit() {
                                                 {simulationSteps[currentSimulationStep]}
                                             </motion.p>
                                         </AnimatePresence>
-                                    </div>
-
-                                    <div className="grid grid-cols-3 gap-4 pt-10">
-                                        {[
-                                            { icon: Globe, label: "SEO", value: "92" },
-                                            { icon: Zap, label: "Perf", value: "88" },
-                                            { icon: ShieldCheck, label: "GEO", value: "Ready" }
-                                        ].map((stat, i) => (stat.label === "GEO" && progress < 80) ? (
-                                            <div key={i} className="flex flex-col items-center opacity-20">
-                                                <stat.icon className="w-5 h-5 mb-2" />
-                                                <div className="text-[10px] uppercase tracking-widest text-muted-foreground">{stat.label}</div>
-                                            </div>
-                                        ) : (
-                                            <motion.div
-                                                key={i}
-                                                initial={{ opacity: 0 }}
-                                                animate={{ opacity: 1 }}
-                                                className="flex flex-col items-center"
-                                            >
-                                                <stat.icon className="w-5 h-5 mb-2 text-primary" />
-                                                <div className="font-bold text-lg">{stat.value}</div>
-                                                <div className="text-[10px] uppercase tracking-widest text-muted-foreground">{stat.label}</div>
-                                            </motion.div>
-                                        ))}
                                     </div>
                                 </div>
                             </motion.div>
