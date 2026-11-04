@@ -26,7 +26,7 @@
 
 - Firestore deny-by-default with constrained public create rules.
 - CSP and security headers are defined only in `vercel.json`, which isn't used, so they aren't applied on the live Apache site.
-- Rate-limit endpoint with origin checks. The client calls it only when `VITE_RATE_LIMIT_FUNCTION_URL` is set.
+- Best-effort, client-side rate-limit check using an endpoint with origin checks. The client calls it only when `VITE_RATE_LIMIT_FUNCTION_URL` is set. It doesn't limit direct creates to the public Firestore collections, which `firestore.rules` still allows.
 
 ## Known Improvement Tracks
 
