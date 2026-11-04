@@ -345,19 +345,21 @@
         "subtitle": "See how visible your brand is on Google, ChatGPT, and Gemini — and get prioritized next steps.",
         "form": {
             "urlLabel": "Website URL",
-            "urlPlaceholder": "https://example.com",
+            "urlPlaceholder": "yourcompany.com",
             "emailLabel": "Email address",
             "emailPlaceholder": "you@company.com",
             "phoneLabel": "Phone number (optional)",
             "phonePlaceholder": "+1 555 123 4567",
             "submitCta": "Get My Free Audit",
+            "submitting": "Sending your request...",
             "note": "You’ll receive a confirmation email now. Your audit summary follows after review."
         },
         "toast": {
-            "missingTitle": "Missing Information",
-            "missingDescription": "Please enter both a website URL and your email address.",
-            "errorTitle": "Error",
-            "errorDescription": "Could not start the audit. Please try again."
+            "invalidTitle": "Check your details",
+            "invalidUrl": "Enter your website address, for example yourcompany.com.",
+            "invalidEmail": "Enter a valid email address, for example you@company.com.",
+            "errorTitle": "Your request wasn’t sent",
+            "errorDescription": "Check your connection and try again. Your details are still in the form."
         },
         "results": {
             "title": "Request Received!",
