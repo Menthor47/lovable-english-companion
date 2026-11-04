@@ -1,5 +1,5 @@
 import { act, fireEvent, render, screen } from "@testing-library/react";
-import type { ReactNode } from "react";
+import { createElement, type ReactNode } from "react";
 import { MemoryRouter } from "react-router-dom";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import Audit from "./Audit";
@@ -14,6 +14,23 @@ vi.mock("@/lib/api", () => ({ api: { contact: { submit } } }));
 vi.mock("@/hooks/use-toast", () => ({ useToast: () => ({ toast, dismiss }) }));
 vi.mock("@/components/layout/PageLayout", () => ({
     PageLayout: ({ children }: { children: ReactNode }) => <main>{children}</main>,
+}));
+// Exit animations don't finish in jsdom, which would keep the form on screen.
+vi.mock("framer-motion", () => ({
+    AnimatePresence: ({ children }: { children: ReactNode }) => <>{children}</>,
+    motion: new Proxy(
+        {},
+        {
+            get: (_target, tag: string) =>
+                ({
+                    children,
+                    className,
+                }: {
+                    children?: ReactNode;
+                    className?: string;
+                }) => createElement(tag, { className }, children),
+        },
+    ),
 }));
 vi.mock("react-i18next", () => ({
     useTranslation: () => ({
@@ -49,6 +66,17 @@ describe("Audit form", () => {
         fillAndSubmit(" acme.com ");
         await act(async () => {});
         expect(submit).toHaveBeenCalledWith(expect.objectContaining({ website: "https://acme.com/", source: "audit" }));
+    });
+
+    it("shows the submitted details on the confirmation screen", async () => {
+        submit.mockResolvedValue({ success: true });
+        fillAndSubmit(" acme.com ", " test@example.com ");
+        await act(async () => {});
+
+        expect(screen.getByText("auditTool.results.title")).toBeTruthy();
+        expect(screen.getByText("acme.com")).toBeTruthy();
+        expect(screen.getByText("test@example.com")).toBeTruthy();
+        expect(screen.queryByLabelText("auditTool.form.urlLabel")).toBeNull();
     });
 
     it("rejects an unusable website without sending", async () => {
