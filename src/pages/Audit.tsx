@@ -17,10 +17,12 @@ import { GlassCard } from "@/components/ui/glass-card";
 // A Firestore write never settles while offline, so give up rather than spin forever.
 const SUBMIT_TIMEOUT_MS = 15000;
 
+class SubmitTimeoutError extends Error {}
+
 function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
     let timer: ReturnType<typeof setTimeout>;
     const timeout = new Promise<never>((_, reject) => {
-        timer = setTimeout(() => reject(new Error("Request timed out")), ms);
+        timer = setTimeout(() => reject(new SubmitTimeoutError("Request timed out")), ms);
     });
     return Promise.race([promise, timeout]).finally(() => clearTimeout(timer));
 }
@@ -96,9 +98,11 @@ export default function Audit() {
             }
         } catch (error) {
             console.error("Audit submission failed:", error);
+            // A timed-out write can still succeed later, so don't call it a failure.
+            const timedOut = error instanceof SubmitTimeoutError;
             toast({
-                title: t("auditTool.toast.errorTitle"),
-                description: t("auditTool.toast.errorDescription"),
+                title: t(timedOut ? "auditTool.toast.timeoutTitle" : "auditTool.toast.errorTitle"),
+                description: t(timedOut ? "auditTool.toast.timeoutDescription" : "auditTool.toast.errorDescription"),
                 variant: "destructive",
             });
             return;
@@ -171,6 +175,7 @@ export default function Audit() {
                                                 <Globe className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                                                 <Input
                                                     id="url"
+                                                    readOnly={isSubmitting}
                                                     inputMode="url"
                                                     autoComplete="url"
                                                     autoCapitalize="none"
@@ -189,6 +194,7 @@ export default function Audit() {
                                                 <Input
                                                     id="email"
                                                     type="email"
+                                                    readOnly={isSubmitting}
                                                     autoComplete="email"
                                                     placeholder={t("auditTool.form.emailPlaceholder")}
                                                     value={formData.email}
@@ -202,6 +208,7 @@ export default function Audit() {
                                                 <Input
                                                     id="phone"
                                                     type="tel"
+                                                    readOnly={isSubmitting}
                                                     autoComplete="tel"
                                                     placeholder={t("auditTool.form.phonePlaceholder")}
                                                     value={formData.phone}

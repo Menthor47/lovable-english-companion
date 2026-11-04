@@ -388,7 +388,9 @@
             "invalidUrl": "Scrie adresa site-ului, de exemplu firmata.ro.",
             "invalidEmail": "Scrie o adresă de email validă, de exemplu tu@firmata.ro.",
             "errorTitle": "Cererea nu a fost trimisă",
-            "errorDescription": "Verifică conexiunea și încearcă din nou. Datele tale au rămas în formular."
+            "errorDescription": "Verifică conexiunea și încearcă din nou. Datele tale au rămas în formular.",
+            "timeoutTitle": "Nu am putut confirma cererea",
+            "timeoutDescription": "Este posibil să ajungă totuși la noi. Verifică emailul de confirmare înainte să încerci din nou."
         },
         "results": {
             "title": "Cerere primită!",

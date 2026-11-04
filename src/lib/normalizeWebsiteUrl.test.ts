@@ -27,6 +27,8 @@ describe("normalizeWebsiteUrl", () => {
         "127.0.0.1",
         "localhost",
         "acme.c",
+        "acme..com",
+        ".acme.com",
     ])("rejects %j", (input) => {
         expect(normalizeWebsiteUrl(input)).toBeNull();
     });

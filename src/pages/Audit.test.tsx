@@ -76,6 +76,9 @@ describe("Audit form", () => {
         const button = screen.getByRole("button", { name: "auditTool.form.submitting" });
         expect(button).toHaveProperty("disabled", true);
         expect(button.getAttribute("aria-busy")).toBe("true");
+        expect(screen.getByLabelText("auditTool.form.urlLabel")).toHaveProperty("readOnly", true);
+        expect(screen.getByLabelText("auditTool.form.emailLabel")).toHaveProperty("readOnly", true);
+        expect(screen.getByLabelText("auditTool.form.phoneLabel")).toHaveProperty("readOnly", true);
     });
 
     it("clears an old error when a valid request starts", async () => {
@@ -102,7 +105,9 @@ describe("Audit form", () => {
             await vi.advanceTimersByTimeAsync(15000);
         });
 
-        expect(toast).toHaveBeenCalledWith(expect.objectContaining({ title: "auditTool.toast.errorTitle" }));
+        expect(toast).toHaveBeenCalledWith(expect.objectContaining({ title: "auditTool.toast.timeoutTitle" }));
+        expect((screen.getByLabelText("auditTool.form.urlLabel") as HTMLInputElement).value).toBe("acme.com");
+        expect((screen.getByLabelText("auditTool.form.emailLabel") as HTMLInputElement).value).toBe("test@example.com");
         expect(screen.getByRole("button", { name: "auditTool.form.submitCta" })).toHaveProperty("disabled", false);
     });
 });

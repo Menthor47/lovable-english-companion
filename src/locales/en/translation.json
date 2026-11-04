@@ -359,7 +359,9 @@
             "invalidUrl": "Enter your website address, for example yourcompany.com.",
             "invalidEmail": "Enter a valid email address, for example you@company.com.",
             "errorTitle": "Your request wasn’t sent",
-            "errorDescription": "Check your connection and try again. Your details are still in the form."
+            "errorDescription": "Check your connection and try again. Your details are still in the form.",
+            "timeoutTitle": "We couldn’t confirm your request",
+            "timeoutDescription": "It may still reach us. Check your email for a confirmation before trying again."
         },
         "results": {
             "title": "Request Received!",

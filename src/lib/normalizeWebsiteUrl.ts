@@ -18,7 +18,9 @@ export function normalizeWebsiteUrl(input: string): string | null {
     if (url.protocol !== "https:" && url.protocol !== "http:") return null;
     // An email address parses as a URL with a username, so reject it here.
     if (url.username || url.password) return null;
-    // A real public address has a dot and a top-level domain of at least two characters.
+    // A real public address has no empty labels ("acme..com") and a top-level domain
+    // of at least two characters.
+    if (url.hostname.split(".").some((label) => !label)) return null;
     if (!/\.[^.\d][^.]+$/.test(url.hostname)) return null;
 
     return url.href;
