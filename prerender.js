@@ -43,6 +43,11 @@ if (!routesToPrerender.includes('/404')) {
     routesToPrerender.push('/404');
 }
 
+// App routes left out of the sitemap still need an entry page, or static hosts
+// return 404 when they're opened directly or reloaded. Keep them out of search.
+const noindexRoutes = new Set(['/login', '/dashboard']);
+routesToPrerender.push(...noindexRoutes);
+
 console.log(`Prerendering ${routesToPrerender.length} routes...`);
 
 (async () => {
@@ -62,7 +67,9 @@ console.log(`Prerendering ${routesToPrerender.length} routes...`);
             const scriptTags = helmet.script.toString();
 
             // Replace title placeholder
-            html = html.replace(/<!--seo-title-->.*?<!--\/seo-title-->/s, titleTag);
+            // Pages without a Helmet title keep the template's default
+            const hasTitle = />[^<]+</.test(titleTag);
+            html = html.replace(/<!--seo-title-->(.*?)<!--\/seo-title-->/s, hasTitle ? titleTag : '$1');
 
             // Replace description - extract from helmet meta or remove placeholder markers
             const descMatch = metaTags.match(/<meta[^>]*name="description"[^>]*>/);
@@ -74,7 +81,9 @@ console.log(`Prerendering ${routesToPrerender.length} routes...`);
             }
 
             // Replace robots placeholder if Helmet provides one (e.g., noindex pages)
-            const robotsMatch = metaTags.match(/<meta[^>]*name="robots"[^>]*>/);
+            const robotsMatch = noindexRoutes.has(url)
+                ? ['<meta name="robots" content="noindex, nofollow">']
+                : metaTags.match(/<meta[^>]*name="robots"[^>]*>/);
             if (robotsMatch) {
                 html = html.replace(/<!--seo-robots-->.*?<!--\/seo-robots-->/s, robotsMatch[0]);
             } else {

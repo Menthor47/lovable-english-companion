@@ -359,16 +359,6 @@
             "errorTitle": "Error",
             "errorDescription": "Could not start the audit. Please try again."
         },
-        "scanning": {
-            "title": "Analyzing {{url}}...",
-            "steps": [
-                "Reviewing technical foundation...",
-                "Checking structured data & schema...",
-                "Evaluating entity and topical coverage...",
-                "Looking for AI citation opportunities (AEO/GEO)...",
-                "Preparing prioritized quick wins..."
-            ]
-        },
         "results": {
             "title": "Request Received!",
             "receivedPrefix": "We received your audit request for",
@@ -380,7 +370,7 @@
                 "We identify quick wins for SEO + GEO + AEO.",
                 "We email you next steps and recommended actions."
             ],
-            "scanAnotherCta": "Scan Another Website"
+            "requestAnotherCta": "Request Another Audit"
         }
     },
     "process": {

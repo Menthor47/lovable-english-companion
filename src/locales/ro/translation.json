@@ -388,16 +388,6 @@
             "errorTitle": "Eroare",
             "errorDescription": "Nu am putut porni auditul. Te rugăm să încerci din nou."
         },
-        "scanning": {
-            "title": "Analizăm {{url}}...",
-            "steps": [
-                "Verificăm fundația tehnică...",
-                "Analizăm date structurate & schema...",
-                "Evaluăm entități și acoperirea topicurilor...",
-                "Căutăm oportunități de citare în AI (AEO/GEO)...",
-                "Pregătim quick wins prioritizate..."
-            ]
-        },
         "results": {
             "title": "Cerere primită!",
             "receivedPrefix": "Am primit cererea ta de audit pentru",
@@ -409,7 +399,7 @@
                 "Identificăm quick wins pentru SEO + GEO + AEO.",
                 "Îți trimitem pe email pașii următori și recomandările."
             ],
-            "scanAnotherCta": "Scanează alt site"
+            "requestAnotherCta": "Solicită alt audit"
         }
     },
     "process": {
