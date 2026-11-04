@@ -6,7 +6,7 @@
 - Routing: React Router
 - State/async: React Query + local hooks
 - Backend: Firebase (Firestore + Functions)
-- Hosting: static output (`dist/static`) + SPA rewrites
+- Hosting: static output (`dist/static`), uploaded by hand to Apache; routing and cache rules are in `public/.htaccess`
 
 ## Rendering Strategy
 
@@ -18,15 +18,15 @@
 ## Data Flow (Lead Capture)
 
 1. UI form components collect input.
-2. `use-contact-form` validates input and calls `api.contact.submit`.
+2. The form (`use-contact-form` or `src/pages/Audit.tsx`) validates input and calls `api.contact.submit`.
 3. Firestore write to `contact_requests` / `audit_requests`.
 4. Firebase Functions trigger email workflows.
 
 ## Security Controls (Current)
 
 - Firestore deny-by-default with constrained public create rules.
-- CSP and security headers in `vercel.json`.
-- Rate-limit endpoint with origin checks.
+- CSP and security headers are defined only in `vercel.json`, which isn't used, so they aren't applied on the live Apache site.
+- Rate-limit endpoint with origin checks. The client calls it only when `VITE_RATE_LIMIT_FUNCTION_URL` is set.
 
 ## Known Improvement Tracks
 
