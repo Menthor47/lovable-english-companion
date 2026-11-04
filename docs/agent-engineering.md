@@ -98,7 +98,7 @@ Workflow selection: Default for matching tasks (selected by the project owner, 2
 | Apache-style test server script | Proposed | No adoption decision | Makes ENG-3 repeatable |
 | Stop tracking `.env` | Proposed | No adoption decision | Resolves the ENG-2 exception |
 | Security headers on Apache | Proposed | No adoption decision | The content security policy exists only in `vercel.json`, so it isn't applied live |
-| Configure the rate-limit function URL | Proposed | No adoption decision | `checkRateLimit` exists, but the client allows every request when the URL is unset |
+| Configure the rate-limit function URL | Proposed | No adoption decision | `checkRateLimit` exists, but the client allows every request when the URL is unset. Even when set, it's a client-side check and doesn't limit direct Firestore creates |
 | Prerender glossary pages | Proposed | No adoption decision | Resolves the ENG-3 exception; adds pages to search |
 | Remove unused files | Proposed | No adoption decision | `agseoofirebase/`, `agseo.zip`, `bun.lockb`, `cmd`, `vercel.json`, `public/_redirects`, `.windsurf/rules/r1.md` |
 | Branch protection requiring CI on `main` | Proposed | No adoption decision | Would stop broken builds merging; needs a repository settings change |
