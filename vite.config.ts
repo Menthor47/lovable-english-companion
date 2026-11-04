@@ -226,6 +226,12 @@ export default defineConfig(({ mode: _mode }) => ({
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'pwa-192x192.png', 'pwa-512x512.png'],
+      // Every route is prerendered to real HTML, so navigations must go to the
+      // network. The default fallback would serve the homepage for every URL.
+      workbox: {
+        navigateFallback: null,
+        globPatterns: ['**/*.{js,css}'],
+      },
       manifest: {
         name: 'AGSEO - AI SEO Agency',
         short_name: 'AGSEO',
@@ -256,22 +262,22 @@ export default defineConfig(({ mode: _mode }) => ({
   build: {
     rollupOptions: {
       output: {
+        // Match exact packages and leave everything else to Rollup. A catch-all
+        // vendor chunk made vendor and vendor-react import each other, so vendor
+        // could run before React existed and crash the whole app on load.
         manualChunks: (id) => {
-          if (id.includes("node_modules")) {
-            if (id.includes("react") || id.includes("react-dom") || id.includes("react-router-dom") || id.includes("react-helmet-async")) {
-              return "vendor-react";
-            }
-            if (id.includes("framer-motion")) {
-              return "vendor-framer";
-            }
-            if (id.includes("lucide-react")) {
-              return "vendor-icons";
-            }
-            if (id.includes("@radix-ui") || id.includes("clsx") || id.includes("tailwind-merge")) {
-              return "vendor-ui";
-            }
-            return "vendor";
+          const packageName = id.match(/.*[\\/]node_modules[\\/]((?:@[^\\/]+[\\/])?[^\\/]+)/)?.[1]?.replace("\\", "/");
+          if (!packageName) return undefined;
+
+          if (["react", "react-dom", "scheduler", "react-router", "react-router-dom", "@remix-run/router", "react-helmet-async"].includes(packageName)) {
+            return "vendor-react";
           }
+          if (packageName === "framer-motion") return "vendor-framer";
+          if (packageName === "lucide-react") return "vendor-icons";
+          if (packageName.startsWith("@radix-ui/") || packageName === "clsx" || packageName === "tailwind-merge") {
+            return "vendor-ui";
+          }
+          return undefined;
         },
       },
     },
