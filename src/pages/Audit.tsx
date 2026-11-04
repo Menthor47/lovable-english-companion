@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { z } from "zod";
 import { PageLayout } from "@/components/layout/PageLayout";
 import { useTranslation } from "react-i18next";
@@ -237,7 +238,7 @@ export default function Audit() {
 
                                     <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                                         <Button variant="hero" size="lg" className="px-10" asChild>
-                                            <a href="#contact">{t("services.cta")}</a>
+                                            <Link to="/contact">{t("services.cta")}</Link>
                                         </Button>
                                         <Button variant="ghost" size="lg" onClick={() => {
                                             setStep("form");
