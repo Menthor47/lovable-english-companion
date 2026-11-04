@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { z } from "zod";
 import { PageLayout } from "@/components/layout/PageLayout";
@@ -6,17 +6,33 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Search, CheckCircle, BarChart3, Globe, Sparkles } from "lucide-react";
+import { Search, CheckCircle, BarChart3, Globe, Loader2, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
 import { api } from "@/lib/api";
+import { normalizeWebsiteUrl } from "@/lib/normalizeWebsiteUrl";
 import { SITE_OG_IMAGE_URL, getAbsoluteUrl } from "@/lib/siteMetadata";
 import { GlassCard } from "@/components/ui/glass-card";
+
+// A Firestore write never settles while offline, so give up rather than spin forever.
+const SUBMIT_TIMEOUT_MS = 15000;
+
+class SubmitTimeoutError extends Error {}
+
+function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
+    let timer: ReturnType<typeof setTimeout>;
+    const timeout = new Promise<never>((_, reject) => {
+        timer = setTimeout(() => reject(new SubmitTimeoutError("Request timed out")), ms);
+    });
+    return Promise.race([promise, timeout]).finally(() => clearTimeout(timer));
+}
 
 export default function Audit() {
     const [step, setStep] = useState<"form" | "results">("form");
     const [formData, setFormData] = useState({ url: "", email: "", phone: "", website2: "" });
-    const { toast } = useToast();
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const submitLock = useRef(false);
+    const { toast, dismiss } = useToast();
     const { t } = useTranslation();
 
     const pageUrl = getAbsoluteUrl("/tools/audit");
@@ -34,49 +50,65 @@ export default function Audit() {
         t("auditTool.results.nextSteps", { returnObjects: true }) as unknown,
     );
 
-    const auditSchema = z.object({
-        url: z.string().url({ message: "Please enter a valid URL (e.g. https://example.com)" }),
-        email: z.string().email({ message: "Please enter a valid email address" }),
-        phone: z.string().optional(),
-        website2: z.string().optional() // honeypot
-    });
+    const showInvalid = (description: string) => {
+        toast({
+            title: t("auditTool.toast.invalidTitle"),
+            description,
+            variant: "destructive",
+        });
+    };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        const result = auditSchema.safeParse(formData);
+        // State updates aren't immediate, so a ref stops a second submit in the same tick.
+        if (submitLock.current) return;
 
-        if (!result.success) {
-            const firstError = result.error.errors[0]?.message || t("auditTool.toast.missingDescription");
-            toast({
-                title: t("auditTool.toast.missingTitle"),
-                description: firstError,
-                variant: "destructive",
-            });
+        const website = normalizeWebsiteUrl(formData.url);
+        if (!website) {
+            showInvalid(t("auditTool.toast.invalidUrl"));
             return;
         }
 
+        const email = formData.email.trim();
+        if (!z.string().email().safeParse(email).success) {
+            showInvalid(t("auditTool.toast.invalidEmail"));
+            return;
+        }
+
+        submitLock.current = true;
+        setIsSubmitting(true);
+        dismiss();
+
         try {
             const phone = formData.phone.trim();
-            const result = await api.contact.submit({
-                email: formData.email,
-                phone: phone.length ? phone : undefined,
-                website: formData.url,
-                source: "audit",
-                website2: formData.website2 || undefined,
-            });
+            const result = await withTimeout(
+                api.contact.submit({
+                    email,
+                    phone: phone.length ? phone : undefined,
+                    website,
+                    source: "audit",
+                    website2: formData.website2 || undefined,
+                }),
+                SUBMIT_TIMEOUT_MS,
+            );
 
             if (!result.success) {
                 throw new Error(result.message);
             }
         } catch (error) {
             console.error("Audit submission failed:", error);
+            // A timed-out write can still succeed later, so don't call it a failure.
+            const timedOut = error instanceof SubmitTimeoutError;
             toast({
-                title: t("auditTool.toast.errorTitle"),
-                description: t("auditTool.toast.errorDescription"),
+                title: t(timedOut ? "auditTool.toast.timeoutTitle" : "auditTool.toast.errorTitle"),
+                description: t(timedOut ? "auditTool.toast.timeoutDescription" : "auditTool.toast.errorDescription"),
                 variant: "destructive",
             });
             return;
+        } finally {
+            submitLock.current = false;
+            setIsSubmitting(false);
         }
 
         setStep("results");
@@ -124,7 +156,7 @@ export default function Audit() {
                                 </div>
 
                                 <GlassCard className="p-8 shadow-2xl overflow-visible border-primary/20" gradient>
-                                    <form onSubmit={handleSubmit} className="space-y-6">
+                                    <form onSubmit={handleSubmit} noValidate className="space-y-6">
                                         <input
                                             name="website2"
                                             type="text"
@@ -143,6 +175,11 @@ export default function Audit() {
                                                 <Globe className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                                                 <Input
                                                     id="url"
+                                                    readOnly={isSubmitting}
+                                                    inputMode="url"
+                                                    autoComplete="url"
+                                                    autoCapitalize="none"
+                                                    spellCheck={false}
                                                     placeholder={t("auditTool.form.urlPlaceholder")}
                                                     value={formData.url}
                                                     onChange={(e) => setFormData({ ...formData, url: e.target.value })}
@@ -157,6 +194,8 @@ export default function Audit() {
                                                 <Input
                                                     id="email"
                                                     type="email"
+                                                    readOnly={isSubmitting}
+                                                    autoComplete="email"
                                                     placeholder={t("auditTool.form.emailPlaceholder")}
                                                     value={formData.email}
                                                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -169,6 +208,8 @@ export default function Audit() {
                                                 <Input
                                                     id="phone"
                                                     type="tel"
+                                                    readOnly={isSubmitting}
+                                                    autoComplete="tel"
                                                     placeholder={t("auditTool.form.phonePlaceholder")}
                                                     value={formData.phone}
                                                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
@@ -177,9 +218,13 @@ export default function Audit() {
                                             </div>
                                         </div>
 
-                                        <Button type="submit" variant="hero" size="xl" className="w-full text-xl h-16 shadow-[0_0_20px_rgba(var(--primary),0.3)] hover:shadow-[0_0_30px_rgba(var(--primary),0.5)] transition-all">
-                                            <Search className="w-6 h-6 mr-3" />
-                                            {t("auditTool.form.submitCta")}
+                                        <Button type="submit" variant="hero" size="xl" disabled={isSubmitting} aria-busy={isSubmitting} className="w-full text-xl h-16 shadow-[0_0_20px_rgba(var(--primary),0.3)] hover:shadow-[0_0_30px_rgba(var(--primary),0.5)] transition-all">
+                                            {isSubmitting ? (
+                                                <Loader2 className="w-6 h-6 mr-3 animate-spin" aria-hidden="true" />
+                                            ) : (
+                                                <Search className="w-6 h-6 mr-3" aria-hidden="true" />
+                                            )}
+                                            {isSubmitting ? t("auditTool.form.submitting") : t("auditTool.form.submitCta")}
                                         </Button>
 
                                         <p className="text-xs text-center text-muted-foreground font-medium opacity-60">
@@ -210,7 +255,7 @@ export default function Audit() {
 
                                     <h2 className="text-4xl font-bold mb-4 font-heading">{t("auditTool.results.title")}</h2>
                                     <p className="text-lg text-muted-foreground mb-10 max-w-lg mx-auto leading-relaxed">
-                                        {t("auditTool.results.receivedPrefix")} <span className="text-foreground font-semibold underline decoration-primary/30 decoration-2 underline-offset-4">{formData.url}</span>. {t("auditTool.results.confirmationPrefix")} <span className="text-foreground font-semibold">{formData.email}</span>, {t("auditTool.results.confirmationSuffix")}
+                                        {t("auditTool.results.receivedPrefix")} <span className="text-foreground font-semibold underline decoration-primary/30 decoration-2 underline-offset-4 [overflow-wrap:anywhere]">{formData.url.trim()}</span>. {t("auditTool.results.confirmationPrefix")} <span className="text-foreground font-semibold [overflow-wrap:anywhere]">{formData.email.trim()}</span>, {t("auditTool.results.confirmationSuffix")}
                                     </p>
 
                                     <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 mb-10 text-left border border-white/10 shadow-inner group">

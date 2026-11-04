@@ -374,19 +374,23 @@
         "subtitle": "Vezi cât de vizibil e brandul tău pe Google, ChatGPT și Gemini — și primești pașii prioritizați.",
         "form": {
             "urlLabel": "URL site",
-            "urlPlaceholder": "https://example.com",
+            "urlPlaceholder": "firmata.ro",
             "emailLabel": "Adresă de email",
             "emailPlaceholder": "you@company.com",
             "phoneLabel": "Număr de telefon (opțional)",
             "phonePlaceholder": "+40 712 345 678",
             "submitCta": "Primește auditul gratuit",
+            "submitting": "Trimitem cererea...",
             "note": "Vei primi imediat un email de confirmare. Rezumatul auditului vine după revizuire."
         },
         "toast": {
-            "missingTitle": "Lipsesc informații",
-            "missingDescription": "Te rugăm să introduci atât URL-ul site-ului, cât și adresa de email.",
-            "errorTitle": "Eroare",
-            "errorDescription": "Nu am putut porni auditul. Te rugăm să încerci din nou."
+            "invalidTitle": "Verifică datele",
+            "invalidUrl": "Scrie adresa site-ului, de exemplu firmata.ro.",
+            "invalidEmail": "Scrie o adresă de email validă, de exemplu tu@firmata.ro.",
+            "errorTitle": "Cererea nu a fost trimisă",
+            "errorDescription": "Verifică conexiunea și încearcă din nou. Datele tale au rămas în formular.",
+            "timeoutTitle": "Nu am putut confirma cererea",
+            "timeoutDescription": "Este posibil să ajungă totuși la noi. Verifică emailul de confirmare înainte să încerci din nou."
         },
         "results": {
             "title": "Cerere primită!",
