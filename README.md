@@ -13,13 +13,13 @@ The intelligent companion for modern marketing teams.
 ## Features
 
 * **AI-First Services**: Content Engine, GEO Optimization, Technical Audits.
-* **Interactive Tools**: ROI Calculator, Instant Audit.
-* **Client Operations**: Integrated Client Portal Dashboard.
+* **Interactive Tools**: ROI Calculator, free audit request form.
+* **Client Operations**: Client dashboard demo with illustrative data.
 * **Programmatic SEO**: Industry-specific landing pages and comparison hubs.
 
 ## Prerequisites
 
-* Node.js (v18 or higher)
+* Node.js (version in `.node-version`)
 * npm (v9 or higher)
 
 ## Environment Variables
