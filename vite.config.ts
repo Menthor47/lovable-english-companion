@@ -226,11 +226,23 @@ export default defineConfig(({ mode: _mode }) => ({
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'pwa-192x192.png', 'pwa-512x512.png'],
-      // Every route is prerendered to real HTML, so navigations must go to the
-      // network. The default fallback would serve the homepage for every URL.
+      // Pages are prerendered to real HTML, so navigations must go to the network.
+      // The default fallback would serve the homepage for every URL. Visited pages
+      // are cached only as an offline copy of that same URL.
       workbox: {
         navigateFallback: null,
         globPatterns: ['**/*.{js,css}'],
+        runtimeCaching: [
+          {
+            urlPattern: ({ request }) => request.mode === 'navigate',
+            handler: 'NetworkFirst',
+            options: {
+              cacheName: 'pages',
+              cacheableResponse: { statuses: [200] },
+              expiration: { maxEntries: 30 },
+            },
+          },
+        ],
       },
       manifest: {
         name: 'AGSEO - AI SEO Agency',
