@@ -13,15 +13,13 @@ import { SITE_OG_IMAGE_URL, getAbsoluteUrl } from "@/lib/siteMetadata";
 import { GlassCard } from "@/components/ui/glass-card";
 
 export default function Audit() {
-    const [step, setStep] = useState<"form" | "scanning" | "results">("form");
+    const [step, setStep] = useState<"form" | "results">("form");
     const [formData, setFormData] = useState({ url: "", email: "", phone: "", website2: "" });
     const { toast } = useToast();
     const { t } = useTranslation();
-    const [progress, setProgress] = useState(0);
 
     const pageUrl = getAbsoluteUrl("/tools/audit");
 
-    // The simulation steps
     const toStringArray = (value: unknown): string[] => {
         if (!Array.isArray(value)) return [];
 
@@ -31,15 +29,9 @@ export default function Audit() {
         return array as string[];
     };
 
-    const simulationSteps = toStringArray(
-        t("auditTool.scanning.steps", { returnObjects: true }) as unknown,
-    );
-
     const nextSteps = toStringArray(
         t("auditTool.results.nextSteps", { returnObjects: true }) as unknown,
     );
-
-    const [currentSimulationStep, setCurrentSimulationStep] = useState(0);
 
     const auditSchema = z.object({
         url: z.string().url({ message: "Please enter a valid URL (e.g. https://example.com)" }),
@@ -86,36 +78,7 @@ export default function Audit() {
             return;
         }
 
-        setStep("scanning");
-        setCurrentSimulationStep(0);
-        setProgress(0);
-
-        // Simulate scanning process with progress bar
-        const totalDuration = 4000; // 4 seconds
-        const stepInterval = totalDuration / simulationSteps.length;
-
-        let stepCount = 0;
-        const interval = setInterval(() => {
-            stepCount++;
-            if (stepCount < simulationSteps.length) {
-                setCurrentSimulationStep(stepCount);
-                // Progress is updated slightly behind the step count for smoothness
-            } else {
-                clearInterval(interval);
-                setProgress(100);
-                setTimeout(() => setStep("results"), 500);
-            }
-        }, stepInterval);
-
-        const progressInterval = setInterval(() => {
-            setProgress(prev => {
-                if (prev >= 98) {
-                    clearInterval(progressInterval);
-                    return 98;
-                }
-                return prev + 1;
-            });
-        }, totalDuration / 100);
+        setStep("results");
     };
 
     return (
@@ -226,60 +189,6 @@ export default function Audit() {
                             </motion.div>
                         )}
 
-                        {step === "scanning" && (
-                            <motion.div
-                                key="scanning"
-                                initial={{ opacity: 0, scale: 0.95 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 1.05 }}
-                                className="text-center py-20"
-                            >
-                                <div className="relative w-32 h-32 mx-auto mb-12">
-                                    <motion.div
-                                        animate={{ rotate: 360 }}
-                                        transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                                        className="absolute inset-0 border-[3px] border-primary/10 rounded-full border-t-primary"
-                                    />
-                                    <motion.div
-                                        animate={{ rotate: -360 }}
-                                        transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                                        className="absolute inset-4 border-[3px] border-accent/10 rounded-full border-b-accent"
-                                    />
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                        <Search className="w-10 h-10 text-primary animate-pulse" />
-                                    </div>
-                                </div>
-
-                                <h2 className="text-3xl font-bold mb-6 font-heading tracking-tight">
-                                    {t("auditTool.scanning.title", { url: formData.url })}
-                                </h2>
-
-                                <div className="max-w-md mx-auto space-y-6">
-                                    <div className="h-2 w-full bg-white/5 rounded-full overflow-hidden border border-white/5 backdrop-blur-sm">
-                                        <motion.div
-                                            className="h-full bg-gradient-to-r from-primary to-accent"
-                                            initial={{ width: 0 }}
-                                            animate={{ width: `${progress}%` }}
-                                        />
-                                    </div>
-
-                                    <div className="h-8 relative">
-                                        <AnimatePresence mode="wait">
-                                            <motion.p
-                                                key={currentSimulationStep}
-                                                initial={{ opacity: 0, y: 10 }}
-                                                animate={{ opacity: 1, y: 0 }}
-                                                exit={{ opacity: 0, y: -10 }}
-                                                className="text-muted-foreground text-xl font-medium"
-                                            >
-                                                {simulationSteps[currentSimulationStep]}
-                                            </motion.p>
-                                        </AnimatePresence>
-                                    </div>
-                                </div>
-                            </motion.div>
-                        )}
-
                         {step === "results" && (
                             <motion.div
                                 key="results"
@@ -300,7 +209,7 @@ export default function Audit() {
 
                                     <h2 className="text-4xl font-bold mb-4 font-heading">{t("auditTool.results.title")}</h2>
                                     <p className="text-lg text-muted-foreground mb-10 max-w-lg mx-auto leading-relaxed">
-                                        {t("auditTool.results.receivedPrefix")} <span className="text-foreground font-semibold underline decoration-primary/30 decoration-2 underline-offset-4">{formData.url}</span>. {t("auditTool.results.confirmationPrefix")} <span className="text-foreground font-semibold">{formData.email}</span>. {t("auditTool.results.confirmationSuffix")}
+                                        {t("auditTool.results.receivedPrefix")} <span className="text-foreground font-semibold underline decoration-primary/30 decoration-2 underline-offset-4">{formData.url}</span>. {t("auditTool.results.confirmationPrefix")} <span className="text-foreground font-semibold">{formData.email}</span>, {t("auditTool.results.confirmationSuffix")}
                                     </p>
 
                                     <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 mb-10 text-left border border-white/10 shadow-inner group">
@@ -334,7 +243,7 @@ export default function Audit() {
                                             setStep("form");
                                             setFormData({ url: "", email: "", phone: "", website2: "" });
                                         }}>
-                                            {t("auditTool.results.scanAnotherCta")}
+                                            {t("auditTool.results.requestAnotherCta")}
                                         </Button>
                                     </div>
                                 </GlassCard>
